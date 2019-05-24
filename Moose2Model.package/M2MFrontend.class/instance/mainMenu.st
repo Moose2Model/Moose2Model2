@@ -52,5 +52,13 @@ mainMenu
 						name: nil;
 						description: 'Add menu item';
 						icon: (self iconNamed: #add);
-						action: [ self addItemTo: group ] ] ].
+						action: [ self addItemTo: group ] ] ];
+		addGroup: [ :group | 
+			group
+				addItem: [ :item | 
+					item
+						name: nil;
+						description: 'Open Help';
+						icon: (self iconNamed: #help);
+						action: [ HelpBrowser openOn: M2MHelp ] ] ].
 	^ aMenu
