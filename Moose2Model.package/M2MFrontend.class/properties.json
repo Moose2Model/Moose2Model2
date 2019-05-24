@@ -1,11 +1,14 @@
 {
 	"commentStamp" : "RainerWinkler 5/24/2019 16:07",
-	"super" : "Object",
+	"super" : "ComposablePresenter",
 	"category" : "Moose2Model-Frontend",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [ ],
-	"name" : "M2MFrontendEntry",
+	"instvars" : [
+		"list",
+		"menu"
+	],
+	"name" : "M2MFrontend",
 	"type" : "normal"
 }
