@@ -2,7 +2,7 @@ as yet unclassified
 initializeWidgets
 	| windowMorph tRcanvas |
 	tRcanvas := TRCanvas new.
-	tRcanvas addShape: (TRBoxShape new size: 2).
+	"tRcanvas addShape: (TRBoxShape new size: 2)."
 	windowMorph := TRMorph new.
 	windowMorph canvas: tRcanvas.
 	pane := windowMorph asSpecAdapter.
@@ -12,7 +12,7 @@ initializeWidgets
 				cr;
 				show: 'Opened';
 				cr.
-			windowMorph extent: 200 @ 200.
+			windowMorph extent: 400 @ 400.
 			"windowMorph extent: windowMorph extent asIntegerPoint."
 			windowMorph changed ].
 	pane widget surface

@@ -4,5 +4,5 @@ initializePresenter
 		whenSelectionChangedDo: [ :selection | 
 			[ :item | 
 			self draw: item.
-			self changeMyTitle: item	"Change title" ]
+			self changeMyTitle: self title , ' ' , item	"Change title" ]
 				cull: selection selectedItem ]

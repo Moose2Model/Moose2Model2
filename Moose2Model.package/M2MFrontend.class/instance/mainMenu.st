@@ -68,5 +68,21 @@ mainMenu
 						name: nil;
 						description: 'Refresh pane';
 						icon: (self iconNamed: #refresh);
-						action: [ self refresh ] ] ].
+						action: [ self refresh ] ] ];
+		addGroup: [ :group | 
+			group
+				addItem: [ :item | 
+					item
+						name: nil;
+						description: 'Refresh pane';
+						icon: (self iconNamed: #glamorousGreenCircle);
+						action: [ self draw2: #Green ] ] ];
+		addGroup: [ :group | 
+			group
+				addItem: [ :item | 
+					item
+						name: nil;
+						description: 'Refresh pane';
+						icon: (self iconNamed: #glamorousRedCircle);
+						action: [ self draw2: #Red ] ] ].
 	^ aMenu
