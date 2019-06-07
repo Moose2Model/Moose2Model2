@@ -1,10 +1,7 @@
 as yet unclassified
 initializeWidgets
-	| windowMorph tRcanvas |
-	tRcanvas := TRCanvas new.
-	tRcanvas addShape: (TRBoxShape new size: 2).
-	windowMorph := TRMorph new.
-	windowMorph canvas: tRcanvas.
+	| windowMorph |
+	windowMorph := M2MAthensMorph new.
 	pane := windowMorph asSpecAdapter.
 	pane
 		when: MorphOpened
@@ -12,9 +9,7 @@ initializeWidgets
 				cr;
 				show: 'Opened';
 				cr.
-			windowMorph extent: 200 @ 200.
-			"windowMorph extent: windowMorph extent asIntegerPoint."
-			windowMorph changed ].
+			windowMorph resize ].
 	pane widget surface
 		drawDuring:
 			[ :canvas | "First, we clear the surface" "view widget surface clear." "we can use " pane widget surface clear: Color white ].

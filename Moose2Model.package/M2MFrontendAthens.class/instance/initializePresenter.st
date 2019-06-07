@@ -3,6 +3,6 @@ initializePresenter
 	list
 		whenSelectionChangedDo: [ :selection | 
 			[ :item | 
-			self draw2: item.
-			self changeMyTitle: self title , ' ' , item	"Change title" ]
+			self draw: item.
+			self changeMyTitle: item	"Change title" ]
 				cull: selection selectedItem ]
