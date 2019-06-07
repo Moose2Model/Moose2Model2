@@ -1,7 +1,8 @@
 as yet unclassified
 initializeWidgets
 	| windowMorph |
-	windowMorph := M2MAthensMorph new.
+	windowMorph := M2MAthensMorph
+		new.
 	pane := windowMorph asSpecAdapter.
 	pane
 		when: MorphOpened
@@ -10,6 +11,10 @@ initializeWidgets
 				show: 'Opened';
 				cr.
 			windowMorph resize ].
+	pane widget surface
+		drawDuring:
+			[ :canvas | "First, we clear the surface" "view widget surface clear." "we can use " pane widget surface clear: Color white ].
+	pane changed.
 	menu := self mainMenu.
 	list := self newList.
 	list items: {'Green' . 'Red'}.
