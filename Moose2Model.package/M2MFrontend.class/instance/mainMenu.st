@@ -60,5 +60,13 @@ mainMenu
 						name: nil;
 						description: 'Open Help';
 						icon: (self iconNamed: #help);
-						action: [ HelpBrowser openOn: M2MHelp ] ] ].
+						action: [ HelpBrowser openOn: M2MHelp ] ] ];
+		addGroup: [ :group | 
+			group
+				addItem: [ :item | 
+					item
+						name: nil;
+						description: 'Refresh pane';
+						icon: (self iconNamed: #refresh);
+						action: [ self refresh ] ] ].
 	^ aMenu

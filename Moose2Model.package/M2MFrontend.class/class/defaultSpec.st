@@ -8,5 +8,6 @@ defaultSpec
 			(SpecPanedLayout newHorizontal
 				position: 200;
 				add: #list;
+				add: #pane;
 				yourself);
 		yourself

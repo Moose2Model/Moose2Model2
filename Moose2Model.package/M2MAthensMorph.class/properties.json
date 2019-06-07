@@ -1,15 +1,13 @@
 {
-	"commentStamp" : "RainerWinkler 5/24/2019 16:07",
-	"super" : "ComposablePresenter",
+	"commentStamp" : "",
+	"super" : "Morph",
 	"category" : "Moose2Model-Frontend",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"list",
-		"menu",
-		"pane"
+		"surface"
 	],
-	"name" : "M2MFrontend",
+	"name" : "M2MAthensMorph",
 	"type" : "normal"
 }
