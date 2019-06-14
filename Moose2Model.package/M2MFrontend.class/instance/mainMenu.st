@@ -74,7 +74,7 @@ mainMenu
 				addItem: [ :item | 
 					item
 						name: nil;
-						description: 'Refresh pane';
+						description: 'Green';
 						icon: (self iconNamed: #glamorousGreenCircle);
 						action: [ self draw2: #Green ] ] ];
 		addGroup: [ :group | 
@@ -82,7 +82,7 @@ mainMenu
 				addItem: [ :item | 
 					item
 						name: nil;
-						description: 'Refresh pane';
+						description: 'Red';
 						icon: (self iconNamed: #glamorousRedCircle);
 						action: [ self draw2: #Red ] ] ].
 	^ aMenu
