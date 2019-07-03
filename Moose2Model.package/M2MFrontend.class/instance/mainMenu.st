@@ -84,5 +84,13 @@ mainMenu
 						name: nil;
 						description: 'Red';
 						icon: (self iconNamed: #glamorousRedCircle);
-						action: [ self draw2: #Red ] ] ].
+						action: [ self draw2: #Red ] ] ];
+		addGroup: [ :group | 
+			group
+				addItem: [ :item | 
+					item
+						name: nil;
+						description: 'White';
+						icon: (self iconNamed: #glamorousAdd);
+						action: [ self draw2: #ChooseColor ] ] ].
 	^ aMenu
