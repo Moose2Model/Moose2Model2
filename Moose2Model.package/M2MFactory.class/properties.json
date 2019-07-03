@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "RainerWinkler 7/3/2019 15:19",
+	"super" : "Object",
+	"category" : "Moose2Model-Frontend",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"colorChooser"
+	],
+	"name" : "M2MFactory",
+	"type" : "normal"
+}

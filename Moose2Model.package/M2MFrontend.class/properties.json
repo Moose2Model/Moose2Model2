@@ -1,5 +1,5 @@
 {
-	"commentStamp" : "RainerWinkler 5/24/2019 16:07",
+	"commentStamp" : "RainerWinkler 7/3/2019 15:28",
 	"super" : "ComposablePresenter",
 	"category" : "Moose2Model-Frontend",
 	"classinstvars" : [ ],
@@ -8,7 +8,9 @@
 	"instvars" : [
 		"list",
 		"menu",
-		"pane"
+		"pane",
+		"factory",
+		"new"
 	],
 	"name" : "M2MFrontend",
 	"type" : "normal"

@@ -1,2 +1,2 @@
 I represent the central part of the Frontend.
-I containt the the main Spec components.
+I contain the the main Spec components.
