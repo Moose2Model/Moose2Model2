@@ -15,8 +15,8 @@
         <type>FAMIXMethod</type>
         <class>M2MMockColorSelectorDialogWindow</class>
         <method>title:</method>
-        <x>-257.0</x>
-        <y>103.0</y>
+        <x>-219.0</x>
+        <y>93.0</y>
     </element>
     <element>
         <type>FAMIXMethod</type>
@@ -35,8 +35,8 @@
         <type>FAMIXMethod</type>
         <class>M2MMockColorSelectorDialogWindow</class>
         <method>mockSelectedColor:</method>
-        <x>-232.0</x>
-        <y>78.0</y>
+        <x>-266.0</x>
+        <y>70.0</y>
     </element>
     <element>
         <type>FAMIXMethod</type>
