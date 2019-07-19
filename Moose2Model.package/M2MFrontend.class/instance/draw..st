@@ -1,6 +1,7 @@
 as yet unclassified
 draw: aString
 	| font |
+	self halt.
 	font := LogicalFont familyName: 'Arial' pointSize: 20.
 	pane widget surface
 		drawDuring: [ :canvas | 
