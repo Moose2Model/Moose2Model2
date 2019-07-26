@@ -1,1 +1,0 @@
-This a demo how the Athens Canvas can be used
