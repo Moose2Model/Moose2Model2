@@ -3,7 +3,8 @@ initializeWidgets
 	| windowMorph tRcanvas |
 	tRcanvas := TRCanvas new.
 	self makeZoomable: tRcanvas.
-	
+	self makeCanvasDraggable: tRcanvas.
+
 	"tRcanvas addShape: (TRBoxShape new size: 2)."
 	windowMorph := TRMorph new.
 	windowMorph canvas: tRcanvas.
