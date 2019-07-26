@@ -9,8 +9,4 @@ menuCommandOn: aBuilder
 		parent: 'Moose2Model') action: [ M2MFrontend new openWithSpec ].
 	(aBuilder
 		item: 'Documentation';
-		parent: 'Moose2Model') action: [ HelpBrowser openOn: M2MHelp ].
-	(aBuilder
-		item: 'Moose2Model Athens Test';
-		parent: 'Moose2Model')
-		action: [ M2MFrontendAthens new openWithSpec ]
+		parent: 'Moose2Model') action: [ HelpBrowser openOn: M2MHelp ]
