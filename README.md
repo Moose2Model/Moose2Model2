@@ -1,6 +1,6 @@
 # Moose2Model2
 Moose2Model Version 2
-This repository will contain the coding for version 2 of Moose2Model. Currently it contains only test coding. See Moose2Model for a tool that you can use now.
+This repository was supposed to contain the coding for version 2 of Moose2Model. Actually it is planned to remain in the first repository. So this repository might be deleted soon. Currently it contains only test coding. See Moose2Model for a tool that you can use now.
 ## Installation
 Install from this repository using Iceberg on Pharo 8.
 Install Roassal2 from https://github.com/ObjectProfile/Roassal2 using Monticello as described there. The installation into Pharo 8 should work. Only the Trachel package should be needed. 
