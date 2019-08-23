@@ -1,3 +1,6 @@
+The development of Moose2Model will contain on the main repository Moose2Model. This repository (Moose2Model2) is archived and cannot be changed. 
+It was planned to make a major redesign of Moose2Model, so starting from an empty repository made sense. The strategy changed, it is now planned to adapt the existing solution. So this repository is not needed anymore.
+
 # Moose2Model2
 Moose2Model Version 2
 This repository was supposed to contain the coding for version 2 of Moose2Model. Actually it is planned to remain in the first repository. So this repository might be deleted soon. Currently it contains only test coding. See Moose2Model for a tool that you can use now.
