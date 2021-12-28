@@ -2,51 +2,103 @@
 <html>
 
 <head>
-  <meta charset="utf-8" />
-  <title>Moose2Model</title>
-  <script>
-    'use strict';
-    function draw() {
-      var canvas = document.getElementById('pane');
-      if (canvas.getContext) {
-        var ctx = canvas.getContext('2d');
+    <meta charset="utf-8" />
+    <title>Moose2Model</title>
+    <script>
+        'use strict';
+        function draw() {
+            var canvas = document.getElementById('pane');
+            if (canvas.getContext) {
+                var ctx = canvas.getContext('2d');
+
+                // Coding to improve drawing in case of Retina displays
+
+                // get current size of the canvas
+                let rect = canvas.getBoundingClientRect();
+
+                // increase the actual size of our canvas
+                canvas.width = rect.width * devicePixelRatio;
+                canvas.height = rect.height * devicePixelRatio;
+
+                // ensure all drawing operations are scaled
+                ctx.scale(devicePixelRatio, devicePixelRatio);
+
+                // scale everything down using CSS
+                canvas.style.width = rect.width + 'px';
+                canvas.style.height = rect.height + 'px';
 
 
 
-        // get current size of the canvas
-        let rect = canvas.getBoundingClientRect();
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(10.5, 5);
+                ctx.lineTo(10.5, 140);
+                ctx.stroke();
 
-        // increase the actual size of our canvas
-        canvas.width = rect.width * devicePixelRatio;
-        canvas.height = rect.height * devicePixelRatio;
+                ctx.font = '20px serif';
+                ctx.fillText('foo', 10, 50);
+                var text = ctx.measureText('foo'); // TextMetrics object
+                var width_of_text = text.width; // 16;
 
-        // ensure all drawing operations are scaled
-        ctx.scale(devicePixelRatio, devicePixelRatio);
+                ctx.fillText(width_of_text, 10, 100);
 
-        // scale everything down using CSS
-        canvas.style.width = rect.width + 'px';
-        canvas.style.height = rect.height + 'px';
-
-
-
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(10.5, 5);
-        ctx.lineTo(10.5, 140);
-        ctx.stroke();
-
-      }
-    }
-  </script>
-  <style>
-    canvas {
-      border: 1px solid black;
-    }
-  </style>
+            }
+        }
+    </script>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
 </head>
 
 <body onload="draw();">
-  <canvas id="pane" width="800" height="800"></canvas>
+    <form>
+        <input type="button" value="Load model">
+    </form>
+    <br>
+    <p></p>
+    <p></p>
+    <canvas id="pane" width="800" height="800"></canvas>
+
+    <script>
+        'use strict';
+
+        // store a reference to our file handle
+        let fileHandle;
+
+
+        const button = document.querySelector('input');
+        const paragraph = document.querySelector('p');
+
+        button.addEventListener('click', LoadModel);
+
+        if (window.isSecureContext) {
+            // Page is a secure context so service workers are now available
+            paragraph.textContent = 'Secure Context';
+        }
+        else {
+            paragraph.textContent = 'Not secure';
+        }
+
+
+        async function LoadModel() {
+            // open file picker
+            [fileHandle] = await window.showOpenFilePicker();
+
+            if (fileHandle.kind === 'file') {
+                // run file code
+                // get file contents
+                const fileData = await fileHandle.getFile();
+                paragraph.textContent = fileData;
+            } else if (fileHandle.kind === 'directory') {
+                // run directory code
+            }
+            // paragraph.textContent = 'The button was pressed';
+        }
+    </script>
+
+
 </body>
 
 </html>
