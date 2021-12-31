@@ -83,6 +83,7 @@
 
 
         async function LoadModel() {
+            'use strict';
             // open file picker
             [fileHandle] = await window.showOpenFilePicker();
 
@@ -90,7 +91,116 @@
                 // run file code
                 // get file contents
                 const fileData = await fileHandle.getFile();
-                paragraph.textContent = fileData;
+                const contents = await fileData.text();
+                // let len = 0;
+                const len = contents.length;
+                let counter = 0;
+                let cont = '';
+                let nest = 0;
+                let nestOld = 0;
+                let isString = false;
+                let countNewLine = 0;
+                let elementName = '';
+                let isGrouping = false;
+                let isParentChild = false;
+                let isCode = false;
+                let isData = false;
+                let isCall = false;
+                let isAccess = false;
+                let countGrouping = 0;
+                let countParentChild = 0;
+                let countCode = 0;
+                let countData = 0;
+                let countCall = 0;
+                let countAccess = 0;
+                do {
+                    let char = contents.at(counter);
+                    if (char == '(' && !isString) {
+                        // cont = cont + char;
+                        nest = nest + 1;
+                    }
+                    else if (char == ')' && !isString) {
+                        // cont = cont + char;
+                        nest = nest - 1;
+                    }
+                    else if (char == '\'') {
+                        // String separator found
+                    }
+                    else if (char == '\\') {
+                        // Masking found
+                    }
+                    else if (char == '\n') {
+                        // New line found
+                        countNewLine = countNewLine + 1;
+                    }
+                    else if (char == '\r') {
+                        // Cariage Return found
+                    }
+                    else {
+
+                        if (nest == 2) {
+                            if (nestOld == 1) {
+                                elementName = '';
+                            };
+                            if (char != ' ') {
+                                elementName = elementName + char
+                            }
+                        }
+
+                    };
+                    // cont = cont + char;
+
+                    if (nest == 3) {
+                        if (nestOld == 2) {
+
+                            isGrouping = false;
+                            isParentChild = false;
+                            isCode = false;
+                            isData = false;
+                            isCall = false;
+                            isAccess = false;
+                            switch (elementName) {
+                                case 'SOMIX.Grouping':
+                                    isGrouping = true;
+                                    countGrouping += 1;
+                                    break;
+                                case 'SOMIX.ParentChild':
+                                    isParentChild = true;
+                                    countParentChild += 1;
+                                    break;
+                                case 'SOMIX.Code':
+                                    isCode = true;
+                                    countCode += 1;
+                                    break;
+                                case 'SOMIX.Data':
+                                    isData = true;
+                                    countData += 1;
+                                    break;
+                                case 'SOMIX.Call':
+                                    isCall = true;
+                                    countCall += 1;
+                                    break;
+                                case 'SOMIX.Access':
+                                    isAccess = true;
+                                    countAccess += 1;
+                                    break;
+                                default:
+
+                            };
+                            cont = cont + elementName + '|';
+                            elementName = '';
+                        };
+                    };
+
+                    counter = counter + 1;
+                    nestOld = nest;
+                } while (counter < len);
+                paragraph.textContent = cont;
+                // paragraph.textContent = contents.at(350919);
+                // paragraph.textContent = contents.at(350922);
+
+                // const stream = await fileData.stream();
+
             } else if (fileHandle.kind === 'directory') {
                 // run directory code
             }
