@@ -101,6 +101,7 @@
                 let isString = false;
                 let countNewLine = 0;
                 let elementName = '';
+                let attrName = '';
                 let isGrouping = false;
                 let isParentChild = false;
                 let isCode = false;
@@ -113,6 +114,11 @@
                 let countData = 0;
                 let countCall = 0;
                 let countAccess = 0;
+                let countUnknownElement = 0;
+                let expectAttrName = false;
+                let attrNameFound = false;
+                let expectValNode = false;
+                let valNode = '';
                 do {
                     let char = contents.at(counter);
                     if (char == '(' && !isString) {
@@ -139,6 +145,7 @@
                     else {
 
                         if (nest == 2) {
+                            // The Elementname is always on level 2. And it is the only information that is present here
                             if (nestOld == 1) {
                                 elementName = '';
                             };
@@ -146,13 +153,28 @@
                                 elementName = elementName + char
                             }
                         }
+                        else if (nest == 3) {
+                            if (expectAttrName) {
+                                attrName = attrName + char;
+                            }
+                            if (expectValNode) {
+                                valNode = valNode + char;
+                            }
+
+                        }
+                        else if (nest == 4) {
+                            if (valNode == 'ref:'){
+                                valNode = ''; // Remove prefix ref:
+                            }
+                            valNode = valNode + char;
+                        }
 
                     };
                     // cont = cont + char;
 
                     if (nest == 3) {
                         if (nestOld == 2) {
-
+                            // When the level switches to 3 this is a sign that the Elementname is completly read
                             isGrouping = false;
                             isParentChild = false;
                             isCode = false;
@@ -185,21 +207,40 @@
                                     countAccess += 1;
                                     break;
                                 default:
-
+                                    countUnknownElement += 1;
                             };
-                            cont = cont + elementName + '|';
-                            elementName = '';
                         };
-                    };
+                        // Now analyze serial or attributes
+                        if (nestOld == 2) {
+                            attrName = '';
+                            expectAttrName = true;
+                        };
+                        if (expectAttrName && char == ' ') {
+                            expectAttrName = false;
+                            attrNameFound = true;
+                            expectValNode = true;
+                            valNode = '';
+                        }
+
+
+
+                    }
+                    else if (nest == 2) {
+                        if (expectValNode) {
+                            // Attribute Name and value Node are now found
+                            cont = cont + elementName + ' A: ' + attrName + ' V: ' + valNode + '|';
+                            expectValNode = false;
+
+                        }
+                    }
+                    else if (nest == 1) {
+                        elementName = '';
+                    }
 
                     counter = counter + 1;
                     nestOld = nest;
                 } while (counter < len);
                 paragraph.textContent = cont;
-                // paragraph.textContent = contents.at(350919);
-                // paragraph.textContent = contents.at(350922);
-
-                // const stream = await fileData.stream();
 
             } else if (fileHandle.kind === 'directory') {
                 // run directory code
