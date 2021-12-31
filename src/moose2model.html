@@ -119,6 +119,21 @@
                 let attrNameFound = false;
                 let expectValNode = false;
                 let valNode = '';
+                let idVal = 0;
+                let nameVal = '';
+                let uniqueNameVal = '';
+                let technicalTypeVal = '';
+                let linkToEditorVal = '';
+                let parentVal = 0;
+                let childVal = 0;
+                let isMainVal = false;
+                let callerVal = 0;
+                let calledVal = 0;
+                let accessorVal = 0;
+                let accessedVal = 0;
+                let isWriteVal = false;
+                let isReadVal = false;
+                let isDependentVal = false;
                 do {
                     let char = contents.at(counter);
                     if (char == '(' && !isString) {
@@ -154,7 +169,7 @@
                             }
                         }
                         else if (nest == 3) {
-                            if (expectAttrName) {
+                            if (expectAttrName && char != ' ') {
                                 attrName = attrName + char;
                             }
                             if (expectValNode) {
@@ -163,7 +178,7 @@
 
                         }
                         else if (nest == 4) {
-                            if (valNode == 'ref:'){
+                            if (valNode == 'ref:') {
                                 valNode = ''; // Remove prefix ref:
                             }
                             valNode = valNode + char;
@@ -231,10 +246,88 @@
                             cont = cont + elementName + ' A: ' + attrName + ' V: ' + valNode + '|';
                             expectValNode = false;
 
+                            // This is now the place where the values are known
+                            switch (attrName) {
+                                case 'id:':
+                                    idVal = Number(valNode);
+                                    break;
+                                case 'name':
+                                    nameVal = valNode;
+                                    break;
+                                case 'uniqueName':
+                                    uniqueNameVal = valNode;
+                                    break;
+                                case 'technicalType':
+                                    technicalTypeVal = valNode;
+                                    break;
+                                case 'linkToEditor':
+                                    linkToEditorVal = valNode;
+                                    break;
+                                case 'parent':
+                                    parentVal = Number(valNode);
+                                    break;
+                                case 'child':
+                                    childVal = Number(valNode);
+                                    break;
+                                case 'isMain':
+                                    if (valNode == 'true') {
+                                        isMainVal = true;
+                                    }
+                                    break;
+                                case 'caller':
+                                    callerVal = Number(valNode);
+                                    break;
+                                case 'called':
+                                    calledVal = Number(valNode);
+                                    break;
+                                case 'accessor':
+                                    accessorVal = Number(valNode);
+                                    break;
+                                case 'accessed':
+                                    accessedVal = Number(valNode);
+                                    break;
+                                case 'isWrite':
+                                    if (valNode == 'true') {
+                                        isWriteVal = true;
+                                    }
+                                    break;
+                                case 'isRead':
+                                    if (valNode == 'true') {
+                                        isReadVal = true;
+                                    }
+                                    break;
+                                case 'isDependent':
+                                    if (valNode == 'true') {
+                                        isDependentVal = true;
+                                    }
+                                    break;
+                            }
+
+
                         }
                     }
                     else if (nest == 1) {
+                        if (elementName != '') {
+                            // This is now the place where the values are stored
+
+                        }
+                        // Clear data before it is read again
                         elementName = '';
+                        idVal = 0;
+                        nameVal = '';
+                        uniqueNameVal = '';
+                        technicalTypeVal = '';
+                        linkToEditorVal = '';
+                        parentVal = '';
+                        childVal = '';
+                        isMainVal = false;
+                        callerVal = 0;
+                        calledVal = 0;
+                        accessorVal = 0;
+                        accessedVal = 0;
+                        isWriteVal = false;
+                        isReadVal = false;
+                        isDependentVal = false;
                     }
 
                     counter = counter + 1;
