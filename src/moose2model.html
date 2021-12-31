@@ -243,7 +243,7 @@
                     else if (nest == 2) {
                         if (expectValNode) {
                             // Attribute Name and value Node are now found
-                            cont = cont + elementName + ' A: ' + attrName + ' V: ' + valNode + '|';
+                            // cont = cont + elementName + ' A: ' + attrName + ' V: ' + valNode + '|';
                             expectValNode = false;
 
                             // This is now the place where the values are known
@@ -309,6 +309,30 @@
                     else if (nest == 1) {
                         if (elementName != '') {
                             // This is now the place where the values are stored
+
+                            switch (elementName) {
+                                case 'SOMIX.Grouping':
+                                    cont = cont + elementName + ' name: ' + nameVal + ' uniqueName: ' + uniqueNameVal + ' technicalType: ' + technicalTypeVal + '|';
+                                    break;
+                                case 'SOMIX.ParentChild':
+                                    cont = cont + elementName + ' parent: ' + parentVal  + ' child: ' + childVal + ' isMain: ' + isMainVal + '|';
+                                    break;
+                                case 'SOMIX.Code':
+                                    cont = cont + elementName + ' name: ' + nameVal + ' uniqueName: ' + uniqueNameVal + ' technicalType: ' + technicalTypeVal + '|';
+                                    break;
+                                case 'SOMIX.Data':
+                                    cont = cont + elementName + ' name: ' + nameVal + ' uniqueName: ' + uniqueNameVal + ' technicalType: ' + technicalTypeVal + '|';
+                                    break;
+                                case 'SOMIX.Call':
+                                    cont = cont + elementName + ' caller: ' + callerVal + ' called: ' + calledVal + '|';
+                                    break;
+                                case 'SOMIX.Access':
+                                    cont = cont + elementName + ' accessor: ' + accessorVal + ' accessed: ' + accessedVal + ' isWrite: ' + isWriteVal + ' isRead: ' + isReadVal + ' isDependent: ' + isDependentVal + '|';
+                                    break;
+                                default:
+                                    countUnknownElement += 1;
+                            };
+
 
                         }
                         // Clear data before it is read again
