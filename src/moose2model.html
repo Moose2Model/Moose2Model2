@@ -7,6 +7,11 @@
     <script>
         'use strict';
         function draw() {
+
+            function random(number) {
+                return Math.floor(Math.random() * number);
+            }
+
             var canvas = document.getElementById('pane');
             if (canvas.getContext) {
                 var ctx = canvas.getContext('2d');
@@ -42,6 +47,14 @@
 
                 ctx.fillText(width_of_text, 10, 100);
 
+                const WIDTH = rect.width;
+                const HEIGHT = rect.height;
+                for (let i = 0; i < 100; i++) {
+                    ctx.beginPath();
+                    ctx.fillStyle = 'rgba(113,121,208,0.1)';
+                    ctx.arc(random(WIDTH), random(HEIGHT), random(100), 0, 2 * Math.PI);
+                    ctx.fill();
+                }
             }
         }
     </script>
@@ -61,7 +74,7 @@
     <p></p>
     <canvas id="pane" width="800" height="800"></canvas>
     <!-- <canvas id="pane" width=window.innerWidth height=window.innerHeight></canvas> -->
-
+    <script src="Global.js"></script>
     <script src="LoadModel.js"></script>
 
     <script>
@@ -72,8 +85,8 @@
         let w = window.innerWidth;
         let h = window.innerHeight;
         var canvas = document.getElementById('pane');
-        canvas.width = w-40;
-        canvas.height = h-40;
+        canvas.width = w - 40;
+        canvas.height = h - 40;
 
 
         // store a reference to our file handle

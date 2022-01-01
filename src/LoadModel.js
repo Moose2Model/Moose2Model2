@@ -8,6 +8,7 @@
                 // get file contents
                 const fileData = await fileHandle.getFile();
                 const contents = await fileData.text();
+                initializeBuildModel();
                 // let len = 0;
                 const len = contents.length;
                 let counter = 0;
@@ -225,29 +226,30 @@
                     else if (nest == 1) {
                         if (elementName != '') {
                             // This is now the place where the values are stored
+                            cont = cont + buildModel(elementName, idVal, nameVal, uniqueNameVal, technicalTypeVal, linkToEditorVal, parentVal, childVal, isMainVal, callerVal, calledVal, accessorVal, accessedVal, isWriteVal, isReadVal, isDependentVal);
 
-                            switch (elementName) {
-                                case 'SOMIX.Grouping':
-                                    cont = cont + elementName + ' name: ' + nameVal + ' uniqueName: ' + uniqueNameVal + ' technicalType: ' + technicalTypeVal + '|';
-                                    break;
-                                case 'SOMIX.ParentChild':
-                                    cont = cont + elementName + ' parent: ' + parentVal  + ' child: ' + childVal + ' isMain: ' + isMainVal + '|';
-                                    break;
-                                case 'SOMIX.Code':
-                                    cont = cont + elementName + ' name: ' + nameVal + ' uniqueName: ' + uniqueNameVal + ' technicalType: ' + technicalTypeVal + '|';
-                                    break;
-                                case 'SOMIX.Data':
-                                    cont = cont + elementName + ' name: ' + nameVal + ' uniqueName: ' + uniqueNameVal + ' technicalType: ' + technicalTypeVal + '|';
-                                    break;
-                                case 'SOMIX.Call':
-                                    cont = cont + elementName + ' caller: ' + callerVal + ' called: ' + calledVal + '|';
-                                    break;
-                                case 'SOMIX.Access':
-                                    cont = cont + elementName + ' accessor: ' + accessorVal + ' accessed: ' + accessedVal + ' isWrite: ' + isWriteVal + ' isRead: ' + isReadVal + ' isDependent: ' + isDependentVal + '|';
-                                    break;
-                                default:
-                                    countUnknownElement += 1;
-                            };
+                            // switch (elementName) {
+                            //     case 'SOMIX.Grouping':
+                            //         cont = cont + elementName + ' name: ' + nameVal + ' uniqueName: ' + uniqueNameVal + ' technicalType: ' + technicalTypeVal + '|';
+                            //         break;
+                            //     case 'SOMIX.ParentChild':
+                            //         cont = cont + elementName + ' parent: ' + parentVal  + ' child: ' + childVal + ' isMain: ' + isMainVal + '|';
+                            //         break;
+                            //     case 'SOMIX.Code':
+                            //         cont = cont + elementName + ' name: ' + nameVal + ' uniqueName: ' + uniqueNameVal + ' technicalType: ' + technicalTypeVal + '|';
+                            //         break;
+                            //     case 'SOMIX.Data':
+                            //         cont = cont + elementName + ' name: ' + nameVal + ' uniqueName: ' + uniqueNameVal + ' technicalType: ' + technicalTypeVal + '|';
+                            //         break;
+                            //     case 'SOMIX.Call':
+                            //         cont = cont + elementName + ' caller: ' + callerVal + ' called: ' + calledVal + '|';
+                            //         break;
+                            //     case 'SOMIX.Access':
+                            //         cont = cont + elementName + ' accessor: ' + accessorVal + ' accessed: ' + accessedVal + ' isWrite: ' + isWriteVal + ' isRead: ' + isReadVal + ' isDependent: ' + isDependentVal + '|';
+                            //         break;
+                            //     default:
+                            //         countUnknownElement += 1;
+                            // };
 
 
                         }
