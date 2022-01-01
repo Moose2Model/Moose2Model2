@@ -16,6 +16,33 @@ function drawBalls(ctx, width, height) {
     }
 };
 
+function positionRandom(width, height) {
+
+    function random(number) {
+        return Math.floor(Math.random() * number);
+    }
+    const offset = 20;
+    const w = width - offset * 2;
+    const h = height - offset * 2;
+
+
+    complModelPosition = [];
+
+
+    for (const mEBI of modelElementsByIndex) {
+        if (typeof mEBI !== 'undefined') {
+
+            let position = {
+                x: random(w) + offset,
+                y: random(h) + offset,
+            };
+
+            complModelPosition[mEBI['index']] = position;
+
+        }
+    }
+};
+
 function positionBoxed(width, height) {
     const offset = 20;
     const w = width - offset * 2;
@@ -161,8 +188,8 @@ function forceDirecting(width, height) {
                     complModelPosition[pC['parent']].y,
                     complModelPosition[pC['child']].x,
                     complModelPosition[pC['child']].y);
-                complModelPositionNew[pC['parent']].x += step * pCForce.x;
-                complModelPositionNew[pC['parent']].y += step * pCForce.y;
+                complModelPositionNew[pC['parent']].x += 0.2 * step * pCForce.x; // Make parent more heavy, therefore a factor 0.2
+                complModelPositionNew[pC['parent']].y += 0.2 * step * pCForce.y; // Make parent more heavy, therefore a factor 0.2
                 complModelPositionNew[pC['child']].x -= step * pCForce.x;
                 complModelPositionNew[pC['child']].y -= step * pCForce.y;
             }

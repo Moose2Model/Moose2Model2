@@ -278,7 +278,8 @@ async function LoadModel() {
         // paragraph.textContent = cont;
 
         positionCircle(g_width, g_height);
-        // positionBoxed(700, 700);
+        // positionBoxed(g_width, g_height);
+        // positionRandom(g_width, g_height);
 
         // const nRepetitions = 200;
         // let n = 0;
