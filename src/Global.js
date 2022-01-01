@@ -11,6 +11,10 @@ let accessByAccessed = [];
 // These global variables are only needed when an mse model is loaded:
 let indexByMSEIndex = [];
 let currentIndex = 1;
+// For picture of complete Model
+let complModelPosition = [];
+
+
 
 function uniqueKey(technicalType, uniqueName) {
     return technicalType + '..' + uniqueName; // TODO is a .. enough to have always unique keys?
@@ -57,8 +61,16 @@ function buildModel(elementName, idVal, nameVal, uniqueNameVal, technicalTypeVal
             child: child,
             isMain: isMainVal
         };
-        parentChildByParent[parent] = parentChild;
-        parentChildByChild[child] = parentChild;
+        if (typeof parentChildByParent[parent] === 'undefined') {
+            parentChildByParent[parent] = [parentChild];
+        } else {
+            parentChildByParent[parent].push(parentChild);
+        };
+        if (typeof parentChildByChild[child] === 'undefined') {
+            parentChildByChild[child] = [parentChild];
+        } else {
+            parentChildByChild[child].push(parentChild);
+        };
     }
     else if (elementName == 'SOMIX.Call') {
         updateMSEIndex(callerVal);
@@ -70,9 +82,17 @@ function buildModel(elementName, idVal, nameVal, uniqueNameVal, technicalTypeVal
             caller: caller,
             called: called,
         };
+        if (typeof callByCaller[caller] === 'undefined') {
+            callByCaller[caller] = [call];
+        } else {
+            callByCaller[caller].push(call);
+        };
+        if (typeof callByCalled[called] === 'undefined') {
+            callByCalled[called] = [call];
+        } else {
+            callByCalled[called].push(call);
+        };
 
-        callByCaller[caller] = call;
-        callByCalled[called] = call;
     }
     else if (elementName == 'SOMIX.Access') {
         updateMSEIndex(accessorVal);
@@ -88,8 +108,17 @@ function buildModel(elementName, idVal, nameVal, uniqueNameVal, technicalTypeVal
             isDependent: isDependentVal
         };
 
-        accessByAccessor[accessor] = access;
-        accessByAccessed[accessed] = access;
+        if (typeof accessByAccessor[accessor] === 'undefined') {
+            accessByAccessor[accessor] = [access];
+        } else {
+            accessByAccessor[accessor].push(access);
+        };
+
+        if (typeof accessByAccessed[accessed] === 'undefined') {
+            accessByAccessed[accessed] = [access];
+        } else {
+            accessByAccessed[accessed].push(access)
+        };
     }
     else {
         // TODO handle unknown elements

@@ -4,60 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <title>Moose2Model</title>
-    <script>
-        'use strict';
-        function draw() {
+    <script src="Drawing.js"></script>
 
-            function random(number) {
-                return Math.floor(Math.random() * number);
-            }
-
-            var canvas = document.getElementById('pane');
-            if (canvas.getContext) {
-                var ctx = canvas.getContext('2d');
-
-                // Coding to improve drawing in case of Retina displays
-
-                // get current size of the canvas
-                let rect = canvas.getBoundingClientRect();
-
-                // increase the actual size of our canvas
-                canvas.width = rect.width * devicePixelRatio;
-                canvas.height = rect.height * devicePixelRatio;
-
-                // ensure all drawing operations are scaled
-                ctx.scale(devicePixelRatio, devicePixelRatio);
-
-                // scale everything down using CSS
-                canvas.style.width = rect.width + 'px';
-                canvas.style.height = rect.height + 'px';
-
-
-
-                ctx.lineWidth = 1;
-                ctx.beginPath();
-                ctx.moveTo(10.5, 5);
-                ctx.lineTo(10.5, 140);
-                ctx.stroke();
-
-                ctx.font = '20px serif';
-                ctx.fillText('foo', 10, 50);
-                var text = ctx.measureText('foo'); // TextMetrics object
-                var width_of_text = text.width; // 16;
-
-                ctx.fillText(width_of_text, 10, 100);
-
-                const WIDTH = rect.width;
-                const HEIGHT = rect.height;
-                for (let i = 0; i < 100; i++) {
-                    ctx.beginPath();
-                    ctx.fillStyle = 'rgba(113,121,208,0.1)';
-                    ctx.arc(random(WIDTH), random(HEIGHT), random(100), 0, 2 * Math.PI);
-                    ctx.fill();
-                }
-            }
-        }
-    </script>
     <style>
         canvas {
             border: 1px solid black;
@@ -65,7 +13,7 @@
     </style>
 </head>
 
-<body onload="draw();">
+<body onload="draw();" onresize="draw();">
     <form>
         <input type="button" value="Load model">
     </form>
@@ -80,13 +28,13 @@
     <script>
         'use strict';
 
-        // Make canvas as big as possible. Fill the current Window completly
+        // // Make canvas as big as possible. Fill the current Window completly
 
-        let w = window.innerWidth;
-        let h = window.innerHeight;
-        var canvas = document.getElementById('pane');
-        canvas.width = w - 40;
-        canvas.height = h - 40;
+        // let w = window.innerWidth;
+        // let h = window.innerHeight;
+        // var canvas = document.getElementById('pane');
+        // canvas.width = w - 40;
+        // canvas.height = h - 40;
 
 
         // store a reference to our file handle

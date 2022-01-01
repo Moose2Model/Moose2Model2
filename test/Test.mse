@@ -14,7 +14,7 @@
   (name 'LONG_MEANINGLESS_METHOD_NAME')
   (technicalType 'ABAPMethod')
   (uniqueName 'sap.z2mse_demo_long_prefix_cl_b.long_meaningless_method_name'))
-(SOMIX.Code (id: 4 )
+(SOMIX.Code (id: 104 )
   (name 'LONG_MEANINGLESS_METHOD_NAME')
   (technicalType 'ABAPMethod')
   (uniqueName 'sap.z2mse_demo_long_prefix_cl_b.long_meaningless_method_name'))
