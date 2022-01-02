@@ -463,7 +463,7 @@ canvas.addEventListener('mouseover', function (e) {
     mouseover = true;
 });
 
-canvas.addEventListener('mouseout', function (e) {
-    window.cancelAnimationFrame(raf);
-    mouseover = false;
-});
+// canvas.addEventListener('mouseout', function (e) {
+//     window.cancelAnimationFrame(raf);
+//     mouseover = false;
+// });

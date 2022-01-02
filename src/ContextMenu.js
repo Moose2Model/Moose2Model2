@@ -12,8 +12,10 @@ $('#contextMenu').on('click', 'li', function (e) {
   $menu.hide();
   if ($(this).text() == 'Start Force-directed graph') {
     forceFeedback = true;
+    raf = window.requestAnimationFrame(draw);
   } else {
     forceFeedback = false;
+    window.cancelAnimationFrame(raf);
   }
 });
 
