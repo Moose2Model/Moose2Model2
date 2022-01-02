@@ -293,6 +293,7 @@ async function LoadModel() {
         //     n += 1;
         //     draw();
         // } while (n < nRepetitions);
+        mouseover = true;
         draw();
 
     } else if (fileHandle.kind === 'directory') {

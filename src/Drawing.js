@@ -171,7 +171,7 @@ function forceDirecting(width, height) {
             fact = 0;
         } else if (dist < 0.1) {
             fact = 100;
-        } else { fact = 1 / ( dist * dist ) };
+        } else { fact = 1 / (dist * dist) };
         fact = -fact * 2000;
         let force = {
             x: vect.x * fact,
@@ -327,14 +327,14 @@ function drawCompleteModel(ctx, width, height) {
 
 function draw() {
 
+    if (mouseover) {
+
+        // var canvas = document.getElementById('pane');
 
 
-    var canvas = document.getElementById('pane');
-
-
-    var raf;
-    if (canvas.getContext) {
-        var ctx = canvas.getContext('2d');
+        // var raf;
+        // if (canvas.getContext) {
+        // var ctx = canvas.getContext('2d');
 
         // // Coding to improve drawing in case of Retina displays
 
@@ -360,7 +360,7 @@ function draw() {
         let height = window.innerHeight - 40;
         g_width = width;
         g_height = height;
-        var canvas = document.getElementById('pane');
+        // var canvas = document.getElementById('pane');
         // increase the actual size of our canvas
         canvas.width = width * devicePixelRatio;
         canvas.height = height * devicePixelRatio;
@@ -392,13 +392,16 @@ function draw() {
         // positionBoxed(width, height);
         forceDirecting(width, height);
         drawCompleteModel(ctx, width, height);
+        // }
         raf = window.requestAnimationFrame(draw);
     }
 }
-// canvas.addEventListener('mouseover', function (e) {
-//     raf = window.requestAnimationFrame(draw);
-// });
+canvas.addEventListener('mouseover', function (e) {
+    raf = window.requestAnimationFrame(draw);
+    mouseover = true;
+});
 
-// canvas.addEventListener('mouseout', function (e) {
-//     window.cancelAnimationFrame(raf);
-// });
+canvas.addEventListener('mouseout', function (e) {
+    window.cancelAnimationFrame(raf);
+    mouseover = false;
+});
