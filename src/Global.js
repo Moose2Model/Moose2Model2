@@ -20,6 +20,19 @@ let raf;
 let mouseover = false;
 let forceFeedback = false;
 
+// To support mouse event handling
+function reOffset() {
+    var BB = canvas.getBoundingClientRect();
+    offsetX = BB.left;
+    offsetY = BB.top;
+  }
+  let offsetX, offsetY;
+  reOffset();
+  window.onscroll = function (e) { reOffset(); }
+  window.onresize = function (e) { reOffset(); }
+
+  
+
 function uniqueKey(technicalType, uniqueName) {
     return technicalType + '..' + uniqueName; // TODO is a .. enough to have always unique keys?
 };

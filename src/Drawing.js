@@ -3,6 +3,19 @@
 let g_width = window.innerWidth - 40;
 let g_height = window.innerHeight - 40;
 
+//
+
+// function handleMouseClick(e) {
+//     ctx.font = '20px arial';
+//     ctx.fillStyle = 'black';
+//     ctx.fillText('Is clicked', 10, 150);
+// }
+
+// canvas.addEventListener('click', handleMouseClick, false);
+
+
+//
+
 function drawBalls(ctx, width, height) {
 
     function random(number) {
@@ -439,8 +452,10 @@ function draw() {
             forceDirecting(width, height);
         }
         drawCompleteModel(ctx, width, height);
+        if (forceFeedback) {
+            raf = window.requestAnimationFrame(draw);
+        }
         // }
-        raf = window.requestAnimationFrame(draw);
     }
 }
 canvas.addEventListener('mouseover', function (e) {

@@ -12,7 +12,8 @@
         }
 
         #canvas,
-        #contextMenu {
+        #contextMenu,
+        #onClickInfo {
             position: absolute;
         }
 
@@ -21,6 +22,17 @@
             background: white;
             list-style: none;
             padding: 3px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 15px;
+        }
+
+        #onClickInfo {
+            border: 1px solid green;
+            background: white;
+            list-style: none;
+            padding: 3px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 15px;
         }
     </style>
 </head>
@@ -44,7 +56,10 @@
     <div id=canvasContainer></div>
     <canvas id="pane" width="800" height="800"></canvas>
     <ul id=contextMenu>
-        <li>Test</li>
+        <li>Will be renamed</li>
+    </ul>
+    <ul id=onClickInfo>
+        <li>Will be renamed</li>
     </ul>
     </div>
     <!-- <canvas id="pane" width=window.innerWidth height=window.innerHeight></canvas> -->
@@ -52,13 +67,14 @@
         // function $(x) {
         //     return document.getElementById(x);
         // };
-        var $menu = $('#contextMenu');
+        // var $menu = $('#contextMenu');
 
     </script>
     <script src="Global.js"></script>
     <script src="LoadModel.js"></script>
     <script src="Drawing.js"></script>
     <script src="ContextMenu.js"></script>
+    <script src="MouseClick.js"></script>
 
     <script>
         'use strict';
