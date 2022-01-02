@@ -18,6 +18,7 @@ let canvas = document.getElementById('pane');
 var ctx = canvas.getContext('2d');
 let raf;
 let mouseover = false;
+let forceFeedback = false;
 
 function uniqueKey(technicalType, uniqueName) {
     return technicalType + '..' + uniqueName; // TODO is a .. enough to have always unique keys?

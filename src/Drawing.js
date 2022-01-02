@@ -137,14 +137,18 @@ function forceDirecting(width, height) {
         if (typeof mEBI !== 'undefined') {
 
             let position = {
-                x: complModelPosition[mEBI['index']].x,
-                y: complModelPosition[mEBI['index']].y,
+                // x: complModelPosition[mEBI['index']].x,
+                // y: complModelPosition[mEBI['index']].y,
+                x: 0,
+                y: 0,
             };
             complModelPositionNew[mEBI['index']] = position;
         }
     }
 
     const avgLen = w2 / Math.sqrt(nElements);
+    // const step = 0.00002; // für 300kb Model
+    // const step = 0.000001; // für 4 MB Model
     const step = 0.00002;
 
     function spring(x1, y1, x2, y2) {
@@ -248,12 +252,53 @@ function forceDirecting(width, height) {
         }
     }
 
+    // Determine correction factor
+
+    let maxDiff = 0.
+    let corrFact = 1;
+
+    for (const mEBI of modelElementsByIndex) {
+        if (typeof mEBI !== 'undefined') {
+
+            if (Math.abs(complModelPositionNew[mEBI['index']].x) > maxDiff) {
+                maxDiff = Math.abs(complModelPositionNew[mEBI['index']].x);
+            };
+            if (Math.abs(complModelPositionNew[mEBI['index']].y) > maxDiff) {
+                maxDiff = Math.abs(complModelPositionNew[mEBI['index']].y);
+            };
+        }
+    }
+
+    if (maxDiff > 100) {
+        corrFact = 100 / maxDiff;
+    }
+
+
+    // // Limit displacement
+
+    // const maxDisplacment = 10.
+
+
+    // for (const mEBI of modelElementsByIndex) {
+    //     if (typeof mEBI !== 'undefined') {
+
+    //         if (Math.abs(complModelPositionNew[mEBI['index']].x) > maxDisplacment) {
+    //             complModelPositionNew[mEBI['index']].x *= maxDisplacment / complModelPositionNew[mEBI['index']].x
+    //         };
+    //         if (Math.abs(complModelPositionNew[mEBI['index']].y) > maxDisplacment) {
+    //             complModelPositionNew[mEBI['index']].y *= maxDisplacment / complModelPositionNew[mEBI['index']].y
+    //         };
+    //     }
+    // }
+
+    // Calculate new positions
+
     for (const mEBI of modelElementsByIndex) {
         if (typeof mEBI !== 'undefined') {
 
             let position = {
-                x: complModelPositionNew[mEBI['index']].x,
-                y: complModelPositionNew[mEBI['index']].y,
+                x: corrFact * complModelPositionNew[mEBI['index']].x + complModelPosition[mEBI['index']].x,
+                y: corrFact * complModelPositionNew[mEBI['index']].y + complModelPosition[mEBI['index']].y,
             };
             complModelPosition[mEBI['index']] = position;
         }
@@ -390,7 +435,9 @@ function draw() {
         // drawBalls(ctx, width / 2, height / 2);
 
         // positionBoxed(width, height);
-        forceDirecting(width, height);
+        if (forceFeedback) {
+            forceDirecting(width, height);
+        }
         drawCompleteModel(ctx, width, height);
         // }
         raf = window.requestAnimationFrame(draw);

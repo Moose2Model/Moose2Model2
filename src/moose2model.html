@@ -10,22 +10,55 @@
         canvas {
             border: 1px solid black;
         }
+
+        #canvas,
+        #contextMenu {
+            position: absolute;
+        }
+
+        #contextMenu {
+            border: 1px solid green;
+            background: white;
+            list-style: none;
+            padding: 3px;
+        }
     </style>
 </head>
 
 <body onload="draw();" onresize="draw();">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
+    <!-- Begin Context ContextMenu -->
+    <!-- <div id=canvasContainer>
+        <canvas id="canvas" width=300 height=300></canvas>
+        <ul id=contextMenu><li>Test</li></ul>
+      </div> -->
+
+    <!-- End Context ContextMenu -->
     <form>
         <input type="button" value="Load model">
     </form>
     <br>
     <p></p>
     <p></p>
+    <div id=canvasContainer></div>
     <canvas id="pane" width="800" height="800"></canvas>
+    <ul id=contextMenu>
+        <li>Test</li>
+    </ul>
+    </div>
     <!-- <canvas id="pane" width=window.innerWidth height=window.innerHeight></canvas> -->
+    <script>
+        // function $(x) {
+        //     return document.getElementById(x);
+        // };
+        var $menu = $('#contextMenu');
+
+    </script>
     <script src="Global.js"></script>
     <script src="LoadModel.js"></script>
     <script src="Drawing.js"></script>
+    <script src="ContextMenu.js"></script>
 
     <script>
         'use strict';
