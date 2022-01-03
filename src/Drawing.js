@@ -98,7 +98,7 @@ function drawWhenForceDirectRequires(){
 
 function draw(always = true) {
 
-    if (mouseover) {
+    // if (mouseover) {
 
         let width = window.innerWidth - 40;
         let height = window.innerHeight - 40;
@@ -116,7 +116,7 @@ function draw(always = true) {
         if (forceFeedback) {
             requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
         }
-    }
+    // }
 }
 canvas.addEventListener('mouseover', function (e) {
     requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);

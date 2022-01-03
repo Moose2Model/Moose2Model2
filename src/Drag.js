@@ -41,13 +41,14 @@ function handleDragMouseMove(e) {
     // move the selected shape by the drag distance
     diagramms[activeDiagram].complModelPosition[draggedElement.index].x += dx;
     diagramms[activeDiagram].complModelPosition[draggedElement.index].y += dy;
-// Pin all dragged elements
-    if (diagramms[activeDiagram].pinned.indexOf(draggedElement.index) == -1){
+    // Pin all dragged elements
+    if (diagramms[activeDiagram].pinned.indexOf(draggedElement.index) == -1) {
         diagramms[activeDiagram].pinned.push(draggedElement.index);
     }
 
     // clear the canvas and redraw all shapes
     drawCompleteModel(ctx, g_width, g_height);
+
     // update the starting drag position (== the current mouse position)
     startX = mouseX;
     startY = mouseY;
@@ -59,7 +60,10 @@ function handleDragMouseUp(e) {
     e.preventDefault();
     e.stopPropagation();
     // the drag is over -- clear the isDragging flag
-    isDragging = false;
+    isDragging = false;    
+    if (forceFeedback) {
+        requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
+    }
 
 };
 
@@ -70,5 +74,8 @@ function handleDragMouseOut(e) {
     e.stopPropagation();
     // the drag is over -- clear the isDragging flag
     isDragging = false;
+    if (forceFeedback) {
+        requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
+    }
 
 };

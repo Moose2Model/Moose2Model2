@@ -22,6 +22,7 @@ let currentIndex = 1;
 var canvas = document.getElementById('pane');
 var ctx = canvas.getContext('2d');
 let requestAnimationFrame;
+/** @deprecated */
 let mouseover = false;
 let forceFeedback = false;
 

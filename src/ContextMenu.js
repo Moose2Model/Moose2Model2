@@ -87,10 +87,12 @@ $('#contextMenu').on('click', 'li', function (e) {
     window.cancelAnimationFrame(requestAnimationFrame);
   } else if ($(this).text() == 'Jump to code') {
     window.location.href = gMC_url;
+    // requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
   }else if ($(this).text() == 'Remove pinning') {
     const idx = diagramms[activeDiagram].pinned.indexOf(gMCElementContextHandled.index);
     if (idx !== -1){
       diagramms[activeDiagram].pinned.splice(idx, 1);
     }
+    // requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
   }
 });
