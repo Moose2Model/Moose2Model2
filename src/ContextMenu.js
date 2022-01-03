@@ -12,11 +12,15 @@ $menu.hide();
 
 
 
-canvas.addEventListener('mousedown', hideContextMenu, false);
+canvas.addEventListener('mousedown', handleContextMouseDown, false);
 canvas.addEventListener('contextmenu', handleContextMenu, false);
-// canvas.addEventListener('mouseout', hideContextMenu, false);
+// This causes the Menu to not shown at all:
+// canvas.addEventListener('mouseout', handleContextMouseOut, false);
 
-function hideContextMenu(e) {
+function handleContextMouseDown(e) {
+  $menu.hide();
+}
+function handleContextMouseOut(e) {
   $menu.hide();
 }
 
