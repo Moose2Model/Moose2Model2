@@ -15,9 +15,10 @@ let accessByAccessed = [];
 // These global variables are only needed when an mse model is loaded:
 let indexByMSEIndex = [];
 let currentIndex = 1;
-// For picture of complete Model
-let complModelPosition = [];
-// For drawings
+// // For picture of complete Model
+// /** @deprecated */
+// let complModelPosition = [];
+/** The main Canvas for drawings */
 var canvas = document.getElementById('pane');
 var ctx = canvas.getContext('2d');
 let requestAnimationFrame;
@@ -34,7 +35,29 @@ let offsetX, offsetY;
 reOffset();
 window.onscroll = function (e) { reOffset(); }
 window.onresize = function (e) { reOffset(); }
+canvas.onresize = function (e) { reOffset(); }
 
+function findNearestElement(x, y, maxDistance) {
+    let minDistanceSquared = -1;
+    let minIndex = 0;
+
+    for (let i = 1; i < diagramms[activeDiagram].complModelPosition.length; i++) { // List start with index 1
+
+        let distance = (x - diagramms[activeDiagram].complModelPosition[i].x) * (x - diagramms[activeDiagram].complModelPosition[i].x) + (y - diagramms[activeDiagram].complModelPosition[i].y) * (y - diagramms[activeDiagram].complModelPosition[i].y);
+        if (minDistanceSquared < 0) {
+            minDistanceSquared = distance;
+            minIndex = i;
+        } else if (distance < minDistanceSquared) {
+            minDistanceSquared = distance;
+            minIndex = i;
+        }
+    }
+    if (minDistanceSquared < maxDistance*maxDistance) {
+        // Return nearest element only when it is nearer than maxDistance
+        return modelElementsByIndex[minIndex];
+    }
+
+}
 
 
 function uniqueKey(technicalType, uniqueName) {
