@@ -4,7 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <title>Moose2Model</title>
-    <!-- <script src="Drawing.js"></script> -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
 
     <style>
         canvas {
@@ -38,21 +39,14 @@
 </head>
 
 <body onload="draw();" onresize="draw();">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="jquery-3.6.0.js"></script>
 
-    <!-- Begin Context ContextMenu -->
-    <!-- <div id=canvasContainer>
-        <canvas id="canvas" width=300 height=300></canvas>
-        <ul id=contextMenu><li>Test</li></ul>
-      </div> -->
-
-    <!-- End Context ContextMenu -->
     <form>
         <input type="button" value="Load model">
     </form>
     <br>
-    <p></p>
-    <p></p>
+    <!-- <p></p>
+    <p></p> -->
     <div id=canvasContainer></div>
     <canvas id="pane" width="800" height="800"></canvas>
     <ul id=contextMenu>
@@ -62,16 +56,10 @@
         <li>Will be renamed</li>
     </ul>
     </div>
-    <!-- <canvas id="pane" width=window.innerWidth height=window.innerHeight></canvas> -->
-    <script>
-        // function $(x) {
-        //     return document.getElementById(x);
-        // };
-        // var $menu = $('#contextMenu');
 
-    </script>
     <script src="Global.js"></script>
-    <script src="LoadModel.js"></script>
+    <script src="AnalyzeMseFile.js"></script>
+    <script src="PositionElements.js"></script>
     <script src="Drawing.js"></script>
     <script src="ContextMenu.js"></script>
     <script src="MouseClick.js"></script>
@@ -79,30 +67,38 @@
     <script>
         'use strict';
 
-        // // Make canvas as big as possible. Fill the current Window completly
-
-        // let w = window.innerWidth;
-        // let h = window.innerHeight;
-        // var canvas = document.getElementById('pane');
-        // canvas.width = w - 40;
-        // canvas.height = h - 40;
-
-
-        // store a reference to our file handle
-        let fileHandle;
-
 
         const button = document.querySelector('input');
-        const paragraph = document.querySelector('p');
+        // const paragraph = document.querySelector('p');
 
         button.addEventListener('click', LoadModel);
 
         if (window.isSecureContext) {
-            // Page is a secure context so service workers are now available
-            paragraph.textContent = 'Secure Context';
+            // window.alert('The browser context is secure. This application will work');
         }
         else {
-            paragraph.textContent = 'Not secure';
+            window.alert('The browser context is not secure. This application will not work');
+        }
+
+        async function LoadModel() {
+            'use strict';
+            // open file picker
+            [fileHandle] = await window.showOpenFilePicker();
+
+            if (fileHandle.kind === 'file') {
+                // run file code
+                // get file contents
+                const fileData = await fileHandle.getFile();
+                const contents = await fileData.text();
+                analyzeMseFile(contents);
+                positionCircle(g_width, g_height);
+                mouseover = true;
+                draw();
+
+            } else if (fileHandle.kind === 'directory') {
+                // run directory code
+            }
+
         }
 
     </script>

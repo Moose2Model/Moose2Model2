@@ -1,3 +1,7 @@
+'use strict';
+// store a reference to our file handle
+let fileHandle;
+
 // This are all global variables which contain informations on a loaded model
 // They are enhanced when more than a single mse model is loaded
 let modelElementsByUniqueKey = {};
@@ -14,9 +18,9 @@ let currentIndex = 1;
 // For picture of complete Model
 let complModelPosition = [];
 // For drawings
-let canvas = document.getElementById('pane');
+var canvas = document.getElementById('pane');
 var ctx = canvas.getContext('2d');
-let raf;
+let requestAnimationFrame;
 let mouseover = false;
 let forceFeedback = false;
 
@@ -25,13 +29,13 @@ function reOffset() {
     var BB = canvas.getBoundingClientRect();
     offsetX = BB.left;
     offsetY = BB.top;
-  }
-  let offsetX, offsetY;
-  reOffset();
-  window.onscroll = function (e) { reOffset(); }
-  window.onresize = function (e) { reOffset(); }
+}
+let offsetX, offsetY;
+reOffset();
+window.onscroll = function (e) { reOffset(); }
+window.onresize = function (e) { reOffset(); }
 
-  
+
 
 function uniqueKey(technicalType, uniqueName) {
     return technicalType + '..' + uniqueName; // TODO is a .. enough to have always unique keys?

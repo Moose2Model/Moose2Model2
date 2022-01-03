@@ -1,3 +1,4 @@
+'use strict';
 // From https://stackoverflow.com/questions/31601393/create-context-menu-using-jquery-with-html-5-canvas
 // Adapted. Requires JQuery
 
@@ -12,10 +13,10 @@ $('#contextMenu').on('click', 'li', function (e) {
   $menu.hide();
   if ($(this).text() == 'Start Force-directed graph') {
     forceFeedback = true;
-    raf = window.requestAnimationFrame(draw);
+    requestAnimationFrame = window.requestAnimationFrame(draw);
   } else {
     forceFeedback = false;
-    window.cancelAnimationFrame(raf);
+    window.cancelAnimationFrame(requestAnimationFrame);
   }
 });
 

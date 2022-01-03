@@ -1,19 +1,19 @@
+'use strict';
 // Requires JQuery
 
+let gMC_url = '';
 
 let $onClickInfo = $('#onClickInfo');
 // hide the context menu
 $onClickInfo.hide();
 
-// $('#contextMenu').on('click', 'li', function (e) {
-//   // hide the context menu
-//   $menu.hide();
-//   if ($(this).text() == 'Start Force-directed graph') {
-//     forceFeedback = true;
-//   } else {
-//     forceFeedback = false;
-//   }
-// });
+$('#onClickInfo').on('click', 'li', function (e) {
+    // hide the context menu
+    $onClickInfo.hide();
+    if ($(this).text() == 'Jump to code') {
+        window.location.href = gMC_url;
+    }
+  });
 
 canvas.addEventListener('mousedown', handleMouseDown2, false);
 canvas.addEventListener('click', handleMouseClick, false);
@@ -61,11 +61,15 @@ function handleMouseClick(e) {
         nameText = element.name;
         linkToEditorText = element.linkToEditor;
     };
+    gMC_url = element.linkToEditor; // So that it is globaly available in case the link is clicked
 
     // if (!r) { $onClickInfo.hide(); return; }
     $onClickInfo.show();
     let InfoText = 'Mouse is Clicked at x: ' + x + ' y: ' + y;
     var m = [InfoText, nameText, techtypeText, uniqueNameText, linkToEditorText];
+    if (linkToEditorText != ''){
+        m.push('Jump to code');
+    };
     $onClickInfo.empty();
     $onClickInfo.css({ left: x, top: y });
     for (var i = 0; i < m.length; i++) {
