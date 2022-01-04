@@ -122,6 +122,39 @@
 
 
 
+        .toprow {
+
+            /* position: absolute; */
+            /* top: 300px;
+            left: 300px; */
+            /* float: left;
+            overflow: hidden; */
+            background-color: white;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+         .myIcon {
+
+            position: absolute;
+            top: 100px;
+            left: 0px;
+            /* float: left;
+overflow: hidden; */
+            /* background-color: white;
+            font-family: Arial, Helvetica, sans-serif; */
+        }
+
+        .toprow .myModelText {
+
+            position: absolute;
+            top: 15px;
+            left: 50px;
+            /* float: left;
+overflow: hidden; */
+            background-color: white;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
         .navbar {
             overflow: hidden;
             background-color: white;
@@ -130,11 +163,13 @@
 
         .navbar a {
             float: left;
+            overflow: hidden;
+            /* float: left;
             font-size: 16px;
             color: rgb(0, 0, 0);
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
+            text-align: center; */
+            /* padding: 14px 16px; */
+            /* text-decoration: none; */
         }
 
         .dropdown {
@@ -142,13 +177,14 @@
             overflow: hidden;
         }
 
-        .dropdown .dropbtn {
+        .dropdown .dropbtn,
+        a {
             cursor: pointer;
             font-size: 16px;
             border: none;
             outline: none;
             color: rgb(85, 71, 71);
-            padding: 14px 16px;
+            padding: 5px 10px;
             background-color: inherit;
             font-family: inherit;
             margin: 0;
@@ -169,16 +205,18 @@
             z-index: 1;
         }
 
-        .dropdown-content input, a {
+        .dropdown-content input,
+        a {
             float: none;
             color: black;
-            padding: 12px 16px;
+            /* padding: 12px 16px; */
             text-decoration: none;
             display: block;
             text-align: left;
         }
 
-        .dropdown-content input:hover, a:hover {
+        .dropdown-content input:hover,
+        a:hover {
             background-color: #ddd;
         }
 
@@ -209,13 +247,16 @@
             font-family: Arial, Helvetica, sans-serif;
             font-size: 15px;
         }
-
     </style>
 </head>
 
 <body onload="drawAlways();" onresize="drawAlways();">
     <script src="jquery-3.6.0.js"></script>
+    <div class="toprow">
+        <img class="MyIcon" src="favicon.ico">
+        <div class="myModelText" id="LoadedModel"></div>
 
+    </div>
     <div class="navbar">
         <div class="dropdown">
             <button class="dropbtn" onclick="myFunction()">Dropdown
@@ -224,12 +265,12 @@
             <div class="dropdown-content" id="myDropdown">
                 <!-- <input id="LoadButton" type="button" value="Load model"> -->
                 <input id="LoadButton" value="Load model">
-                <input id="LoadButton 2" value="Load model 2">
+                <!-- <input id="LoadButton 2" value="Load model 2"> -->
                 <!-- <a href="#">Link 2</a>
                 <a href="#">Link 3</a> -->
             </div>
         </div>
-        <a href="https://github.com/Moose2Model/Moose2Model2">Github repository</a>
+        <a href="https://github.com/Moose2Model/Moose2Model2" target="_blank">Github repository</a>
     </div>
 
 
@@ -257,6 +298,11 @@
     <script src="HTMLLogic.js"></script>
 
     <script>
+
+        let loadModelText = document.getElementById("LoadedModel");
+        loadModelText.innerHTML = "No Model loaded";
+
+
         /* When the user clicks on the button, 
         toggle between hiding and showing the dropdown content */
         function myFunction() {
