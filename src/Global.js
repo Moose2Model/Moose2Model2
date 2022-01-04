@@ -38,6 +38,25 @@ window.onscroll = function (e) { reOffset(); }
 window.onresize = function (e) { reOffset(); }
 canvas.onresize = function (e) { reOffset(); }
 
+
+window.addEventListener('resize', resizeCanvas);
+
+let g_width = 99; // Will soon be overwritten
+let g_height = 99; // Will soon be overwritten
+resizeCanvas();
+
+// function resizeCanvas() {
+//     let g_width = window.innerWidth - 40;
+//     let g_height = window.innerHeight - 100;
+// }
+
+function resizeCanvas() {
+    g_width = window.innerWidth - 20;
+    g_height = window.innerHeight - 100;
+    canvas.widh = g_width;
+    canvas.height = g_height;
+}
+
 function findNearestElement(x, y, maxDistance) {
     let minDistanceSquared = -1;
     let minIndex = 0;
@@ -53,7 +72,7 @@ function findNearestElement(x, y, maxDistance) {
             minIndex = i;
         }
     }
-    if (minDistanceSquared < maxDistance*maxDistance) {
+    if (minDistanceSquared < maxDistance * maxDistance) {
         // Return nearest element only when it is nearer than maxDistance
         return modelElementsByIndex[minIndex];
     }

@@ -1,24 +1,24 @@
 'use strict';
 // For Canvas sometimes needed
-let g_width = window.innerWidth - 40;
-let g_height = window.innerHeight - 40;
+
+// function resizeCanvas() {
+//     let g_width = window.innerWidth - 40;
+//     let g_height = window.innerHeight - 100;
+// }
 
 function supportRetina() {
-    let width = window.innerWidth - 40;
-    let height = window.innerHeight - 40;
-    g_width = width;
-    g_height = height;
+    resizeCanvas();
     // var canvas = document.getElementById('pane');
     // increase the actual size of our canvas
-    canvas.width = width * devicePixelRatio;
-    canvas.height = height * devicePixelRatio;
+    canvas.width = g_width * devicePixelRatio;
+    canvas.height = g_height * devicePixelRatio;
 
     // ensure all drawing operations are scaled
     ctx.scale(devicePixelRatio, devicePixelRatio);
 
     // scale everything down using CSS
-    canvas.style.width = width + 'px';
-    canvas.style.height = height + 'px';
+    canvas.style.width = g_width + 'px';
+    canvas.style.height = g_height + 'px';
 };
 
 function cameraToCanvasX(x) {

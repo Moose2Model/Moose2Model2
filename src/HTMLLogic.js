@@ -1,6 +1,9 @@
 'use strict';
 
 
+let loadModelText = document.getElementById("LoadedModel");
+loadModelText.innerHTML = "No Model loaded";
+
 // // const button = document.querySelector('input');
 const button = document.getElementById('LoadButton');
 // // const paragraph = document.querySelector('p');
@@ -25,6 +28,7 @@ async function LoadModel() {
         const fileData = await fileHandle.getFile();
         const contents = await fileData.text();
         document.title = fileData.name;
+        loadModelText.innerHTML = 'Loaded SOMIX model: '+ fileData.name;
         useStartDiagram();
         analyzeMseFile(contents);
         positionCircle(g_width, g_height);
