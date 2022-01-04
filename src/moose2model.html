@@ -207,17 +207,17 @@ overflow: hidden; */
             padding-bottom: 0px;
             padding-left: 0px;
             padding-right: 20px;
-            padding-top: 0px;
+            padding-top: 5px;
 
             background-color: inherit;
             font-family: inherit;
             /* margin: 100; */
         }
 
-        .navbar a:hover,
+        .navbar button:hover,
         .dropdown:hover .dropbtn,
         .dropbtn:focus {
-            background-color: rgb(194, 182, 182);
+            background-color: rgb(223, 223, 223);
         }
 
         .dropdown-content {
@@ -280,7 +280,7 @@ overflow: hidden; */
 <body onload="drawAlways();" onresize="drawAlways();">
     <script src="jquery-3.6.0.js"></script>
     <div class="toprow">
-        <img class="MyIcon" src="favicon.ico">
+        <img class="MyIcon" src="favicon.ico"> <!-- will be 32px wide and high -->
         <div class="myModelText" id="LoadedModel"></div>
 
     </div>
@@ -323,7 +323,7 @@ overflow: hidden; */
     <script>
 
         function JumpToGithub() {
-            window.open( 'https://github.com/Moose2Model/Moose2Model2', '_blank' );
+            window.open('https://github.com/Moose2Model/Moose2Model2', '_blank');
         }
 
         /* When the user clicks on the button, 
