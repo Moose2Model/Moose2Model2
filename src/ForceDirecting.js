@@ -221,25 +221,28 @@ function forceDirecting(width, height) {
 
     let maxDiff = 0.
     let corrFact = 1;
+    let draggedIndex = 0;
 
     for (const mEBI of modelElementsByIndex) {
         if (typeof mEBI !== 'undefined') {
 
             let handledIndex = mEBI['index'];
-            if (isDragging && draggedIndex == handledIndex) {
-                // Do not alter the position of currently dragged elements
-                complModelPositionNew[mEBI['index']].x = 0; 
-                complModelPositionNew2[mEBI['index']].x = 0;
-                complModelPositionNew[mEBI['index']].y = 0; 
-                complModelPositionNew2[mEBI['index']].y = 0;
-                continue;
+            if (isDragging && !backGroundDragged) {
+                if (draggedIndex == handledIndex) {
+                    // Do not alter the position of currently dragged elements
+                    complModelPositionNew[mEBI['index']].x = 0;
+                    complModelPositionNew2[mEBI['index']].x = 0;
+                    complModelPositionNew[mEBI['index']].y = 0;
+                    complModelPositionNew2[mEBI['index']].y = 0;
+                    continue;
+                }
             }
 
             if (diagramms[activeDiagram].pinned.indexOf(handledIndex) > -1) {
                 // Do not alter position of pinned elements
-                complModelPositionNew[mEBI['index']].x = 0; 
+                complModelPositionNew[mEBI['index']].x = 0;
                 complModelPositionNew2[mEBI['index']].x = 0;
-                complModelPositionNew[mEBI['index']].y = 0; 
+                complModelPositionNew[mEBI['index']].y = 0;
                 complModelPositionNew2[mEBI['index']].y = 0;
                 continue;
             }
@@ -258,8 +261,7 @@ function forceDirecting(width, height) {
     }
 
     // Calculate new positions
-    let draggedIndex = 0;
-    if (isDragging) {
+    if (isDragging && !backGroundDragged) {
         draggedIndex = draggedElement.index;
     }
 
@@ -287,7 +289,7 @@ function forceDirecting(width, height) {
         }
     }
 
-    
+
     redraw = true;
     return redraw;
 

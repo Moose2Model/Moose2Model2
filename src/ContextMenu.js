@@ -38,7 +38,7 @@ function handleContextMenu(e) {
   let linkToEditorText = '';
   let techtypeText = '';
   let uniqueNameText = 'No element found';
-  gMCElementContextHandled = findNearestElement(x, y, 20);
+  gMCElementContextHandled = findNearestElement(cameraToPaneX(x), cameraToPaneY(y), cameraToPaneScale(20) );
   gMC_url = '';
   if (typeof gMCElementContextHandled !== 'undefined') {
     uniqueNameText = gMCElementContextHandled.uniqueName;
@@ -52,7 +52,7 @@ function handleContextMenu(e) {
     if (linkToEditorText != '') {
       m.push('Jump to code');
     };
-    if (diagramms[activeDiagram].pinned.indexOf(gMCElementContextHandled.index) > -1 ){
+    if (diagramms[activeDiagram].pinned.indexOf(gMCElementContextHandled.index) > -1) {
       m.push('Remove pinning');
     }
 
@@ -88,9 +88,9 @@ $('#contextMenu').on('click', 'li', function (e) {
   } else if ($(this).text() == 'Jump to code') {
     window.location.href = gMC_url;
     // requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
-  }else if ($(this).text() == 'Remove pinning') {
+  } else if ($(this).text() == 'Remove pinning') {
     const idx = diagramms[activeDiagram].pinned.indexOf(gMCElementContextHandled.index);
-    if (idx !== -1){
+    if (idx !== -1) {
       diagramms[activeDiagram].pinned.splice(idx, 1);
     }
     // requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);

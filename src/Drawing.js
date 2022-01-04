@@ -21,6 +21,38 @@ function supportRetina() {
     canvas.style.height = height + 'px';
 };
 
+function cameraToCanvasX(x) {
+
+    return diagramms[activeDiagram].camerSettings.zoomfactor * (x + diagramms[activeDiagram].camerSettings.move.x) + g_width / 2;
+
+}
+
+function cameraToPaneX(canvasX) {
+
+    return - diagramms[activeDiagram].camerSettings.move.x + (canvasX - g_width / 2) / diagramms[activeDiagram].camerSettings.zoomfactor;
+
+}
+
+function cameraToCanvasY(y) {
+
+    return diagramms[activeDiagram].camerSettings.zoomfactor * (y + diagramms[activeDiagram].camerSettings.move.y) + g_height / 2;
+
+}
+
+function cameraToPaneY(canvasY) {
+
+    return - diagramms[activeDiagram].camerSettings.move.y + (canvasY - g_height / 2) / diagramms[activeDiagram].camerSettings.zoomfactor;
+
+}
+
+function cameraToCanvasScale(size) {
+    return diagramms[activeDiagram].camerSettings.zoomfactor * size;
+}
+
+function cameraToPaneScale(size) {
+    return size / diagramms[activeDiagram].camerSettings.zoomfactor;
+}
+
 function drawCompleteModel(ctx, width, height) {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -28,11 +60,11 @@ function drawCompleteModel(ctx, width, height) {
     for (const pCBP of parentChildByParent) {
         if (typeof pCBP !== 'undefined') {
             for (const pC of pCBP) {
-                ctx.lineWidth = 1;
+                ctx.lineWidth = cameraToCanvasScale(1);
                 ctx.beginPath();
                 ctx.strokeStyle = 'rgba(0, 0, 0, 0.2)';
-                ctx.moveTo(diagramms[activeDiagram].complModelPosition[pC['parent']].x, diagramms[activeDiagram].complModelPosition[pC['parent']].y);
-                ctx.lineTo(diagramms[activeDiagram].complModelPosition[pC['child']].x, diagramms[activeDiagram].complModelPosition[pC['child']].y);
+                ctx.moveTo(cameraToCanvasX(diagramms[activeDiagram].complModelPosition[pC['parent']].x), cameraToCanvasY(diagramms[activeDiagram].complModelPosition[pC['parent']].y));
+                ctx.lineTo(cameraToCanvasX(diagramms[activeDiagram].complModelPosition[pC['child']].x), cameraToCanvasY(diagramms[activeDiagram].complModelPosition[pC['child']].y));
                 ctx.stroke();
             }
         }
@@ -41,11 +73,11 @@ function drawCompleteModel(ctx, width, height) {
     for (const cBC of callByCaller) {
         if (typeof cBC !== 'undefined') {
             for (const cC of cBC) {
-                ctx.lineWidth = 1;
+                ctx.lineWidth = cameraToCanvasScale(1);
                 ctx.beginPath();
                 ctx.strokeStyle = 'rgba(255, 0, 0, 0.2)';
-                ctx.moveTo(diagramms[activeDiagram].complModelPosition[cC['caller']].x, diagramms[activeDiagram].complModelPosition[cC['caller']].y);
-                ctx.lineTo(diagramms[activeDiagram].complModelPosition[cC['called']].x, diagramms[activeDiagram].complModelPosition[cC['called']].y);
+                ctx.moveTo(cameraToCanvasX(diagramms[activeDiagram].complModelPosition[cC['caller']].x), cameraToCanvasY(diagramms[activeDiagram].complModelPosition[cC['caller']].y));
+                ctx.lineTo(cameraToCanvasX(diagramms[activeDiagram].complModelPosition[cC['called']].x), cameraToCanvasY(diagramms[activeDiagram].complModelPosition[cC['called']].y));
                 ctx.stroke();
             }
         }
@@ -54,11 +86,11 @@ function drawCompleteModel(ctx, width, height) {
     for (const aBA of accessByAccessor) {
         if (typeof aBA !== 'undefined') {
             for (const aA of aBA) {
-                ctx.lineWidth = 1;
+                ctx.lineWidth = cameraToCanvasScale(1);
                 ctx.beginPath();
                 ctx.strokeStyle = 'rgba(0, 0, 255, 0.2)';
-                ctx.moveTo(diagramms[activeDiagram].complModelPosition[aA['accessor']].x, diagramms[activeDiagram].complModelPosition[aA['accessor']].y);
-                ctx.lineTo(diagramms[activeDiagram].complModelPosition[aA['accessed']].x, diagramms[activeDiagram].complModelPosition[aA['accessed']].y);
+                ctx.moveTo(cameraToCanvasX(diagramms[activeDiagram].complModelPosition[aA['accessor']].x), cameraToCanvasY(diagramms[activeDiagram].complModelPosition[aA['accessor']].y));
+                ctx.lineTo(cameraToCanvasX(diagramms[activeDiagram].complModelPosition[aA['accessed']].x), cameraToCanvasY(diagramms[activeDiagram].complModelPosition[aA['accessed']].y));
                 ctx.stroke();
             }
         }
@@ -71,28 +103,29 @@ function drawCompleteModel(ctx, width, height) {
             switch (mEBI['element']) {
                 case 'SOMIX.Grouping':
                     ctx.fillStyle = 'black';
-                    size = 4;
+                    size = cameraToCanvasScale(4);
                     break;
                 case 'SOMIX.Code':
                     ctx.fillStyle = 'red';
-                    size = 2;
+                    size = cameraToCanvasScale(2);
                     break;
                 case 'SOMIX.Data':
                     ctx.fillStyle = 'blue';
-                    size = 2;
+                    size = cameraToCanvasScale(2);
                     break;
             }
-            ctx.arc(diagramms[activeDiagram].complModelPosition[mEBI['index']].x, diagramms[activeDiagram].complModelPosition[mEBI['index']].y, size, 0, 2 * Math.PI);
+            ctx.arc(cameraToCanvasX(diagramms[activeDiagram].complModelPosition[mEBI['index']].x),
+                cameraToCanvasY(diagramms[activeDiagram].complModelPosition[mEBI['index']].y), size, 0, 2 * Math.PI);
             ctx.fill();
         }
     }
 };
 
-function drawAlways(){
+function drawAlways() {
     draw(true)
 }
 
-function drawWhenForceDirectRequires(){
+function drawWhenForceDirectRequires() {
     draw(false)
 }
 
@@ -100,22 +133,22 @@ function draw(always = true) {
 
     // if (mouseover) {
 
-        let width = window.innerWidth - 40;
-        let height = window.innerHeight - 40;
-        g_width = width;
-        g_height = height;
+    let width = window.innerWidth - 40;
+    let height = window.innerHeight - 40;
+    g_width = width;
+    g_height = height;
 
-        supportRetina();
-        let redraw = true;
-        if (forceFeedback) {
-            let redraw = forceDirecting(width, height);
-        }
-        if (redraw || always) {
-            drawCompleteModel(ctx, width, height);
-        }
-        if (forceFeedback) {
-            requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
-        }
+    supportRetina();
+    let redraw = true;
+    if (forceFeedback) {
+        let redraw = forceDirecting(width, height);
+    }
+    if (redraw || always) {
+        drawCompleteModel(ctx, width, height);
+    }
+    if (forceFeedback) {
+        requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
+    }
     // }
 }
 canvas.addEventListener('mouseover', function (e) {

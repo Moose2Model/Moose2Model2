@@ -1,10 +1,11 @@
 'use strict';
 
 
-const button = document.querySelector('input');
-// const paragraph = document.querySelector('p');
+// // const button = document.querySelector('input');
+// const button = document.getElementById('LoadButton');
+// // const paragraph = document.querySelector('p');
 
-button.addEventListener('click', LoadModel);
+// button.addEventListener('click', LoadModel);
 
 if (window.isSecureContext) {
     // window.alert('The browser context is secure. This application will work');
