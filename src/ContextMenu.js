@@ -28,8 +28,11 @@ function handleContextMenu(e) {
   // tell the browser we're handling this event
   e.preventDefault();
   e.stopPropagation();
-  // reOffset(); // Because recalculating the offset appears not to work properly in all cases
+
   // get mouse position relative to the canvas
+
+  reOffset(); // Solve problem why this is needed
+
   var x = parseInt(e.clientX - offsetX);
   var y = parseInt(e.clientY - offsetY);
 
@@ -52,7 +55,7 @@ function handleContextMenu(e) {
     if (linkToEditorText != '') {
       m.push('Jump to code');
     };
-    if (diagramms[activeDiagram].pinned.indexOf(gMCElementContextHandled.index) > -1) {
+    if (diagramms[activeDiagram.name].pinned.indexOf(gMCElementContextHandled.index) > -1) {
       m.push('Remove pinning');
     }
 
@@ -89,9 +92,9 @@ $('#contextMenu').on('click', 'li', function (e) {
     window.location.href = gMC_url;
     // requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
   } else if ($(this).text() == 'Remove pinning') {
-    const idx = diagramms[activeDiagram].pinned.indexOf(gMCElementContextHandled.index);
+    const idx = diagramms[activeDiagram.name].pinned.indexOf(gMCElementContextHandled.index);
     if (idx !== -1) {
-      diagramms[activeDiagram].pinned.splice(idx, 1);
+      diagramms[activeDiagram.name].pinned.splice(idx, 1);
     }
     // requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
   }

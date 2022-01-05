@@ -23,34 +23,34 @@ function supportRetina() {
 
 function cameraToCanvasX(x) {
 
-    return diagramms[activeDiagram].camerSettings.zoomfactor * (x + diagramms[activeDiagram].camerSettings.move.x) + g_width / 2;
+    return diagramms[activeDiagram.name].camerSettings.zoomfactor * (x + diagramms[activeDiagram.name].camerSettings.move.x) + g_width / 2;
 
 }
 
 function cameraToPaneX(canvasX) {
 
-    return - diagramms[activeDiagram].camerSettings.move.x + (canvasX - g_width / 2) / diagramms[activeDiagram].camerSettings.zoomfactor;
+    return - diagramms[activeDiagram.name].camerSettings.move.x + (canvasX - g_width / 2) / diagramms[activeDiagram.name].camerSettings.zoomfactor;
 
 }
 
 function cameraToCanvasY(y) {
 
-    return diagramms[activeDiagram].camerSettings.zoomfactor * (y + diagramms[activeDiagram].camerSettings.move.y) + g_height / 2;
+    return diagramms[activeDiagram.name].camerSettings.zoomfactor * (y + diagramms[activeDiagram.name].camerSettings.move.y) + g_height / 2;
 
 }
 
 function cameraToPaneY(canvasY) {
 
-    return - diagramms[activeDiagram].camerSettings.move.y + (canvasY - g_height / 2) / diagramms[activeDiagram].camerSettings.zoomfactor;
+    return - diagramms[activeDiagram.name].camerSettings.move.y + (canvasY - g_height / 2) / diagramms[activeDiagram.name].camerSettings.zoomfactor;
 
 }
 
 function cameraToCanvasScale(size) {
-    return diagramms[activeDiagram].camerSettings.zoomfactor * size;
+    return diagramms[activeDiagram.name].camerSettings.zoomfactor * size;
 }
 
 function cameraToPaneScale(size) {
-    return size / diagramms[activeDiagram].camerSettings.zoomfactor;
+    return size / diagramms[activeDiagram.name].camerSettings.zoomfactor;
 }
 
 function drawCompleteModel(ctx, width, height) {
@@ -63,8 +63,8 @@ function drawCompleteModel(ctx, width, height) {
                 ctx.lineWidth = cameraToCanvasScale(1);
                 ctx.beginPath();
                 ctx.strokeStyle = 'rgba(0, 0, 0, 0.2)';
-                ctx.moveTo(cameraToCanvasX(diagramms[activeDiagram].complModelPosition[pC['parent']].x), cameraToCanvasY(diagramms[activeDiagram].complModelPosition[pC['parent']].y));
-                ctx.lineTo(cameraToCanvasX(diagramms[activeDiagram].complModelPosition[pC['child']].x), cameraToCanvasY(diagramms[activeDiagram].complModelPosition[pC['child']].y));
+                ctx.moveTo(cameraToCanvasX(diagramms[activeDiagram.name].complModelPosition[pC['parent']].x), cameraToCanvasY(diagramms[activeDiagram.name].complModelPosition[pC['parent']].y));
+                ctx.lineTo(cameraToCanvasX(diagramms[activeDiagram.name].complModelPosition[pC['child']].x), cameraToCanvasY(diagramms[activeDiagram.name].complModelPosition[pC['child']].y));
                 ctx.stroke();
             }
         }
@@ -76,8 +76,8 @@ function drawCompleteModel(ctx, width, height) {
                 ctx.lineWidth = cameraToCanvasScale(1);
                 ctx.beginPath();
                 ctx.strokeStyle = 'rgba(255, 0, 0, 0.2)';
-                ctx.moveTo(cameraToCanvasX(diagramms[activeDiagram].complModelPosition[cC['caller']].x), cameraToCanvasY(diagramms[activeDiagram].complModelPosition[cC['caller']].y));
-                ctx.lineTo(cameraToCanvasX(diagramms[activeDiagram].complModelPosition[cC['called']].x), cameraToCanvasY(diagramms[activeDiagram].complModelPosition[cC['called']].y));
+                ctx.moveTo(cameraToCanvasX(diagramms[activeDiagram.name].complModelPosition[cC['caller']].x), cameraToCanvasY(diagramms[activeDiagram.name].complModelPosition[cC['caller']].y));
+                ctx.lineTo(cameraToCanvasX(diagramms[activeDiagram.name].complModelPosition[cC['called']].x), cameraToCanvasY(diagramms[activeDiagram.name].complModelPosition[cC['called']].y));
                 ctx.stroke();
             }
         }
@@ -89,8 +89,8 @@ function drawCompleteModel(ctx, width, height) {
                 ctx.lineWidth = cameraToCanvasScale(1);
                 ctx.beginPath();
                 ctx.strokeStyle = 'rgba(0, 0, 255, 0.2)';
-                ctx.moveTo(cameraToCanvasX(diagramms[activeDiagram].complModelPosition[aA['accessor']].x), cameraToCanvasY(diagramms[activeDiagram].complModelPosition[aA['accessor']].y));
-                ctx.lineTo(cameraToCanvasX(diagramms[activeDiagram].complModelPosition[aA['accessed']].x), cameraToCanvasY(diagramms[activeDiagram].complModelPosition[aA['accessed']].y));
+                ctx.moveTo(cameraToCanvasX(diagramms[activeDiagram.name].complModelPosition[aA['accessor']].x), cameraToCanvasY(diagramms[activeDiagram.name].complModelPosition[aA['accessor']].y));
+                ctx.lineTo(cameraToCanvasX(diagramms[activeDiagram.name].complModelPosition[aA['accessed']].x), cameraToCanvasY(diagramms[activeDiagram.name].complModelPosition[aA['accessed']].y));
                 ctx.stroke();
             }
         }
@@ -114,8 +114,8 @@ function drawCompleteModel(ctx, width, height) {
                     size = cameraToCanvasScale(2);
                     break;
             }
-            ctx.arc(cameraToCanvasX(diagramms[activeDiagram].complModelPosition[mEBI['index']].x),
-                cameraToCanvasY(diagramms[activeDiagram].complModelPosition[mEBI['index']].y), size, 0, 2 * Math.PI);
+            ctx.arc(cameraToCanvasX(diagramms[activeDiagram.name].complModelPosition[mEBI['index']].x),
+                cameraToCanvasY(diagramms[activeDiagram.name].complModelPosition[mEBI['index']].y), size, 0, 2 * Math.PI);
             ctx.fill();
         }
     }

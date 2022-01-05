@@ -103,10 +103,10 @@ function forceDirecting(width, height) {
                 if (typeof pCBP !== 'undefined') {
                     for (const pC of pCBP) {
                         let pCForce = spring(
-                            diagramms[activeDiagram].complModelPosition[pC['parent']].x,
-                            diagramms[activeDiagram].complModelPosition[pC['parent']].y,
-                            diagramms[activeDiagram].complModelPosition[pC['child']].x,
-                            diagramms[activeDiagram].complModelPosition[pC['child']].y);
+                            diagramms[activeDiagram.name].complModelPosition[pC['parent']].x,
+                            diagramms[activeDiagram.name].complModelPosition[pC['parent']].y,
+                            diagramms[activeDiagram.name].complModelPosition[pC['child']].x,
+                            diagramms[activeDiagram.name].complModelPosition[pC['child']].y);
                         complModelPositionNew[pC['parent']].x += 0.2 * step * pCForce.x; // Make parent more heavy, therefore a factor 0.2
                         complModelPositionNew[pC['parent']].y += 0.2 * step * pCForce.y; // Make parent more heavy, therefore a factor 0.2
                         complModelPositionNew[pC['child']].x -= step * pCForce.x;
@@ -130,10 +130,10 @@ function forceDirecting(width, height) {
                 if (typeof cBC !== 'undefined') {
                     for (const cC of cBC) {
                         let cCForce = spring(
-                            diagramms[activeDiagram].complModelPosition[cC['caller']].x,
-                            diagramms[activeDiagram].complModelPosition[cC['caller']].y,
-                            diagramms[activeDiagram].complModelPosition[cC['called']].x,
-                            diagramms[activeDiagram].complModelPosition[cC['called']].y);
+                            diagramms[activeDiagram.name].complModelPosition[cC['caller']].x,
+                            diagramms[activeDiagram.name].complModelPosition[cC['caller']].y,
+                            diagramms[activeDiagram.name].complModelPosition[cC['called']].x,
+                            diagramms[activeDiagram.name].complModelPosition[cC['called']].y);
                         complModelPositionNew[cC['caller']].x += step * cCForce.x;
                         complModelPositionNew[cC['caller']].y += step * cCForce.y;
                         complModelPositionNew[cC['called']].x -= step * cCForce.x;
@@ -157,10 +157,10 @@ function forceDirecting(width, height) {
                 if (typeof aBA !== 'undefined') {
                     for (const aA of aBA) {
                         let aAForce = spring(
-                            diagramms[activeDiagram].complModelPosition[aA['accessor']].x,
-                            diagramms[activeDiagram].complModelPosition[aA['accessor']].y,
-                            diagramms[activeDiagram].complModelPosition[aA['accessed']].x,
-                            diagramms[activeDiagram].complModelPosition[aA['accessed']].y);
+                            diagramms[activeDiagram.name].complModelPosition[aA['accessor']].x,
+                            diagramms[activeDiagram.name].complModelPosition[aA['accessor']].y,
+                            diagramms[activeDiagram.name].complModelPosition[aA['accessed']].x,
+                            diagramms[activeDiagram.name].complModelPosition[aA['accessed']].y);
                         complModelPositionNew[aA['accessor']].x += step * aAForce.x;
                         complModelPositionNew[aA['accessor']].y += step * aAForce.y;
                         complModelPositionNew[aA['accessed']].x -= step * aAForce.x;
@@ -186,10 +186,10 @@ function forceDirecting(width, height) {
                         if (typeof mEBI2 !== 'undefined') {
                             if (mEBI != mEBI2) {
                                 let eForce = repulsion(
-                                    diagramms[activeDiagram].complModelPosition[mEBI['index']].x,
-                                    diagramms[activeDiagram].complModelPosition[mEBI['index']].y,
-                                    diagramms[activeDiagram].complModelPosition[mEBI2['index']].x,
-                                    diagramms[activeDiagram].complModelPosition[mEBI2['index']].y);
+                                    diagramms[activeDiagram.name].complModelPosition[mEBI['index']].x,
+                                    diagramms[activeDiagram.name].complModelPosition[mEBI['index']].y,
+                                    diagramms[activeDiagram.name].complModelPosition[mEBI2['index']].x,
+                                    diagramms[activeDiagram.name].complModelPosition[mEBI2['index']].y);
                                 complModelPositionNew2[mEBI['index']].x += step * eForce.x;
                                 complModelPositionNew2[mEBI['index']].y += step * eForce.y;
                                 complModelPositionNew2[mEBI2['index']].x -= step * eForce.x;
@@ -238,7 +238,7 @@ function forceDirecting(width, height) {
                 }
             }
 
-            if (diagramms[activeDiagram].pinned.indexOf(handledIndex) > -1) {
+            if (diagramms[activeDiagram.name].pinned.indexOf(handledIndex) > -1) {
                 // Do not alter position of pinned elements
                 complModelPositionNew[mEBI['index']].x = 0;
                 complModelPositionNew2[mEBI['index']].x = 0;
@@ -276,16 +276,16 @@ function forceDirecting(width, height) {
             //     continue;
             // }
 
-            // if (diagramms[activeDiagram].pinned.indexOf(handledIndex) > -1) {
+            // if (diagramms[activeDiagram.name].pinned.indexOf(handledIndex) > -1) {
             //     // Do not alter position of pinned elements
             //     continue;
             // }
 
             let position = {
-                x: corrFact * complModelPositionNew[handledIndex].x + corrFact * complModelPositionNew2[handledIndex].x + diagramms[activeDiagram].complModelPosition[handledIndex].x,
-                y: corrFact * complModelPositionNew[handledIndex].y + corrFact * complModelPositionNew2[handledIndex].y + diagramms[activeDiagram].complModelPosition[handledIndex].y,
+                x: corrFact * complModelPositionNew[handledIndex].x + corrFact * complModelPositionNew2[handledIndex].x + diagramms[activeDiagram.name].complModelPosition[handledIndex].x,
+                y: corrFact * complModelPositionNew[handledIndex].y + corrFact * complModelPositionNew2[handledIndex].y + diagramms[activeDiagram.name].complModelPosition[handledIndex].y,
             };
-            diagramms[activeDiagram].complModelPosition[handledIndex] = position;
+            diagramms[activeDiagram.name].complModelPosition[handledIndex] = position;
         }
     }
 

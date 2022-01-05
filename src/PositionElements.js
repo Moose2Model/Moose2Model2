@@ -11,15 +11,9 @@ function positionCircle(width, height) {
     const dAngle = 2 * Math.PI / nElements;
     let angle = 0;
 
-
-    // const w = width - offset * 2;
-    // const h = height - offset * 2;
-    // const area = h * w;
-    // const area2 = Math.max(area / nElements, 1);
-    // const scale = Math.sqrt(area2);
     let x = 0;
     let y = 0;
-    diagramms[activeDiagram].complModelPosition = [];
+    diagramms[activeDiagram.name].complModelPosition = [];
 
 
     for (const mEBI of modelElementsByIndex) {
@@ -33,7 +27,7 @@ function positionCircle(width, height) {
                 y: y,
             };
 
-            diagramms[activeDiagram].complModelPosition[mEBI['index']] = position;
+            diagramms[activeDiagram.name].complModelPosition[mEBI['index']] = position;
             angle += dAngle;
         }
     }

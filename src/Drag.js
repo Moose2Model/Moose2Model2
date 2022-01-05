@@ -14,6 +14,8 @@ function handleDragMouseDown(e) {
     // e.preventDefault();
     // e.stopPropagation();
 
+    reOffset(); // Solve problem why this is needed
+
     startX = parseInt(e.clientX - offsetX);
     startY = parseInt(e.clientY - offsetY);
 
@@ -46,15 +48,15 @@ function handleDragMouseMove(e) {
     const dx = mouseX - startX;
     const dy = mouseY - startY;
     if (backGroundDragged) {
-        diagramms[activeDiagram].camerSettings.move.x += cameraToPaneScale(dx);
-        diagramms[activeDiagram].camerSettings.move.y += cameraToPaneScale(dy);
+        diagramms[activeDiagram.name].camerSettings.move.x += cameraToPaneScale(dx);
+        diagramms[activeDiagram.name].camerSettings.move.y += cameraToPaneScale(dy);
     } else {
         // move the selected shape by the drag distance
-        diagramms[activeDiagram].complModelPosition[draggedElement.index].x += cameraToPaneScale(dx);
-        diagramms[activeDiagram].complModelPosition[draggedElement.index].y += cameraToPaneScale(dy);
+        diagramms[activeDiagram.name].complModelPosition[draggedElement.index].x += cameraToPaneScale(dx);
+        diagramms[activeDiagram.name].complModelPosition[draggedElement.index].y += cameraToPaneScale(dy);
         // Pin all dragged elements
-        if (diagramms[activeDiagram].pinned.indexOf(draggedElement.index) == -1) {
-            diagramms[activeDiagram].pinned.push(draggedElement.index);
+        if (diagramms[activeDiagram.name].pinned.indexOf(draggedElement.index) == -1) {
+            diagramms[activeDiagram.name].pinned.push(draggedElement.index);
         }
     }
 

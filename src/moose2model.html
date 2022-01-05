@@ -41,12 +41,33 @@
             text-decoration: none;
         }
 
-        .dropdown {
+        .dropdownFileMenu {
             float: left;
             overflow: hidden;
         }
 
-        .dropdown .dropbtn,
+        .dropdownHelpMenu {
+            float: left;
+            overflow: hidden;
+        }
+
+        .dropdownFileMenu .fileMenuButton,
+        button {
+            cursor: pointer;
+            font-size: 16px;
+            border: none;
+            outline: none;
+            color: rgb(0, 0, 0);
+            padding-bottom: 0px;
+            padding-left: 0px;
+            padding-right: 20px;
+            padding-top: 5px;
+
+            background-color: inherit;
+            font-family: inherit;
+        }
+
+        .dropdownHelpMenu .helpMenuButton,
         button {
             cursor: pointer;
             font-size: 16px;
@@ -63,12 +84,18 @@
         }
 
         .navbar button:hover,
-        .dropdown:hover .dropbtn,
-        .dropbtn:focus {
+        .dropdownFileMenu:hover .fileMenuButton,
+        .fileMenuButton:focus {
             background-color: rgb(223, 223, 223);
         }
 
-        .dropdown-content {
+        .navbar button:hover,
+        .dropdownHelpMenu:hover .helpMenuButton,
+        .helpMenuButton:focus {
+            background-color: rgb(223, 223, 223);
+        }
+
+        .FileMenu-content {
             display: none;
             position: absolute;
             background-color: #f9f9f9;
@@ -77,18 +104,47 @@
             z-index: 1;
         }
 
-        .dropdown-content input,
+        .HelpMenu-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .FileMenu-content input,
         a input {
             float: none;
             color: black;
             border: none;
             outline: none;
-            padding: 16px 16px;
+            padding: 10px 10px;
             text-decoration: none;
+            /* Required so that elements are placed below each other */
+            display: block;
             text-align: left;
         }
 
-        .dropdown-content input:hover,
+        .HelpMenu-content input,
+        a input {
+            float: none;
+            color: black;
+            border: none;
+            outline: none;
+            padding: 10px 10px;
+            text-decoration: none;
+            /* Required so that elements are placed below each other */
+            display: block;
+            text-align: left;
+        }
+
+        .FileMenu-content input:hover,
+        a:hover {
+            background-color: #ddd;
+        }
+
+        .HelpMenu-content input:hover,
         a:hover {
             background-color: #ddd;
         }
@@ -133,22 +189,30 @@
 
     </div>
     <div class="navbar">
-        <div class="dropdown">
-            <button class="dropbtn" onclick="myFunction()">File
-                <i class="fa fa-caret-down"></i>
+        <div class="dropdownFileMenu">
+            <button class="fileMenuButton" onclick="ToggleFileMenu()">File
             </button>
-            <div class="dropdown-content" id="myDropdown">
+            <div class="FileMenu-content" id="FileMenuID">
                 <input id="LoadButton" value="Load model">
-                <!-- <input id="LoadButton 2" value="Load model 2"> -->
-                <!-- <a href="#">Link 2</a>
-                <a href="#">Link 3</a> -->
+                <input id="NewDiagramButton" value="New Diagram">
             </div>
         </div>
-        <button class="dropdown" onclick="JumpToGithub()">Github repository</button>
-        <button class="dropdown" onclick="JumpToDocu()">Documentation</button>
+        <div class="dropdownHelpMenu">
+            <button class="helpMenuButton" onclick="ToggleHelpMenu()">Help
+            </button>
+            <div class="HelpMenu-content" id="HelpMenuID">
+                <input id="ToGithubButton" value="Github repository">
+                <input id="ToHelpButton" value="Documentation">
+            </div>
+        </div>
     </div>
 
-    <br>
+    <div class="newDiagramElement" id="newDiagramElementID">
+        <label for="newDiagramField">Enter a name for the new Diagram: </label>
+        <input type="text" id="newDiagramField" class="guessField">
+        <input type="submit" value="Create" class="createNewDiagram" id="CreateNewDiagramButton">
+    </div>
+
     <div id=canvasContainer></div>
     <canvas id="pane" width="800" height="800"></canvas>
     <ul id=contextMenu>
@@ -168,6 +232,33 @@
     <script src="HTMLLogic.js?v=3"></script>
 
     <script>
+        const newDiagramElement = document.getElementById('newDiagramElementID');
+        newDiagramElement.hidden = true;
+
+        const LoadMseButton = document.getElementById('LoadButton');
+        LoadMseButton.addEventListener('click', LoadModel);
+
+        const ToGithubButton = document.getElementById('ToGithubButton');
+        ToGithubButton.addEventListener('click', JumpToGithub);
+
+        const ToHelpButton = document.getElementById('ToHelpButton');
+        ToHelpButton.addEventListener('click', JumpToDocu);
+
+        const NewDiagramButton = document.getElementById('NewDiagramButton');
+        NewDiagramButton.addEventListener('click', newDiagramRequested);
+
+        const CreateNewDiagramButton = document.getElementById('CreateNewDiagramButton');
+        CreateNewDiagramButton.addEventListener('click', newDiagram);
+
+        function newDiagramRequested() {
+            newDiagramElement.hidden = false;
+        }
+
+        function newDiagram() {
+            // Todo Read input field and create new diagram
+            newDiagramElement.hidden = true;
+            // Set also to hidden, when the user clicks elsewhere or make environment not responsive
+        }
 
         function JumpToGithub() {
             window.open('https://github.com/Moose2Model/Moose2Model2', '_blank');
@@ -178,17 +269,25 @@
         }
 
         /* When the user clicks on the button, 
-        toggle between hiding and showing the dropdown content */
-        function myFunction() {
-            document.getElementById("myDropdown").classList.toggle("show");
+        toggle between hiding and showing the dropdownFileMenu content */
+        function ToggleFileMenu() {
+            document.getElementById("FileMenuID").classList.toggle("show");
+        }
+        function ToggleHelpMenu() {
+            document.getElementById("HelpMenuID").classList.toggle("show");
         }
 
-        // Close the dropdown if the user clicks outside of it
+        // Close the dropdownFileMenu if the user clicks outside of it
         window.onclick = function (e) {
-            if (!e.target.matches('.dropbtn')) {
-                var myDropdown = document.getElementById("myDropdown");
-                if (myDropdown.classList.contains('show')) {
-                    myDropdown.classList.remove('show');
+            if (!e.target.matches('.fileMenuButton')) {
+                var FileMenuID = document.getElementById("FileMenuID");
+                if (FileMenuID.classList.contains('show')) {
+                    FileMenuID.classList.remove('show');
+                }
+            } else if (!e.target.matches('.helpMenuButton')) {
+                var FileMenuID = document.getElementById("HelpMenuID");
+                if (FileMenuID.classList.contains('show')) {
+                    FileMenuID.classList.remove('show');
                 }
             }
         }

@@ -38,6 +38,10 @@ window.onscroll = function (e) { reOffset(); }
 window.onresize = function (e) { reOffset(); }
 canvas.onresize = function (e) { reOffset(); }
 
+window.addEventListener('scroll', reOffset);
+window.addEventListener('resize', reOffset);
+canvas.addEventListener('resize', reOffset);
+
 
 window.addEventListener('resize', resizeCanvas);
 
@@ -52,7 +56,7 @@ resizeCanvas();
 
 function resizeCanvas() {
     g_width = window.innerWidth - 20;
-    g_height = window.innerHeight - 100;
+    g_height = window.innerHeight - 85;
     canvas.widh = g_width;
     canvas.height = g_height;
 }
@@ -61,9 +65,9 @@ function findNearestElement(x, y, maxDistance) {
     let minDistanceSquared = -1;
     let minIndex = 0;
 
-    for (let i = 1; i < diagramms[activeDiagram].complModelPosition.length; i++) { // List start with index 1
+    for (let i = 1; i < diagramms[activeDiagram.name].complModelPosition.length; i++) { // List start with index 1
 
-        let distance = (x - diagramms[activeDiagram].complModelPosition[i].x) * (x - diagramms[activeDiagram].complModelPosition[i].x) + (y - diagramms[activeDiagram].complModelPosition[i].y) * (y - diagramms[activeDiagram].complModelPosition[i].y);
+        let distance = (x - diagramms[activeDiagram.name].complModelPosition[i].x) * (x - diagramms[activeDiagram.name].complModelPosition[i].x) + (y - diagramms[activeDiagram.name].complModelPosition[i].y) * (y - diagramms[activeDiagram.name].complModelPosition[i].y);
         if (minDistanceSquared < 0) {
             minDistanceSquared = distance;
             minIndex = i;
