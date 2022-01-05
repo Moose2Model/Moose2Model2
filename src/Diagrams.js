@@ -40,6 +40,10 @@ function useStartDiagram() {
 
 /** Call me once when a new diagram is required */
 function newDiagram(name) {
+
+
+
+  
   const move = { x: 0, y: 0 };
   diagramms[name] = {};
   diagramms[name].type = circuitDiagramForSoftwareType;
