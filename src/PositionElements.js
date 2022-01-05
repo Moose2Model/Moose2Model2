@@ -23,6 +23,7 @@ function positionCircle(width, height) {
             y = w4 * Math.sin(angle);
 
             let position = {
+                index: mEBI['index'],
                 x: x,
                 y: y,
             };
