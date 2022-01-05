@@ -23,37 +23,47 @@ function supportRetina() {
 
 function cameraToCanvasX(x) {
 
-    return diagramms[activeDiagram.name].camerSettings.zoomfactor * (x + diagramms[activeDiagram.name].camerSettings.move.x) + g_width / 2;
+    return diagramms[activeDiagram.name].cameraSettings.zoomfactor * (x + diagramms[activeDiagram.name].cameraSettings.move.x) + g_width / 2;
 
 }
 
 function cameraToPaneX(canvasX) {
 
-    return - diagramms[activeDiagram.name].camerSettings.move.x + (canvasX - g_width / 2) / diagramms[activeDiagram.name].camerSettings.zoomfactor;
+    return - diagramms[activeDiagram.name].cameraSettings.move.x + (canvasX - g_width / 2) / diagramms[activeDiagram.name].cameraSettings.zoomfactor;
 
 }
 
 function cameraToCanvasY(y) {
 
-    return diagramms[activeDiagram.name].camerSettings.zoomfactor * (y + diagramms[activeDiagram.name].camerSettings.move.y) + g_height / 2;
+    return diagramms[activeDiagram.name].cameraSettings.zoomfactor * (y + diagramms[activeDiagram.name].cameraSettings.move.y) + g_height / 2;
 
 }
 
 function cameraToPaneY(canvasY) {
 
-    return - diagramms[activeDiagram.name].camerSettings.move.y + (canvasY - g_height / 2) / diagramms[activeDiagram.name].camerSettings.zoomfactor;
+    return - diagramms[activeDiagram.name].cameraSettings.move.y + (canvasY - g_height / 2) / diagramms[activeDiagram.name].cameraSettings.zoomfactor;
 
 }
 
 function cameraToCanvasScale(size) {
-    return diagramms[activeDiagram.name].camerSettings.zoomfactor * size;
+    return diagramms[activeDiagram.name].cameraSettings.zoomfactor * size;
 }
 
 function cameraToPaneScale(size) {
-    return size / diagramms[activeDiagram.name].camerSettings.zoomfactor;
+    return size / diagramms[activeDiagram.name].cameraSettings.zoomfactor;
 }
 
 function drawCompleteModel(ctx, width, height) {
+    if (typeof diagramms[activeDiagram.name] === 'undefined') {
+        // Do not draw when no diagram exists
+        return;
+    }
+    if (diagramms[activeDiagram.name].type != completeDiagramType) {
+        ctx.font = '15px san-serif';
+        ctx.fillStyle = 'red'
+        ctx.fillText('The type of this diagram is not yet supported: ' + activeDiagram.name, 10, 50);
+        return;
+    }
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -140,14 +150,18 @@ function draw(always = true) {
 
     supportRetina();
     let redraw = true;
-    if (forceFeedback) {
-        let redraw = forceDirecting(width, height);
+    if (typeof diagramms[activeDiagram.name] !== 'undefined') {
+        if (diagramms[activeDiagram.name].forceFeedback) {
+            let redraw = forceDirecting(width, height);
+        }
     }
     if (redraw || always) {
         drawCompleteModel(ctx, width, height);
     }
-    if (forceFeedback) {
-        requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
+    if (typeof diagramms[activeDiagram.name] !== 'undefined') {
+        if (diagramms[activeDiagram.name].forceFeedback) {
+            requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
+        }
     }
     // }
 }

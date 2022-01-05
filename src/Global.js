@@ -24,7 +24,7 @@ var ctx = canvas.getContext('2d');
 let requestAnimationFrame;
 /** @deprecated */
 let mouseover = false;
-let forceFeedback = false;
+// let forceFeedback = false;
 
 // To support mouse event handling
 function reOffset() {

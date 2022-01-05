@@ -41,9 +41,12 @@ function handleContextMenu(e) {
   let linkToEditorText = '';
   let techtypeText = '';
   let uniqueNameText = 'No element found';
-  gMCElementContextHandled = findNearestElement(cameraToPaneX(x), cameraToPaneY(y), cameraToPaneScale(20) );
+  gMCElementContextHandled = findNearestElement(cameraToPaneX(x), cameraToPaneY(y), cameraToPaneScale(20));
   gMC_url = '';
   if (typeof gMCElementContextHandled !== 'undefined') {
+
+    // Handle context menu, when an element is clicked
+
     uniqueNameText = gMCElementContextHandled.uniqueName;
     techtypeText = gMCElementContextHandled.technicalType;
     nameText = gMCElementContextHandled.name;
@@ -60,8 +63,11 @@ function handleContextMenu(e) {
     }
 
   } else {
+    // Handle context menu, when the pane is clicked
 
     var m = ['Start Force-directed graph', 'Stop Force-directed graph'];
+    let otherArrays = returnOtherDiagrams();
+    m.push(otherArrays);
   };
 
 
@@ -83,11 +89,15 @@ $('#contextMenu').on('click', 'li', function (e) {
   // hide the context menu
   $menu.hide();
   if ($(this).text() == 'Start Force-directed graph') {
-    forceFeedback = true;
-    requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
+    if (typeof diagramms[activeDiagram.name] !== 'undefined') {
+      diagramms[activeDiagram.name].forceFeedback = true;
+      requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
+    }
   } else if ($(this).text() == 'Stop Force-directed graph') {
-    forceFeedback = false;
-    window.cancelAnimationFrame(requestAnimationFrame);
+    if (typeof diagramms[activeDiagram.name] !== 'undefined') {
+      diagramms[activeDiagram.name].forceFeedback = false;
+      window.cancelAnimationFrame(requestAnimationFrame);
+    }
   } else if ($(this).text() == 'Jump to code') {
     window.location.href = gMC_url;
     // requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
@@ -97,5 +107,14 @@ $('#contextMenu').on('click', 'li', function (e) {
       diagramms[activeDiagram.name].pinned.splice(idx, 1);
     }
     // requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
+  } else {
+    // Scan for a name of another diagram
+    for (const c of returnOtherDiagrams()) {
+      if ($(this).text() == c) {
+        activeDiagram.name = c;
+        drawCompleteModel(ctx, g_width, g_height);
+      }
+    }
   }
-});
+}
+);

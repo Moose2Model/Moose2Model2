@@ -207,6 +207,7 @@
         </div>
     </div>
 
+    <!-- Fields when a new diagram is entered -->
     <div class="newDiagramElement" id="newDiagramElementID">
         <label for="newDiagramField">Enter a name for the new Diagram: </label>
         <input type="text" id="newDiagramField" class="guessField">
@@ -233,7 +234,7 @@
 
     <script>
         const newDiagramElement = document.getElementById('newDiagramElementID');
-        newDiagramElement.hidden = true;
+        newDiagramElement.hidden = true; // Hide when page is loaded
 
         const LoadMseButton = document.getElementById('LoadButton');
         LoadMseButton.addEventListener('click', LoadModel);
@@ -244,19 +245,28 @@
         const ToHelpButton = document.getElementById('ToHelpButton');
         ToHelpButton.addEventListener('click', JumpToDocu);
 
-        const NewDiagramButton = document.getElementById('NewDiagramButton');
-        NewDiagramButton.addEventListener('click', newDiagramRequested);
+        // New diagram
 
-        const CreateNewDiagramButton = document.getElementById('CreateNewDiagramButton');
-        CreateNewDiagramButton.addEventListener('click', newDiagram);
+        const NewDiagramButton = document.getElementById('NewDiagramButton'); // From Menu
+        NewDiagramButton.addEventListener('click', handleNewDiagramRequested);
 
-        function newDiagramRequested() {
+        const CreateNewDiagramButton = document.getElementById('CreateNewDiagramButton'); // From Input Area
+        CreateNewDiagramButton.addEventListener('click', handleNewDiagram);
+
+        
+
+        let newDiagramNameElement = document.getElementById('newDiagramField');
+
+        function handleNewDiagramRequested() {
             newDiagramElement.hidden = false;
         }
 
-        function newDiagram() {
+        function handleNewDiagram() {
             // Todo Read input field and create new diagram
+            const text = newDiagramNameElement.value;
+            newDiagram(text);
             newDiagramElement.hidden = true;
+            newDiagramNameElement.value = '';
             // Set also to hidden, when the user clicks elsewhere or make environment not responsive
         }
 

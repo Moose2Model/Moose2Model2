@@ -48,8 +48,8 @@ function handleDragMouseMove(e) {
     const dx = mouseX - startX;
     const dy = mouseY - startY;
     if (backGroundDragged) {
-        diagramms[activeDiagram.name].camerSettings.move.x += cameraToPaneScale(dx);
-        diagramms[activeDiagram.name].camerSettings.move.y += cameraToPaneScale(dy);
+        diagramms[activeDiagram.name].cameraSettings.move.x += cameraToPaneScale(dx);
+        diagramms[activeDiagram.name].cameraSettings.move.y += cameraToPaneScale(dy);
     } else {
         // move the selected shape by the drag distance
         diagramms[activeDiagram.name].complModelPosition[draggedElement.index].x += cameraToPaneScale(dx);
@@ -75,7 +75,7 @@ function handleDragMouseUp(e) {
     e.stopPropagation();
     // the drag is over -- clear the isDragging flag
     isDragging = false;
-    if (forceFeedback) {
+    if (diagramms[activeDiagram.name].forceFeedback) {
         requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
     }
 
@@ -88,7 +88,7 @@ function handleDragMouseOut(e) {
     e.stopPropagation();
     // the drag is over -- clear the isDragging flag
     isDragging = false;
-    if (forceFeedback) {
+    if (diagramms[activeDiagram.name].forceFeedback) {
         requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
     }
 
