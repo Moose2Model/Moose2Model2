@@ -44,6 +44,7 @@ function forceDirecting(width, height) {
                 let position = {
                     // x: complModelPosition[mEBI['index']].x,
                     // y: complModelPosition[mEBI['index']].y,
+                    index: mEBI['index'],
                     x: 0,
                     y: 0,
                 };
@@ -290,6 +291,7 @@ function forceDirecting(width, height) {
             // }
 
             let position = {
+                index: handledIndex,
                 x: corrFact * diagramms[activeDiagram.name].forceDirectingState.complModelPositionNew[handledIndex].x + corrFact * diagramms[activeDiagram.name].forceDirectingState.complModelPositionNew2[handledIndex].x + diagramms[activeDiagram.name].complModelPosition[handledIndex].x,
                 y: corrFact * diagramms[activeDiagram.name].forceDirectingState.complModelPositionNew[handledIndex].y + corrFact * diagramms[activeDiagram.name].forceDirectingState.complModelPositionNew2[handledIndex].y + diagramms[activeDiagram.name].complModelPosition[handledIndex].y,
             };
