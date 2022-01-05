@@ -34,14 +34,15 @@ function positionCircle(width, height) {
     }
 };
 
-function addWithNeighbors(element){
-    if (typeof element !== 'undefined'){
-    let position = {
-        index: element['index'],
-        x: Math.random * 100,
-        y: Math.random * 100,
-    };
+function addWithNeighbors(element) {
+    if (typeof element !== 'undefined') {
+        let position = {
+            index: element['index'],
+            x: Math.random() * 100,
+            y: Math.random() * 100,
+        };
 
-    diagramms[diagramInfos.activeDiagram].complModelPosition[element['index']] = position;}
+        diagramms[diagramInfos.activeDiagram].complModelPosition[element['index']] = position;
+    }
 }
 

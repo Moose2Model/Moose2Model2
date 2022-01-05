@@ -46,7 +46,7 @@ function newDiagram(name) {
   diagramms[name].forceFeedback = false;
   diagramms[name].complModelPosition = [];
   diagramms[name].pinned = [];
-  diagramms[diagramInfos.displayedDiagram].forceDirectingState = initialForceDirectingState;
+  diagramms[name].forceDirectingState = initialForceDirectingState;
 
   diagramms[name].cameraSettings = {
     move: move,

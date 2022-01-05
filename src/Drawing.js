@@ -76,12 +76,14 @@ function drawCompleteModel(ctx, width, height) {
             if (typeof tempArray !== 'undefined') {
                 for (const pC of tempArray) {
                     if (typeof pC !== 'undefined') {
-                        ctx.lineWidth = cameraToCanvasScale(1);
-                        ctx.beginPath();
-                        ctx.strokeStyle = 'rgba(0, 0, 0, 0.2)';
-                        ctx.moveTo(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['parent']].x), cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['parent']].y));
-                        ctx.lineTo(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['child']].x), cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['child']].y));
-                        ctx.stroke();
+                        if (typeof diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['child']] !== 'undefined') {
+                            ctx.lineWidth = cameraToCanvasScale(1);
+                            ctx.beginPath();
+                            ctx.strokeStyle = 'rgba(0, 0, 0, 0.2)';
+                            ctx.moveTo(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['parent']].x), cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['parent']].y));
+                            ctx.lineTo(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['child']].x), cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['child']].y));
+                            ctx.stroke();
+                        }
                     }
                 }
             }
@@ -92,12 +94,14 @@ function drawCompleteModel(ctx, width, height) {
             if (typeof tempArray !== 'undefined') {
                 for (const cC of tempArray) {
                     if (typeof cC !== 'undefined') {
-                        ctx.lineWidth = cameraToCanvasScale(1);
-                        ctx.beginPath();
-                        ctx.strokeStyle = 'rgba(255, 0, 0, 0.2)';
-                        ctx.moveTo(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[cC['caller']].x), cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[cC['caller']].y));
-                        ctx.lineTo(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[cC['called']].x), cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[cC['called']].y));
-                        ctx.stroke();
+                        if (typeof diagramms[diagramInfos.displayedDiagram].complModelPosition[cC['called']] !== 'undefined') {
+                            ctx.lineWidth = cameraToCanvasScale(1);
+                            ctx.beginPath();
+                            ctx.strokeStyle = 'rgba(255, 0, 0, 0.2)';
+                            ctx.moveTo(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[cC['caller']].x), cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[cC['caller']].y));
+                            ctx.lineTo(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[cC['called']].x), cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[cC['called']].y));
+                            ctx.stroke();
+                        }
                     }
                 }
             }
@@ -108,12 +112,14 @@ function drawCompleteModel(ctx, width, height) {
             if (typeof tempArray !== 'undefined') {
                 for (const aA of tempArray) {
                     if (typeof aA !== 'undefined') {
-                        ctx.lineWidth = cameraToCanvasScale(1);
-                        ctx.beginPath();
-                        ctx.strokeStyle = 'rgba(0, 0, 255, 0.2)';
-                        ctx.moveTo(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[aA['accessor']].x), cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[aA['accessor']].y));
-                        ctx.lineTo(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[aA['accessed']].x), cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[aA['accessed']].y));
-                        ctx.stroke();
+                        if (typeof diagramms[diagramInfos.displayedDiagram].complModelPosition[aA['accessed']] !== 'undefined') {
+                            ctx.lineWidth = cameraToCanvasScale(1);
+                            ctx.beginPath();
+                            ctx.strokeStyle = 'rgba(0, 0, 255, 0.2)';
+                            ctx.moveTo(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[aA['accessor']].x), cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[aA['accessor']].y));
+                            ctx.lineTo(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[aA['accessed']].x), cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[aA['accessed']].y));
+                            ctx.stroke();
+                        }
                     }
                 }
             }

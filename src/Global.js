@@ -66,17 +66,18 @@ function findNearestElement(x, y, maxDistance) {
     let minIndex = 0;
 
     for (let i = 1; i < diagramms[diagramInfos.displayedDiagram].complModelPosition.length; i++) { // List start with index 1
-
-        let distance = (x - diagramms[diagramInfos.displayedDiagram].complModelPosition[i].x) * (x - diagramms[diagramInfos.displayedDiagram].complModelPosition[i].x) + (y - diagramms[diagramInfos.displayedDiagram].complModelPosition[i].y) * (y - diagramms[diagramInfos.displayedDiagram].complModelPosition[i].y);
-        if (minDistanceSquared < 0) {
-            minDistanceSquared = distance;
-            minIndex = i;
-        } else if (distance < minDistanceSquared) {
-            minDistanceSquared = distance;
-            minIndex = i;
+        if (typeof diagramms[diagramInfos.displayedDiagram].complModelPosition[i] !== 'undefined') {
+            let distance = (x - diagramms[diagramInfos.displayedDiagram].complModelPosition[i].x) * (x - diagramms[diagramInfos.displayedDiagram].complModelPosition[i].x) + (y - diagramms[diagramInfos.displayedDiagram].complModelPosition[i].y) * (y - diagramms[diagramInfos.displayedDiagram].complModelPosition[i].y);
+            if (minDistanceSquared < 0) {
+                minDistanceSquared = distance;
+                minIndex = i;
+            } else if (distance < minDistanceSquared) {
+                minDistanceSquared = distance;
+                minIndex = i;
+            }
         }
     }
-    if (minDistanceSquared < maxDistance * maxDistance) {
+    if (minDistanceSquared < maxDistance * maxDistance && minDistanceSquared != -1) {
         // Return nearest element only when it is nearer than maxDistance
         return modelElementsByIndex[minIndex];
     }
