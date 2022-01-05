@@ -23,7 +23,16 @@
         .toprow .myModelText {
 
             position: absolute;
-            top: 15px;
+            top: 5px;
+            left: 50px;
+            background-color: white;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .toprow .myDiagramText {
+
+            position: absolute;
+            top: 25px;
             left: 50px;
             background-color: white;
             font-family: Arial, Helvetica, sans-serif;
@@ -186,6 +195,7 @@
     <div class="toprow">
         <img class="MyIcon" src="favicon.ico"> <!-- will be 32px wide and high -->
         <div class="myModelText" id="LoadedModel"></div>
+        <div class="myDiagramText" id="ActiveDiagramID"></div>
 
     </div>
     <div class="navbar">
@@ -253,7 +263,7 @@
         const CreateNewDiagramButton = document.getElementById('CreateNewDiagramButton'); // From Input Area
         CreateNewDiagramButton.addEventListener('click', handleNewDiagram);
 
-        
+
 
         let newDiagramNameElement = document.getElementById('newDiagramField');
 

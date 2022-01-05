@@ -67,7 +67,9 @@ function handleContextMenu(e) {
 
     var m = ['Start Force-directed graph', 'Stop Force-directed graph'];
     let otherArrays = returnOtherDiagrams();
-    m.push(otherArrays);
+    for (const oA of otherArrays){
+      m.push(oA);
+    }
   };
 
 
@@ -111,8 +113,9 @@ $('#contextMenu').on('click', 'li', function (e) {
     // Scan for a name of another diagram
     for (const c of returnOtherDiagrams()) {
       if ($(this).text() == c) {
-        activeDiagram.name = c;
+        switchDiagram(c);
         drawCompleteModel(ctx, g_width, g_height);
+        // draw();
       }
     }
   }

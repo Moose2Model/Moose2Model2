@@ -1,5 +1,5 @@
 'use strict';
-const startDiagram = 'StartDiagramKey';
+const startDiagram = 'All model elements';
 const completeDiagramType = 'A';
 const circuitDiagramForSoftwareType = 'C';
 /**  Global class which contains references to all processed documents
@@ -22,6 +22,7 @@ let activeDiagram = {};
 function useStartDiagram() {
   const move = { x: 0, y: 0 };
   activeDiagram.name = startDiagram;
+  activeDiagramText.innerHTML = 'Active diagram: ' + activeDiagram.name;
   diagramms[activeDiagram.name] = {};
   diagramms[activeDiagram.name].type = completeDiagramType;
   diagramms[activeDiagram.name].forceFeedback = false;
@@ -37,6 +38,7 @@ function useStartDiagram() {
 /** Call me once when a new diagram is required */
 function newDiagram(name) {
   const move = { x: 0, y: 0 };
+  activeDiagramText.innerHTML = 'Active diagram: ' + name;
   diagramms[name] = {};
   diagramms[name].type = circuitDiagramForSoftwareType;
   diagramms[name].forceFeedback = false;
@@ -48,6 +50,12 @@ function newDiagram(name) {
     zoomfactor: 1
   }
 }
+
+function switchDiagram(name){
+  activeDiagram.name = name;
+  activeDiagramText.innerHTML = 'Active diagram: ' + name;
+}
+
 /**Returns an array with all other diagrams */
 function returnOtherDiagrams() {
   let list = [];
