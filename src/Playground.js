@@ -25,7 +25,7 @@ function positionRandom(width, height) {
     const h = height - offset * 2;
 
 
-    diagramms[activeDiagram.name].complModelPosition = [];
+    diagramms[diagramInfos.displayedDiagram].complModelPosition = [];
 
 
     for (const mEBI of modelElementsByIndex) {
@@ -36,7 +36,7 @@ function positionRandom(width, height) {
                 y: random(h) + offset,
             };
 
-            diagramms[activeDiagram.name].complModelPosition[mEBI['index']] = position;
+            diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']] = position;
 
         }
     }
@@ -56,7 +56,7 @@ function positionBoxed(width, height) {
     const scale = Math.sqrt(area2);
     let x = offset;
     let y = offset;
-    diagramms[activeDiagram.name].complModelPosition = [];
+    diagramms[diagramInfos.displayedDiagram].complModelPosition = [];
 
 
     for (const mEBI of modelElementsByIndex) {
@@ -67,7 +67,7 @@ function positionBoxed(width, height) {
                 y: y,
             };
 
-            diagramms[activeDiagram.name].complModelPosition[mEBI['index']] = position;
+            diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']] = position;
 
             x += scale;
             if (x > (width - offset)) {

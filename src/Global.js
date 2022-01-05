@@ -65,9 +65,9 @@ function findNearestElement(x, y, maxDistance) {
     let minDistanceSquared = -1;
     let minIndex = 0;
 
-    for (let i = 1; i < diagramms[activeDiagram.name].complModelPosition.length; i++) { // List start with index 1
+    for (let i = 1; i < diagramms[diagramInfos.displayedDiagram].complModelPosition.length; i++) { // List start with index 1
 
-        let distance = (x - diagramms[activeDiagram.name].complModelPosition[i].x) * (x - diagramms[activeDiagram.name].complModelPosition[i].x) + (y - diagramms[activeDiagram.name].complModelPosition[i].y) * (y - diagramms[activeDiagram.name].complModelPosition[i].y);
+        let distance = (x - diagramms[diagramInfos.displayedDiagram].complModelPosition[i].x) * (x - diagramms[diagramInfos.displayedDiagram].complModelPosition[i].x) + (y - diagramms[diagramInfos.displayedDiagram].complModelPosition[i].y) * (y - diagramms[diagramInfos.displayedDiagram].complModelPosition[i].y);
         if (minDistanceSquared < 0) {
             minDistanceSquared = distance;
             minIndex = i;

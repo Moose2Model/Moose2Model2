@@ -13,7 +13,7 @@ function positionCircle(width, height) {
 
     let x = 0;
     let y = 0;
-    diagramms[activeDiagram.name].complModelPosition = [];
+    diagramms[diagramInfos.displayedDiagram].complModelPosition = [];
 
 
     for (const mEBI of modelElementsByIndex) {
@@ -28,9 +28,20 @@ function positionCircle(width, height) {
                 y: y,
             };
 
-            diagramms[activeDiagram.name].complModelPosition[mEBI['index']] = position;
+            diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']] = position;
             angle += dAngle;
         }
     }
 };
+
+function addWithNeighbors(element){
+    if (typeof element !== 'undefined'){
+    let position = {
+        index: element['index'],
+        x: Math.random * 100,
+        y: Math.random * 100,
+    };
+
+    diagramms[diagramInfos.activeDiagram].complModelPosition[element['index']] = position;}
+}
 

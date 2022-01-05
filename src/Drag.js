@@ -48,15 +48,15 @@ function handleDragMouseMove(e) {
     const dx = mouseX - startX;
     const dy = mouseY - startY;
     if (backGroundDragged) {
-        diagramms[activeDiagram.name].cameraSettings.move.x += cameraToPaneScale(dx);
-        diagramms[activeDiagram.name].cameraSettings.move.y += cameraToPaneScale(dy);
+        diagramms[diagramInfos.displayedDiagram].cameraSettings.move.x += cameraToPaneScale(dx);
+        diagramms[diagramInfos.displayedDiagram].cameraSettings.move.y += cameraToPaneScale(dy);
     } else {
         // move the selected shape by the drag distance
-        diagramms[activeDiagram.name].complModelPosition[draggedElement.index].x += cameraToPaneScale(dx);
-        diagramms[activeDiagram.name].complModelPosition[draggedElement.index].y += cameraToPaneScale(dy);
+        diagramms[diagramInfos.displayedDiagram].complModelPosition[draggedElement.index].x += cameraToPaneScale(dx);
+        diagramms[diagramInfos.displayedDiagram].complModelPosition[draggedElement.index].y += cameraToPaneScale(dy);
         // Pin all dragged elements
-        if (diagramms[activeDiagram.name].pinned.indexOf(draggedElement.index) == -1) {
-            diagramms[activeDiagram.name].pinned.push(draggedElement.index);
+        if (diagramms[diagramInfos.displayedDiagram].pinned.indexOf(draggedElement.index) == -1) {
+            diagramms[diagramInfos.displayedDiagram].pinned.push(draggedElement.index);
         }
     }
 
@@ -75,7 +75,7 @@ function handleDragMouseUp(e) {
     e.stopPropagation();
     // the drag is over -- clear the isDragging flag
     isDragging = false;
-    if (diagramms[activeDiagram.name].forceFeedback) {
+    if (diagramms[diagramInfos.displayedDiagram].forceFeedback) {
         requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
     }
 
@@ -88,7 +88,7 @@ function handleDragMouseOut(e) {
     e.stopPropagation();
     // the drag is over -- clear the isDragging flag
     isDragging = false;
-    if (diagramms[activeDiagram.name].forceFeedback) {
+    if (diagramms[diagramInfos.displayedDiagram].forceFeedback) {
         requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
     }
 

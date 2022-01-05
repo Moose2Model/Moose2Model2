@@ -55,19 +55,29 @@ function handleContextMenu(e) {
 
     let InfoText = 'Mouse is Clicked at x: ' + x + ' y: ' + y;
     var m = [InfoText, nameText, techtypeText, uniqueNameText, linkToEditorText];
+    if (typeof diagramInfos.activeDiagram !== 'undefined') {
+      m.unshift('Add element with all neighbours');
+    }
     if (linkToEditorText != '') {
       m.push('Jump to code');
     };
-    if (diagramms[activeDiagram.name].pinned.indexOf(gMCElementContextHandled.index) > -1) {
+    if (diagramms[diagramInfos.displayedDiagram].pinned.indexOf(gMCElementContextHandled.index) > -1) {
       m.push('Remove pinning');
     }
 
   } else {
     // Handle context menu, when the pane is clicked
-
     var m = ['Start Force-directed graph', 'Stop Force-directed graph'];
+    if (typeof diagramInfos.displayedDiagram !== 'undefined') {
+      if (diagramms[diagramInfos.displayedDiagram].type == circuitDiagramForSoftwareType) {
+        if (diagramInfos.displayedDiagram != diagramInfos.activeDiagram) {
+          m.unshift('Make this diagram active');
+        }
+      }
+    }
+
     let otherArrays = returnOtherDiagrams();
-    for (const oA of otherArrays){
+    for (const oA of otherArrays) {
       m.push(oA);
     }
   };
@@ -91,25 +101,32 @@ $('#contextMenu').on('click', 'li', function (e) {
   // hide the context menu
   $menu.hide();
   if ($(this).text() == 'Start Force-directed graph') {
-    if (typeof diagramms[activeDiagram.name] !== 'undefined') {
-      diagramms[activeDiagram.name].forceFeedback = true;
+    if (typeof diagramms[diagramInfos.displayedDiagram] !== 'undefined') {
+      diagramms[diagramInfos.displayedDiagram].forceFeedback = true;
       requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
     }
   } else if ($(this).text() == 'Stop Force-directed graph') {
-    if (typeof diagramms[activeDiagram.name] !== 'undefined') {
-      diagramms[activeDiagram.name].forceFeedback = false;
+    if (typeof diagramms[diagramInfos.displayedDiagram] !== 'undefined') {
+      diagramms[diagramInfos.displayedDiagram].forceFeedback = false;
       window.cancelAnimationFrame(requestAnimationFrame);
     }
   } else if ($(this).text() == 'Jump to code') {
     window.location.href = gMC_url;
     // requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
   } else if ($(this).text() == 'Remove pinning') {
-    const idx = diagramms[activeDiagram.name].pinned.indexOf(gMCElementContextHandled.index);
+    const idx = diagramms[diagramInfos.displayedDiagram].pinned.indexOf(gMCElementContextHandled.index);
     if (idx !== -1) {
-      diagramms[activeDiagram.name].pinned.splice(idx, 1);
+      diagramms[diagramInfos.displayedDiagram].pinned.splice(idx, 1);
     }
     // requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
-  } else {
+  } else if ($(this).text() == 'Make this diagram active') {
+    setDiagramActive(diagramInfos.displayedDiagram);
+  } else if ($(this).text() == 'Add element with all neighbours') {
+
+    addWithNeighbors(gMCElementContextHandled);
+
+  }
+  else {
     // Scan for a name of another diagram
     for (const c of returnOtherDiagrams()) {
       if ($(this).text() == c) {

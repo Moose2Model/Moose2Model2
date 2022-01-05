@@ -3,8 +3,10 @@
 
 let loadModelText = document.getElementById("LoadedModel");
 loadModelText.innerHTML = "No Model loaded";
+let displayedDiagramText = document.getElementById("DisplayedDiagramID");
+displayedDiagramText.innerHTML = "Nothing is displayed";
 let activeDiagramText = document.getElementById("ActiveDiagramID");
-activeDiagramText.innerHTML = "No diagram active";
+activeDiagramText.innerHTML = "Nothing is active";
 
 
 if (window.isSecureContext) {

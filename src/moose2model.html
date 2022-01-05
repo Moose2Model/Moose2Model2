@@ -29,11 +29,20 @@
             font-family: Arial, Helvetica, sans-serif;
         }
 
-        .toprow .myDiagramText {
+        .toprow .displayedDiagramText {
 
             position: absolute;
             top: 25px;
             left: 50px;
+            background-color: white;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .toprow .activeDiagramText {
+
+            position: absolute;
+            top: 25px;
+            left: 400px;
             background-color: white;
             font-family: Arial, Helvetica, sans-serif;
         }
@@ -195,7 +204,8 @@
     <div class="toprow">
         <img class="MyIcon" src="favicon.ico"> <!-- will be 32px wide and high -->
         <div class="myModelText" id="LoadedModel"></div>
-        <div class="myDiagramText" id="ActiveDiagramID"></div>
+        <div class="displayedDiagramText" id="DisplayedDiagramID"></div>
+        <div class="activeDiagramText" id="ActiveDiagramID"></div>
 
     </div>
     <div class="navbar">
