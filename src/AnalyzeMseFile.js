@@ -45,8 +45,16 @@ function analyzeMseFile(contents) {
     let isWriteVal = false;
     let isReadVal = false;
     let isDependentVal = false;
+    let char;
     do {
-        let char = contents.at(counter);
+        // try {
+            char = contents.at(counter);
+            // On mobile chrome the function at() does not work on a string. This is not fixed.
+        // }
+        // catch {
+        //     contents = contents.split('');
+        //     char = contents.at(counter);
+        // }
         if (char == '(' && !isString) {
             // cont = cont + char;
             nest = nest + 1;
