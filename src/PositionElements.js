@@ -35,14 +35,29 @@ function positionCircle(width, height) {
 };
 
 function addWithNeighbors(element) {
+    let position;
     if (typeof element !== 'undefined') {
-        let position = {
+        position = {
             index: element['index'],
             x: Math.random() * 100,
             y: Math.random() * 100,
         };
-
         diagramms[diagramInfos.activeDiagram].complModelPosition[element['index']] = position;
+    }
+
+    // Add childs
+
+    if (typeof parentChildByParent[element.index] !== 'undefined') {
+        for (const el of parentChildByParent[element.index]) {
+            if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[el.index] === 'undefined') {
+                position = {
+                    index: el.child,
+                    x: Math.random() * 100,
+                    y: Math.random() * 100,
+                };
+                diagramms[diagramInfos.activeDiagram].complModelPosition[el.child] = position;
+            }
+        }
     }
 }
 

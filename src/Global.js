@@ -6,6 +6,13 @@ let fileHandle;
 // They are enhanced when more than a single mse model is loaded
 let modelElementsByUniqueKey = {};
 let modelElementsByIndex = [];
+/** Contains an array where parents are placed at their index and an object is contained with this structure:
+ *         const parentChild = {
+            parent: parent,
+            child: child,
+            isMain: isMainVal
+        };
+ */
 let parentChildByParent = [];
 let parentChildByChild = [];
 let callByCaller = [];
