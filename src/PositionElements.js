@@ -42,20 +42,41 @@ function addWithNeighbors(element) {
             x: Math.random() * 100,
             y: Math.random() * 100,
         };
-        diagramms[diagramInfos.activeDiagram].complModelPosition[element['index']] = position;
+        if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[element['index']] === 'undefined') {
+            diagramms[diagramInfos.activeDiagram].complModelPosition[element['index']] = position;
+        }
     }
 
     // Add childs
 
     if (typeof parentChildByParent[element.index] !== 'undefined') {
         for (const el of parentChildByParent[element.index]) {
-            if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[el.index] === 'undefined') {
+            if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[el.child] === 'undefined') {
                 position = {
                     index: el.child,
                     x: Math.random() * 100,
                     y: Math.random() * 100,
                 };
-                diagramms[diagramInfos.activeDiagram].complModelPosition[el.child] = position;
+                if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[el.child] === 'undefined') {
+                    diagramms[diagramInfos.activeDiagram].complModelPosition[el.child] = position;
+                }
+            }
+        }
+    }
+
+    // Add parents
+
+    if (typeof parentChildByChild[element.index] !== 'undefined') {
+        for (const el of parentChildByChild[element.index]) {
+            if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[el.parent] === 'undefined') {
+                position = {
+                    index: el.parent,
+                    x: Math.random() * 100,
+                    y: Math.random() * 100,
+                };
+                if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[el.parent] === 'undefined') {
+                    diagramms[diagramInfos.activeDiagram].complModelPosition[el.parent] = position;
+                }
             }
         }
     }
