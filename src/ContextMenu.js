@@ -5,29 +5,88 @@
 let gMC_url = '';
 /** The element that is processed by the context menu */
 let gMCElementContextHandled;
+/** @deprecated */
+let contextMenuClickStarted = false;
+let lastMousedowndAt = { x: 0, y: 0 };
 
 let $menu = $('#contextMenu');
 // hide the context menu
 $menu.hide();
 
 
-
 canvas.addEventListener('mousedown', handleContextMouseDown, false);
+// canvas.addEventListener('mousemove', handleDragMouseMove, false);
+// canvas.addEventListener('mouseup', handleMouseUp, false);
+
+
+// canvas.addEventListener('mousedown', handleContextMouseDown, false);
 canvas.addEventListener('contextmenu', handleContextMenu, false);
 // This causes the Menu to not shown at all:
 // canvas.addEventListener('mouseout', handleContextMouseOut, false);
 
+
 function handleContextMouseDown(e) {
+  let which = ''
+  if (typeof e === 'object') {
+    switch (e.button) {
+      case 0:
+        which = 'left';
+        break;
+      case 1:
+        which = 'middle';
+        break;
+      case 2:
+        which = 'right';
+        contextMenuClickStarted = true;
+
+        reOffset(); // Solve problem why this is needed
+
+        var x = parseInt(e.clientX - offsetX);
+        var y = parseInt(e.clientY - offsetY);
+        lastMousedowndAt.x = x;
+        lastMousedowndAt.y = y;
+        break;
+      default:
+        which = 'unknown';
+    }
+  }
+
   $menu.hide();
 }
+
+// function handleDragMouseMove(e) {
+//   contextMenuClickStarted = false;
+// }
+
 function handleContextMouseOut(e) {
   $menu.hide();
 }
 
 function handleContextMenu(e) {
-  // tell the browser we're handling this event
-  e.preventDefault();
-  e.stopPropagation();
+// function handleMouseUp(e) {
+  if (!contextMenuClickStarted) {
+    return;
+  }
+  let which = ''
+  if (typeof e === 'object') {
+    switch (e.button) {
+      case 0:
+        which = 'left';
+        break;
+      case 1:
+        which = 'middle';
+        break;
+      case 2:
+        which = 'right';
+        break;
+      default:
+        which = 'unknown';
+    }
+  }
+
+  if (which != 'right') {
+    return;
+  }
 
   // get mouse position relative to the canvas
 
@@ -35,7 +94,13 @@ function handleContextMenu(e) {
 
   var x = parseInt(e.clientX - offsetX);
   var y = parseInt(e.clientY - offsetY);
+  // The context menu of the standard is always suppressed. This is for instance also done in diagrams.net
+  e.preventDefault();
+  e.stopPropagation();
 
+  if (Math.abs(x - lastMousedowndAt.x) > 5 || Math.abs(y - lastMousedowndAt.y > 5)) {
+    return;
+  }
 
   let nameText = '';
   let linkToEditorText = '';

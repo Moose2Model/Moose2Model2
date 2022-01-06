@@ -16,22 +16,44 @@ function handleDragMouseDown(e) {
     if (typeof diagramms[diagramInfos.displayedDiagram] === 'undefined') {
         return;
     }
+    let which = ''
+    if (typeof e === 'object') {
+        switch (e.button) {
+            case 0:
+                which = 'left';
+                break;
+            case 1:
+                which = 'middle';
+                break;
+            case 2:
+                which = 'right';
+                break;
+            default:
+                which = 'unknown';
+        }
+    }
+
     reOffset(); // Solve problem why this is needed
 
     startX = parseInt(e.clientX - offsetX);
     startY = parseInt(e.clientY - offsetY);
 
-    draggedElement = findNearestElement(cameraToPaneX(startX), cameraToPaneY(startY), 10);
-    if (typeof draggedElement !== 'undefined') {
-        isDragging = true;
-        backGroundDragged = false;
-        e.preventDefault();
-        e.stopPropagation();
-    } else {
+    if (which == 'right') {
         isDragging = true;
         backGroundDragged = true;
         e.preventDefault();
         e.stopPropagation();
+        return;
+    }
+    if (which == 'left') {
+        draggedElement = findNearestElement(cameraToPaneX(startX), cameraToPaneY(startY), 10);
+        if (typeof draggedElement !== 'undefined') {
+            isDragging = true;
+            backGroundDragged = false;
+            e.preventDefault();
+            e.stopPropagation();
+            return;
+        }
     }
 
 }
