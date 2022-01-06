@@ -10,6 +10,9 @@ const circuitDiagramForSoftwareDiagramType = 'C';
 * @member complModelPosition An array with positions.
  Use as: diagramms[diagramInfos.displayedDiagram].complModelPosition.x and diagramms[diagramInfos.displayedDiagram].complModelPosition.y
  Contains also the index of the element in diagramms[diagramInfos.displayedDiagram].complModelPosition.index
+* @member diagramSettings The settings of a diagram. Use:
+ diagramms[diagramInfos.displayedDiagram].diagramSettings.displayNewElementBox - The box for new elements is displayed
+ diagramms[diagramInfos.displayedDiagram].diagramSettings.displayElementNames - The name of elements is displayed
 * @member pinned An array with the indizees of all pinned elements
 * @member cameraSettings An object with tranforms the internal positions to the displayed positions in the canvas. Use as: 
 diagramms[diagramInfos.displayedDiagram].cameraSettings.move.x
@@ -27,14 +30,18 @@ let diagramInfos = {};
 function useStartDiagram() {
   const move = { x: 0, y: 0 };
   diagramInfos.displayedDiagram = startDiagram;
+  let name = diagramInfos.displayedDiagram; // Minimizes problems with copy paste from this method to method newDiagram
   displayedDiagramText.innerHTML = 'Displayed diagram: ' + diagramInfos.displayedDiagram;
-  diagramms[diagramInfos.displayedDiagram] = {};
-  diagramms[diagramInfos.displayedDiagram].type = completeDiagramType;
-  diagramms[diagramInfos.displayedDiagram].diagramType = bulletPointDiagramType;
-  diagramms[diagramInfos.displayedDiagram].forceFeedback = false;
-  diagramms[diagramInfos.displayedDiagram].complModelPosition = [];
-  diagramms[diagramInfos.displayedDiagram].pinned = [];
-  diagramms[diagramInfos.displayedDiagram].forceDirectingState = initialForceDirectingState;
+  diagramms[name] = {};
+  diagramms[name].type = completeDiagramType;
+  diagramms[name].diagramType = bulletPointDiagramType;
+  diagramms[name].diagramSettings = {};
+  diagramms[name].diagramSettings.displayNewElementBox = false;
+  diagramms[name].diagramSettings.displayElementNames = false;
+  diagramms[name].forceFeedback = false;
+  diagramms[name].complModelPosition = [];
+  diagramms[name].pinned = [];
+  diagramms[name].forceDirectingState = initialForceDirectingState;
 
   diagramms[diagramInfos.displayedDiagram].cameraSettings = {
     move: move,
@@ -44,11 +51,14 @@ function useStartDiagram() {
 
 /** Call me once when a new diagram is required */
 function newDiagram(name) {
-  
+
   const move = { x: 0, y: 0 };
   diagramms[name] = {};
   diagramms[name].type = circuitDiagramForSoftwareType;
   diagramms[name].diagramType = circuitDiagramForSoftwareDiagramType;
+  diagramms[name].diagramSettings = {};
+  diagramms[name].diagramSettings.displayNewElementBox = true;
+  diagramms[name].diagramSettings.displayElementNames = true;
   diagramms[name].forceFeedback = false;
   diagramms[name].complModelPosition = [];
   diagramms[name].pinned = [];
@@ -79,4 +89,10 @@ function returnOtherDiagrams() {
 function setDiagramActive(name) {
   diagramInfos.activeDiagram = name;
   activeDiagramText.innerHTML = 'Active diagram: ' + name;
+}
+
+function toggleNameDisplay() {
+  if (typeof diagramms[diagramInfos.displayedDiagram].diagramSettings.displayElementNames !== 'undefined') {
+    diagramms[diagramInfos.displayedDiagram].diagramSettings.displayElementNames = !diagramms[diagramInfos.displayedDiagram].diagramSettings.displayElementNames;
+  }
 }

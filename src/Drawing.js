@@ -69,7 +69,7 @@ function drawCompleteModel(ctx, width, height) {
     }
 
     // Draw background
-    if (diagramms[diagramInfos.displayedDiagram].diagramType == circuitDiagramForSoftwareDiagramType) {
+    if (diagramms[diagramInfos.displayedDiagram].diagramSettings.displayNewElementBox == true) {
         ctx.lineWidth = cameraToCanvasScale(1);
         ctx.setLineDash([cameraToCanvasScale(8), cameraToCanvasScale(2)]);
         ctx.strokeStyle = 'gray'
@@ -81,10 +81,10 @@ function drawCompleteModel(ctx, width, height) {
         // var textMeasurement = ctx.measureText('foo'); // TextMetrics object
         // textMeasurement.width; // 16;
 
-        const scaledFontSize = cameraToCanvasScale(12);
+        let scaledFontSize = cameraToCanvasScale(12);
         ctx.textAlign = 'right';
         ctx.font = scaledFontSize + 'px Arial san-serif';
-        ctx.fillText('New elements are placed here', cameraToCanvasX(newElBoxX + newElBoxWidth ), cameraToCanvasY(newElBoxY + newElBoxHeight + 12));
+        ctx.fillText('New elements are placed here', cameraToCanvasX(newElBoxX + newElBoxWidth), cameraToCanvasY(newElBoxY + newElBoxHeight + 12));
         ctx.textAlign = 'start';
 
     }
@@ -158,21 +158,43 @@ function drawCompleteModel(ctx, width, height) {
                     ctx.beginPath();
                     switch (mEBI['element']) {
                         case 'SOMIX.Grouping':
-                            ctx.fillStyle = 'black';
+                            if (diagramms[diagramInfos.displayedDiagram].diagramSettings.displayElementNames) {
+                                ctx.fillStyle = 'gray'; // Texts cannot be read when the ball is black
+                            } else {
+                                ctx.fillStyle = 'black';
+                            }
                             size = cameraToCanvasScale(4);
                             break;
                         case 'SOMIX.Code':
-                            ctx.fillStyle = 'red';
+                            if (diagramms[diagramInfos.displayedDiagram].diagramSettings.displayElementNames) {
+                                ctx.fillStyle = 'orange'; // Makes reading easier
+                            } else {
+                                ctx.fillStyle = 'red';
+                            }
                             size = cameraToCanvasScale(2);
                             break;
                         case 'SOMIX.Data':
-                            ctx.fillStyle = 'blue';
+                            if (diagramms[diagramInfos.displayedDiagram].diagramSettings.displayElementNames) {
+                                ctx.fillStyle = 'lightBlue'; // Makes reading easier
+                            } else {
+                                ctx.fillStyle = 'blue';
+                            }
                             size = cameraToCanvasScale(2);
                             break;
                     }
                     ctx.arc(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
                         cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y), size, 0, 2 * Math.PI);
                     ctx.fill();
+                    if (diagramms[diagramInfos.displayedDiagram].diagramSettings.displayElementNames == true) {
+                        const fontsize = 3;
+                        ctx.fillStyle = 'black';
+                        let scaledFontSize = cameraToCanvasScale(fontsize);
+                        ctx.textAlign = 'center';
+                        ctx.font = scaledFontSize + 'px Arial san-serif';
+                        ctx.fillText(mEBI.name, cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
+                            cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y + fontsize * .3));
+                        ctx.textAlign = 'standard';
+                    }
                 }
                 else if (diagramms[diagramInfos.displayedDiagram].diagramType == circuitDiagramForSoftwareDiagramType) {
                     let size = 3;
@@ -194,6 +216,16 @@ function drawCompleteModel(ctx, width, height) {
                     ctx.arc(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
                         cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y), size, 0, 2 * Math.PI);
                     ctx.fill();
+                    if (diagramms[diagramInfos.displayedDiagram].diagramSettings.displayElementNames == true) {
+                        const fontsize = 3;
+                        ctx.fillStyle = 'black';
+                        let scaledFontSize = cameraToCanvasScale(fontsize);
+                        ctx.textAlign = 'center';
+                        ctx.font = scaledFontSize + 'px Arial san-serif';
+                        ctx.fillText(mEBI.name, cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
+                            cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y + fontsize * .3));
+                        ctx.textAlign = 'standard';
+                    }
                 }
                 else { window.alert('Internal error. Unknown type in drawing.') }
             }
@@ -220,8 +252,6 @@ function drawWhenForceDirectRequires() {
 
 function draw(always = true) {
 
-    // if (mouseover) {
-
     let width = window.innerWidth - 40;
     let height = window.innerHeight - 40;
     g_width = width;
@@ -246,10 +276,5 @@ function draw(always = true) {
 }
 canvas.addEventListener('mouseover', function (e) {
     requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
-    mouseover = true;
 });
 
-// canvas.addEventListener('mouseout', function (e) {
-//     window.cancelAnimationFrame(requestAnimationFrame);
-//     mouseover = false;
-// });

@@ -43,7 +43,7 @@ function positionCircle(width, height) {
 function addWithNeighbors(element) {
 
     // Switch Force-Directing off, so that new elements remain in the box where they have been placed
-    diagramms[diagramInfos.displayedDiagram].forceFeedback = false;
+    diagramms[diagramInfos.activeDiagram].forceFeedback = false;
 
     let position;
     if (typeof element !== 'undefined') {

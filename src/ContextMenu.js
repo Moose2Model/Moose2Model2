@@ -67,18 +67,20 @@ function handleContextMenu(e) {
 
   } else {
     // Handle context menu, when the pane is clicked
-    var m = ['Start Force-directed graph', 'Stop Force-directed graph'];
+    var m = [];
     if (typeof diagramInfos.displayedDiagram !== 'undefined') {
       if (diagramms[diagramInfos.displayedDiagram].type == circuitDiagramForSoftwareType) {
         if (diagramInfos.displayedDiagram != diagramInfos.activeDiagram) {
           m.unshift('Make this diagram active');
         }
       }
-    }
+      m.push('Toggle display of names');
+      m.push('Start Force-directed graph', 'Stop Force-directed graph');
 
-    let otherArrays = returnOtherDiagrams();
-    for (const oA of otherArrays) {
-      m.push(oA);
+      let otherArrays = returnOtherDiagrams();
+      for (const oA of otherArrays) {
+        m.push(oA);
+      }
     }
   };
 
@@ -116,7 +118,7 @@ $('#contextMenu').on('click', 'li', function (e) {
   } else if ($(this).text() == 'Remove pinning') {
     const idx = diagramms[diagramInfos.displayedDiagram].pinned.indexOf(gMCElementContextHandled.index);
     if (idx !== -1) {
-      diagramms[diagramInfos.displayedDiagram].pinned.splice(idx, 1);
+      diagramms[diagramInfos.displayedDiagram].pinned.splice(idx, 1); // delete this element from list
     }
     // requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
   } else if ($(this).text() == 'Make this diagram active') {
@@ -124,6 +126,10 @@ $('#contextMenu').on('click', 'li', function (e) {
   } else if ($(this).text() == 'Add element with all neighbours') {
 
     addWithNeighbors(gMCElementContextHandled);
+  } else if ($(this).text() == 'Toggle display of names') {
+
+    toggleNameDisplay();
+
 
   }
   else {
