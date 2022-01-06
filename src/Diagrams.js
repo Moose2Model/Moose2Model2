@@ -2,8 +2,11 @@
 const startDiagram = 'All model elements';
 const completeDiagramType = 'A';
 const circuitDiagramForSoftwareType = 'C';
+const bulletPointDiagramType = 'B';
+const circuitDiagramForSoftwareDiagramType = 'C';
 /**  Global class which contains references to all processed documents
 * @member type The type of the diagram. Either completeDiagramType or circuitDiagramForSoftwareType
+* @member diagramType The type how elements are displayed. Either bulletPointDiagramType or circuitDiagramForSoftwareDiagramType. 
 * @member complModelPosition An array with positions.
  Use as: diagramms[diagramInfos.displayedDiagram].complModelPosition.x and diagramms[diagramInfos.displayedDiagram].complModelPosition.y
  Contains also the index of the element in diagramms[diagramInfos.displayedDiagram].complModelPosition.index
@@ -27,6 +30,7 @@ function useStartDiagram() {
   displayedDiagramText.innerHTML = 'Displayed diagram: ' + diagramInfos.displayedDiagram;
   diagramms[diagramInfos.displayedDiagram] = {};
   diagramms[diagramInfos.displayedDiagram].type = completeDiagramType;
+  diagramms[diagramInfos.displayedDiagram].diagramType = bulletPointDiagramType;
   diagramms[diagramInfos.displayedDiagram].forceFeedback = false;
   diagramms[diagramInfos.displayedDiagram].complModelPosition = [];
   diagramms[diagramInfos.displayedDiagram].pinned = [];
@@ -40,13 +44,11 @@ function useStartDiagram() {
 
 /** Call me once when a new diagram is required */
 function newDiagram(name) {
-
-
-
   
   const move = { x: 0, y: 0 };
   diagramms[name] = {};
   diagramms[name].type = circuitDiagramForSoftwareType;
+  diagramms[name].diagramType = circuitDiagramForSoftwareDiagramType;
   diagramms[name].forceFeedback = false;
   diagramms[name].complModelPosition = [];
   diagramms[name].pinned = [];

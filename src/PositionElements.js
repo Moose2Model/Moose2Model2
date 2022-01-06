@@ -80,5 +80,74 @@ function addWithNeighbors(element) {
             }
         }
     }
+
+    // Add called
+
+    if (typeof callByCaller[element.index] !== 'undefined'){
+        for (const el of callByCaller[element.index]){
+            if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[el.called] === 'undefined'){
+                position = {
+                    index: el.called,
+                    x: Math.random() * 100,
+                    y: Math.random() * 100,
+                };
+                if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[el.called] === 'undefined') {
+                    diagramms[diagramInfos.activeDiagram].complModelPosition[el.called] = position;
+                }
+            }
+        }
+    }
+
+    // Add callers
+
+    if (typeof callByCalled[element.index] !== 'undefined'){
+        for (const el of callByCalled[element.index]){
+            if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[el.caller] === 'undefined'){
+                position = {
+                    index: el.caller,
+                    x: Math.random() * 100,
+                    y: Math.random() * 100,
+                };
+                if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[el.caller] === 'undefined') {
+                    diagramms[diagramInfos.activeDiagram].complModelPosition[el.caller] = position;
+                }
+            }
+        }
+    }
+
+    // Add accessed
+
+    if (typeof accessByAccessor[element.index] !== 'undefined'){
+        for (const el of accessByAccessor[element.index]){
+            if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[el.accessed] === 'undefined'){
+                position = {
+                    index: el.accessed,
+                    x: Math.random() * 100,
+                    y: Math.random() * 100,
+                };
+                if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[el.accessed] === 'undefined') {
+                    diagramms[diagramInfos.activeDiagram].complModelPosition[el.accessed] = position;
+                }
+            }
+        }
+    }
+
+    // Add accessors
+
+    if (typeof accessByAccessed[element.index] !== 'undefined'){
+        for (const el of accessByAccessed[element.index]){
+            if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[el.accessor] === 'undefined'){
+                position = {
+                    index: el.accessor,
+                    x: Math.random() * 100,
+                    y: Math.random() * 100,
+                };
+                if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[el.accessor] === 'undefined') {
+                    diagramms[diagramInfos.activeDiagram].complModelPosition[el.accessor] = position;
+                }
+            }
+        }
+    }
+
 }
 

@@ -131,131 +131,56 @@ function drawCompleteModel(ctx, width, height) {
             let mEBI = modelElementsByIndex[cmp.index];
 
             if (typeof mEBI !== 'undefined') {
-                let size = 3;
-                ctx.beginPath();
-                switch (mEBI['element']) {
-                    case 'SOMIX.Grouping':
-                        ctx.fillStyle = 'black';
-                        size = cameraToCanvasScale(4);
-                        break;
-                    case 'SOMIX.Code':
-                        ctx.fillStyle = 'red';
-                        size = cameraToCanvasScale(2);
-                        break;
-                    case 'SOMIX.Data':
-                        ctx.fillStyle = 'blue';
-                        size = cameraToCanvasScale(2);
-                        break;
+                if (diagramms[diagramInfos.displayedDiagram].diagramType == bulletPointDiagramType) {
+                    let size = 3;
+                    ctx.beginPath();
+                    switch (mEBI['element']) {
+                        case 'SOMIX.Grouping':
+                            ctx.fillStyle = 'black';
+                            size = cameraToCanvasScale(4);
+                            break;
+                        case 'SOMIX.Code':
+                            ctx.fillStyle = 'red';
+                            size = cameraToCanvasScale(2);
+                            break;
+                        case 'SOMIX.Data':
+                            ctx.fillStyle = 'blue';
+                            size = cameraToCanvasScale(2);
+                            break;
+                    }
+                    ctx.arc(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
+                        cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y), size, 0, 2 * Math.PI);
+                    ctx.fill();
                 }
-                ctx.arc(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
-                    cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y), size, 0, 2 * Math.PI);
-                ctx.fill();
+                else if (diagramms[diagramInfos.displayedDiagram].diagramType == circuitDiagramForSoftwareDiagramType) {
+                    let size = 3;
+                    ctx.beginPath();
+                    switch (mEBI['element']) {
+                        case 'SOMIX.Grouping':
+                            ctx.fillStyle = 'gray';
+                            size = cameraToCanvasScale(4);
+                            break;
+                        case 'SOMIX.Code':
+                            ctx.fillStyle = 'orange';
+                            size = cameraToCanvasScale(2);
+                            break;
+                        case 'SOMIX.Data':
+                            ctx.fillStyle = 'lightBlue';
+                            size = cameraToCanvasScale(2);
+                            break;
+                    }
+                    ctx.arc(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
+                        cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y), size, 0, 2 * Math.PI);
+                    ctx.fill();
+                }
+                else { window.alert('Internal error. Unknown type in drawing.') }
             }
         }
     }
 
-    // for (const mEBI of modelElementsByIndex) {
-    //     if (typeof mEBI !== 'undefined') {
-    //         let size = 3;
-    //         ctx.beginPath();
-    //         switch (mEBI['element']) {
-    //             case 'SOMIX.Grouping':
-    //                 ctx.fillStyle = 'black';
-    //                 size = cameraToCanvasScale(4);
-    //                 break;
-    //             case 'SOMIX.Code':
-    //                 ctx.fillStyle = 'red';
-    //                 size = cameraToCanvasScale(2);
-    //                 break;
-    //             case 'SOMIX.Data':
-    //                 ctx.fillStyle = 'blue';
-    //                 size = cameraToCanvasScale(2);
-    //                 break;
-    //         }
-    //         ctx.arc(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
-    //             cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y), size, 0, 2 * Math.PI);
-    //         ctx.fill();
-    //     }
-    // }
 };
 
-function drawCompleteModelOld(ctx, width, height) {
-    if (typeof diagramms[diagramInfos.displayedDiagram] === 'undefined') {
-        // Do not draw when no diagram exists
-        return;
-    }
-    if (diagramms[diagramInfos.displayedDiagram].type != completeDiagramType) {
-        ctx.font = '15px san-serif';
-        ctx.fillStyle = 'red'
-        ctx.fillText('The type of this diagram is not yet supported: ' + diagramInfos.displayedDiagram, 10, 50);
-        return;
-    }
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    for (const pCBP of parentChildByParent) {
-        if (typeof pCBP !== 'undefined') {
-            for (const pC of pCBP) {
-                ctx.lineWidth = cameraToCanvasScale(1);
-                ctx.beginPath();
-                ctx.strokeStyle = 'rgba(0, 0, 0, 0.2)';
-                ctx.moveTo(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['parent']].x), cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['parent']].y));
-                ctx.lineTo(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['child']].x), cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['child']].y));
-                ctx.stroke();
-            }
-        }
-    };
-
-    for (const cBC of callByCaller) {
-        if (typeof cBC !== 'undefined') {
-            for (const cC of cBC) {
-                ctx.lineWidth = cameraToCanvasScale(1);
-                ctx.beginPath();
-                ctx.strokeStyle = 'rgba(255, 0, 0, 0.2)';
-                ctx.moveTo(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[cC['caller']].x), cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[cC['caller']].y));
-                ctx.lineTo(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[cC['called']].x), cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[cC['called']].y));
-                ctx.stroke();
-            }
-        }
-    };
-
-    for (const aBA of accessByAccessor) {
-        if (typeof aBA !== 'undefined') {
-            for (const aA of aBA) {
-                ctx.lineWidth = cameraToCanvasScale(1);
-                ctx.beginPath();
-                ctx.strokeStyle = 'rgba(0, 0, 255, 0.2)';
-                ctx.moveTo(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[aA['accessor']].x), cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[aA['accessor']].y));
-                ctx.lineTo(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[aA['accessed']].x), cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[aA['accessed']].y));
-                ctx.stroke();
-            }
-        }
-    };
-
-    for (const mEBI of modelElementsByIndex) {
-        if (typeof mEBI !== 'undefined') {
-            let size = 3;
-            ctx.beginPath();
-            switch (mEBI['element']) {
-                case 'SOMIX.Grouping':
-                    ctx.fillStyle = 'black';
-                    size = cameraToCanvasScale(4);
-                    break;
-                case 'SOMIX.Code':
-                    ctx.fillStyle = 'red';
-                    size = cameraToCanvasScale(2);
-                    break;
-                case 'SOMIX.Data':
-                    ctx.fillStyle = 'blue';
-                    size = cameraToCanvasScale(2);
-                    break;
-            }
-            ctx.arc(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
-                cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y), size, 0, 2 * Math.PI);
-            ctx.fill();
-        }
-    }
-};
 
 function drawAlways() {
     draw(true)

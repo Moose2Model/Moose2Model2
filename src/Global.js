@@ -14,10 +14,47 @@ let modelElementsByIndex = [];
         };
  */
 let parentChildByParent = [];
+/** Contains an array where childs are placed at their index and an object is contained with this structure:
+ *         const parentChild = {
+            parent: parent,
+            child: child,
+            isMain: isMainVal
+        };
+ */
 let parentChildByChild = [];
+/** Contains an array hwere callers are placed at their index and an object is contained with this structure:
+ *         const call = {
+            caller: caller,
+            called: called,
+        };
+ */
 let callByCaller = [];
+/** Contains an array hwere called elements are placed at their index and an object is contained with this structure:
+ *         const call = {
+            caller: caller,
+            called: called,
+        };
+ */
 let callByCalled = [];
+/** Contains an array where accessing elements are placed at their index and an object is contained with this structure:
+*const access = {
+    accessor: accessor,
+    accessed: accessed,
+    isWrite: isWriteVal,
+    isRead: isReadVal,
+    isDependent: isDependentVal
+};
+*/
 let accessByAccessor = [];
+/** Contains an array where accessed elements are placed at their index and an object is contained with this structure:
+*const access = {
+    accessor: accessor,
+    accessed: accessed,
+    isWrite: isWriteVal,
+    isRead: isReadVal,
+    isDependent: isDependentVal
+};
+*/
 let accessByAccessed = [];
 // These global variables are only needed when an mse model is loaded:
 let indexByMSEIndex = [];
