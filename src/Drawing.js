@@ -68,6 +68,28 @@ function drawCompleteModel(ctx, width, height) {
         return;
     }
 
+    // Draw background
+    if (diagramms[diagramInfos.displayedDiagram].diagramType == circuitDiagramForSoftwareDiagramType) {
+        ctx.lineWidth = cameraToCanvasScale(1);
+        ctx.setLineDash([cameraToCanvasScale(8), cameraToCanvasScale(2)]);
+        ctx.strokeStyle = 'gray'
+        ctx.strokeRect(cameraToCanvasX(newElBoxX), cameraToCanvasY(newElBoxY), cameraToCanvasScale(newElBoxWidth), cameraToCanvasScale(newElBoxHeight));
+        ctx.setLineDash([]);
+
+        ctx.fillStyle = 'gray';
+
+        // var textMeasurement = ctx.measureText('foo'); // TextMetrics object
+        // textMeasurement.width; // 16;
+
+        const scaledFontSize = cameraToCanvasScale(12);
+        ctx.textAlign = 'right';
+        ctx.font = scaledFontSize + 'px Arial san-serif';
+        ctx.fillText('New elements are placed here', cameraToCanvasX(newElBoxX + newElBoxWidth ), cameraToCanvasY(newElBoxY + newElBoxHeight + 12));
+        ctx.textAlign = 'start';
+
+    }
+
+    // Draw elements
 
     for (const cmp of diagramms[diagramInfos.displayedDiagram].complModelPosition) {
         if (typeof cmp !== 'undefined') {
@@ -177,6 +199,12 @@ function drawCompleteModel(ctx, width, height) {
             }
         }
     }
+
+    //     // Draw further informations
+    // ctx.moveTo(g_width - 20, g_height - 10);
+    ctx.fillStyle = 'black';
+    ctx.font = '12px Arial san-serif';
+    ctx.fillText(Math.round(100 * diagramms[diagramInfos.displayedDiagram].cameraSettings.zoomfactor) + '%', g_width - 40, g_height - 10);
 
 };
 

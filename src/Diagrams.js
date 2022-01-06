@@ -13,8 +13,8 @@ const circuitDiagramForSoftwareDiagramType = 'C';
 * @member pinned An array with the indizees of all pinned elements
 * @member cameraSettings An object with tranforms the internal positions to the displayed positions in the canvas. Use as: 
 diagramms[diagramInfos.displayedDiagram].cameraSettings.move.x
-diagramms[activeDiagramm.name].cameraSettings.move.y
-diagramms[activeDiagramm.name].cameraSettings.zoomfactor
+diagramms[diagramInfos.displayedDiagram].cameraSettings.move.y
+diagramms[diagramInfos.displayedDiagram].cameraSettings.zoomfactor
 * @member forceDirectingState see ForceDirection.js for content*/
 let diagramms = {};
 

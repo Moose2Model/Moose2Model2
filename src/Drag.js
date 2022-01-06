@@ -13,7 +13,9 @@ function handleDragMouseDown(e) {
     // // tell the browser we're handling this event
     // e.preventDefault();
     // e.stopPropagation();
-
+    if (typeof diagramms[diagramInfos.displayedDiagram] === 'undefined') {
+        return;
+    }
     reOffset(); // Solve problem why this is needed
 
     startX = parseInt(e.clientX - offsetX);
