@@ -60,6 +60,10 @@ function addWithNeighbors(element) {
         }
     }
 
+    // list of added neigbors. This list is required to add "isMain" parents also
+
+    let addNeighbors = [];
+
     // Add childs
 
     if (typeof parentChildByParent[element.index] !== 'undefined') {
@@ -72,6 +76,7 @@ function addWithNeighbors(element) {
                 };
                 if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[el.child] === 'undefined') {
                     diagramms[diagramInfos.activeDiagram].complModelPosition[el.child] = position;
+                    addNeighbors.push(el.child);
                 }
             }
         }
@@ -89,6 +94,7 @@ function addWithNeighbors(element) {
                 };
                 if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[el.parent] === 'undefined') {
                     diagramms[diagramInfos.activeDiagram].complModelPosition[el.parent] = position;
+                    addNeighbors.push(el.parent);
                 }
             }
         }
@@ -106,6 +112,7 @@ function addWithNeighbors(element) {
                 };
                 if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[el.called] === 'undefined') {
                     diagramms[diagramInfos.activeDiagram].complModelPosition[el.called] = position;
+                    addNeighbors.push(el.called);
                 }
             }
         }
@@ -123,6 +130,7 @@ function addWithNeighbors(element) {
                 };
                 if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[el.caller] === 'undefined') {
                     diagramms[diagramInfos.activeDiagram].complModelPosition[el.caller] = position;
+                    addNeighbors.push(el.caller);
                 }
             }
         }
@@ -140,6 +148,7 @@ function addWithNeighbors(element) {
                 };
                 if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[el.accessed] === 'undefined') {
                     diagramms[diagramInfos.activeDiagram].complModelPosition[el.accessed] = position;
+                    addNeighbors.push(el.accessed);
                 }
             }
         }
@@ -157,6 +166,30 @@ function addWithNeighbors(element) {
                 };
                 if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[el.accessor] === 'undefined') {
                     diagramms[diagramInfos.activeDiagram].complModelPosition[el.accessor] = position;
+                    addNeighbors.push(el.accessor);
+                }
+            }
+        }
+    }
+
+    // Add "isMain" parents of all added elements when they exist.
+    // This is required, so that a user understands for instance to which class a method belongs. Method names
+    // are normally not unique nor understandable without the class name
+
+    for (const element of addNeighbors) {
+        if (typeof parentChildByChild[element] !== 'undefined') {
+            for (const el of parentChildByChild[element]) {
+                if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[el.parent] === 'undefined') {
+                    if (el.isMain) {
+                        position = {
+                            index: el.parent,
+                            x: newElBoxX + Math.random() * newElBoxWidth,
+                            y: newElBoxY + Math.random() * newElBoxHeight,
+                        };
+                        if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[el.parent] === 'undefined') {
+                            diagramms[diagramInfos.activeDiagram].complModelPosition[el.parent] = position;
+                        }
+                    }
                 }
             }
         }
