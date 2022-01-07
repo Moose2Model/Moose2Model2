@@ -3,7 +3,7 @@
 let fileHandle;
 
 // This are all global variables which contain informations on a loaded model
-// They are enhanced when more than a single mse model is loaded
+// They should be enhanced when more than a single mse model is loaded
 let modelElementsByUniqueKey = {};
 let modelElementsByIndex = [];
 /** Contains an array where parents are placed at their index and an object is contained with this structure:
@@ -137,6 +137,17 @@ function initializeBuildModel() {
     // Call before a new mse model is loaded
     indexByMSEIndex = [];
     currentIndex = 1;
+
+    // Clear old mse model
+    modelElementsByUniqueKey = {};
+    modelElementsByIndex = [];
+    parentChildByParent = [];
+    parentChildByChild = [];
+    callByCaller = [];
+    callByCalled = [];
+    accessByAccessor = [];
+    accessByAccessed = [];
+
 }
 
 function updateMSEIndex(mseIndex) {
