@@ -16,9 +16,9 @@ else {
     window.alert('The browser context is not secure. This application will not work');
 }
 
-// Do always at start
+// // Do always at start
 
-startLogic();
+// startLogic();
 
 async function LoadModel() {
     'use strict';
@@ -57,23 +57,3 @@ async function LoadModel() {
 
 }
 
-function  startLogic() {
-
-// Load example model
-
-    let contents = returnExample();
-    document.title = 'Example file';
-    loadModelText.innerHTML = 'Loaded SOMIX model: ' + 'Example file';
-    useStartDiagram();
-    analyzeMseFile(contents);
-    positionCircle(g_width, g_height);
-    mouseover = true;
-    draw();
-
-    // Create a new diagram
-    newDiagram('Demo Diagram');
-
-    // Set demo program immediatly active
-    setDiagramActive('Demo Diagram');
-    
-}

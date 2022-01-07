@@ -171,6 +171,10 @@
             display: block;
         }
 
+        .showHelp {
+            display: block;
+        }
+
 
         /* Old styles */
 
@@ -223,6 +227,7 @@
             <div class="HelpMenu-content" id="HelpMenuID">
                 <input id="ToGithubButton" value="Github repository">
                 <input id="ToHelpButton" value="Documentation">
+                <input id="LoadDemoModel" value="Load demo data">
             </div>
         </div>
     </div>
@@ -266,6 +271,30 @@
 
         const ToHelpButton = document.getElementById('ToHelpButton');
         ToHelpButton.addEventListener('click', JumpToDocu);
+
+        const LoadDemoModelButton = document.getElementById('LoadDemoModel');
+        LoadDemoModelButton.addEventListener('click', LoadDemoModel);
+
+        function LoadDemoModel() {
+
+            // Load example model
+
+            let contents = returnExample();
+            document.title = 'Example file';
+            loadModelText.innerHTML = 'Loaded SOMIX model: ' + 'Example file';
+            useStartDiagram();
+            analyzeMseFile(contents);
+            positionCircle(g_width, g_height);
+            mouseover = true;
+            draw();
+
+            // Create a new diagram
+            newDiagram('Demo Diagram');
+
+            // Set demo program immediatly active
+            setDiagramActive('Demo Diagram');
+
+        }
 
         // New diagram
 
@@ -312,12 +341,14 @@
 
         // Close the dropdownFileMenu if the user clicks outside of it
         window.onclick = function (e) {
+
             if (!e.target.matches('.fileMenuButton')) {
                 var FileMenuID = document.getElementById("FileMenuID");
                 if (FileMenuID.classList.contains('show')) {
                     FileMenuID.classList.remove('show');
                 }
-            } else if (!e.target.matches('.helpMenuButton')) {
+            }
+            if (!e.target.matches('.helpMenuButton')) {
                 var FileMenuID = document.getElementById("HelpMenuID");
                 if (FileMenuID.classList.contains('show')) {
                     FileMenuID.classList.remove('show');
