@@ -1,6 +1,7 @@
 'use strict';
 
 const initialForceDirectingState = {
+    springLength : 28, // 10, Make spring length identical to the previous standard length
     previousLoop: -1,
     previousLoopIndex: -1,
     complModelPositionNew: [],
@@ -22,7 +23,7 @@ const maxTimeForceDirectMs = 200;
 function forceDirecting(width, height) {
 
     let redraw = false;
-
+/** @deprecated */
     const w2 = Math.min(width, height);
     let nElements = 1;
     for (const mEBI of modelElementsByIndex) {
@@ -54,10 +55,11 @@ function forceDirecting(width, height) {
         }
     }
 
-    const avgLen = w2 / Math.sqrt(nElements);
+    const oldSpringLength = w2 / Math.sqrt(nElements);
     // const step = 0.00002; // für 300kb Model
     // const step = 0.000001; // für 4 MB Model
-    const step = 0.00002;
+    const step = 0.00002; 
+
 
     function spring(x1, y1, x2, y2) {
         let vect = {
@@ -66,8 +68,10 @@ function forceDirecting(width, height) {
         };
         let dist = Math.sqrt(vect.x * vect.x + vect.y * vect.y);
         let force = {
-            x: vect.x * (dist - avgLen),
-            y: vect.y * (dist - avgLen)
+            // x: vect.x * (dist - avgLen),
+            x: vect.x * (dist - diagramms[diagramInfos.displayedDiagram].forceDirectingState.springLength),
+            // y: vect.y * (dist - avgLen)
+            y: vect.y * (dist - diagramms[diagramInfos.displayedDiagram].forceDirectingState.springLength)
         };
         return force;
     };
@@ -84,7 +88,8 @@ function forceDirecting(width, height) {
         } else if (dist < 0.1) {
             fact = 100;
         } else { fact = 1 / (dist * dist) };
-        fact = -fact * 2000;
+        // fact = -fact * 2000;
+        fact = -fact * 20000;
         let force = {
             x: vect.x * fact,
             y: vect.y * fact

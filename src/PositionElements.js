@@ -8,12 +8,15 @@ const newElBoxHeight = 100;
 
 function positionCircle(width, height) {
     const offset = 20;
-    const w2 = Math.min(width, height);
-    const w4 = w2 / 2 - offset;
+    // const w2 = Math.min(width, height);
     let nElements = 1;
     for (const mEBI of modelElementsByIndex) {
         nElements += 1;
     }
+
+    const w2 = 5 * diagramms[diagramInfos.displayedDiagram].forceDirectingState.springLength * Math.sqrt(nElements);
+    const w4 = w2 / 2 - offset;
+
     const dAngle = 2 * Math.PI / nElements;
     let angle = 0;
 
