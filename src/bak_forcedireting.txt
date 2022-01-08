@@ -1,26 +1,3 @@
-'use strict';
-
-const initialForceDirectingState = {
-    springLength : 28, // 10, Make spring length identical to the previous standard length
-    maxRepulsion : 20, // the maximal length where a repulsion between elements is not zero
-    previousLoop: -1,
-    previousLoopIndex: -1,
-    complModelPositionNew: [],
-    complModelPositionNew2: []
-}
-
-/** Remember the loop in the Force-Directing logic */
-// let previousLoop = -1;
-/** Remember the index of the last processed loop in the Force-Directing logic */
-// let previousLoopIndex = -1;
-// /** Remember the index when the loop for repulsion was left to improve performance */
-// let previousRepulsionIndex = -1;
-
-const maxTimeForceDirectMs = 200;
-
-// let complModelPositionNew = [];
-// let complModelPositionNew2 = [];
-
 function forceDirecting(width, height) {
 
     let redraw = false;
