@@ -1,8 +1,8 @@
 'use strict';
 
 const initialForceDirectingState = {
-    springLength : 28, // 10, Make spring length identical to the previous standard length
-    maxRepulsion : 20, // the maximal length where a repulsion between elements is not zero
+    springLength: 28, // 10, Make spring length identical to the previous standard length
+    maxRepulsion: 20, // the maximal length where a repulsion between elements is not zero
     previousLoop: -1,
     previousLoopIndex: -1,
     complModelPositionNew: [],
@@ -24,7 +24,7 @@ const maxTimeForceDirectMs = 200;
 function forceDirecting(width, height) {
 
     let redraw = false;
-/** @deprecated */
+    /** @deprecated */
     const w2 = Math.min(width, height);
     let nElements = 1;
     for (const mEBI of modelElementsByIndex) {
@@ -59,7 +59,7 @@ function forceDirecting(width, height) {
     const oldSpringLength = w2 / Math.sqrt(nElements);
     // const step = 0.00002; // für 300kb Model
     // const step = 0.000001; // für 4 MB Model
-    const step = 0.00002; 
+    const step = 0.00002;
 
 
     function spring(x1, y1, x2, y2) {
@@ -90,7 +90,8 @@ function forceDirecting(width, height) {
             fact = 100;
         } else { fact = 1 / (dist * dist) };
         // fact = -fact * 2000;
-        fact = -fact * 20000;
+        // fact = -fact * 20000;
+        fact = -fact * 40000; // 08.01.2022 Increase factor by two because duplicate calculation of repulsion was removed in line 215
         let force = {
             x: vect.x * fact,
             y: vect.y * fact
@@ -210,7 +211,8 @@ function forceDirecting(width, height) {
                         for (const mEBI2 of modelElementsByIndex) {
                             if (typeof mEBI2 !== 'undefined') {
                                 if (typeof diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI2['index']] !== 'undefined') {
-                                    if (mEBI != mEBI2) {
+                                    // if (mEBI != mEBI2) {
+                                    if (mEBI.index < mEBI2.index) {
                                         let eForce = repulsion(
                                             diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x,
                                             diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y,
