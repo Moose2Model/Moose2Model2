@@ -6,7 +6,8 @@ const initialForceDirectingState = {
     previousLoop: -1,
     previousLoopIndex: -1,
     complModelPositionNew: [],
-    complModelPositionNew2: []
+    complModelPositionNew2: [],
+    elementsGrouped: [] // ELements groupd to calculate repulsion more efficient
 }
 
 /** Remember the loop in the Force-Directing logic */
@@ -27,7 +28,8 @@ function forceDirecting(width, height) {
     /** @deprecated */
     const w2 = Math.min(width, height);
     let nElements = 1;
-    for (const mEBI of modelElementsByIndex) {
+    // for (const mEBI of modelElementsByIndex) {
+        for (const mEBI of diagramms[diagramInfos.displayedDiagram].complModelPosition) {
         nElements += 1;
     }
 
@@ -39,8 +41,10 @@ function forceDirecting(width, height) {
         diagramms[diagramInfos.displayedDiagram].forceDirectingState.previousLoopIndex == -1) {
         diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew = [];
         diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew2 = [];
+        diagramms[diagramInfos.displayedDiagram].forceDirectingState.elementsGrouped = [];
 
-        for (const mEBI of modelElementsByIndex) {
+        // for (const mEBI of modelElementsByIndex) {
+            for (const mEBI of diagramms[diagramInfos.displayedDiagram].complModelPosition) {
             if (typeof mEBI !== 'undefined') {
 
                 let position = {
@@ -52,6 +56,9 @@ function forceDirecting(width, height) {
                 };
                 diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[mEBI['index']] = position;
                 diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew2[mEBI['index']] = position;
+
+                let groupX = Math.floor()
+
             }
         }
     }
@@ -204,11 +211,14 @@ function forceDirecting(width, height) {
         }
 
         if (i == 4) {
-            for (let j = diagramms[diagramInfos.displayedDiagram].forceDirectingState.previousLoopIndex; j < modelElementsByIndex.length; j++) {
-                let mEBI = modelElementsByIndex[j];
+            // for (let j = diagramms[diagramInfos.displayedDiagram].forceDirectingState.previousLoopIndex; j < modelElementsByIndex.length; j++) {
+            //     let mEBI = modelElementsByIndex[j];
+                for (let j = diagramms[diagramInfos.displayedDiagram].forceDirectingState.previousLoopIndex; j < diagramms[diagramInfos.displayedDiagram].complModelPosition.length; j++) {
+                    let mEBI = diagramms[diagramInfos.displayedDiagram].complModelPosition[j];
                 if (typeof mEBI !== 'undefined') {
                     if (typeof diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']] !== 'undefined') {
-                        for (const mEBI2 of modelElementsByIndex) {
+                        // for (const mEBI2 of modelElementsByIndex) {
+                        for (const mEBI2 of diagramms[diagramInfos.displayedDiagram].complModelPosition) {
                             if (typeof mEBI2 !== 'undefined') {
                                 if (typeof diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI2['index']] !== 'undefined') {
                                     // if (mEBI != mEBI2) {
@@ -229,7 +239,8 @@ function forceDirecting(width, height) {
                     }
                 }
                 if ((Date.now() - startTime) > maxTimeForceDirectMs) {
-                    if (j + 1 < modelElementsByIndex.length) {
+                    // if (j + 1 < modelElementsByIndex.length) {
+                        if (j + 1 < diagramms[diagramInfos.displayedDiagram].complModelPosition.length) {
                         diagramms[diagramInfos.displayedDiagram].forceDirectingState.previousLoopIndex = j + 1;
                         diagramms[diagramInfos.displayedDiagram].forceDirectingState.previousLoop = 4;
                         redraw = false;
@@ -253,7 +264,8 @@ function forceDirecting(width, height) {
     let corrFact = 1;
     let draggedIndex = 0;
 
-    for (const mEBI of modelElementsByIndex) {
+    // for (const mEBI of modelElementsByIndex) {
+        for (const mEBI of diagramms[diagramInfos.displayedDiagram].complModelPosition) {
         if (typeof mEBI !== 'undefined') {
 
             let handledIndex = mEBI['index'];
@@ -295,7 +307,8 @@ function forceDirecting(width, height) {
         draggedIndex = draggedElement.index;
     }
 
-    for (const mEBI of modelElementsByIndex) {
+    // for (const mEBI of modelElementsByIndex) {
+        for (const mEBI of diagramms[diagramInfos.displayedDiagram].complModelPosition) {
         if (typeof mEBI !== 'undefined') {
 
             let handledIndex = mEBI['index'];
