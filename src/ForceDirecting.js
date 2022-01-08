@@ -100,7 +100,7 @@ function forceDirecting(width, height) {
         };
         let dist = Math.sqrt(vect.x * vect.x + vect.y * vect.y);
         let fact = 1;
-        if (dist > diagramms[diagramInfos.displayedDiagram].forceDirectingState.maxRepulsion) {
+        if (dist > diagramms[diagramInfos.displayedDiagram].forceDirectingState.maxRepulsionLength) {
             fact = 0;
         } else if (dist < 0.1) {
             fact = 100;
