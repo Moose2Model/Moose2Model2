@@ -29,7 +29,7 @@ function forceDirecting(width, height) {
     const w2 = Math.min(width, height);
     let nElements = 1;
     // for (const mEBI of modelElementsByIndex) {
-        for (const mEBI of diagramms[diagramInfos.displayedDiagram].complModelPosition) {
+    for (const mEBI of diagramms[diagramInfos.displayedDiagram].complModelPosition) {
         nElements += 1;
     }
 
@@ -44,7 +44,7 @@ function forceDirecting(width, height) {
         diagramms[diagramInfos.displayedDiagram].forceDirectingState.elementsGrouped = [];
 
         // for (const mEBI of modelElementsByIndex) {
-            for (const mEBI of diagramms[diagramInfos.displayedDiagram].complModelPosition) {
+        for (const mEBI of diagramms[diagramInfos.displayedDiagram].complModelPosition) {
             if (typeof mEBI !== 'undefined') {
 
                 let position = {
@@ -59,15 +59,15 @@ function forceDirecting(width, height) {
 
                 // The following appears to be the best way to implement the DIV operation in Javascript
                 // (https://stackoverflow.com/questions/4228356/how-to-perform-an-integer-division-and-separately-get-the-remainder-in-javascr)
-                let groupX = Math.floor(mEBI.x/diagramms[diagramInfos.displayedDiagram].forceDirectingState.maxRepulsionLength);
-                let groupY = Math.floor(mEBI.y/diagramms[diagramInfos.displayedDiagram].forceDirectingState.maxRepulsionLength);
-                if (typeof diagramms[diagramInfos.displayedDiagram].forceDirectingState.elementsGrouped[groupX] === 'undefined'){
+                let groupX = Math.floor(mEBI.x / diagramms[diagramInfos.displayedDiagram].forceDirectingState.maxRepulsionLength);
+                let groupY = Math.floor(mEBI.y / diagramms[diagramInfos.displayedDiagram].forceDirectingState.maxRepulsionLength);
+                if (typeof diagramms[diagramInfos.displayedDiagram].forceDirectingState.elementsGrouped[groupX] === 'undefined') {
                     diagramms[diagramInfos.displayedDiagram].forceDirectingState.elementsGrouped[groupX] = [];
                 }
-                if (typeof diagramms[diagramInfos.displayedDiagram].forceDirectingState.elementsGrouped[groupX][groupY] === 'undefined'){
+                if (typeof diagramms[diagramInfos.displayedDiagram].forceDirectingState.elementsGrouped[groupX][groupY] === 'undefined') {
                     diagramms[diagramInfos.displayedDiagram].forceDirectingState.elementsGrouped[groupX][groupY] = [];
                 }
-                diagramms[diagramInfos.displayedDiagram].forceDirectingState.elementsGrouped[groupX][groupY].push(mEBI); 
+                diagramms[diagramInfos.displayedDiagram].forceDirectingState.elementsGrouped[groupX][groupY].push(mEBI);
             }
         }
     }
@@ -141,8 +141,8 @@ function forceDirecting(width, height) {
                                 diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['parent']].y,
                                 diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['child']].x,
                                 diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['child']].y);
-                            diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[pC['parent']].x += step * pCForce.x; 
-                            diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[pC['parent']].y += step * pCForce.y; 
+                            diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[pC['parent']].x += step * pCForce.x;
+                            diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[pC['parent']].y += step * pCForce.y;
                             diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[pC['child']].x -= step * pCForce.x;
                             diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[pC['child']].y -= step * pCForce.y;
                         }
@@ -222,34 +222,59 @@ function forceDirecting(width, height) {
         if (i == 4) {
             // for (let j = diagramms[diagramInfos.displayedDiagram].forceDirectingState.previousLoopIndex; j < modelElementsByIndex.length; j++) {
             //     let mEBI = modelElementsByIndex[j];
-                for (let j = diagramms[diagramInfos.displayedDiagram].forceDirectingState.previousLoopIndex; j < diagramms[diagramInfos.displayedDiagram].complModelPosition.length; j++) {
-                    let mEBI = diagramms[diagramInfos.displayedDiagram].complModelPosition[j];
+            for (let j = diagramms[diagramInfos.displayedDiagram].forceDirectingState.previousLoopIndex; j < diagramms[diagramInfos.displayedDiagram].complModelPosition.length; j++) {
+                let mEBI = diagramms[diagramInfos.displayedDiagram].complModelPosition[j];
                 if (typeof mEBI !== 'undefined') {
                     if (typeof diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']] !== 'undefined') {
-                        // for (const mEBI2 of modelElementsByIndex) {
-                        for (const mEBI2 of diagramms[diagramInfos.displayedDiagram].complModelPosition) {
-                            if (typeof mEBI2 !== 'undefined') {
-                                if (typeof diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI2['index']] !== 'undefined') {
-                                    // if (mEBI != mEBI2) {
-                                    if (mEBI.index < mEBI2.index) {
-                                        let eForce = repulsion(
-                                            diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x,
-                                            diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y,
-                                            diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI2['index']].x,
-                                            diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI2['index']].y);
-                                        diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew2[mEBI['index']].x += step * eForce.x;
-                                        diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew2[mEBI['index']].y += step * eForce.y;
-                                        diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew2[mEBI2['index']].x -= step * eForce.x;
-                                        diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew2[mEBI2['index']].y -= step * eForce.y;
+
+                        let groupX = Math.floor(mEBI.x / diagramms[diagramInfos.displayedDiagram].forceDirectingState.maxRepulsionLength);
+                        let groupY = Math.floor(mEBI.y / diagramms[diagramInfos.displayedDiagram].forceDirectingState.maxRepulsionLength);
+
+                        for (let ix = groupX - 1; ix <= groupX + 1; ix++) {
+                            for (let iy = groupY - 1; iy <= groupY + 1; iy++) {
+                                if (typeof diagramms[diagramInfos.displayedDiagram].forceDirectingState.elementsGrouped[ix] !== 'undefined') {
+                                    if (typeof diagramms[diagramInfos.displayedDiagram].forceDirectingState.elementsGrouped[ix][iy] !== 'undefined') {
+                                        for (const mEBI2 of diagramms[diagramInfos.displayedDiagram].forceDirectingState.elementsGrouped[ix][iy]) {
+                                            if (mEBI.index < mEBI2.index) {
+                                                let eForce = repulsion(
+                                                    diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x,
+                                                    diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y,
+                                                    diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI2['index']].x,
+                                                    diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI2['index']].y);
+                                                diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew2[mEBI['index']].x += step * eForce.x;
+                                                diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew2[mEBI['index']].y += step * eForce.y;
+                                                diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew2[mEBI2['index']].x -= step * eForce.x;
+                                                diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew2[mEBI2['index']].y -= step * eForce.y;
+                                            }
+                                        }
                                     }
                                 }
                             }
+
                         }
+
+                        // for (const mEBI2 of diagramms[diagramInfos.displayedDiagram].complModelPosition) {
+                        //     if (typeof mEBI2 !== 'undefined') {
+                        //         if (typeof diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI2['index']] !== 'undefined') {
+                        //             if (mEBI.index < mEBI2.index) {
+                        //                 let eForce = repulsion(
+                        //                     diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x,
+                        //                     diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y,
+                        //                     diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI2['index']].x,
+                        //                     diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI2['index']].y);
+                        //                 diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew2[mEBI['index']].x += step * eForce.x;
+                        //                 diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew2[mEBI['index']].y += step * eForce.y;
+                        //                 diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew2[mEBI2['index']].x -= step * eForce.x;
+                        //                 diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew2[mEBI2['index']].y -= step * eForce.y;
+                        //             }
+                        //         }
+                        //     }
+                        // }
                     }
                 }
                 if ((Date.now() - startTime) > maxTimeForceDirectMs) {
                     // if (j + 1 < modelElementsByIndex.length) {
-                        if (j + 1 < diagramms[diagramInfos.displayedDiagram].complModelPosition.length) {
+                    if (j + 1 < diagramms[diagramInfos.displayedDiagram].complModelPosition.length) {
                         diagramms[diagramInfos.displayedDiagram].forceDirectingState.previousLoopIndex = j + 1;
                         diagramms[diagramInfos.displayedDiagram].forceDirectingState.previousLoop = 4;
                         redraw = false;
@@ -274,7 +299,7 @@ function forceDirecting(width, height) {
     let draggedIndex = 0;
 
     // for (const mEBI of modelElementsByIndex) {
-        for (const mEBI of diagramms[diagramInfos.displayedDiagram].complModelPosition) {
+    for (const mEBI of diagramms[diagramInfos.displayedDiagram].complModelPosition) {
         if (typeof mEBI !== 'undefined') {
 
             let handledIndex = mEBI['index'];
@@ -317,7 +342,7 @@ function forceDirecting(width, height) {
     }
 
     // for (const mEBI of modelElementsByIndex) {
-        for (const mEBI of diagramms[diagramInfos.displayedDiagram].complModelPosition) {
+    for (const mEBI of diagramms[diagramInfos.displayedDiagram].complModelPosition) {
         if (typeof mEBI !== 'undefined') {
 
             let handledIndex = mEBI['index'];
