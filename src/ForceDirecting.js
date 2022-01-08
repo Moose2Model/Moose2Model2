@@ -2,7 +2,7 @@
 
 const initialForceDirectingState = {
     springLength: 28, // 10, Make spring length identical to the previous standard length
-    maxRepulsion: 20, // the maximal length where a repulsion between elements is not zero
+    maxRepulsionLength: 20, // the maximal length where a repulsion between elements is not zero
     previousLoop: -1,
     previousLoopIndex: -1,
     complModelPositionNew: [],
@@ -57,8 +57,17 @@ function forceDirecting(width, height) {
                 diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[mEBI['index']] = position;
                 diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew2[mEBI['index']] = position;
 
-                let groupX = Math.floor()
-
+                // The following appears to be the best way to implement the DIV operation in Javascript
+                // (https://stackoverflow.com/questions/4228356/how-to-perform-an-integer-division-and-separately-get-the-remainder-in-javascr)
+                let groupX = Math.floor(mEBI.x/diagramms[diagramInfos.displayedDiagram].forceDirectingState.maxRepulsionLength);
+                let groupY = Math.floor(mEBI.y/diagramms[diagramInfos.displayedDiagram].forceDirectingState.maxRepulsionLength);
+                if (typeof diagramms[diagramInfos.displayedDiagram].forceDirectingState.elementsGrouped[groupX] === 'undefined'){
+                    diagramms[diagramInfos.displayedDiagram].forceDirectingState.elementsGrouped[groupX] = [];
+                }
+                if (typeof diagramms[diagramInfos.displayedDiagram].forceDirectingState.elementsGrouped[groupX][groupY] === 'undefined'){
+                    diagramms[diagramInfos.displayedDiagram].forceDirectingState.elementsGrouped[groupX][groupY] = [];
+                }
+                diagramms[diagramInfos.displayedDiagram].forceDirectingState.elementsGrouped[groupX][groupY].push(mEBI); 
             }
         }
     }
@@ -132,8 +141,8 @@ function forceDirecting(width, height) {
                                 diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['parent']].y,
                                 diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['child']].x,
                                 diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['child']].y);
-                            diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[pC['parent']].x += 0.2 * step * pCForce.x; // Make parent more heavy, therefore a factor 0.2
-                            diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[pC['parent']].y += 0.2 * step * pCForce.y; // Make parent more heavy, therefore a factor 0.2
+                            diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[pC['parent']].x += step * pCForce.x; 
+                            diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[pC['parent']].y += step * pCForce.y; 
                             diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[pC['child']].x -= step * pCForce.x;
                             diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[pC['child']].y -= step * pCForce.y;
                         }
