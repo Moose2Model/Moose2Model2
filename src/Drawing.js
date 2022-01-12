@@ -127,34 +127,30 @@ function drawCompleteModel(ctx, width, height) {
                             ctx.strokeStyle = 'rgba(255, 0, 0, 0.2)';
                             ctx.moveTo(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[cC['caller']].x), cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[cC['caller']].y));
                             ctx.lineTo(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[cC['called']].x), cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[cC['called']].y));
-                            ctx.stroke();
+                            if (diagramms[diagramInfos.displayedDiagram].diagramSettings.displayArrows) {
+                                let deltaX = endX - startX;
+                                let deltaY = endY - startY;
+                                let length = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+                                if (length > 0.1) { // TODO how to handle very short edges?
+                                    let unitX = deltaX / length;
+                                    let unitY = deltaY / length;
 
-                            let deltaX = endX - startX;
-                            let deltaY = endY - startY;
-                            let length = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-                            if (length > 0.1) { // TODO how to handle very short edges?
-                                let unitX = deltaX / length;
-                                let unitY = deltaY / length;
+                                    let unitA1X = 0.866 * unitX - 0.5 * unitY;
+                                    let unitA1Y = 0.5 * unitX + 0.866 * unitY;
+                                    let unitA2X = 0.866 * unitX + 0.5 * unitY;
+                                    let unitA2Y = -0.5 * unitX + 0.866 * unitY;
 
-                                let unitA1X = 0.866*unitX-0.5*unitY;
-                                let unitA1Y = 0.5*unitX+0.866*unitY;
-                                let unitA2X = 0.866*unitX+0.5*unitY;
-                                let unitA2Y = -0.5*unitX+0.866*unitY;
-
-                                let startArrow1X = endX - 7 * unitA1X;
-                                let startArrow1Y = endY - 7 * unitA1Y;
-                                let startArrow2X = endX - 7 * unitA2X;
-                                let startArrow2Y = endY - 7 * unitA2Y;
-                                ctx.beginPath();
-                                ctx.moveTo(cameraToCanvasX(endX), cameraToCanvasY(endY));
-                                ctx.lineTo(cameraToCanvasX(startArrow1X), cameraToCanvasY(startArrow1Y));
-                                ctx.moveTo(cameraToCanvasX(endX), cameraToCanvasY(endY));
-                                ctx.lineTo(cameraToCanvasX(startArrow2X), cameraToCanvasY(startArrow2Y));
-                                ctx.stroke();
-                            
-
+                                    let startArrow1X = endX - 7 * unitA1X;
+                                    let startArrow1Y = endY - 7 * unitA1Y;
+                                    let startArrow2X = endX - 7 * unitA2X;
+                                    let startArrow2Y = endY - 7 * unitA2Y;
+                                    ctx.moveTo(cameraToCanvasX(endX), cameraToCanvasY(endY));
+                                    ctx.lineTo(cameraToCanvasX(startArrow1X), cameraToCanvasY(startArrow1Y));
+                                    ctx.moveTo(cameraToCanvasX(endX), cameraToCanvasY(endY));
+                                    ctx.lineTo(cameraToCanvasX(startArrow2X), cameraToCanvasY(startArrow2Y));
+                                }
                             }
-
+                            ctx.stroke();
                         }
                     }
                 }
