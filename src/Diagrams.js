@@ -13,6 +13,7 @@ const circuitDiagramForSoftwareDiagramType = 'C';
 * @member diagramSettings The settings of a diagram. Use:
  diagramms[diagramInfos.displayedDiagram].diagramSettings.displayNewElementBox - The box for new elements is displayed
  diagramms[diagramInfos.displayedDiagram].diagramSettings.displayElementNames - The name of elements is displayed
+ diagramms[diagramInfos.displayedDiagram].diagramSettings.displayArrows - Edges are displayed with arrows
 * @member pinned An array with the indizees of all pinned elements
 * @member cameraSettings An object with tranforms the internal positions to the displayed positions in the canvas. Use as: 
 diagramms[diagramInfos.displayedDiagram].cameraSettings.move.x
@@ -38,6 +39,7 @@ function useStartDiagram() {
   diagramms[name].diagramSettings = {};
   diagramms[name].diagramSettings.displayNewElementBox = false;
   diagramms[name].diagramSettings.displayElementNames = false;
+  diagramms[name].diagramSettings.displayArrows = false;
   diagramms[name].forceFeedback = false;
   diagramms[name].complModelPosition = [];
   diagramms[name].pinned = [];
@@ -59,6 +61,7 @@ function newDiagram(name) {
   diagramms[name].diagramSettings = {};
   diagramms[name].diagramSettings.displayNewElementBox = true;
   diagramms[name].diagramSettings.displayElementNames = true;
+  diagramms[name].diagramSettings.displayArrows = true;
   diagramms[name].forceFeedback = false;
   diagramms[name].complModelPosition = [];
   diagramms[name].pinned = [];
