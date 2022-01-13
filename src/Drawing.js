@@ -140,10 +140,10 @@ function drawCompleteModel(ctx, width, height) {
                                     let unitA2X = 0.866 * unitX + 0.5 * unitY;
                                     let unitA2Y = -0.5 * unitX + 0.866 * unitY;
 
-                                    let startArrow1X = endX - 7 * unitA1X;
-                                    let startArrow1Y = endY - 7 * unitA1Y;
-                                    let startArrow2X = endX - 7 * unitA2X;
-                                    let startArrow2Y = endY - 7 * unitA2Y;
+                                    let startArrow1X = endX - 7 * unitA1X * scale;
+                                    let startArrow1Y = endY - 7 * unitA1Y * scale;
+                                    let startArrow2X = endX - 7 * unitA2X * scale;
+                                    let startArrow2Y = endY - 7 * unitA2Y * scale;
                                     ctx.moveTo(cameraToCanvasX(endX), cameraToCanvasY(endY));
                                     ctx.lineTo(cameraToCanvasX(startArrow1X), cameraToCanvasY(startArrow1Y));
                                     ctx.moveTo(cameraToCanvasX(endX), cameraToCanvasY(endY));
