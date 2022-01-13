@@ -1,8 +1,10 @@
 'use strict';
 
+const scale = 4;
+
 const initialForceDirectingState = {
     springLength: 28, // 10, Make spring length identical to the previous standard length
-    maxRepulsionLength: 20, // the maximal length where a repulsion between elements is not zero
+    maxRepulsionLength: 20 * scale, // the maximal length where a repulsion between elements is not zero
     previousLoop: -1,
     previousLoopIndex: -1,
     complModelPositionNew: [],
@@ -21,6 +23,8 @@ const maxTimeForceDirectMs = 200;
 
 // let complModelPositionNew = [];
 // let complModelPositionNew2 = [];
+
+
 
 function forceDirecting(width, height) {
 
@@ -78,25 +82,26 @@ function forceDirecting(width, height) {
     const step = 0.00002;
 
 
+
     function spring(x1, y1, x2, y2) {
         let vect = {
-            x: x2 - x1,
-            y: y2 - y1
+            x: (x2 - x1) / scale,
+            y: (y2 - y1) / scale
         };
         let dist = Math.sqrt(vect.x * vect.x + vect.y * vect.y);
         let force = {
             // x: vect.x * (dist - avgLen),
-            x: vect.x * (dist - diagramms[diagramInfos.displayedDiagram].forceDirectingState.springLength),
+            x: scale * vect.x * (dist - diagramms[diagramInfos.displayedDiagram].forceDirectingState.springLength),
             // y: vect.y * (dist - avgLen)
-            y: vect.y * (dist - diagramms[diagramInfos.displayedDiagram].forceDirectingState.springLength)
+            y: scale * vect.y * (dist - diagramms[diagramInfos.displayedDiagram].forceDirectingState.springLength)
         };
         return force;
     };
 
     function repulsion(x1, y1, x2, y2) {
         let vect = {
-            x: x2 - x1,
-            y: y2 - y1
+            x: (x2 - x1) / scale,
+            y: (y2 - y1) / scale
         };
         let dist = Math.sqrt(vect.x * vect.x + vect.y * vect.y);
         let fact = 1;
@@ -109,8 +114,8 @@ function forceDirecting(width, height) {
         // fact = -fact * 20000;
         fact = -fact * 40000; // 08.01.2022 Increase factor by two because duplicate calculation of repulsion was removed in line 215
         let force = {
-            x: vect.x * fact,
-            y: vect.y * fact
+            x: scale * vect.x * fact,
+            y: scale * vect.y * fact
         };
         return force;
     };
@@ -323,17 +328,17 @@ function forceDirecting(width, height) {
                 continue;
             }
 
-            if (Math.abs(diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[mEBI['index']].x) > maxDiff) {
+            if (Math.abs(diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[mEBI['index']].x + diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew2[mEBI['index']].x) > maxDiff) {
                 maxDiff = Math.abs(diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[mEBI['index']].x + diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew2[mEBI['index']].x);
             };
-            if (Math.abs(diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[mEBI['index']].y) > maxDiff) {
+            if (Math.abs(diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[mEBI['index']].y + diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew2[mEBI['index']].y) > maxDiff) {
                 maxDiff = Math.abs(diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[mEBI['index']].y + diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew2[mEBI['index']].y);
             };
         }
     }
 
-    if (maxDiff > 100) {
-        corrFact = 100 / maxDiff;
+    if (maxDiff > 100 * scale) {
+        corrFact = 100 * scale / maxDiff;
     }
 
     // Calculate new positions
