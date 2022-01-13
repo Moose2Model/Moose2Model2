@@ -2,8 +2,8 @@
 
 const newElBoxX = 0;
 const newElBoxY = 0;
-const newElBoxWidth = 100;
-const newElBoxHeight = 100;
+const newElBoxWidth = 100 * scale;
+const newElBoxHeight = 100 * scale;
 
 
 function positionCircle(width, height) {

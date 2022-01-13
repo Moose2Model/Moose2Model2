@@ -99,7 +99,7 @@ function drawCompleteModel(ctx, width, height) {
                 for (const pC of tempArray) {
                     if (typeof pC !== 'undefined') {
                         if (typeof diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['child']] !== 'undefined') {
-                            ctx.lineWidth = cameraToCanvasScale(1);
+                            ctx.lineWidth = cameraToCanvasScale(1*scale);
                             ctx.beginPath();
                             ctx.strokeStyle = 'rgba(0, 0, 0, 0.2)';
                             ctx.moveTo(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['parent']].x), cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['parent']].y));
@@ -122,7 +122,7 @@ function drawCompleteModel(ctx, width, height) {
                             let endX = diagramms[diagramInfos.displayedDiagram].complModelPosition[cC['called']].x;
                             let endY = diagramms[diagramInfos.displayedDiagram].complModelPosition[cC['called']].y;
 
-                            ctx.lineWidth = cameraToCanvasScale(1);
+                            ctx.lineWidth = cameraToCanvasScale(1*scale);
                             ctx.beginPath();
                             ctx.strokeStyle = 'rgba(255, 0, 0, 0.2)';
                             ctx.moveTo(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[cC['caller']].x), cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[cC['caller']].y));
@@ -163,7 +163,7 @@ function drawCompleteModel(ctx, width, height) {
                 for (const aA of tempArray) {
                     if (typeof aA !== 'undefined') {
                         if (typeof diagramms[diagramInfos.displayedDiagram].complModelPosition[aA['accessed']] !== 'undefined') {
-                            ctx.lineWidth = cameraToCanvasScale(1);
+                            ctx.lineWidth = cameraToCanvasScale(1*scale);
                             ctx.beginPath();
                             ctx.strokeStyle = 'rgba(0, 0, 255, 0.2)';
                             ctx.moveTo(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[aA['accessor']].x), cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[aA['accessor']].y));
@@ -191,7 +191,7 @@ function drawCompleteModel(ctx, width, height) {
                             } else {
                                 ctx.fillStyle = 'black';
                             }
-                            size = cameraToCanvasScale(4);
+                            size = cameraToCanvasScale(4*scale);
                             break;
                         case 'SOMIX.Code':
                             if (diagramms[diagramInfos.displayedDiagram].diagramSettings.displayElementNames) {
@@ -199,7 +199,7 @@ function drawCompleteModel(ctx, width, height) {
                             } else {
                                 ctx.fillStyle = 'red';
                             }
-                            size = cameraToCanvasScale(2);
+                            size = cameraToCanvasScale(2*scale);
                             break;
                         case 'SOMIX.Data':
                             if (diagramms[diagramInfos.displayedDiagram].diagramSettings.displayElementNames) {
@@ -207,7 +207,7 @@ function drawCompleteModel(ctx, width, height) {
                             } else {
                                 ctx.fillStyle = 'blue';
                             }
-                            size = cameraToCanvasScale(2);
+                            size = cameraToCanvasScale(2*scale);
                             break;
                     }
                     ctx.arc(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
@@ -216,7 +216,7 @@ function drawCompleteModel(ctx, width, height) {
                     if (diagramms[diagramInfos.displayedDiagram].diagramSettings.displayElementNames == true) {
                         const fontsize = 3;
                         ctx.fillStyle = 'black';
-                        let scaledFontSize = cameraToCanvasScale(fontsize);
+                        let scaledFontSize = cameraToCanvasScale(fontsize*scale);
                         ctx.textAlign = 'center';
                         ctx.font = scaledFontSize + 'px Arial san-serif';
                         ctx.fillText(mEBI.name, cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
@@ -230,22 +230,22 @@ function drawCompleteModel(ctx, width, height) {
                     switch (mEBI['element']) {
                         case 'SOMIX.Grouping':
                             ctx.fillStyle = 'gray';
-                            size = cameraToCanvasScale(4);
+                            size = cameraToCanvasScale(4*scale);
                             break;
                         case 'SOMIX.Code':
                             ctx.fillStyle = 'orange';
-                            size = cameraToCanvasScale(2);
+                            size = cameraToCanvasScale(2*scale);
                             break;
                         case 'SOMIX.Data':
                             ctx.fillStyle = 'lightBlue';
-                            size = cameraToCanvasScale(2);
+                            size = cameraToCanvasScale(2*scale);
                             break;
                     }
                     ctx.arc(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
                         cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y), size, 0, 2 * Math.PI);
                     ctx.fill();
                     if (diagramms[diagramInfos.displayedDiagram].diagramSettings.displayElementNames == true) {
-                        const fontsize = 3;
+                        const fontsize = 3*scale;
                         ctx.fillStyle = 'black';
                         let scaledFontSize = cameraToCanvasScale(fontsize);
                         ctx.textAlign = 'center';
