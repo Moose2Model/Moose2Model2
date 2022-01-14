@@ -93,13 +93,50 @@ function drawCompleteModel(ctx, width, height) {
 
     for (const cmp of diagramms[diagramInfos.displayedDiagram].complModelPosition) {
         if (typeof cmp !== 'undefined') {
+            
+            let mEBI = modelElementsByIndex[cmp.index];
+            // Draw elements for Circuit Diagrams
+            // This is done before drawing the edges, because the edges have to "react" on the actual size of the elements
+
+            if (diagramms[diagramInfos.displayedDiagram].diagramType == circuitDiagramForSoftwareDiagramType) {
+                let size = 3;
+                ctx.beginPath();
+                switch (mEBI['element']) {
+                    case 'SOMIX.Grouping':
+                        ctx.fillStyle = 'gray';
+                        size = cameraToCanvasScale(4 * scale);
+                        break;
+                    case 'SOMIX.Code':
+                        ctx.fillStyle = 'orange';
+                        size = cameraToCanvasScale(2 * scale);
+                        break;
+                    case 'SOMIX.Data':
+                        ctx.fillStyle = 'lightBlue';
+                        size = cameraToCanvasScale(2 * scale);
+                        break;
+                }
+                ctx.arc(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
+                    cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y), size, 0, 2 * Math.PI);
+                ctx.fill();
+                if (diagramms[diagramInfos.displayedDiagram].diagramSettings.displayElementNames == true) {
+                    const fontsize = 3 * scale;
+                    ctx.fillStyle = 'black';
+                    let scaledFontSize = cameraToCanvasScale(fontsize);
+                    ctx.textAlign = 'center';
+                    ctx.font = scaledFontSize + 'px Arial san-serif';
+                    ctx.fillText(mEBI.name, cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
+                        cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y + fontsize * .3));
+                    ctx.textAlign = 'standard';
+                }
+            }
+
             // Draw parent child relations
             let tempArray = parentChildByParent[cmp.index];
             if (typeof tempArray !== 'undefined') {
                 for (const pC of tempArray) {
                     if (typeof pC !== 'undefined') {
                         if (typeof diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['child']] !== 'undefined') {
-                            ctx.lineWidth = cameraToCanvasScale(1*scale);
+                            ctx.lineWidth = cameraToCanvasScale(1 * scale);
                             ctx.beginPath();
                             ctx.strokeStyle = 'rgba(0, 0, 0, 0.2)';
                             ctx.moveTo(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['parent']].x), cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['parent']].y));
@@ -122,7 +159,7 @@ function drawCompleteModel(ctx, width, height) {
                             let endX = diagramms[diagramInfos.displayedDiagram].complModelPosition[cC['called']].x;
                             let endY = diagramms[diagramInfos.displayedDiagram].complModelPosition[cC['called']].y;
 
-                            ctx.lineWidth = cameraToCanvasScale(1*scale);
+                            ctx.lineWidth = cameraToCanvasScale(1 * scale);
                             ctx.beginPath();
                             ctx.strokeStyle = 'rgba(255, 0, 0, 0.2)';
                             ctx.moveTo(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[cC['caller']].x), cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[cC['caller']].y));
@@ -163,7 +200,7 @@ function drawCompleteModel(ctx, width, height) {
                 for (const aA of tempArray) {
                     if (typeof aA !== 'undefined') {
                         if (typeof diagramms[diagramInfos.displayedDiagram].complModelPosition[aA['accessed']] !== 'undefined') {
-                            ctx.lineWidth = cameraToCanvasScale(1*scale);
+                            ctx.lineWidth = cameraToCanvasScale(1 * scale);
                             ctx.beginPath();
                             ctx.strokeStyle = 'rgba(0, 0, 255, 0.2)';
                             ctx.moveTo(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[aA['accessor']].x), cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[aA['accessor']].y));
@@ -178,7 +215,7 @@ function drawCompleteModel(ctx, width, height) {
 
             // tempArray = modelElementsByIndex[cmp.index];
             // if (typeof tempArray !== 'undefined') {
-            let mEBI = modelElementsByIndex[cmp.index];
+            // let mEBI = modelElementsByIndex[cmp.index];
 
             if (typeof mEBI !== 'undefined') {
                 if (diagramms[diagramInfos.displayedDiagram].diagramType == bulletPointDiagramType) {
@@ -191,7 +228,7 @@ function drawCompleteModel(ctx, width, height) {
                             } else {
                                 ctx.fillStyle = 'black';
                             }
-                            size = cameraToCanvasScale(4*scale);
+                            size = cameraToCanvasScale(4 * scale);
                             break;
                         case 'SOMIX.Code':
                             if (diagramms[diagramInfos.displayedDiagram].diagramSettings.displayElementNames) {
@@ -199,7 +236,7 @@ function drawCompleteModel(ctx, width, height) {
                             } else {
                                 ctx.fillStyle = 'red';
                             }
-                            size = cameraToCanvasScale(2*scale);
+                            size = cameraToCanvasScale(2 * scale);
                             break;
                         case 'SOMIX.Data':
                             if (diagramms[diagramInfos.displayedDiagram].diagramSettings.displayElementNames) {
@@ -207,7 +244,7 @@ function drawCompleteModel(ctx, width, height) {
                             } else {
                                 ctx.fillStyle = 'blue';
                             }
-                            size = cameraToCanvasScale(2*scale);
+                            size = cameraToCanvasScale(2 * scale);
                             break;
                     }
                     ctx.arc(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
@@ -216,7 +253,7 @@ function drawCompleteModel(ctx, width, height) {
                     if (diagramms[diagramInfos.displayedDiagram].diagramSettings.displayElementNames == true) {
                         const fontsize = 3;
                         ctx.fillStyle = 'black';
-                        let scaledFontSize = cameraToCanvasScale(fontsize*scale);
+                        let scaledFontSize = cameraToCanvasScale(fontsize * scale);
                         ctx.textAlign = 'center';
                         ctx.font = scaledFontSize + 'px Arial san-serif';
                         ctx.fillText(mEBI.name, cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
@@ -225,35 +262,37 @@ function drawCompleteModel(ctx, width, height) {
                     }
                 }
                 else if (diagramms[diagramInfos.displayedDiagram].diagramType == circuitDiagramForSoftwareDiagramType) {
-                    let size = 3;
-                    ctx.beginPath();
-                    switch (mEBI['element']) {
-                        case 'SOMIX.Grouping':
-                            ctx.fillStyle = 'gray';
-                            size = cameraToCanvasScale(4*scale);
-                            break;
-                        case 'SOMIX.Code':
-                            ctx.fillStyle = 'orange';
-                            size = cameraToCanvasScale(2*scale);
-                            break;
-                        case 'SOMIX.Data':
-                            ctx.fillStyle = 'lightBlue';
-                            size = cameraToCanvasScale(2*scale);
-                            break;
-                    }
-                    ctx.arc(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
-                        cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y), size, 0, 2 * Math.PI);
-                    ctx.fill();
-                    if (diagramms[diagramInfos.displayedDiagram].diagramSettings.displayElementNames == true) {
-                        const fontsize = 3*scale;
-                        ctx.fillStyle = 'black';
-                        let scaledFontSize = cameraToCanvasScale(fontsize);
-                        ctx.textAlign = 'center';
-                        ctx.font = scaledFontSize + 'px Arial san-serif';
-                        ctx.fillText(mEBI.name, cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
-                            cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y + fontsize * .3));
-                        ctx.textAlign = 'standard';
-                    }
+                    // Was already done earlier in the loop 
+
+                    // let size = 3;
+                    // ctx.beginPath();
+                    // switch (mEBI['element']) {
+                    //     case 'SOMIX.Grouping':
+                    //         ctx.fillStyle = 'gray';
+                    //         size = cameraToCanvasScale(4 * scale);
+                    //         break;
+                    //     case 'SOMIX.Code':
+                    //         ctx.fillStyle = 'orange';
+                    //         size = cameraToCanvasScale(2 * scale);
+                    //         break;
+                    //     case 'SOMIX.Data':
+                    //         ctx.fillStyle = 'lightBlue';
+                    //         size = cameraToCanvasScale(2 * scale);
+                    //         break;
+                    // }
+                    // ctx.arc(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
+                    //     cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y), size, 0, 2 * Math.PI);
+                    // ctx.fill();
+                    // if (diagramms[diagramInfos.displayedDiagram].diagramSettings.displayElementNames == true) {
+                    //     const fontsize = 3 * scale;
+                    //     ctx.fillStyle = 'black';
+                    //     let scaledFontSize = cameraToCanvasScale(fontsize);
+                    //     ctx.textAlign = 'center';
+                    //     ctx.font = scaledFontSize + 'px Arial san-serif';
+                    //     ctx.fillText(mEBI.name, cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
+                    //         cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y + fontsize * .3));
+                    //     ctx.textAlign = 'standard';
+                    // }
                 }
                 else { window.alert('Internal error. Unknown type in drawing.') }
             }
