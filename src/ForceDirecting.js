@@ -1,15 +1,16 @@
 'use strict';
 
 const scale = 4;
+const oversizeGroups = 1;
 
 const initialForceDirectingState = {
-    springLength: 28, // 10, Make spring length identical to the previous standard length
+    springLength: 28 * scale , // 10, Make spring length identical to the previous standard length
     maxRepulsionLength: 20 * scale, // the maximal length where a repulsion between elements is not zero
     previousLoop: -1,
     previousLoopIndex: -1,
     complModelPositionNew: [],
     complModelPositionNew2: [],
-    elementsGrouped: [] // ELements groupd to calculate repulsion more efficient
+    elementsGrouped: [] // ELements grouped to calculate repulsion more efficient
 }
 
 /** Remember the loop in the Force-Directing logic */
@@ -61,10 +62,11 @@ function forceDirecting(width, height) {
                 diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[mEBI['index']] = position;
                 diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew2[mEBI['index']] = position;
 
+                // The following is required to optimize the calculation of repulsions. Adjacent elements are grouped together
                 // The following appears to be the best way to implement the DIV operation in Javascript
                 // (https://stackoverflow.com/questions/4228356/how-to-perform-an-integer-division-and-separately-get-the-remainder-in-javascr)
-                let groupX = Math.floor(mEBI.x / diagramms[diagramInfos.displayedDiagram].forceDirectingState.maxRepulsionLength);
-                let groupY = Math.floor(mEBI.y / diagramms[diagramInfos.displayedDiagram].forceDirectingState.maxRepulsionLength);
+                let groupX = Math.floor(mEBI.x / (diagramms[diagramInfos.displayedDiagram].forceDirectingState.maxRepulsionLength + oversizeGroups));
+                let groupY = Math.floor(mEBI.y / (diagramms[diagramInfos.displayedDiagram].forceDirectingState.maxRepulsionLength + oversizeGroups));
                 if (typeof diagramms[diagramInfos.displayedDiagram].forceDirectingState.elementsGrouped[groupX] === 'undefined') {
                     diagramms[diagramInfos.displayedDiagram].forceDirectingState.elementsGrouped[groupX] = [];
                 }
@@ -91,9 +93,9 @@ function forceDirecting(width, height) {
         let dist = Math.sqrt(vect.x * vect.x + vect.y * vect.y);
         let force = {
             // x: vect.x * (dist - avgLen),
-            x: scale * vect.x * (dist - diagramms[diagramInfos.displayedDiagram].forceDirectingState.springLength),
+            x: scale * vect.x * (dist - diagramms[diagramInfos.displayedDiagram].forceDirectingState.springLength / scale),
             // y: vect.y * (dist - avgLen)
-            y: scale * vect.y * (dist - diagramms[diagramInfos.displayedDiagram].forceDirectingState.springLength)
+            y: scale * vect.y * (dist - diagramms[diagramInfos.displayedDiagram].forceDirectingState.springLength / scale)
         };
         return force;
     };
@@ -107,7 +109,7 @@ function forceDirecting(width, height) {
         let fact = 1;
         if (dist > diagramms[diagramInfos.displayedDiagram].forceDirectingState.maxRepulsionLength) {
             fact = 0;
-        } else if (dist < 0.1) {
+        } else if (dist < 0.1 * scale) {
             fact = 100;
         } else { fact = 1 / (dist * dist) };
         // fact = -fact * 2000;
@@ -232,11 +234,11 @@ function forceDirecting(width, height) {
                 if (typeof mEBI !== 'undefined') {
                     if (typeof diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']] !== 'undefined') {
 
-                        let groupX = Math.floor(mEBI.x / diagramms[diagramInfos.displayedDiagram].forceDirectingState.maxRepulsionLength);
-                        let groupY = Math.floor(mEBI.y / diagramms[diagramInfos.displayedDiagram].forceDirectingState.maxRepulsionLength);
+                        let groupX = Math.floor(mEBI.x / (diagramms[diagramInfos.displayedDiagram].forceDirectingState.maxRepulsionLength + oversizeGroups));
+                        let groupY = Math.floor(mEBI.y / (diagramms[diagramInfos.displayedDiagram].forceDirectingState.maxRepulsionLength + oversizeGroups));
 
-                        for (let ix = groupX - 1; ix <= groupX + 1; ix++) {
-                            for (let iy = groupY - 1; iy <= groupY + 1; iy++) {
+                        for (let ix = groupX - 2; ix <= groupX + 2; ix++) {
+                            for (let iy = groupY - 2; iy <= groupY + 2; iy++) {
                                 if (typeof diagramms[diagramInfos.displayedDiagram].forceDirectingState.elementsGrouped[ix] !== 'undefined') {
                                     if (typeof diagramms[diagramInfos.displayedDiagram].forceDirectingState.elementsGrouped[ix][iy] !== 'undefined') {
                                         for (const mEBI2 of diagramms[diagramInfos.displayedDiagram].forceDirectingState.elementsGrouped[ix][iy]) {
