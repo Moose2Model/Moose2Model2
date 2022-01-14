@@ -108,6 +108,7 @@ function resizeCanvas() {
 function findNearestElement(x, y, maxDistance) {
     let minDistanceSquared = -1;
     let minIndex = 0;
+    let foundGroup = 0;
 
     for (let i = 1; i < diagramms[diagramInfos.displayedDiagram].complModelPosition.length; i++) { // List start with index 1
         if (typeof diagramms[diagramInfos.displayedDiagram].complModelPosition[i] !== 'undefined') {
@@ -119,12 +120,31 @@ function findNearestElement(x, y, maxDistance) {
                 minDistanceSquared = distance;
                 minIndex = i;
             }
+
+            if (typeof diagramms[diagramInfos.displayedDiagram].complModelPosition[i].boxX1 !== 'undefined') {
+                let mEBI = modelElementsByIndex[diagramms[diagramInfos.displayedDiagram].complModelPosition[i].index];
+                if (mEBI.element == 'SOMIX.Grouping') {
+                    if (isInBox(x, y,
+                        diagramms[diagramInfos.displayedDiagram].complModelPosition[i].boxX1,
+                        diagramms[diagramInfos.displayedDiagram].complModelPosition[i].boxX2,
+                        diagramms[diagramInfos.displayedDiagram].complModelPosition[i].boxY1,
+                        diagramms[diagramInfos.displayedDiagram].complModelPosition[i].boxY2,
+                        0, 0)) {
+                        foundGroup = diagramms[diagramInfos.displayedDiagram].complModelPosition[i].index;
+                    }
+                }
+            }
+
         }
     }
     if (minDistanceSquared < maxDistance * maxDistance && minDistanceSquared != -1) {
         // Return nearest element only when it is nearer than maxDistance
         return modelElementsByIndex[minIndex];
     }
+
+    if (foundGroup != 0) {
+        return modelElementsByIndex[foundGroup];
+    } 
 
 }
 

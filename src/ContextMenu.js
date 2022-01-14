@@ -121,7 +121,9 @@ function handleContextMenu(e) {
     let InfoText = 'Mouse is Clicked at x: ' + x + ' y: ' + y;
     var m = [InfoText, nameText, techtypeText, uniqueNameText, linkToEditorText];
     if (typeof diagramInfos.activeDiagram !== 'undefined') {
-      m.unshift('Add element with all neighbours');
+      if (gMCElementContextHandled.element != 'SOMIX.Grouping') {
+        m.unshift('Add element with all neighbours');
+      }
     }
     if (linkToEditorText != '') {
       m.push('Jump to code');
