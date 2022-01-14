@@ -375,26 +375,30 @@ function drawCompleteModel(ctx, width, height) {
                 const fontsize = fontSizeGeneral * scale;
                 ctx.fillStyle = 'black';
                 let scaledFontSize = cameraToCanvasScale(fontsize);
-                ctx.textAlign = 'center';
-                ctx.font = scaledFontSize + 'px Arial san-serif';
-                ctx.fillText(mEBI.name, cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
-                    cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y + fontsize * .3));
-                ctx.textAlign = 'standard';
+                if (mEBI.element == 'SOMIX.Code' || mEBI.element == 'SOMIX.Data') {
+                    ctx.textAlign = 'center';
+                    ctx.font = scaledFontSize + 'px Arial san-serif';
+                    ctx.fillText(mEBI.name, cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
+                        cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y + fontsize * .3));
+                    ctx.textAlign = 'standard';
+                }
             }
             // }
-
-            // Draw parent child relations
-            let tempArray = parentChildByParent[cmp.index];
-            if (typeof tempArray !== 'undefined') {
-                for (const pC of tempArray) {
-                    if (typeof pC !== 'undefined') {
-                        if (typeof diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['child']] !== 'undefined') {
-                            ctx.lineWidth = cameraToCanvasScale(1 * scale);
-                            ctx.beginPath();
-                            ctx.strokeStyle = 'rgba(0, 0, 0, 0.2)';
-                            ctx.moveTo(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['parent']].x), cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['parent']].y));
-                            ctx.lineTo(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['child']].x), cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['child']].y));
-                            ctx.stroke();
+            let tempArray;
+            if (diagramms[diagramInfos.displayedDiagram].diagramType != circuitDiagramForSoftwareDiagramType) {
+                // Draw parent child relations
+                tempArray = parentChildByParent[cmp.index];
+                if (typeof tempArray !== 'undefined') {
+                    for (const pC of tempArray) {
+                        if (typeof pC !== 'undefined') {
+                            if (typeof diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['child']] !== 'undefined') {
+                                ctx.lineWidth = cameraToCanvasScale(1 * scale);
+                                ctx.beginPath();
+                                ctx.strokeStyle = 'rgba(0, 0, 0, 0.2)';
+                                ctx.moveTo(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['parent']].x), cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['parent']].y));
+                                ctx.lineTo(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['child']].x), cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['child']].y));
+                                ctx.stroke();
+                            }
                         }
                     }
                 }
