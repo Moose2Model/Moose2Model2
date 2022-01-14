@@ -129,10 +129,10 @@ function drawCompleteModel(ctx, width, height) {
                 switch (mEBI['element']) {
                     case 'SOMIX.Grouping':
                         ctx.fillStyle = 'gray';
-                        SizeOnPane = 4 * scale;
+                        SizeOnPane = 8 * scale;
                         size = cameraToCanvasScale(SizeOnPane);
                         ctx.arc(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
-                            cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y), size, 0, 2 * Math.PI);
+                            cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y), size / 2, 0, 2 * Math.PI);
                         ctx.fill();
                         break;
                     case 'SOMIX.Code':
@@ -145,10 +145,10 @@ function drawCompleteModel(ctx, width, height) {
                         break;
                     case 'SOMIX.Data':
                         ctx.fillStyle = 'lightBlue';
-                        SizeOnPane = 3.5 * scale;
+                        SizeOnPane = 7 * scale;
                         size = cameraToCanvasScale(SizeOnPane);
                         ctx.arc(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
-                            cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y), size, 0, 2 * Math.PI);
+                            cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y), size / 2, 0, 2 * Math.PI);
                         ctx.fill();
                         break;
                 }
@@ -257,6 +257,21 @@ function drawCompleteModel(ctx, width, height) {
                                     endX -= unitVector.x * stepL;
                                     endY -= unitVector.y * stepL;
                                 }
+                                // retract the start last
+
+                                const marginStartX = 1;
+                                const marginStartY = 4;
+
+                                while (vectorLength > minLength && isInBox(startX, startY,
+                                    diagramms[diagramInfos.displayedDiagram].complModelPosition[cC['caller']].boxX1,
+                                    diagramms[diagramInfos.displayedDiagram].complModelPosition[cC['caller']].boxX2,
+                                    diagramms[diagramInfos.displayedDiagram].complModelPosition[cC['caller']].boxY1,
+                                    diagramms[diagramInfos.displayedDiagram].complModelPosition[cC['caller']].boxY2,
+                                    marginStartX, marginStartY)) {
+                                    vectorLength -= stepL;
+                                    startX += unitVector.x * stepL;
+                                    startY += unitVector.y * stepL;
+                                }
                             }
 
                             ctx.lineWidth = cameraToCanvasScale(1 * scale);
@@ -300,11 +315,60 @@ function drawCompleteModel(ctx, width, height) {
                 for (const aA of tempArray) {
                     if (typeof aA !== 'undefined') {
                         if (typeof diagramms[diagramInfos.displayedDiagram].complModelPosition[aA['accessed']] !== 'undefined') {
+
+                            let startX = diagramms[diagramInfos.displayedDiagram].complModelPosition[aA['accessor']].x;
+                            let startY = diagramms[diagramInfos.displayedDiagram].complModelPosition[aA['accessor']].y;
+                            let endX = diagramms[diagramInfos.displayedDiagram].complModelPosition[aA['accessed']].x;
+                            let endY = diagramms[diagramInfos.displayedDiagram].complModelPosition[aA['accessed']].y;
+
+                            if (diagramms[diagramInfos.displayedDiagram].diagramType == circuitDiagramForSoftwareDiagramType) {
+                                // Keep distance between arrows and bounding box in case of circuit diagrams
+                                const minLength = 10;
+                                const stepL = 1;
+                                let vector = {
+                                    x: endX - startX,
+                                    y: endY - startY
+                                };
+                                let vectorLength = Math.sqrt((endX - startX) * (endX - startX) + (endY - startY) * (endY - startY))
+
+                                let unitVector = {
+                                    x: (endX - startX) / vectorLength,
+                                    y: (endY - startY) / vectorLength
+                                };
+                                // retract the end first
+
+                                const marginEndX = 1;
+                                const marginEndY = 1;
+
+                                while (vectorLength > minLength && isInBox(endX, endY,
+                                    diagramms[diagramInfos.displayedDiagram].complModelPosition[aA['accessed']].boxX1,
+                                    diagramms[diagramInfos.displayedDiagram].complModelPosition[aA['accessed']].boxX2,
+                                    diagramms[diagramInfos.displayedDiagram].complModelPosition[aA['accessed']].boxY1,
+                                    diagramms[diagramInfos.displayedDiagram].complModelPosition[aA['accessed']].boxY2,
+                                    marginEndX, marginEndY)) {
+                                    vectorLength -= stepL;
+                                    endX -= unitVector.x * stepL;
+                                    endY -= unitVector.y * stepL;
+                                }
+                                // retract the start last
+
+                                while (vectorLength > minLength && isInBox(startX, startY,
+                                    diagramms[diagramInfos.displayedDiagram].complModelPosition[aA['accessor']].boxX1,
+                                    diagramms[diagramInfos.displayedDiagram].complModelPosition[aA['accessor']].boxX2,
+                                    diagramms[diagramInfos.displayedDiagram].complModelPosition[aA['accessor']].boxY1,
+                                    diagramms[diagramInfos.displayedDiagram].complModelPosition[aA['accessor']].boxY2,
+                                    marginEndX, marginEndY)) {
+                                    vectorLength -= stepL;
+                                    startX += unitVector.x * stepL;
+                                    startY += unitVector.y * stepL;
+                                }
+
+                            }
                             ctx.lineWidth = cameraToCanvasScale(1 * scale);
                             ctx.beginPath();
                             ctx.strokeStyle = 'rgba(0, 0, 255, 0.2)';
-                            ctx.moveTo(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[aA['accessor']].x), cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[aA['accessor']].y));
-                            ctx.lineTo(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[aA['accessed']].x), cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[aA['accessed']].y));
+                            ctx.moveTo(cameraToCanvasX(startX), cameraToCanvasY(startY));
+                            ctx.lineTo(cameraToCanvasX(endX), cameraToCanvasY(endY));
                             ctx.stroke();
                         }
                     }
