@@ -81,6 +81,7 @@ const fontSizeGeneral = 3;
 const groupSize = 8;
 const codeSize = 7;
 const dataSize = 7;
+const generalFontSize = 12;
 
 function drawCompleteModel(ctx, width, height) {
     if (typeof diagramms[diagramInfos.displayedDiagram] === 'undefined') {
@@ -110,10 +111,10 @@ function drawCompleteModel(ctx, width, height) {
         // var textMeasurement = ctx.measureText('foo'); // TextMetrics object
         // textMeasurement.width; // 16;
 
-        let scaledFontSize = cameraToCanvasScale(12);
+        let scaledFontSize = cameraToCanvasScale(generalFontSize);
         ctx.textAlign = 'right';
         ctx.font = scaledFontSize + 'px Arial san-serif';
-        ctx.fillText('New elements are placed here', cameraToCanvasX(newElBoxX + newElBoxWidth), cameraToCanvasY(newElBoxY + newElBoxHeight + 12));
+        ctx.fillText('New elements are placed here', cameraToCanvasX(newElBoxX + newElBoxWidth), cameraToCanvasY(newElBoxY + newElBoxHeight + generalFontSize));
         ctx.textAlign = 'start';
 
     }
@@ -290,16 +291,15 @@ function drawCompleteModel(ctx, width, height) {
                                 cameraToCanvasScale(height));
                             ctx.setLineDash([]);
 
-                            // ctx.fillStyle = 'gray';
+                            ctx.fillStyle = 'black';
 
-                            // var textMeasurement = ctx.measureText('foo'); // TextMetrics object
-                            // textMeasurement.width; // 16;
-
-                            // let scaledFontSize = cameraToCanvasScale(12);
-                            // ctx.textAlign = 'right';
-                            // ctx.font = scaledFontSize + 'px Arial san-serif';
-                            // ctx.fillText('New elements are placed here', cameraToCanvasX(newElBoxX + newElBoxWidth), cameraToCanvasY(newElBoxY + newElBoxHeight + 12));
-                            // ctx.textAlign = 'start';
+                            let scaledFontSize = cameraToCanvasScale(generalFontSize);
+                            ctx.textAlign = 'center';
+                            ctx.font = scaledFontSize + 'px Arial san-serif';
+                            ctx.fillText(mEBI.name,
+                                cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxX1 + width / 2),
+                                cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxY1 - generalFontSize / 2));
+                            ctx.textAlign = 'start';
                         } else {
                             ctx.fillStyle = 'gray';
                             SizeOnPane = groupSize * scale;
@@ -650,7 +650,7 @@ function drawCompleteModel(ctx, width, height) {
     //     // Draw further informations
     // ctx.moveTo(g_width - 20, g_height - 10);
     ctx.fillStyle = 'black';
-    ctx.font = '12px Arial san-serif';
+    ctx.font = generalFontSize + 'px Arial san-serif';
     ctx.fillText(Math.round(100 * diagramms[diagramInfos.displayedDiagram].cameraSettings.zoomfactor) + '%', g_width - 40, g_height - 10);
 
 };
