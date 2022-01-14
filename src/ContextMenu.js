@@ -63,7 +63,7 @@ function handleContextMouseOut(e) {
 }
 
 function handleContextMenu(e) {
-// function handleMouseUp(e) {
+  // function handleMouseUp(e) {
   if (!contextMenuClickStarted) {
     return;
   }
@@ -139,7 +139,9 @@ function handleContextMenu(e) {
           m.unshift('Make this diagram active');
         }
       }
-      m.push('Toggle display of names');
+      if (diagramms[diagramInfos.displayedDiagram].type != circuitDiagramForSoftwareType) {
+        m.push('Toggle display of names');
+      }
       m.push('Start Force-directed graph', 'Stop Force-directed graph');
 
       let otherArrays = returnOtherDiagrams();
