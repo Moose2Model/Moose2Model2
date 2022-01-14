@@ -77,6 +77,11 @@ function isInBox(x, y, bX1, bX2, bY1, bY2, marginX, marginY) {
     return true;
 }
 
+const fontSizeGeneral = 3;
+const groupSize = 8;
+const codeSize = 7;
+const dataSize = 7;
+
 function drawCompleteModel(ctx, width, height) {
     if (typeof diagramms[diagramInfos.displayedDiagram] === 'undefined') {
         // Do not draw when no diagram exists
@@ -113,8 +118,8 @@ function drawCompleteModel(ctx, width, height) {
 
     }
 
-    // Draw elements
-
+    // Prepare drawing of elements
+    // Determine bounding rects before main drawing
     for (const cmp of diagramms[diagramInfos.displayedDiagram].complModelPosition) {
         if (typeof cmp !== 'undefined') {
 
@@ -125,19 +130,191 @@ function drawCompleteModel(ctx, width, height) {
             if (diagramms[diagramInfos.displayedDiagram].diagramType == circuitDiagramForSoftwareDiagramType) {
                 let SizeOnPane = 1;
                 let size = 3;
-                ctx.beginPath();
-                switch (mEBI['element']) {
+                // ctx.beginPath();
+                switch (mEBI.element) {
                     case 'SOMIX.Grouping':
-                        ctx.fillStyle = 'gray';
-                        SizeOnPane = 8 * scale;
-                        size = cameraToCanvasScale(SizeOnPane);
-                        ctx.arc(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
-                            cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y), size / 2, 0, 2 * Math.PI);
-                        ctx.fill();
+                        //         ctx.fillStyle = 'gray';
+                        SizeOnPane = groupSize * scale;
+                        //         size = cameraToCanvasScale(SizeOnPane);
+                        //         ctx.arc(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x),
+                        //             cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y), size / 2, 0, 2 * Math.PI);
+                        //         ctx.fill();
+                        break;
+                    case 'SOMIX.Code':
+                        //         ctx.fillStyle = 'orange';
+                        SizeOnPane = codeSize * scale;
+                        //         size = cameraToCanvasScale(SizeOnPane);
+
+                        //         ctx.fillRect(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x) - size / 2,
+                        //             cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y) - size / 2, size, size);
+                        break;
+                    case 'SOMIX.Data':
+                        //         ctx.fillStyle = 'lightBlue';
+                        SizeOnPane = dataSize * scale;
+                        //         size = cameraToCanvasScale(SizeOnPane);
+                        //         ctx.arc(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
+                        //             cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y), size / 2, 0, 2 * Math.PI);
+                        //         ctx.fill();
+                        break;
+                }
+
+                // ctx.fillRect(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x - size / 2),
+                //     cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y - size / 2), size, size);
+
+                if (diagramms[diagramInfos.displayedDiagram].diagramSettings.displayElementNames == true) {
+                    if (mEBI.element == 'SOMIX.Grouping') {
+                        // Was already done
+                    }
+                    else if (mEBI.element == 'SOMIX.Code' || mEBI.element == 'SOMIX.Data') {
+                        const fontsize = fontSizeGeneral * scale;
+                        ctx.fillStyle = 'black';
+                        let scaledFontSize = cameraToCanvasScale(fontsize);
+                        ctx.textAlign = 'center';
+                        ctx.font = scaledFontSize + 'px Arial san-serif';
+                        let textInfo = ctx.measureText(mEBI.name);
+                        let textWidthOnPane = cameraToPaneScale(textInfo.width);
+                        if (mEBI.element == 'SOMIX.Code') {
+                            SizeOnPane = codeSize * scale;
+                        } else {
+                            SizeOnPane = dataSize * scale;
+                        }
+
+                        // Set values for bounding box
+
+                        let temp1 = diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x - SizeOnPane / 2;
+                        let temp2 = diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x - textWidthOnPane / 2;
+                        let temp;
+                        if (temp1 < temp2) {
+                            temp = temp1;
+                        } else {
+                            temp = temp2;
+                        }
+                        diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].boxX1 = temp;
+
+                        temp1 = diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x + SizeOnPane / 2;
+                        temp2 = diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x + textWidthOnPane / 2;
+                        if (temp1 < temp2) {
+                            temp = temp2;
+                        } else {
+                            temp = temp1;
+                        }
+                        diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].boxX2 = temp;
+
+                        diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].boxY1 =
+                            diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y - SizeOnPane / 2;
+
+                        diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].boxY2 =
+                            diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y + SizeOnPane / 2;
+                    }
+
+
+                    // ctx.fillText(mEBI.name, cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
+                    //     cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y + fontsize * .3));
+                    // ctx.textAlign = 'standard';
+                }
+            }
+        }
+    }
+
+
+    // Draw elements
+
+    for (const cmp of diagramms[diagramInfos.displayedDiagram].complModelPosition) {
+        if (typeof cmp !== 'undefined') {
+
+            let mEBI = modelElementsByIndex[cmp.index];
+            // Draw elements for Circuit Diagrams
+            // This is done before drawing the edges, because the edges have to "react" on the actual size of the elements
+
+            if (diagramms[diagramInfos.displayedDiagram].diagramType == circuitDiagramForSoftwareDiagramType) {
+
+                if (diagramms[diagramInfos.displayedDiagram].diagramSettings.displayElementNames == true) {
+                    if (mEBI.element == 'SOMIX.Grouping') {
+                        // Bounding rects of data and code was already determined during the preparation and can therefore be used now
+                        let bX1 = 0;
+                        let bX2 = 0;
+                        let bY1 = 0;
+                        let bY2 = 0;
+                        const margin = 5;
+                        let isFirst = true;
+                        if (typeof parentChildByParent[mEBI.index] !== 'undefined') {
+                            for (const childrens of parentChildByParent[mEBI.index]) {
+                                if (typeof diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child] !== 'undefined') {
+                                    if (isFirst) {
+                                        bX1 = diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].boxX1;
+                                        bX2 = diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].boxX2;
+                                        bY1 = diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].boxY1;
+                                        bY2 = diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].boxY2;
+                                        isFirst = false;
+                                    };
+                                    if (bX1 > diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].boxX1) {
+                                        bX1 = diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].boxX1
+                                    }
+                                    if (bX2 < diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].boxX2) {
+                                        bX2 = diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].boxX2
+                                    }
+                                    if (bY1 > diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].boxY1) {
+                                        bY1 = diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].boxY1
+                                    }
+                                    if (bY2 < diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].boxY2) {
+                                        bY2 = diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].boxY2
+                                    }
+                                }
+                            }
+                        }
+                        diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxX1 = bX1 - margin;
+                        diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxX2 = bX2 + margin;
+                        diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxY1 = bY1 - margin;
+                        diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxY2 = bY2 + margin;
+                    }
+                }
+
+
+                let SizeOnPane = 1;
+                let size = 3;
+                ctx.beginPath();
+                switch (mEBI.element) {
+                    case 'SOMIX.Grouping':
+                        const drawGroupsAsBoxes = true;
+                        if (drawGroupsAsBoxes) {
+                            ctx.lineWidth = cameraToCanvasScale(1);
+                            ctx.setLineDash([cameraToCanvasScale(8), cameraToCanvasScale(2)]);
+                            ctx.strokeStyle = 'black'
+                            const width = diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxX2 -
+                                diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxX1;
+                            const height = diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxY2 -
+                                diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxY1;
+                            ctx.strokeRect(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxX1 + 0 * width / 2),
+                                cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxY1 + 0 * height / 2),
+                                cameraToCanvasScale(width),
+                                cameraToCanvasScale(height));
+                            ctx.setLineDash([]);
+
+                            // ctx.fillStyle = 'gray';
+
+                            // var textMeasurement = ctx.measureText('foo'); // TextMetrics object
+                            // textMeasurement.width; // 16;
+
+                            // let scaledFontSize = cameraToCanvasScale(12);
+                            // ctx.textAlign = 'right';
+                            // ctx.font = scaledFontSize + 'px Arial san-serif';
+                            // ctx.fillText('New elements are placed here', cameraToCanvasX(newElBoxX + newElBoxWidth), cameraToCanvasY(newElBoxY + newElBoxHeight + 12));
+                            // ctx.textAlign = 'start';
+                        } else {
+                            ctx.fillStyle = 'gray';
+                            SizeOnPane = groupSize * scale;
+                            size = cameraToCanvasScale(SizeOnPane);
+                            ctx.arc(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x),
+                                cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y), size / 2, 0, 2 * Math.PI);
+                            ctx.fill();
+                        }
+
+
+
                         break;
                     case 'SOMIX.Code':
                         ctx.fillStyle = 'orange';
-                        SizeOnPane = 7 * scale;
+                        SizeOnPane = codeSize * scale;
                         size = cameraToCanvasScale(SizeOnPane);
 
                         ctx.fillRect(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x) - size / 2,
@@ -145,7 +322,7 @@ function drawCompleteModel(ctx, width, height) {
                         break;
                     case 'SOMIX.Data':
                         ctx.fillStyle = 'lightBlue';
-                        SizeOnPane = 7 * scale;
+                        SizeOnPane = dataSize * scale;
                         size = cameraToCanvasScale(SizeOnPane);
                         ctx.arc(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
                             cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y), size / 2, 0, 2 * Math.PI);
@@ -156,48 +333,55 @@ function drawCompleteModel(ctx, width, height) {
                 // ctx.fillRect(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x - size / 2),
                 //     cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y - size / 2), size, size);
 
-                if (diagramms[diagramInfos.displayedDiagram].diagramSettings.displayElementNames == true) {
-                    const fontsize = 3 * scale;
-                    ctx.fillStyle = 'black';
-                    let scaledFontSize = cameraToCanvasScale(fontsize);
-                    ctx.textAlign = 'center';
-                    ctx.font = scaledFontSize + 'px Arial san-serif';
-                    let textInfo = ctx.measureText(mEBI.name);
-                    let textWidthOnPane = cameraToPaneScale(textInfo.width);
 
-                    // Set values for bounding box
+                //     else if (mEBI.element == 'SOMIX.Code' || mEBI.element == 'SOMIX.Data') {
+                //         const fontsize = 3 * scale;
+                //         ctx.fillStyle = 'black';
+                //         let scaledFontSize = cameraToCanvasScale(fontsize);
+                //         ctx.textAlign = 'center';
+                //         ctx.font = scaledFontSize + 'px Arial san-serif';
+                //         let textInfo = ctx.measureText(mEBI.name);
+                //         let textWidthOnPane = cameraToPaneScale(textInfo.width);
 
-                    let temp1 = diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x - SizeOnPane / 2;
-                    let temp2 = diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x - textWidthOnPane / 2;
-                    let temp;
-                    if (temp1 < temp2) {
-                        let temp = temp1;
-                    } else {
-                        temp = temp2;
-                    }
-                    diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].boxX1 = temp;
+                //         // Set values for bounding box
 
-                    temp1 = diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x + SizeOnPane / 2;
-                    temp2 = diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x + textWidthOnPane / 2;
-                    if (temp1 < temp2) {
-                        temp = temp2;
-                    } else {
-                        temp = temp1;
-                    }
-                    diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].boxX2 = temp;
+                //         let temp1 = diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x - SizeOnPane / 2;
+                //         let temp2 = diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x - textWidthOnPane / 2;
+                //         let temp;
+                //         if (temp1 < temp2) {
+                //             let temp = temp1;
+                //         } else {
+                //             temp = temp2;
+                //         }
+                //         diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].boxX1 = temp;
 
-                    diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].boxY1 =
-                        diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y - SizeOnPane / 2;
+                //         temp1 = diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x + SizeOnPane / 2;
+                //         temp2 = diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x + textWidthOnPane / 2;
+                //         if (temp1 < temp2) {
+                //             temp = temp2;
+                //         } else {
+                //             temp = temp1;
+                //         }
+                //         diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].boxX2 = temp;
 
-                    diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].boxY2 =
-                        diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y + SizeOnPane / 2;
+                //         diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].boxY1 =
+                //             diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y - SizeOnPane / 2;
+
+                //         diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].boxY2 =
+                //             diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y + SizeOnPane / 2;
+                //     }
 
 
-                    ctx.fillText(mEBI.name, cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
-                        cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y + fontsize * .3));
-                    ctx.textAlign = 'standard';
-                }
+                const fontsize = fontSizeGeneral * scale;
+                ctx.fillStyle = 'black';
+                let scaledFontSize = cameraToCanvasScale(fontsize);
+                ctx.textAlign = 'center';
+                ctx.font = scaledFontSize + 'px Arial san-serif';
+                ctx.fillText(mEBI.name, cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
+                    cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y + fontsize * .3));
+                ctx.textAlign = 'standard';
             }
+            // }
 
             // Draw parent child relations
             let tempArray = parentChildByParent[cmp.index];
