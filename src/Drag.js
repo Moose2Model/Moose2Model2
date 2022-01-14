@@ -75,12 +75,27 @@ function handleDragMouseMove(e) {
         diagramms[diagramInfos.displayedDiagram].cameraSettings.move.x += cameraToPaneScale(dx);
         diagramms[diagramInfos.displayedDiagram].cameraSettings.move.y += cameraToPaneScale(dy);
     } else {
-        // move the selected shape by the drag distance
-        diagramms[diagramInfos.displayedDiagram].complModelPosition[draggedElement.index].x += cameraToPaneScale(dx);
-        diagramms[diagramInfos.displayedDiagram].complModelPosition[draggedElement.index].y += cameraToPaneScale(dy);
-        // Pin all dragged elements
-        if (diagramms[diagramInfos.displayedDiagram].pinned.indexOf(draggedElement.index) == -1) {
-            diagramms[diagramInfos.displayedDiagram].pinned.push(draggedElement.index);
+        let mEBI = modelElementsByIndex[diagramms[diagramInfos.displayedDiagram].complModelPosition[draggedElement.index].index];
+        if (mEBI.element == 'SOMIX.Code' || mEBI.element == 'SOMIX.Data') {
+            // move the selected shape by the drag distance
+            diagramms[diagramInfos.displayedDiagram].complModelPosition[draggedElement.index].x += cameraToPaneScale(dx);
+            diagramms[diagramInfos.displayedDiagram].complModelPosition[draggedElement.index].y += cameraToPaneScale(dy);
+            // Pin all dragged elements
+            if (diagramms[diagramInfos.displayedDiagram].pinned.indexOf(draggedElement.index) == -1) {
+                diagramms[diagramInfos.displayedDiagram].pinned.push(draggedElement.index);
+            }
+        } else if (mEBI.element == 'SOMIX.Grouping') {
+            // move the selected shape by the drag distance
+            diagramms[diagramInfos.displayedDiagram].complModelPosition[draggedElement.index].x += cameraToPaneScale(dx);
+            diagramms[diagramInfos.displayedDiagram].complModelPosition[draggedElement.index].y += cameraToPaneScale(dy);
+            if (typeof parentChildByParent[mEBI.index] !== 'undefined') {
+                for (const childrens of parentChildByParent[mEBI.index]) {
+                    if (typeof diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child] !== 'undefined') {
+                        diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].x += cameraToPaneScale(dx);
+                        diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].y += cameraToPaneScale(dy);
+                    }
+                }
+            }
         }
     }
 

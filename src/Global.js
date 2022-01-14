@@ -112,25 +112,31 @@ function findNearestElement(x, y, maxDistance) {
 
     for (let i = 1; i < diagramms[diagramInfos.displayedDiagram].complModelPosition.length; i++) { // List start with index 1
         if (typeof diagramms[diagramInfos.displayedDiagram].complModelPosition[i] !== 'undefined') {
-            let distance = (x - diagramms[diagramInfos.displayedDiagram].complModelPosition[i].x) * (x - diagramms[diagramInfos.displayedDiagram].complModelPosition[i].x) + (y - diagramms[diagramInfos.displayedDiagram].complModelPosition[i].y) * (y - diagramms[diagramInfos.displayedDiagram].complModelPosition[i].y);
-            if (minDistanceSquared < 0) {
-                minDistanceSquared = distance;
-                minIndex = i;
-            } else if (distance < minDistanceSquared) {
-                minDistanceSquared = distance;
-                minIndex = i;
+            let mEBI = modelElementsByIndex[diagramms[diagramInfos.displayedDiagram].complModelPosition[i].index];
+            if (diagramms[diagramInfos.displayedDiagram].diagramType == bulletPointDiagramType ||
+                (diagramms[diagramInfos.displayedDiagram].diagramType == circuitDiagramForSoftwareDiagramType &&
+                    mEBI.element != 'SOMIX.Grouping')
+            ) {
+                let distance = (x - diagramms[diagramInfos.displayedDiagram].complModelPosition[i].x) * (x - diagramms[diagramInfos.displayedDiagram].complModelPosition[i].x) + (y - diagramms[diagramInfos.displayedDiagram].complModelPosition[i].y) * (y - diagramms[diagramInfos.displayedDiagram].complModelPosition[i].y);
+                if (minDistanceSquared < 0) {
+                    minDistanceSquared = distance;
+                    minIndex = i;
+                } else if (distance < minDistanceSquared) {
+                    minDistanceSquared = distance;
+                    minIndex = i;
+                }
             }
-
-            if (typeof diagramms[diagramInfos.displayedDiagram].complModelPosition[i].boxX1 !== 'undefined') {
-                let mEBI = modelElementsByIndex[diagramms[diagramInfos.displayedDiagram].complModelPosition[i].index];
-                if (mEBI.element == 'SOMIX.Grouping') {
-                    if (isInBox(x, y,
-                        diagramms[diagramInfos.displayedDiagram].complModelPosition[i].boxX1,
-                        diagramms[diagramInfos.displayedDiagram].complModelPosition[i].boxX2,
-                        diagramms[diagramInfos.displayedDiagram].complModelPosition[i].boxY1,
-                        diagramms[diagramInfos.displayedDiagram].complModelPosition[i].boxY2,
-                        0, 0)) {
-                        foundGroup = diagramms[diagramInfos.displayedDiagram].complModelPosition[i].index;
+            if (diagramms[diagramInfos.displayedDiagram].diagramType == circuitDiagramForSoftwareDiagramType) {
+                if (typeof diagramms[diagramInfos.displayedDiagram].complModelPosition[i].boxX1 !== 'undefined') {
+                    if (mEBI.element == 'SOMIX.Grouping') {
+                        if (isInBox(x, y,
+                            diagramms[diagramInfos.displayedDiagram].complModelPosition[i].boxX1,
+                            diagramms[diagramInfos.displayedDiagram].complModelPosition[i].boxX2,
+                            diagramms[diagramInfos.displayedDiagram].complModelPosition[i].boxY1,
+                            diagramms[diagramInfos.displayedDiagram].complModelPosition[i].boxY2,
+                            0, 0)) {
+                            foundGroup = diagramms[diagramInfos.displayedDiagram].complModelPosition[i].index;
+                        }
                     }
                 }
             }
@@ -144,7 +150,7 @@ function findNearestElement(x, y, maxDistance) {
 
     if (foundGroup != 0) {
         return modelElementsByIndex[foundGroup];
-    } 
+    }
 
 }
 
