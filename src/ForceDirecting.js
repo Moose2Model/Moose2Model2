@@ -370,7 +370,9 @@ function forceDirecting(width, height) {
                     x: corrFact * diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[handledIndex].x + corrFact * diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew2[handledIndex].x + diagramms[diagramInfos.displayedDiagram].complModelPosition[handledIndex].x,
                     y: corrFact * diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[handledIndex].y + corrFact * diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew2[handledIndex].y + diagramms[diagramInfos.displayedDiagram].complModelPosition[handledIndex].y,
                 };
-                diagramms[diagramInfos.displayedDiagram].complModelPosition[handledIndex] = position;
+                // Do not overwrite other fields of complModelPosition
+                diagramms[diagramInfos.displayedDiagram].complModelPosition[handledIndex].x = position.x;
+                diagramms[diagramInfos.displayedDiagram].complModelPosition[handledIndex].y = position.y;
             }
         }
     }

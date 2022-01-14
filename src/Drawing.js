@@ -93,26 +93,30 @@ function drawCompleteModel(ctx, width, height) {
 
     for (const cmp of diagramms[diagramInfos.displayedDiagram].complModelPosition) {
         if (typeof cmp !== 'undefined') {
-            
+
             let mEBI = modelElementsByIndex[cmp.index];
             // Draw elements for Circuit Diagrams
             // This is done before drawing the edges, because the edges have to "react" on the actual size of the elements
 
             if (diagramms[diagramInfos.displayedDiagram].diagramType == circuitDiagramForSoftwareDiagramType) {
+                let SizeOnPane = 1;
                 let size = 3;
                 ctx.beginPath();
                 switch (mEBI['element']) {
                     case 'SOMIX.Grouping':
                         ctx.fillStyle = 'gray';
-                        size = cameraToCanvasScale(4 * scale);
+                        SizeOnPane = 4 * scale;
+                        size = cameraToCanvasScale(SizeOnPane);
                         break;
                     case 'SOMIX.Code':
                         ctx.fillStyle = 'orange';
-                        size = cameraToCanvasScale(2 * scale);
+                        SizeOnPane = 2 * scale;
+                        size = cameraToCanvasScale(SizeOnPane);
                         break;
                     case 'SOMIX.Data':
                         ctx.fillStyle = 'lightBlue';
-                        size = cameraToCanvasScale(2 * scale);
+                        SizeOnPane = 2 * scale;
+                        size = cameraToCanvasScale(SizeOnPane);
                         break;
                 }
                 ctx.arc(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
@@ -124,6 +128,37 @@ function drawCompleteModel(ctx, width, height) {
                     let scaledFontSize = cameraToCanvasScale(fontsize);
                     ctx.textAlign = 'center';
                     ctx.font = scaledFontSize + 'px Arial san-serif';
+                    let textInfo = ctx.measureText(mEBI.name);
+                    let textWidthOnPane = cameraToPaneScale(textInfo.width);
+
+                    // Set values for bounding box
+
+                    let temp1 = diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x - SizeOnPane / 2;
+                    let temp2 = diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x - textWidthOnPane / 2;
+                    let temp;
+                    if (temp1 < temp2) {
+                        let temp = temp1;
+                    } else {
+                        temp = temp2;
+                    }
+                    diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].boxX1 = temp;
+
+                    temp1 = diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x + SizeOnPane / 2;
+                    temp2 = diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x + textWidthOnPane / 2;
+                    if (temp1 < temp2) {
+                        temp = temp2;
+                    } else {
+                        temp = temp1;
+                    }
+                    diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].boxX2 = temp;
+
+                    diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].boxY1 =
+                        diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y - SizeOnPane / 2;
+
+                    diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].boxY2 =
+                        diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y + SizeOnPane / 2;
+
+
                     ctx.fillText(mEBI.name, cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
                         cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y + fontsize * .3));
                     ctx.textAlign = 'standard';
