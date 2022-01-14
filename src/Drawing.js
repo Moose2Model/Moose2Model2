@@ -462,9 +462,15 @@ function drawCompleteModel(ctx, width, height) {
                                 }
                             }
 
-                            ctx.lineWidth = cameraToCanvasScale(1 * scale);
                             ctx.beginPath();
-                            ctx.strokeStyle = 'rgba(255, 0, 0, 0.2)';
+                            if (diagramms[diagramInfos.displayedDiagram].diagramType != circuitDiagramForSoftwareDiagramType) {
+                                ctx.lineWidth = cameraToCanvasScale(1 * scale);
+                                ctx.strokeStyle = 'rgba(255, 0, 0, 0.2)';
+                            }
+                            else {
+                                ctx.lineWidth = cameraToCanvasScale(1);
+                                ctx.strokeStyle = 'black';
+                            }
                             ctx.moveTo(cameraToCanvasX(startX), cameraToCanvasY(startY));
                             ctx.lineTo(cameraToCanvasX(endX), cameraToCanvasY(endY));
                             if (diagramms[diagramInfos.displayedDiagram].diagramSettings.displayArrows) {
@@ -552,9 +558,15 @@ function drawCompleteModel(ctx, width, height) {
                                 }
 
                             }
-                            ctx.lineWidth = cameraToCanvasScale(1 * scale);
                             ctx.beginPath();
-                            ctx.strokeStyle = 'rgba(0, 0, 255, 0.2)';
+                            if (diagramms[diagramInfos.displayedDiagram].diagramType != circuitDiagramForSoftwareDiagramType) {
+                                ctx.lineWidth = cameraToCanvasScale(1 * scale);
+                                ctx.strokeStyle = 'rgba(0, 0, 255, 0.2)';
+                            }
+                            else {
+                                ctx.lineWidth = cameraToCanvasScale(1);
+                                ctx.strokeStyle = 'blue';
+                            }
                             ctx.moveTo(cameraToCanvasX(startX), cameraToCanvasY(startY));
                             ctx.lineTo(cameraToCanvasX(endX), cameraToCanvasY(endY));
                             ctx.stroke();
