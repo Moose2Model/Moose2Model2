@@ -53,6 +53,30 @@ function cameraToPaneScale(size) {
     return size / diagramms[diagramInfos.displayedDiagram].cameraSettings.zoomfactor;
 }
 
+function isInBox(x, y, bX1, bX2, bY1, bY2, marginX, marginY) {
+    // normalize box
+    let nbX1, nbX2, nbY1, nbY2;
+    if (bX1 < bX2) {
+        nbX1 = bX1;
+        nbX2 = bX2;
+    } else {
+        nbX1 = bX2;
+        nbX2 = bX1;
+    };
+    if (bY1 < bY2) {
+        nbY1 = bY1;
+        nbY2 = bY2;
+    } else {
+        nbY1 = bY2;
+        nbY2 = bY1;
+    };
+    if (x < nbX1 - marginX) { return false };
+    if (x > nbX2 + marginX) { return false };
+    if (y < nbY1 - marginY) { return false };
+    if (y > nbY2 + marginY) { return false };
+    return true;
+}
+
 function drawCompleteModel(ctx, width, height) {
     if (typeof diagramms[diagramInfos.displayedDiagram] === 'undefined') {
         // Do not draw when no diagram exists
@@ -107,21 +131,31 @@ function drawCompleteModel(ctx, width, height) {
                         ctx.fillStyle = 'gray';
                         SizeOnPane = 4 * scale;
                         size = cameraToCanvasScale(SizeOnPane);
+                        ctx.arc(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
+                            cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y), size, 0, 2 * Math.PI);
+                        ctx.fill();
                         break;
                     case 'SOMIX.Code':
                         ctx.fillStyle = 'orange';
-                        SizeOnPane = 2 * scale;
+                        SizeOnPane = 7 * scale;
                         size = cameraToCanvasScale(SizeOnPane);
+
+                        ctx.fillRect(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x) - size / 2,
+                            cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y) - size / 2, size, size);
                         break;
                     case 'SOMIX.Data':
                         ctx.fillStyle = 'lightBlue';
-                        SizeOnPane = 2 * scale;
+                        SizeOnPane = 3.5 * scale;
                         size = cameraToCanvasScale(SizeOnPane);
+                        ctx.arc(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
+                            cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y), size, 0, 2 * Math.PI);
+                        ctx.fill();
                         break;
                 }
-                ctx.arc(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
-                    cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y), size, 0, 2 * Math.PI);
-                ctx.fill();
+
+                // ctx.fillRect(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x - size / 2),
+                //     cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y - size / 2), size, size);
+
                 if (diagramms[diagramInfos.displayedDiagram].diagramSettings.displayElementNames == true) {
                     const fontsize = 3 * scale;
                     ctx.fillStyle = 'black';
@@ -194,11 +228,42 @@ function drawCompleteModel(ctx, width, height) {
                             let endX = diagramms[diagramInfos.displayedDiagram].complModelPosition[cC['called']].x;
                             let endY = diagramms[diagramInfos.displayedDiagram].complModelPosition[cC['called']].y;
 
+                            if (diagramms[diagramInfos.displayedDiagram].diagramType == circuitDiagramForSoftwareDiagramType) {
+                                // Keep distance between arrows and bounding box in case of circuit diagrams
+                                const minLength = 10;
+                                const stepL = 1;
+                                let vector = {
+                                    x: endX - startX,
+                                    y: endY - startY
+                                };
+                                let vectorLength = Math.sqrt((endX - startX) * (endX - startX) + (endY - startY) * (endY - startY))
+
+                                let unitVector = {
+                                    x: (endX - startX) / vectorLength,
+                                    y: (endY - startY) / vectorLength
+                                };
+                                // retract the end first
+
+                                const marginEndX = 1;
+                                const marginEndY = 4;
+
+                                while (vectorLength > minLength && isInBox(endX, endY,
+                                    diagramms[diagramInfos.displayedDiagram].complModelPosition[cC['called']].boxX1,
+                                    diagramms[diagramInfos.displayedDiagram].complModelPosition[cC['called']].boxX2,
+                                    diagramms[diagramInfos.displayedDiagram].complModelPosition[cC['called']].boxY1,
+                                    diagramms[diagramInfos.displayedDiagram].complModelPosition[cC['called']].boxY2,
+                                    marginEndX, marginEndY)) {
+                                    vectorLength -= stepL;
+                                    endX -= unitVector.x * stepL;
+                                    endY -= unitVector.y * stepL;
+                                }
+                            }
+
                             ctx.lineWidth = cameraToCanvasScale(1 * scale);
                             ctx.beginPath();
                             ctx.strokeStyle = 'rgba(255, 0, 0, 0.2)';
-                            ctx.moveTo(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[cC['caller']].x), cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[cC['caller']].y));
-                            ctx.lineTo(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[cC['called']].x), cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[cC['called']].y));
+                            ctx.moveTo(cameraToCanvasX(startX), cameraToCanvasY(startY));
+                            ctx.lineTo(cameraToCanvasX(endX), cameraToCanvasY(endY));
                             if (diagramms[diagramInfos.displayedDiagram].diagramSettings.displayArrows) {
                                 let deltaX = endX - startX;
                                 let deltaY = endY - startY;
