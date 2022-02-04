@@ -220,6 +220,7 @@
                 <input id="OpenWorkFolderButton" value="Open Work Folder">
                 <input id="LoadButton" value="Load model">
                 <input id="NewDiagramButton" value="New Diagram">
+                <input id="SaveDiagramButton" value="Save Displayed Diagram">
             </div>
         </div>
         <div class="dropdownHelpMenu">
@@ -272,6 +273,9 @@
 
         const NewDiagramButton = document.getElementById('NewDiagramButton'); // From Menu
         NewDiagramButton.addEventListener('click', handleNewDiagramRequested);
+
+        const SaveDiagramButton = document.getElementById('SaveDiagramButton');
+        SaveDiagramButton.addEventListener('click', SaveDisplayedDiagram);
 
         const ToGithubButton = document.getElementById('ToGithubButton');
         ToGithubButton.addEventListener('click', JumpToGithub);

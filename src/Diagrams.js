@@ -8,8 +8,8 @@ const circuitDiagramForSoftwareDiagramType = 'C';
 * @member type The type of the diagram. Either completeDiagramType or circuitDiagramForSoftwareType
 * @member diagramType The type how elements are displayed. Either bulletPointDiagramType or circuitDiagramForSoftwareDiagramType. 
 * @member complModelPosition An array with positions.
- Use as: diagramms[diagramInfos.displayedDiagram].complModelPosition.x and diagramms[diagramInfos.displayedDiagram].complModelPosition.y
- Contains also the index of the element in diagramms[diagramInfos.displayedDiagram].complModelPosition.index
+ Use as: diagramms[diagramInfos.displayedDiagram].complModelPosition[index].x and diagramms[diagramInfos.displayedDiagram].complModelPosition[index].y
+ Contains also the index of the element in diagramms[diagramInfos.displayedDiagram].complModelPosition[index].index
  May have the positions of a box that describes the size of the element (Check whether .boxX1 is defined)
  .boxX1, .boxX2, .boxY1, .boxY2
 * @member diagramSettings The settings of a diagram. Use:
@@ -105,4 +105,38 @@ function toggleNameDisplay() {
   if (typeof diagramms[diagramInfos.displayedDiagram].diagramSettings.displayElementNames !== 'undefined') {
     diagramms[diagramInfos.displayedDiagram].diagramSettings.displayElementNames = !diagramms[diagramInfos.displayedDiagram].diagramSettings.displayElementNames;
   }
+}
+
+function SaveDisplayedDiagram() {
+  if (diagramInfos.displayedDiagram == startDiagram) {
+    window.alert("The diagram with all model elements cannot be saved");
+    return;
+  }
+  console.log('Save Displayed Diagram is called');
+
+  let generationInfoExternal = {};
+
+  // Store which elements are added with neighbors
+
+  generationInfoExternal.addedWithNeighbors = [];
+  for (const e of diagramms[diagramInfos.displayedDiagram].generationInfoInternal.addedWithNeighbors) {
+    generationInfoExternal.addedWithNeighbors.push(modelElementsByIndex[e].uniqueName);
+    console.log(modelElementsByIndex[e].uniqueName);
+  }
+
+  // Store positions
+  generationInfoExternal.positions = [];
+  
+
+  for (const e2 of diagramms[diagramInfos.displayedDiagram].complModelPosition) {
+    if (typeof e2 !== 'undefined') {
+      let position = {};
+      position.uniqueName = modelElementsByIndex[e2.index].uniqueName;
+      position.x = e2.x;
+      position.y = e2.y;
+      generationInfoExternal.positions.push(position);
+    }
+  }
+
+
 }
