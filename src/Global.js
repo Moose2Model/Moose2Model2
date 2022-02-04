@@ -1,6 +1,7 @@
 'use strict';
-// store a reference to our file handle
+// store a reference to the loaded metamodel, has to be adapted when more than a single model can be loaded
 let fileHandle;
+let workDirectoryHandle;
 
 // This are all global variables which contain informations on a loaded model
 // They should be enhanced when more than a single mse model is loaded

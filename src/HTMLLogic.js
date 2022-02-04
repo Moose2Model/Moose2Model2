@@ -52,8 +52,26 @@ async function LoadModel() {
         draw();
 
     } else if (fileHandle.kind === 'directory') {
-        // run directory code
+        // Inform user that directories are not supported here
     }
 
+}
+
+async function SetWorkFolder() {
+    'use strict';
+    try {
+        workDirectoryHandle = await window.showDirectoryPicker();
+        for await (const entry of workDirectoryHandle.values()) {
+            console.log(entry.kind, entry.name);
+        }
+        await workDirectoryHandle.removeEntry('d2.txt');
+        console.log('After removing');
+        for await (const entry of workDirectoryHandle.values()) {
+            console.log(entry.kind, entry.name);
+        }
+    } catch (err) {
+        window.alert("Accessing a directory failed");
+        return;
+    }
 }
 

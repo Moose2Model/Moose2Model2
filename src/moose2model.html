@@ -217,6 +217,7 @@
             <button class="fileMenuButton" onclick="ToggleFileMenu()">File
             </button>
             <div class="FileMenu-content" id="FileMenuID">
+                <input id="OpenWorkFolderButton" value="Open Work Folder">
                 <input id="LoadButton" value="Load model">
                 <input id="NewDiagramButton" value="New Diagram">
             </div>
@@ -263,8 +264,14 @@
         const newDiagramElement = document.getElementById('newDiagramElementID');
         newDiagramElement.hidden = true; // Hide when page is loaded
 
+        const OpenWorkFolderButton = document.getElementById('OpenWorkFolderButton');
+        OpenWorkFolderButton.addEventListener('click', SetWorkFolder);
+
         const LoadMseButton = document.getElementById('LoadButton');
         LoadMseButton.addEventListener('click', LoadModel);
+
+        const NewDiagramButton = document.getElementById('NewDiagramButton'); // From Menu
+        NewDiagramButton.addEventListener('click', handleNewDiagramRequested);
 
         const ToGithubButton = document.getElementById('ToGithubButton');
         ToGithubButton.addEventListener('click', JumpToGithub);
@@ -297,9 +304,6 @@
         }
 
         // New diagram
-
-        const NewDiagramButton = document.getElementById('NewDiagramButton'); // From Menu
-        NewDiagramButton.addEventListener('click', handleNewDiagramRequested);
 
         const CreateNewDiagramButton = document.getElementById('CreateNewDiagramButton'); // From Input Area
         CreateNewDiagramButton.addEventListener('click', handleNewDiagram);
