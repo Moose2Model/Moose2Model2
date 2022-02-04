@@ -21,7 +21,10 @@ const circuitDiagramForSoftwareDiagramType = 'C';
 diagramms[diagramInfos.displayedDiagram].cameraSettings.move.x
 diagramms[diagramInfos.displayedDiagram].cameraSettings.move.y
 diagramms[diagramInfos.displayedDiagram].cameraSettings.zoomfactor
-* @member forceDirectingState see ForceDirection.js for content*/
+* @member forceDirectingState see ForceDirection.js for content
+* @member generationInfoInternal An object with all information how a diagram is to be generated. This is the internal representation. It is not defined for the start diagram.
+diagramms[diagramInfos.displayedDiagram].generationInfoInternal.addedWithNeighbors - A list with all indizees of elements that are added with neighbors. Do not add indizees twice, check whether they exist before adding.
+*/
 let diagramms = {};
 
 /** Contains informations of the diagrams
@@ -73,6 +76,8 @@ function newDiagram(name) {
     move: move,
     zoomfactor: 1
   }
+  diagramms[name].generationInfoInternal = {};
+  diagramms[name].generationInfoInternal.addedWithNeighbors = [];
 }
 
 function switchDiagram(name) {

@@ -45,6 +45,10 @@ function positionCircle(width, height) {
 
 function addWithNeighbors(element) {
 
+    if (diagramms[diagramInfos.activeDiagram].generationInfoInternal.addedWithNeighbors.indexOf(element.index) == -1) {
+        diagramms[diagramInfos.activeDiagram].generationInfoInternal.addedWithNeighbors.push(element.index);
+    }
+
     // Switch Force-Directing off, so that new elements remain in the box where they have been placed
     diagramms[diagramInfos.activeDiagram].forceFeedback = false;
 
