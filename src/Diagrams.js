@@ -120,20 +120,20 @@ function SaveDisplayedDiagram() {
 
   generationInfoExternal.addedWithNeighbors = [];
   for (const e of diagramms[diagramInfos.displayedDiagram].generationInfoInternal.addedWithNeighbors) {
-    generationInfoExternal.addedWithNeighbors.push(modelElementsByIndex[e].uniqueName);
+    generationInfoExternal.addedWithNeighbors.push(uniqueKey(modelElementsByIndex[e].technicalType, modelElementsByIndex[e].uniqueName));
     console.log(modelElementsByIndex[e].uniqueName);
   }
 
   // Store positions
   generationInfoExternal.positions = [];
-  
 
-  for (const e2 of diagramms[diagramInfos.displayedDiagram].complModelPosition) {
-    if (typeof e2 !== 'undefined') {
+
+  for (const e of diagramms[diagramInfos.displayedDiagram].complModelPosition) {
+    if (typeof e !== 'undefined') {
       let position = {};
-      position.uniqueName = modelElementsByIndex[e2.index].uniqueName;
-      position.x = e2.x;
-      position.y = e2.y;
+      position.uniqueKey = uniqueKey(modelElementsByIndex[e.index].technicalType, modelElementsByIndex[e.index].uniqueName);
+      position.x = e.x;
+      position.y = e.y;
       generationInfoExternal.positions.push(position);
     }
   }

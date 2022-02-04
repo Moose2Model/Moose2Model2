@@ -157,6 +157,8 @@ function findNearestElement(x, y, maxDistance) {
 
 
 function uniqueKey(technicalType, uniqueName) {
+    // Attention when this logic is changed !! :
+    // Files with generation Information will not be readable anymore
     return technicalType + '..' + uniqueName; // TODO is a .. enough to have always unique keys?
 };
 
