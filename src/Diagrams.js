@@ -138,5 +138,7 @@ function SaveDisplayedDiagram() {
     }
   }
 
+  let jsonExport = JSON.stringify(generationInfoExternal);
+
 
 }
