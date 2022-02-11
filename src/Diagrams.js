@@ -131,10 +131,21 @@ async function ReadDisplayedDiagram() {
   let readGenerationInfo = {};
   readGenerationInfo = JSON.parse(contents);
 
-  // Change the displayed diagram
-  // Clear the displayed diagram when needed -> The user may be warned in some cases
-  // Add elements with neighbor to this diagram
-  // Positin elements on this diagram
+  // --- Change the displayed diagram
+
+  // Remove the extension .m2m Name of file is equal to name of diagram
+
+  let fileName = file.name;
+  let len = fileName.length;
+  if (fileName.substring(len - 4, len) == '.m2m') {
+    fileName = fileName.substring(0, len - 4);
+  }
+  newDiagram(fileName);
+
+  // --- Clear the displayed diagram when needed -> The user may be warned in some cases
+  // Will be implicitly done by calling newDiagram
+  // --- Add elements with neighbor to this diagram
+  // --- Positin elements on this diagram
 
 }
 
