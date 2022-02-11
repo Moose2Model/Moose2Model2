@@ -362,4 +362,6 @@ async function ImportOldDiagram() {
   }
 
 
+  // --- Draw new diagram
+  drawCompleteModel(ctx, g_width, g_height);
 }
