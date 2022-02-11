@@ -142,6 +142,7 @@ async function ReadDisplayedDiagram() {
   }
   newDiagram(fileName);
   setDiagramActive(fileName);
+  switchDiagram(fileName);
 
   // --- Clear the displayed diagram when needed -> The user may be warned in some cases
   // Will be implicitly done by calling newDiagram
@@ -155,10 +156,18 @@ async function ReadDisplayedDiagram() {
   for (const e of readGenerationInfo.positions) {
     if (typeof modelElementsByUniqueKey[e.uniqueKey] !== 'undefined') {
       let element = modelElementsByUniqueKey[e.uniqueKey];
-      diagramms[diagramInfos.displayedDiagram].complModelPosition[element.index].x = e.x;
-      diagramms[diagramInfos.displayedDiagram].complModelPosition[element.index].y = e.y;
+      diagramms[diagramInfos.activeDiagram].complModelPosition[element.index].x = e.x;
+      diagramms[diagramInfos.activeDiagram].complModelPosition[element.index].y = e.y;
     }
   }
+  // --- Pin elements on this diagram
+  for (const e of readGenerationInfo.pinned) {
+    if (typeof modelElementsByUniqueKey[e] !== 'undefined') {
+      diagramms[diagramInfos.activeDiagram].pinned.push(modelElementsByUniqueKey[e].index);
+    }
+  }
+  // --- Draw new diagram
+  drawCompleteModel(ctx, g_width, g_height);
 }
 
 async function SaveDisplayedDiagram() {
@@ -195,6 +204,16 @@ async function SaveDisplayedDiagram() {
       generationInfoExternal.positions.push(position);
     }
   }
+
+  // Store pinning
+  generationInfoExternal.pinned = [];
+  for (const e of diagramms[diagramInfos.displayedDiagram].pinned) {
+    if (typeof e !== 'undefined') {
+      generationInfoExternal.pinned.push(uniqueKey(modelElementsByIndex[e].technicalType, modelElementsByIndex[e].uniqueName));
+    }
+  }
+
+  // Make and export JSON file
 
   let jsonExport = JSON.stringify(generationInfoExternal, null, '\t');
 
