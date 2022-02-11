@@ -48,8 +48,8 @@ function analyzeMseFile(contents) {
     let char;
     do {
         // try {
-            char = contents.at(counter);
-            // On mobile chrome the function at() does not work on a string. This is not fixed.
+        char = contents.at(counter);
+        // On mobile chrome the function at() does not work on a string. This is not fixed.
         // }
         // catch {
         //     contents = contents.split('');

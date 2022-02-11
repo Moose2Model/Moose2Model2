@@ -69,6 +69,7 @@ function addWithNeighbors(element) {
     let addNeighbors = [];
 
     // Add childs
+    // This should currently not be used, because it is not possible to specify that a grouping is added
 
     if (typeof parentChildByParent[element.index] !== 'undefined') {
         for (const el of parentChildByParent[element.index]) {
@@ -87,8 +88,9 @@ function addWithNeighbors(element) {
     }
 
     // Add parents
+    // Outcomment this. Parents are currently only added when they are specified with isMain in the SOMIX model
 
-    if (typeof parentChildByChild[element.index] !== 'undefined') {
+/*     if (typeof parentChildByChild[element.index] !== 'undefined') {
         for (const el of parentChildByChild[element.index]) {
             if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[el.parent] === 'undefined') {
                 position = {
@@ -102,7 +104,7 @@ function addWithNeighbors(element) {
                 }
             }
         }
-    }
+    } */
 
     // Add called
 
