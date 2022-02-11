@@ -107,6 +107,37 @@ function toggleNameDisplay() {
   }
 }
 
+async function ReadDisplayedDiagram() {
+  if (typeof workDirectoryHandle === 'undefined') {
+    window.alert("You have to specify a work directory first");
+    return;
+  }
+  const pickerOpts = {
+    types: [
+      {
+        description: 'Moose2Model diagram specifications',
+        accept: {
+          'text/plain': ['.m2m']
+        }
+      },
+    ],
+    excludeAcceptAllOption: true,
+    multiple: false
+  };
+  let fileHandle;
+  [fileHandle] = await window.showOpenFilePicker(pickerOpts);
+  const file = await fileHandle.getFile();
+  const contents = await file.text();
+  let readGenerationInfo = {};
+  readGenerationInfo = JSON.parse(contents);
+
+  // Change the displayed diagram
+  // Clear the displayed diagram when needed -> The user may be warned in some cases
+  // Add elements with neighbor to this diagram
+  // Positin elements on this diagram
+
+}
+
 async function SaveDisplayedDiagram() {
   if (diagramInfos.displayedDiagram == startDiagram) {
     window.alert("The diagram with all model elements cannot be saved");
