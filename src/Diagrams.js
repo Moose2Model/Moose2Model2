@@ -107,7 +107,7 @@ function toggleNameDisplay() {
   }
 }
 
-function SaveDisplayedDiagram() {
+async function SaveDisplayedDiagram() {
   if (diagramInfos.displayedDiagram == startDiagram) {
     window.alert("The diagram with all model elements cannot be saved");
     return;
@@ -132,13 +132,17 @@ function SaveDisplayedDiagram() {
     if (typeof e !== 'undefined') {
       let position = {};
       position.uniqueKey = uniqueKey(modelElementsByIndex[e.index].technicalType, modelElementsByIndex[e.index].uniqueName);
-      position.x = e.x;
-      position.y = e.y;
+      position.x = Math.round(100 * e.x) / 100;
+      position.y = Math.round(100 * e.y) / 100;
       generationInfoExternal.positions.push(position);
     }
   }
 
-  let jsonExport = JSON.stringify(generationInfoExternal);
+  let jsonExport = JSON.stringify(generationInfoExternal, null, '\t');
 
+  const newFileHandle = await workDirectoryHandle.getFileHandle(diagramInfos.displayedDiagram + '.m2m', { create: true });
+  const writable = await newFileHandle.createWritable();
+  await writable.write(jsonExport);
+  await writable.close();
 
 }
