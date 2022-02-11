@@ -112,7 +112,12 @@ async function SaveDisplayedDiagram() {
     window.alert("The diagram with all model elements cannot be saved");
     return;
   }
-  console.log('Save Displayed Diagram is called');
+
+  if (typeof workDirectoryHandle === 'undefined') {
+    window.alert("You have to specify a work directory first");
+    return;
+  }
+
 
   let generationInfoExternal = {};
 
