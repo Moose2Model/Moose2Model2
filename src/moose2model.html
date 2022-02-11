@@ -219,7 +219,8 @@
             <div class="FileMenu-content" id="FileMenuID">
                 <input id="OpenWorkFolderButton" value="Open Work Folder">
                 <input id="LoadButton" value="Load model">
-                <input id="ReadDiagramButton" value="Read Diagram"> 
+                <input id="ImportOldDiagramButton" value="Import old Diagram (XML)">
+                <input id="ReadDiagramButton" value="Read Diagram">
                 <input id="NewDiagramButton" value="New Diagram">
                 <input id="SaveDiagramButton" value="Save Displayed Diagram">
             </div>
@@ -271,6 +272,9 @@
 
         const LoadMseButton = document.getElementById('LoadButton');
         LoadMseButton.addEventListener('click', LoadModel);
+
+        const ImportOldDiagramButton = document.getElementById('ImportOldDiagramButton');
+        ImportOldDiagramButton.addEventListener('click', ImportOldDiagram);
 
         const ReadDiagramButton = document.getElementById('ReadDiagramButton');
         ReadDiagramButton.addEventListener('click', ReadDisplayedDiagram);
