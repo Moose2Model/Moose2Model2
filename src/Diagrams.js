@@ -131,7 +131,7 @@ async function ReadDisplayedDiagram() {
   let readGenerationInfo = {};
   readGenerationInfo = JSON.parse(contents);
 
-  // --- Change the displayed diagram
+  // --- Change the displayed diagram and set it active so that it can be changed
 
   // Remove the extension .m2m Name of file is equal to name of diagram
 
@@ -141,12 +141,24 @@ async function ReadDisplayedDiagram() {
     fileName = fileName.substring(0, len - 4);
   }
   newDiagram(fileName);
+  setDiagramActive(fileName);
 
   // --- Clear the displayed diagram when needed -> The user may be warned in some cases
   // Will be implicitly done by calling newDiagram
   // --- Add elements with neighbor to this diagram
-  // --- Positin elements on this diagram
-
+  for (const e of readGenerationInfo.addedWithNeighbors) {
+    if (typeof modelElementsByUniqueKey[e] !== 'undefined') {
+      addWithNeighbors(modelElementsByUniqueKey[e]);
+    }
+  }
+  // --- Position elements on this diagram
+  for (const e of readGenerationInfo.positions) {
+    if (typeof modelElementsByUniqueKey[e.uniqueKey] !== 'undefined') {
+      let element = modelElementsByUniqueKey[e.uniqueKey];
+      diagramms[diagramInfos.displayedDiagram].complModelPosition[element.index].x = e.x;
+      diagramms[diagramInfos.displayedDiagram].complModelPosition[element.index].y = e.y;
+    }
+  }
 }
 
 async function SaveDisplayedDiagram() {
@@ -168,7 +180,6 @@ async function SaveDisplayedDiagram() {
   generationInfoExternal.addedWithNeighbors = [];
   for (const e of diagramms[diagramInfos.displayedDiagram].generationInfoInternal.addedWithNeighbors) {
     generationInfoExternal.addedWithNeighbors.push(uniqueKey(modelElementsByIndex[e].technicalType, modelElementsByIndex[e].uniqueName));
-    console.log(modelElementsByIndex[e].uniqueName);
   }
 
   // Store positions
