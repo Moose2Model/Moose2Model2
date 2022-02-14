@@ -226,6 +226,8 @@ async function SaveDisplayedDiagram() {
 
 async function ImportOldDiagram() {
 
+  const factorOldToNew = 1.7;
+
   // Required to migrate Diagrams on FAMIX models to the new version of Moose2Model with SOMIX models
 
   if (typeof workDirectoryHandle === 'undefined') {
@@ -340,7 +342,8 @@ async function ImportOldDiagram() {
                 for (const pc of parentChildByChild[e2.index]) {
                   let foundElement = modelElementsByIndex[pc.parent];
                   if (foundElement.name == n_class) {
-                    // elementFound = true;
+                    // Duplicate 1/2
+                    elementFound = true;
                     if (step == 1) {
                       // --- Add elements with neighbor to this diagram
                       if (n_add_explicitly) {
@@ -350,12 +353,34 @@ async function ImportOldDiagram() {
                     if (step == 2) {
                       // --- Position elements on this diagram
                       if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[e2.index] !== 'undefined') {
-                        diagramms[diagramInfos.activeDiagram].complModelPosition[e2.index].x = parseFloat(n_x);
-                        diagramms[diagramInfos.activeDiagram].complModelPosition[e2.index].y = parseFloat(n_y);
+                        diagramms[diagramInfos.activeDiagram].complModelPosition[e2.index].x = parseFloat(n_x) * factorOldToNew;
+                        diagramms[diagramInfos.activeDiagram].complModelPosition[e2.index].y = parseFloat(n_y) * factorOldToNew;
                       }
                     }
                   }
                 }
+
+                if (!elementFound && expName == n_class) {
+
+                  // Duplicate 2/2
+                  elementFound = true;
+                  if (step == 1) {
+                    // --- Add elements with neighbor to this diagram
+                    if (n_add_explicitly) {
+                      addWithNeighbors(e2);
+                    }
+                  }
+                  if (step == 2) {
+                    // --- Position elements on this diagram
+                    if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[e2.index] !== 'undefined') {
+                      diagramms[diagramInfos.activeDiagram].complModelPosition[e2.index].x = parseFloat(n_x) * factorOldToNew;
+                      diagramms[diagramInfos.activeDiagram].complModelPosition[e2.index].y = parseFloat(n_y) * factorOldToNew;
+                    }
+                  }
+
+                }
+
+
               }
             }
           }
