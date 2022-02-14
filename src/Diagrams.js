@@ -258,7 +258,7 @@ async function ImportOldDiagram() {
     window.alert("Parsing failed");
     return;
   } else {
-    console.log(doc.documentElement.nodeName);
+    // console.log(doc.documentElement.nodeName);
   }
 
   // --- Extract generation info from DOM model
@@ -276,7 +276,9 @@ async function ImportOldDiagram() {
   setDiagramActive(fileName);
   switchDiagram(fileName);
 
-  doc.children[0].children
+  //doc.children[0].children
+
+  let consoleWritten = false;
 
   for (var step = 1; step <= 2; step++) {
 
@@ -331,23 +333,25 @@ async function ImportOldDiagram() {
             expSOMIX = 'SOMIX.Data';
             expName = n_attribute;
           }
+          let elementFound = false;
           for (const e2 of modelElementsByIndex) {
             if (typeof e2 !== 'undefined') {
               if (e2.element == expSOMIX && e2.name == expName) {
                 for (const pc of parentChildByChild[e2.index]) {
                   let foundElement = modelElementsByIndex[pc.parent];
                   if (foundElement.name == n_class) {
+                    // elementFound = true;
                     if (step == 1) {
                       // --- Add elements with neighbor to this diagram
                       if (n_add_explicitly) {
-                        addWithNeighbors(foundElement);
+                        addWithNeighbors(e2);
                       }
                     }
                     if (step == 2) {
                       // --- Position elements on this diagram
-                      if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[foundElement.index] !== 'undefined') {
-                        diagramms[diagramInfos.activeDiagram].complModelPosition[foundElement.index].x = parseFloat(n_x);
-                        diagramms[diagramInfos.activeDiagram].complModelPosition[foundElement.index].y = parseFloat(n_y);
+                      if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[e2.index] !== 'undefined') {
+                        diagramms[diagramInfos.activeDiagram].complModelPosition[e2.index].x = parseFloat(n_x);
+                        diagramms[diagramInfos.activeDiagram].complModelPosition[e2.index].y = parseFloat(n_y);
                       }
                     }
                   }
@@ -355,10 +359,20 @@ async function ImportOldDiagram() {
               }
             }
           }
+
+          if (step == 1 && n_add_explicitly && !elementFound) {
+            consoleWritten = true;
+            console.log(n_type + ' ' + expName + ' ' + ' of ' + n_class + ' was added explicitly but is not found in model. Please correcty manually.');
+          }
+
         }
 
       }
     }
+  }
+
+  if (consoleWritten) {
+    window.alert("Messages are written to the console, please check.");
   }
 
 
