@@ -92,7 +92,7 @@ function drawCompleteModel(ctx, width, height) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     if (diagramms[diagramInfos.displayedDiagram].complModelPosition.length == 0) {
-        ctx.font = '15px san-serif';
+        ctx.font = '15px sans-serif';
         ctx.fillStyle = 'black'
         ctx.fillText('This diagram is currently empty: ' + diagramInfos.displayedDiagram, 10, 50);
         return;
@@ -113,7 +113,7 @@ function drawCompleteModel(ctx, width, height) {
 
         let scaledFontSize = cameraToCanvasScale(generalFontSize);
         ctx.textAlign = 'right';
-        ctx.font = scaledFontSize + 'px Arial san-serif';
+        ctx.font = scaledFontSize + 'px  sans-serif';
         ctx.fillText('New elements are placed here', cameraToCanvasX(newElBoxX + newElBoxWidth), cameraToCanvasY(newElBoxY + newElBoxHeight + generalFontSize));
         ctx.textAlign = 'start';
 
@@ -171,7 +171,7 @@ function drawCompleteModel(ctx, width, height) {
                         ctx.fillStyle = 'black';
                         let scaledFontSize = cameraToCanvasScale(fontsize);
                         ctx.textAlign = 'center';
-                        ctx.font = scaledFontSize + 'px Arial san-serif';
+                        ctx.font = scaledFontSize + 'px  sans-serif';
                         let textInfo = ctx.measureText(mEBI.name);
                         let textWidthOnPane = cameraToPaneScale(textInfo.width);
                         if (mEBI.element == 'SOMIX.Code') {
@@ -295,7 +295,7 @@ function drawCompleteModel(ctx, width, height) {
 
                             let scaledFontSize = cameraToCanvasScale(generalFontSize);
                             ctx.textAlign = 'center';
-                            ctx.font = scaledFontSize + 'px Arial san-serif';
+                            ctx.font = scaledFontSize + 'px  sans-serif';
                             ctx.fillText(mEBI.name,
                                 cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxX1 + width / 2),
                                 cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxY1 - generalFontSize / 2));
@@ -339,7 +339,7 @@ function drawCompleteModel(ctx, width, height) {
                 //         ctx.fillStyle = 'black';
                 //         let scaledFontSize = cameraToCanvasScale(fontsize);
                 //         ctx.textAlign = 'center';
-                //         ctx.font = scaledFontSize + 'px Arial san-serif';
+                //         ctx.font = scaledFontSize + 'px  sans-serif';
                 //         let textInfo = ctx.measureText(mEBI.name);
                 //         let textWidthOnPane = cameraToPaneScale(textInfo.width);
 
@@ -377,7 +377,7 @@ function drawCompleteModel(ctx, width, height) {
                 let scaledFontSize = cameraToCanvasScale(fontsize);
                 if (mEBI.element == 'SOMIX.Code' || mEBI.element == 'SOMIX.Data') {
                     ctx.textAlign = 'center';
-                    ctx.font = scaledFontSize + 'px Arial san-serif';
+                    ctx.font = scaledFontSize + 'px  sans-serif';
                     ctx.fillText(mEBI.name, cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
                         cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y + fontsize * .3));
                     ctx.textAlign = 'standard';
@@ -619,7 +619,7 @@ function drawCompleteModel(ctx, width, height) {
                         ctx.fillStyle = 'black';
                         let scaledFontSize = cameraToCanvasScale(fontsize * scale);
                         ctx.textAlign = 'center';
-                        ctx.font = scaledFontSize + 'px Arial san-serif';
+                        ctx.font = scaledFontSize + 'px  sans-serif';
                         ctx.fillText(mEBI.name, cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
                             cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y + fontsize * .3));
                         ctx.textAlign = 'standard';
@@ -652,7 +652,7 @@ function drawCompleteModel(ctx, width, height) {
                     //     ctx.fillStyle = 'black';
                     //     let scaledFontSize = cameraToCanvasScale(fontsize);
                     //     ctx.textAlign = 'center';
-                    //     ctx.font = scaledFontSize + 'px Arial san-serif';
+                    //     ctx.font = scaledFontSize + 'px  sans-serif';
                     //     ctx.fillText(mEBI.name, cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
                     //         cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y + fontsize * .3));
                     //     ctx.textAlign = 'standard';
@@ -666,7 +666,7 @@ function drawCompleteModel(ctx, width, height) {
     //     // Draw further informations
     // ctx.moveTo(g_width - 20, g_height - 10);
     ctx.fillStyle = 'black';
-    ctx.font = generalFontSize + 'px Arial san-serif';
+    ctx.font = generalFontSize + 'px  sans-serif';
     ctx.fillText(Math.round(100 * diagramms[diagramInfos.displayedDiagram].cameraSettings.zoomfactor) + '%', g_width - 40, g_height - 10);
 
 };
