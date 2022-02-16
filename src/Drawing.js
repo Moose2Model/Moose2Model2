@@ -6,6 +6,22 @@
 //     let g_height = window.innerHeight - 100;
 // }
 
+// Colors
+
+// See also issue #23 - Not all colors are currently used
+let circuitDiagramColorCode = '#ffeb99';
+let circuitDiagramColorHighlightedCode = '#ff9900';
+let circuitDiagramColorData = '#ccffff';
+let circuitDiagramColorHighlightedData = '#0000ff';
+let circuitDiagramColorDataPersistent = '#ccff99';
+let circuitDiagramColorHighlightedDataPersistent = '#00ff00';
+// let circuitDiagramColorCallLines = '#cbcbcb'; // Is to some extend transparent in old solution
+// let circuitDiagramColorAccessesLines = '#9898fe'; // Is to some extend transparent in old solution
+// let circuitDiagramColorCommentLines = '#feds98';
+let circuitDiagramColorCallLines = '#97979780'; // 50% transparent
+let circuitDiagramColorAccessesLines = '#3131fd80'; // 50% transparent
+let circuitDiagramColorCommentLines = '#fdab3180';
+
 function supportRetina() {
     resizeCanvas();
     // var canvas = document.getElementById('pane');
@@ -313,7 +329,7 @@ function drawCompleteModel(ctx, width, height) {
 
                         break;
                     case 'SOMIX.Code':
-                        ctx.fillStyle = 'orange';
+                        ctx.fillStyle = circuitDiagramColorCode;
                         SizeOnPane = codeSize * scale;
                         size = cameraToCanvasScale(SizeOnPane);
 
@@ -321,7 +337,7 @@ function drawCompleteModel(ctx, width, height) {
                             cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y) - size / 2, size, size);
                         break;
                     case 'SOMIX.Data':
-                        ctx.fillStyle = 'lightBlue';
+                        ctx.fillStyle = circuitDiagramColorData;
                         SizeOnPane = dataSize * scale;
                         size = cameraToCanvasScale(SizeOnPane);
                         ctx.arc(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
@@ -469,7 +485,7 @@ function drawCompleteModel(ctx, width, height) {
                             }
                             else {
                                 ctx.lineWidth = cameraToCanvasScale(1);
-                                ctx.strokeStyle = 'black';
+                                ctx.strokeStyle = circuitDiagramColorCallLines;
                             }
                             ctx.moveTo(cameraToCanvasX(startX), cameraToCanvasY(startY));
                             ctx.lineTo(cameraToCanvasX(endX), cameraToCanvasY(endY));
@@ -565,7 +581,7 @@ function drawCompleteModel(ctx, width, height) {
                             }
                             else {
                                 ctx.lineWidth = cameraToCanvasScale(1);
-                                ctx.strokeStyle = 'blue';
+                                ctx.strokeStyle = circuitDiagramColorAccessesLines;
                             }
                             ctx.moveTo(cameraToCanvasX(startX), cameraToCanvasY(startY));
                             ctx.lineTo(cameraToCanvasX(endX), cameraToCanvasY(endY));
