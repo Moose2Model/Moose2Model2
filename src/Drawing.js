@@ -348,7 +348,11 @@ function drawCompleteModel(ctx, width, height) {
                                 cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y) - size / 2, size, size);
                             break;
                         case 'SOMIX.Data':
-                            ctx.fillStyle = circuitDiagramColorData;
+                            if (mEBI.technicalType == 'DBTable') {
+                                ctx.fillStyle = circuitDiagramColorDataPersistent;
+                            } else {
+                                ctx.fillStyle = circuitDiagramColorData;
+                            }
                             SizeOnPane = dataSize * scale;
                             size = cameraToCanvasScale(SizeOnPane);
                             ctx.arc(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
