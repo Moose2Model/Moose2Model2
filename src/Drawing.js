@@ -21,6 +21,9 @@ let circuitDiagramColorHighlightedDataPersistent = '#00ff00';
 let circuitDiagramColorCallLines = '#97979780'; // 50% transparent
 let circuitDiagramColorAccessesLines = '#3131fd80'; // 50% transparent
 let circuitDiagramColorCommentLines = '#fdab3180';
+let circuitDiagramCallWidth = 2;
+let circuitDiagramAccessWidth = 2;
+
 let arrowLength = 3;
 
 function supportRetina() {
@@ -459,7 +462,7 @@ function drawCompleteModel(ctx, width, height) {
                                         ctx.strokeStyle = 'rgba(255, 0, 0, 0.2)';
                                     }
                                     else {
-                                        ctx.lineWidth = cameraToCanvasScale(1);
+                                        ctx.lineWidth = cameraToCanvasScale(circuitDiagramCallWidth);
                                         ctx.strokeStyle = circuitDiagramColorCallLines;
                                     }
                                     ctx.moveTo(cameraToCanvasX(startX), cameraToCanvasY(startY));
@@ -554,7 +557,7 @@ function drawCompleteModel(ctx, width, height) {
                                         ctx.strokeStyle = 'rgba(0, 0, 255, 0.2)';
                                     }
                                     else {
-                                        ctx.lineWidth = cameraToCanvasScale(1);
+                                        ctx.lineWidth = cameraToCanvasScale(circuitDiagramAccessWidth);
                                         ctx.strokeStyle = circuitDiagramColorAccessesLines;
                                     }
                                     ctx.moveTo(cameraToCanvasX(startX), cameraToCanvasY(startY));
