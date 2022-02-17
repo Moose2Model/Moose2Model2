@@ -21,6 +21,7 @@ let circuitDiagramColorHighlightedDataPersistent = '#00ff00';
 let circuitDiagramColorCallLines = '#97979780'; // 50% transparent
 let circuitDiagramColorAccessesLines = '#3131fd80'; // 50% transparent
 let circuitDiagramColorCommentLines = '#fdab3180';
+let arrowLength = 3;
 
 function supportRetina() {
     resizeCanvas();
@@ -471,11 +472,10 @@ function drawCompleteModel(ctx, width, height) {
                                             let unitA1Y = 0.5 * unitX + 0.866 * unitY;
                                             let unitA2X = 0.866 * unitX + 0.5 * unitY;
                                             let unitA2Y = -0.5 * unitX + 0.866 * unitY;
-
-                                            let startArrow1X = endX - 7 * unitA1X * scale;
-                                            let startArrow1Y = endY - 7 * unitA1Y * scale;
-                                            let startArrow2X = endX - 7 * unitA2X * scale;
-                                            let startArrow2Y = endY - 7 * unitA2Y * scale;
+                                            let startArrow1X = endX - arrowLength * unitA1X * scale;
+                                            let startArrow1Y = endY - arrowLength * unitA1Y * scale;
+                                            let startArrow2X = endX - arrowLength * unitA2X * scale;
+                                            let startArrow2Y = endY - arrowLength * unitA2Y * scale;
                                             ctx.moveTo(cameraToCanvasX(endX), cameraToCanvasY(endY));
                                             ctx.lineTo(cameraToCanvasX(startArrow1X), cameraToCanvasY(startArrow1Y));
                                             ctx.moveTo(cameraToCanvasX(endX), cameraToCanvasY(endY));
