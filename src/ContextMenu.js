@@ -132,8 +132,9 @@ function handleContextMenu(e) {
       m.push('Remove pinning');
     };
     if (diagramms[diagramInfos.displayedDiagram].type == circuitDiagramForSoftwareType) {
+      m.push('Highlight used by');
       m.push('Highlight');
-
+      m.push('Highlight using');
     }
 
   } else {
@@ -200,8 +201,12 @@ $('#contextMenu').on('click', 'li', function (e) {
     addWithNeighbors(gMCElementContextHandled);
   } else if ($(this).text() == 'Toggle display of names') {
     toggleNameDisplay();
+  } else if ($(this).text() == 'Highlight used by') {
+    highlightUsedBy(gMCElementContextHandled.index);
   } else if ($(this).text() == 'Highlight') {
-    highlight(gMCElementContextHandled);
+    highlight(gMCElementContextHandled.index);
+  } else if ($(this).text() == 'Highlight using') {
+    highlightUsing(gMCElementContextHandled.index);
   }
   else {
     // Scan for a name of another diagram
