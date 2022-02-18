@@ -64,12 +64,33 @@
             overflow: hidden;
         }
 
+        .dropdownDiagramMenu {
+            float: left;
+            overflow: hidden;
+        }
+
         .dropdownHelpMenu {
             float: left;
             overflow: hidden;
         }
 
         .dropdownFileMenu .fileMenuButton,
+        button {
+            cursor: pointer;
+            font-size: 16px;
+            border: none;
+            outline: none;
+            color: rgb(0, 0, 0);
+            padding-bottom: 0px;
+            padding-left: 0px;
+            padding-right: 20px;
+            padding-top: 5px;
+
+            background-color: inherit;
+            font-family: inherit;
+        }
+
+        .dropdownDiagramMenu .diagramMenuButton,
         button {
             cursor: pointer;
             font-size: 16px;
@@ -108,12 +129,27 @@
         }
 
         .navbar button:hover,
+        .dropdownDiagramMenu:hover .diagramMenuButton,
+        .diagramMenuButton:focus {
+            background-color: rgb(223, 223, 223);
+        }
+
+        .navbar button:hover,
         .dropdownHelpMenu:hover .helpMenuButton,
         .helpMenuButton:focus {
             background-color: rgb(223, 223, 223);
         }
 
         .FileMenu-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .DiagramMenu-content {
             display: none;
             position: absolute;
             background-color: #f9f9f9;
@@ -144,6 +180,19 @@
             text-align: left;
         }
 
+        .DiagramMenu-content input,
+        a input {
+            float: none;
+            color: black;
+            border: none;
+            outline: none;
+            padding: 10px 10px;
+            text-decoration: none;
+            /* Required so that elements are placed below each other */
+            display: block;
+            text-align: left;
+        }
+
         .HelpMenu-content input,
         a input {
             float: none;
@@ -158,6 +207,11 @@
         }
 
         .FileMenu-content input:hover,
+        a:hover {
+            background-color: #ddd;
+        }
+
+        .DiagramMenu-content input:hover,
         a:hover {
             background-color: #ddd;
         }
@@ -225,6 +279,13 @@
                 <input id="SaveDiagramButton" value="Save Displayed Diagram">
             </div>
         </div>
+        <div class="dropdownDiagramMenu">
+            <button class="diagramMenuButton" onclick="ToggleDiagramMenu()">Diagram
+            </button>
+            <div class="DiagramMenu-content" id="DiagramMenuID">
+                <input id="RemoveAllHighlightingButton" value="Remove all highlighting">
+            </div>
+        </div>
         <div class="dropdownHelpMenu">
             <button class="helpMenuButton" onclick="ToggleHelpMenu()">Help
             </button>
@@ -284,6 +345,12 @@
 
         const SaveDiagramButton = document.getElementById('SaveDiagramButton');
         SaveDiagramButton.addEventListener('click', SaveDisplayedDiagram);
+
+        //
+        const RemoveAllHighlightingButton = document.getElementById('RemoveAllHighlightingButton');
+        RemoveAllHighlightingButton.addEventListener('click', RemoveAllHighlighting);
+
+
 
         const ToGithubButton = document.getElementById('ToGithubButton');
         ToGithubButton.addEventListener('click', JumpToGithub);
@@ -351,6 +418,9 @@
         function ToggleFileMenu() {
             document.getElementById("FileMenuID").classList.toggle("show");
         }
+        function ToggleDiagramMenu() {
+            document.getElementById("DiagramMenuID").classList.toggle("show");
+        }
         function ToggleHelpMenu() {
             document.getElementById("HelpMenuID").classList.toggle("show");
         }
@@ -359,15 +429,21 @@
         window.onclick = function (e) {
 
             if (!e.target.matches('.fileMenuButton')) {
-                var FileMenuID = document.getElementById("FileMenuID");
-                if (FileMenuID.classList.contains('show')) {
-                    FileMenuID.classList.remove('show');
+                var MenuID = document.getElementById("FileMenuID");
+                if (MenuID.classList.contains('show')) {
+                    MenuID.classList.remove('show');
+                }
+            }
+            if (!e.target.matches('.diagramMenuButton')) {
+                var MenuID = document.getElementById("DiagramMenuID");
+                if (MenuID.classList.contains('show')) {
+                    MenuID.classList.remove('show');
                 }
             }
             if (!e.target.matches('.helpMenuButton')) {
-                var FileMenuID = document.getElementById("HelpMenuID");
-                if (FileMenuID.classList.contains('show')) {
-                    FileMenuID.classList.remove('show');
+                var MenuID = document.getElementById("HelpMenuID");
+                if (MenuID.classList.contains('show')) {
+                    MenuID.classList.remove('show');
                 }
             }
         }

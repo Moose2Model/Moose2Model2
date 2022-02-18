@@ -74,29 +74,29 @@ function cameraToPaneScale(size) {
     return size / diagramms[diagramInfos.displayedDiagram].cameraSettings.zoomfactor;
 }
 
-function highlightUsedBy(index){
-    if (typeof callByCalled[index] !== 'undefined'){
-        for (const e of callByCalled[index]){
+function highlightUsedBy(index) {
+    if (typeof callByCalled[index] !== 'undefined') {
+        for (const e of callByCalled[index]) {
             highlight(e.caller);
         }
     };
-    if (typeof accessByAccessed[index] !== 'undefined'){
+    if (typeof accessByAccessed[index] !== 'undefined') {
         // This implementation is simplified, but there are currently no SOMIX models where more details are available
-        for (const e of accessByAccessed[index]){
+        for (const e of accessByAccessed[index]) {
             highlight(e.accessor);
         }
     }
 }
 
-function highlightUsing(index){
-    if (typeof callByCaller[index] !== 'undefined'){
-        for (const e of callByCaller[index]){
+function highlightUsing(index) {
+    if (typeof callByCaller[index] !== 'undefined') {
+        for (const e of callByCaller[index]) {
             highlight(e.called);
         }
     }
-    if (typeof accessByAccessor[index] !== 'undefined'){
+    if (typeof accessByAccessor[index] !== 'undefined') {
         // This implementation is simplified, but there are currently no SOMIX models where more details are available
-        for (const e of accessByAccessor[index]){
+        for (const e of accessByAccessor[index]) {
             highlight(e.accessed);
         }
     }
@@ -106,6 +106,10 @@ function highlight(index) {
     if (!diagramms[diagramInfos.displayedDiagram].highlighted.includes(index)) {
         diagramms[diagramInfos.displayedDiagram].highlighted.push(index);
     }
+}
+
+function RemoveAllHighlighting() {
+    diagramms[diagramInfos.displayedDiagram].highlighted = [];
 }
 
 function isInBox(x, y, bX1, bX2, bY1, bY2, marginX, marginY) {
