@@ -74,6 +74,12 @@ function cameraToPaneScale(size) {
     return size / diagramms[diagramInfos.displayedDiagram].cameraSettings.zoomfactor;
 }
 
+function highlight(element) {
+    if (!diagramms[diagramInfos.displayedDiagram].highlighted.includes(element.index)) {
+        diagramms[diagramInfos.displayedDiagram].highlighted.push(element.index);
+    }
+}
+
 function isInBox(x, y, bX1, bX2, bY1, bY2, marginX, marginY) {
     // normalize box
     let nbX1, nbX2, nbY1, nbY2;
@@ -344,7 +350,11 @@ function drawCompleteModel(ctx, width, height) {
 
                             break;
                         case 'SOMIX.Code':
-                            ctx.fillStyle = circuitDiagramColorCode;
+                            if (diagramms[diagramInfos.displayedDiagram].highlighted.includes(mEBI.index)) {
+                                ctx.fillStyle = circuitDiagramColorHighlightedCode;
+                            } else {
+                                ctx.fillStyle = circuitDiagramColorCode;
+                            }
                             SizeOnPane = codeSize * scale;
                             size = cameraToCanvasScale(SizeOnPane);
 
@@ -366,9 +376,17 @@ function drawCompleteModel(ctx, width, height) {
                             break;
                         case 'SOMIX.Data':
                             if (mEBI.technicalType == 'DBTable') {
-                                ctx.fillStyle = circuitDiagramColorDataPersistent;
+                                if (diagramms[diagramInfos.displayedDiagram].highlighted.includes(mEBI.index)) {
+                                    ctx.fillStyle = circuitDiagramColorHighlightedDataPersistent;
+                                } else {
+                                    ctx.fillStyle = circuitDiagramColorDataPersistent;
+                                }
                             } else {
-                                ctx.fillStyle = circuitDiagramColorData;
+                                if (diagramms[diagramInfos.displayedDiagram].highlighted.includes(mEBI.index)) {
+                                    ctx.fillStyle = circuitDiagramColorHighlightedData;
+                                } else {
+                                    ctx.fillStyle = circuitDiagramColorData;
+                                }
                             }
                             SizeOnPane = dataSize * scale;
                             size = cameraToCanvasScale(SizeOnPane);

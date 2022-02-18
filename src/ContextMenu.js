@@ -130,6 +130,10 @@ function handleContextMenu(e) {
     };
     if (diagramms[diagramInfos.displayedDiagram].pinned.indexOf(gMCElementContextHandled.index) > -1) {
       m.push('Remove pinning');
+    };
+    if (diagramms[diagramInfos.displayedDiagram].type == circuitDiagramForSoftwareType) {
+      m.push('Highlight');
+
     }
 
   } else {
@@ -193,13 +197,11 @@ $('#contextMenu').on('click', 'li', function (e) {
   } else if ($(this).text() == 'Make this diagram active') {
     setDiagramActive(diagramInfos.displayedDiagram);
   } else if ($(this).text() == 'Add element with all neighbours') {
-
     addWithNeighbors(gMCElementContextHandled);
   } else if ($(this).text() == 'Toggle display of names') {
-
     toggleNameDisplay();
-
-
+  } else if ($(this).text() == 'Highlight') {
+    highlight(gMCElementContextHandled);
   }
   else {
     // Scan for a name of another diagram
