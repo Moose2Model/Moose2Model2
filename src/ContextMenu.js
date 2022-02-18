@@ -122,7 +122,11 @@ function handleContextMenu(e) {
     var m = [InfoText, nameText, techtypeText, uniqueNameText, linkToEditorText];
     if (typeof diagramInfos.activeDiagram !== 'undefined') {
       if (gMCElementContextHandled.element != 'SOMIX.Grouping') {
-        m.unshift('Add element with all neighbours');
+        if (diagramms[diagramInfos.displayedDiagram].generationInfoInternal.addedWithNeighbors.includes(gMCElementContextHandled.index)) {
+          m.unshift('Remove: Add element with all neighbors');
+        } else {
+          m.unshift('Add element with all neighbors');
+        }
       }
     }
     if (linkToEditorText != '') {
@@ -197,9 +201,11 @@ $('#contextMenu').on('click', 'li', function (e) {
     // requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
   } else if ($(this).text() == 'Make this diagram active') {
     setDiagramActive(diagramInfos.displayedDiagram);
-  } else if ($(this).text() == 'Add element with all neighbours') {
+  } else if ($(this).text() == 'Add element with all neighbors') {
     addWithNeighbors(gMCElementContextHandled);
-  } else if ($(this).text() == 'Toggle display of names') {
+  } else if ($(this).text() == 'Remove: Add element with all neighbors') {
+    redoAddWithNeighbors(gMCElementContextHandled);
+  }  else if ($(this).text() == 'Toggle display of names') {
     toggleNameDisplay();
   } else if ($(this).text() == 'Highlight used by') {
     highlightUsedBy(gMCElementContextHandled.index);

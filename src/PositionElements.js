@@ -43,6 +43,42 @@ function positionCircle(width, height) {
     }
 };
 
+function redoAddWithNeighbors(element) {
+
+    // Make this diagram active
+    diagramInfos.activeDiagram = diagramInfos.displayedDiagram;
+
+    // How is this be done best?
+    let where = diagramms[diagramInfos.activeDiagram].generationInfoInternal.addedWithNeighbors.indexOf(element.index);
+    if (where != -1) {
+        diagramms[diagramInfos.activeDiagram].generationInfoInternal.addedWithNeighbors.splice(where)
+
+        // Remember positions
+        let positions = diagramms[diagramInfos.activeDiagram].complModelPosition;
+
+        // Clear content of current diagram
+        diagramms[diagramInfos.activeDiagram].complModelPosition = [];
+
+        // Rebuild diagram
+        for (const index of diagramms[diagramInfos.activeDiagram].generationInfoInternal.addedWithNeighbors) {
+            let element = modelElementsByIndex[index];
+            if (typeof element !== 'undefined') {
+                addWithNeighbors(element);
+            }
+        }
+
+        // Position as before
+
+        for (const position of positions) {
+            if (typeof position !== 'undefined') {
+                diagramms[diagramInfos.activeDiagram].complModelPosition[position.index] = position;
+            }
+        }
+
+
+    }
+}
+
 function addWithNeighbors(element) {
 
     if (diagramms[diagramInfos.activeDiagram].generationInfoInternal.addedWithNeighbors.indexOf(element.index) == -1) {
@@ -90,21 +126,21 @@ function addWithNeighbors(element) {
     // Add parents
     // Outcomment this. Parents are currently only added when they are specified with isMain in the SOMIX model
 
-/*     if (typeof parentChildByChild[element.index] !== 'undefined') {
-        for (const el of parentChildByChild[element.index]) {
-            if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[el.parent] === 'undefined') {
-                position = {
-                    index: el.parent,
-                    x: newElBoxX + Math.random() * newElBoxWidth,
-                    y: newElBoxY + Math.random() * newElBoxHeight,
-                };
+    /*     if (typeof parentChildByChild[element.index] !== 'undefined') {
+            for (const el of parentChildByChild[element.index]) {
                 if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[el.parent] === 'undefined') {
-                    diagramms[diagramInfos.activeDiagram].complModelPosition[el.parent] = position;
-                    addNeighbors.push(el.parent);
+                    position = {
+                        index: el.parent,
+                        x: newElBoxX + Math.random() * newElBoxWidth,
+                        y: newElBoxY + Math.random() * newElBoxHeight,
+                    };
+                    if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[el.parent] === 'undefined') {
+                        diagramms[diagramInfos.activeDiagram].complModelPosition[el.parent] = position;
+                        addNeighbors.push(el.parent);
+                    }
                 }
             }
-        }
-    } */
+        } */
 
     // Add called
 
