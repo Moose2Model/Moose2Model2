@@ -12,7 +12,7 @@
 let circuitDiagramColorCode = '#ffeb99';
 let circuitDiagramColorHighlightedCode = '#ff9900';
 let circuitDiagramColorData = '#ccffff';
-let circuitDiagramColorHighlightedData = '#0000ff';
+let circuitDiagramColorHighlightedData = '#01ebff';
 let circuitDiagramColorDataPersistent = '#ccff99';
 let circuitDiagramColorHighlightedDataPersistent = '#00ff00';
 // let circuitDiagramColorCallLines = '#cbcbcb'; // Is to some extend transparent in old solution
