@@ -71,7 +71,9 @@ function redoAddWithNeighbors(element) {
 
         for (const position of positions) {
             if (typeof position !== 'undefined') {
-                diagramms[diagramInfos.activeDiagram].complModelPosition[position.index] = position;
+                if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[position.index] !== 'undefined') {
+                    diagramms[diagramInfos.activeDiagram].complModelPosition[position.index] = position;
+                }
             }
         }
 
