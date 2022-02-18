@@ -9,6 +9,7 @@
 // Colors
 
 // See also issue #23 - Not all colors are currently used
+let circuitDiagramColorGrouping = 'gray';
 let circuitDiagramColorCode = '#ffeb99';
 let circuitDiagramColorHighlightedCode = '#ff9900';
 let circuitDiagramColorData = '#ccffff';
@@ -349,7 +350,7 @@ function drawCompleteModel(ctx, width, height) {
                             if (drawGroupsAsBoxes) {
                                 ctx.lineWidth = cameraToCanvasScale(1);
                                 ctx.setLineDash([cameraToCanvasScale(8), cameraToCanvasScale(2)]);
-                                ctx.strokeStyle = 'black'
+                                ctx.strokeStyle = circuitDiagramColorGrouping;
                                 const width = diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxX2 -
                                     diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxX1;
                                 const height = diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxY2 -
