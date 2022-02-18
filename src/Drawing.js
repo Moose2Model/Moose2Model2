@@ -23,6 +23,7 @@ let circuitDiagramColorAccessesLines = '#3131fd80'; // 50% transparent
 let circuitDiagramColorCommentLines = '#fdab3180';
 let circuitDiagramCallWidth = 2;
 let circuitDiagramAccessWidth = 2;
+let circuitDiagramMarkExplicitlyAdded = true;
 
 let arrowLength = 3;
 
@@ -349,6 +350,19 @@ function drawCompleteModel(ctx, width, height) {
 
                             ctx.fillRect(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x) - size / 2,
                                 cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y) - size / 2, size, size);
+
+                            if (circuitDiagramMarkExplicitlyAdded) {
+                                if (diagramms[diagramInfos.displayedDiagram].generationInfoInternal.addedWithNeighbors.includes(mEBI['index'])) {
+                                    ctx.strokeStyle = circuitDiagramColorHighlightedCode;
+                                    SizeOnPane = codeSize * scale;
+                                    size = cameraToCanvasScale(SizeOnPane);
+                                    ctx.beginPath();
+                                    ctx.strokeRect(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x) - size / 2,
+                                        cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y) - size / 2, size, size);
+                                }
+
+                            }
+
                             break;
                         case 'SOMIX.Data':
                             if (mEBI.technicalType == 'DBTable') {
@@ -361,6 +375,26 @@ function drawCompleteModel(ctx, width, height) {
                             ctx.arc(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
                                 cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y), size / 2, 0, 2 * Math.PI);
                             ctx.fill();
+
+
+                            if (circuitDiagramMarkExplicitlyAdded) {
+                                if (diagramms[diagramInfos.displayedDiagram].generationInfoInternal.addedWithNeighbors.includes(mEBI['index'])) {
+
+                                    if (mEBI.technicalType == 'DBTable') {
+                                        ctx.strokeStyle = circuitDiagramColorHighlightedDataPersistent;
+                                    } else {
+                                        ctx.strokeStyle = circuitDiagramColorHighlightedData;
+                                    }
+                                    SizeOnPane = dataSize * scale;
+                                    size = cameraToCanvasScale(SizeOnPane);
+
+                                    ctx.beginPath();
+                                    ctx.arc(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
+                                        cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y), size / 2, 0, 2 * Math.PI);
+                                    ctx.stroke();
+                                }
+                            }
+
                             break;
                     }
 
