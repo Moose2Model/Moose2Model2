@@ -122,7 +122,7 @@ function handleContextMenu(e) {
     var m = [InfoText, nameText, techtypeText, uniqueNameText, linkToEditorText];
     if (typeof diagramInfos.activeDiagram !== 'undefined') {
       if (gMCElementContextHandled.element != 'SOMIX.Grouping') {
-        if (diagramms[diagramInfos.displayedDiagram].generationInfoInternal.addedWithNeighbors.includes(gMCElementContextHandled.index)) {
+        if (diagramms[diagramInfos.activeDiagram].generationInfoInternal.addedWithNeighbors.includes(gMCElementContextHandled.index)) {
           m.unshift('Remove: Add element with all neighbors');
         } else {
           m.unshift('Add element with all neighbors');

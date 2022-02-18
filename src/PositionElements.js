@@ -45,8 +45,10 @@ function positionCircle(width, height) {
 
 function redoAddWithNeighbors(element) {
 
-    // Make this diagram active
-    diagramInfos.activeDiagram = diagramInfos.displayedDiagram;
+    // Make this diagram active 'All model elements'
+    if (diagramInfos.displayedDiagram != startDiagram) { // The start diagram has never to be the active diagram
+        diagramInfos.activeDiagram = diagramInfos.displayedDiagram;
+    }
 
     // How is this be done best?
     let where = diagramms[diagramInfos.activeDiagram].generationInfoInternal.addedWithNeighbors.indexOf(element.index);
