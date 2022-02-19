@@ -106,7 +106,7 @@ function addWithNeighbors(element) {
 
     // list of added neigbors. This list is required to add "isMain" parents also
 
-    let addNeighbors = [];
+    let addNeighbors = [element.index]; // The element itself has also be in this list. This is required for instance so that also for the added element a parent is displayed
 
     // Add childs
     // This should currently not be used, because it is not possible to specify that a grouping is added
