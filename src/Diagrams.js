@@ -10,6 +10,7 @@ const circuitDiagramForSoftwareDiagramType = 'C';
 * @member complModelPosition An array with positions.
  Use as: diagramms[diagramInfos.displayedDiagram].complModelPosition[index].x and diagramms[diagramInfos.displayedDiagram].complModelPosition[index].y
  Contains also the index of the element in diagramms[diagramInfos.displayedDiagram].complModelPosition[index].index
+ An element is displayed in a diagram when visible is true
  May have the positions of a box that describes the size of the element (Check whether .boxX1 is defined)
  .boxX1, .boxX2, .boxY1, .boxY2
 * @member diagramSettings The settings of a diagram. Use:

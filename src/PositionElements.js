@@ -32,6 +32,7 @@ function positionCircle(width, height) {
             y = w4 * Math.sin(angle);
 
             let position = {
+                visible: true,
                 index: mEBI['index'],
                 x: x,
                 y: y,
@@ -95,6 +96,7 @@ function addWithNeighbors(element) {
     let position;
     if (typeof element !== 'undefined') {
         position = {
+            visible: true,
             index: element['index'],
             x: newElBoxX + Math.random() * newElBoxWidth,
             y: newElBoxY + Math.random() * newElBoxHeight,
@@ -115,6 +117,7 @@ function addWithNeighbors(element) {
         for (const el of parentChildByParent[element.index]) {
             if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[el.child] === 'undefined') {
                 position = {
+                    visible: true,
                     index: el.child,
                     x: newElBoxX + Math.random() * newElBoxWidth,
                     y: newElBoxY + Math.random() * newElBoxHeight,
@@ -152,6 +155,7 @@ function addWithNeighbors(element) {
         for (const el of callByCaller[element.index]) {
             if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[el.called] === 'undefined') {
                 position = {
+                    visible: true,
                     index: el.called,
                     x: newElBoxX + Math.random() * newElBoxWidth,
                     y: newElBoxY + Math.random() * newElBoxHeight,
@@ -170,6 +174,7 @@ function addWithNeighbors(element) {
         for (const el of callByCalled[element.index]) {
             if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[el.caller] === 'undefined') {
                 position = {
+                    visible: true,
                     index: el.caller,
                     x: newElBoxX + Math.random() * newElBoxWidth,
                     y: newElBoxY + Math.random() * newElBoxHeight,
@@ -188,6 +193,7 @@ function addWithNeighbors(element) {
         for (const el of accessByAccessor[element.index]) {
             if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[el.accessed] === 'undefined') {
                 position = {
+                    visible: true,
                     index: el.accessed,
                     x: newElBoxX + Math.random() * newElBoxWidth,
                     y: newElBoxY + Math.random() * newElBoxHeight,
@@ -206,6 +212,7 @@ function addWithNeighbors(element) {
         for (const el of accessByAccessed[element.index]) {
             if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[el.accessor] === 'undefined') {
                 position = {
+                    visible: true,
                     index: el.accessor,
                     x: newElBoxX + Math.random() * newElBoxWidth,
                     y: newElBoxY + Math.random() * newElBoxHeight,
@@ -228,6 +235,7 @@ function addWithNeighbors(element) {
                 if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[el.parent] === 'undefined') {
                     if (el.isMain) {
                         position = {
+                            visible: true,
                             index: el.parent,
                             x: newElBoxX + Math.random() * newElBoxWidth,
                             y: newElBoxY + Math.random() * newElBoxHeight,
@@ -250,6 +258,9 @@ function suppress(element) {
     }
 
     // Remove now all suppressed elements
+    if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[element.index] !== 'undefined') {
+        diagramms[diagramInfos.activeDiagram].complModelPosition[element.index].visible = false;
+    }
 
 }
 
@@ -266,6 +277,9 @@ function redoSuppress(element) {
     }
 
     // add now all suppressed elements
+    if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[element.index] !== 'undefined') {
+        diagramms[diagramInfos.activeDiagram].complModelPosition[element.index].visible = true;
+    }
 
 }
 
