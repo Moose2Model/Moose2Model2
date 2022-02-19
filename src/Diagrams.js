@@ -24,6 +24,7 @@ diagramms[diagramInfos.displayedDiagram].cameraSettings.zoomfactor
 * @member forceDirectingState see ForceDirection.js for content
 * @member generationInfoInternal An object with all information how a diagram is to be generated. This is the internal representation. It is not defined for the start diagram.
 diagramms[diagramInfos.displayedDiagram].generationInfoInternal.addedWithNeighbors - A list with all indizees of elements that are added with neighbors. Do not add indizees twice, check whether they exist before adding.
+diagramms[diagramInfos.displayedDiagram].generationInfoInternal.suppressed - A list with all elements that are suppressed with all children
 * @member highlighted An array with the indizes of all highlighted elements Do not add indizees twice, check whether they exist before adding.
 */
 let diagramms = {};
@@ -80,6 +81,7 @@ function newDiagram(name) {
   }
   diagramms[name].generationInfoInternal = {};
   diagramms[name].generationInfoInternal.addedWithNeighbors = [];
+  diagramms[name].generationInfoInternal.suppressed = [];
   diagramms[name].highlighted = [];
 }
 

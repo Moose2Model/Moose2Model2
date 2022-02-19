@@ -243,3 +243,29 @@ function addWithNeighbors(element) {
 
 }
 
+function suppress(element) {
+
+    if (diagramms[diagramInfos.activeDiagram].generationInfoInternal.suppressed.indexOf(element.index) == -1) {
+        diagramms[diagramInfos.activeDiagram].generationInfoInternal.suppressed.push(element.index);
+    }
+
+    // Remove now all suppressed elements
+
+}
+
+function redoSuppress(element) {
+
+    // Make this diagram active 'All model elements'
+    if (diagramInfos.displayedDiagram != startDiagram) { // The start diagram has never to be the active diagram
+        diagramInfos.activeDiagram = diagramInfos.displayedDiagram;
+    }
+
+    let where = diagramms[diagramInfos.activeDiagram].generationInfoInternal.suppressed.indexOf(element.index);
+    if (where != -1) {
+        diagramms[diagramInfos.activeDiagram].generationInfoInternal.suppressed.splice(where)
+    }
+
+    // add now all suppressed elements
+
+}
+

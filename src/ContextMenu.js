@@ -129,6 +129,15 @@ function handleContextMenu(e) {
         }
       }
     }
+    if (typeof diagramInfos.activeDiagram !== 'undefined') {
+      if (gMCElementContextHandled.element == 'SOMIX.Code' || gMCElementContextHandled.element == 'SOMIX.Data') {
+        if (diagramms[diagramInfos.activeDiagram].generationInfoInternal.suppressed.includes(gMCElementContextHandled.index)) {
+          m.push('Redo supress');
+        } else {
+          m.push('Supress');
+        }
+      }
+    }
     if (linkToEditorText != '') {
       m.push('Jump to code');
     };
@@ -205,7 +214,11 @@ $('#contextMenu').on('click', 'li', function (e) {
     addWithNeighbors(gMCElementContextHandled);
   } else if ($(this).text() == 'Remove: Add element with all neighbors') {
     redoAddWithNeighbors(gMCElementContextHandled);
-  }  else if ($(this).text() == 'Toggle display of names') {
+  } else if ($(this).text() == 'Supress') {
+    suppress(gMCElementContextHandled);
+  }  else if ($(this).text() == 'Redo supress') {
+    redoSuppress(gMCElementContextHandled);
+  }   else if ($(this).text() == 'Toggle display of names') {
     toggleNameDisplay();
   } else if ($(this).text() == 'Highlight used by') {
     highlightUsedBy(gMCElementContextHandled.index);
