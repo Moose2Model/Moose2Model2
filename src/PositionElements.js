@@ -251,6 +251,25 @@ function addWithNeighbors(element) {
 
 }
 
+function suppressChildren(index, suppressedIndex) {
+    if (typeof parentChildByParent[index] !== 'undefined') {
+        for (const pC of parentChildByParent[index]) {
+            if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[pC.child] !== 'undefined') {
+                if (diagramms[diagramInfos.activeDiagram].complModelPosition[pC.child].visible) {
+                    diagramms[diagramInfos.activeDiagram].complModelPosition[pC.child].visible = false;
+                    if (typeof diagramms[diagramInfos.activeDiagram].generationInfoInternal.suppressedDueTo[suppressedIndex] === 'undefined') {
+                        diagramms[diagramInfos.activeDiagram].generationInfoInternal.suppressedDueTo[suppressedIndex] = [];
+                    }
+                    if (diagramms[diagramInfos.activeDiagram].generationInfoInternal.suppressedDueTo[suppressedIndex].indexOf(pC.child) == -1) {
+                        diagramms[diagramInfos.activeDiagram].generationInfoInternal.suppressedDueTo[suppressedIndex].push(pC.child);
+                    }
+                    suppressChildren(pC.child, suppressedIndex);
+                }
+            }
+        }
+    }
+}
+
 function suppress(element) {
 
     if (diagramms[diagramInfos.activeDiagram].generationInfoInternal.suppressed.indexOf(element.index) == -1) {
@@ -260,6 +279,7 @@ function suppress(element) {
     // Remove now all suppressed elements
     if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[element.index] !== 'undefined') {
         diagramms[diagramInfos.activeDiagram].complModelPosition[element.index].visible = false;
+        suppressChildren(element.index, element.index);
     }
 
 }
@@ -279,6 +299,15 @@ function redoSuppress(element) {
     // add now all suppressed elements
     if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[element.index] !== 'undefined') {
         diagramms[diagramInfos.activeDiagram].complModelPosition[element.index].visible = true;
+    }
+
+    // Make all elements visible which were made invisible due to suppressing the element where it is redone
+    if (typeof diagramms[diagramInfos.activeDiagram].generationInfoInternal.suppressedDueTo[element.index] !== 'undefined') {
+        for (const sDT of diagramms[diagramInfos.activeDiagram].generationInfoInternal.suppressedDueTo[element.index]) {
+            if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[sDT] !== 'undefined') {
+                diagramms[diagramInfos.activeDiagram].complModelPosition[sDT].visible = true;
+            }
+        }
     }
 
 }

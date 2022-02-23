@@ -137,6 +137,13 @@ function handleContextMenu(e) {
           m.push('Supress');
         }
       }
+      if (gMCElementContextHandled.element == 'SOMIX.Grouping' ) {
+        if (diagramms[diagramInfos.activeDiagram].generationInfoInternal.suppressed.includes(gMCElementContextHandled.index)) {
+          m.push('Redo supress');
+        } else {
+          m.push('Supress with all children');
+        }
+      }
     }
     if (linkToEditorText != '') {
       m.push('Jump to code');
@@ -214,7 +221,7 @@ $('#contextMenu').on('click', 'li', function (e) {
     addWithNeighbors(gMCElementContextHandled);
   } else if ($(this).text() == 'Remove: Add element with all neighbors') {
     redoAddWithNeighbors(gMCElementContextHandled);
-  } else if ($(this).text() == 'Supress') {
+  } else if ($(this).text() == 'Supress' || $(this).text() == 'Supress with all children') {
     suppress(gMCElementContextHandled);
   }  else if ($(this).text() == 'Redo supress') {
     redoSuppress(gMCElementContextHandled);
