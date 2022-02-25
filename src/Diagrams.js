@@ -27,6 +27,7 @@ diagramms[diagramInfos.displayedDiagram].cameraSettings.zoomfactor
 diagramms[diagramInfos.displayedDiagram].generationInfoInternal.addedWithNeighbors - A list with all indizees of elements that are added with neighbors. Do not add indizees twice, check whether they exist before adding.
 diagramms[diagramInfos.displayedDiagram].generationInfoInternal.suppressed - A list with all elements that are suppressed with all children
 diagramms[diagramInfos.displayedDiagram].generationInfoInternal.suppressedDueTo - A list with all elements that are not shown because of a suppressed element
+diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID - A list with all elements that are not shown because of a suppressed element
 * @member highlighted An array with the indizes of all highlighted elements Do not add indizees twice, check whether they exist before adding.
 */
 let diagramms = {};
@@ -85,6 +86,7 @@ function newDiagram(name) {
   diagramms[name].generationInfoInternal.addedWithNeighbors = [];
   diagramms[name].generationInfoInternal.suppressed = [];
   diagramms[name].generationInfoInternal.suppressedDueTo = [];
+  diagramms[name].generationInfoInternal.commentsByID = [];
   diagramms[name].highlighted = [];
 }
 

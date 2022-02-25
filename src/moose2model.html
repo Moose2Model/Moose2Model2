@@ -304,6 +304,14 @@
         <input type="submit" value="Create" class="createNewDiagram" id="CreateNewDiagramButton">
     </div>
 
+    <!-- Fields when a comment is entered -->
+    <div class="commentElement" id="commentElementID">
+        <label for="commentTextField">Enter a text for the comment:</label>
+        <textarea name="commentTextField" id="commentField" rows="5" cols="" 33></textarea>
+        <input type="submit" value="OK" class="commentOK" id="commentOKButton">
+        <input type="submit" value="Cancel" class="commentCancel" id="commentCancelButton">
+    </div>
+
     <div id=canvasContainer></div>
     <canvas id="pane" width="800" height="800"></canvas>
     <ul id=contextMenu>
@@ -312,6 +320,7 @@
     </div>
 
     <script src="Global.js?v=15"></script>
+    <script src="Comment.js?v=15"></script>
     <script src="ForceDirecting.js?v=15"></script>
     <script src="Diagrams.js?v=15"></script>
     <script src="AnalyzeMseFile.js?v=15"></script>
@@ -327,6 +336,9 @@
 
         const newDiagramElement = document.getElementById('newDiagramElementID');
         newDiagramElement.hidden = true; // Hide when page is loaded
+
+        const aCommentElement = document.getElementById('commentElementID');
+        aCommentElement.hidden = true; // Hide when page is loaded
 
         const OpenWorkFolderButton = document.getElementById('OpenWorkFolderButton');
         OpenWorkFolderButton.addEventListener('click', SetWorkFolder);
@@ -387,8 +399,6 @@
         const CreateNewDiagramButton = document.getElementById('CreateNewDiagramButton'); // From Input Area
         CreateNewDiagramButton.addEventListener('click', handleNewDiagram);
 
-
-
         let newDiagramNameElement = document.getElementById('newDiagramField');
 
         function handleNewDiagramRequested() {
@@ -404,6 +414,35 @@
             newDiagramNameElement.value = '';
             // Set also to hidden, when the user clicks elsewhere or make environment not responsive
         }
+
+        // New comment
+
+        const commentOKButton = document.getElementById('commentOKButton'); // From Input Area
+        commentOKButton.addEventListener('click', handleCommentOK);
+
+        const commentCancelButton = document.getElementById('commentCancelButton'); // From Input Area
+        commentCancelButton.addEventListener('click', handleCommentCancel);
+
+        let commentElement = document.getElementById('commentField');
+
+        function handleCommentRequested(text) {
+            commentElement.value = text;
+            aCommentElement.hidden = false;
+            commentElement.focus();
+        }
+
+        function handleCommentOK() {
+            const text = commentElement.value;
+            aCommentElement.hidden = true;
+            commentElement.value = '';
+            commentAdapted(text);
+        }
+
+        function handleCommentCancel() {
+            aCommentElement.hidden = true;
+        }
+
+        //
 
         function JumpToGithub() {
             window.open('https://github.com/Moose2Model/Moose2Model2', '_blank');

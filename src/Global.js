@@ -57,6 +57,7 @@ let accessByAccessor = [];
 };
 */
 let accessByAccessed = [];
+
 // These global variables are only needed when an mse model is loaded:
 let indexByMSEIndex = [];
 let currentIndex = 1;
