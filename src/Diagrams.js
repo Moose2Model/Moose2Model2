@@ -174,6 +174,14 @@ async function ReadDisplayedDiagram() {
       diagramms[diagramInfos.activeDiagram].pinned.push(modelElementsByUniqueKey[e].index);
     }
   }
+
+  // --- Suppress elements on this diagram
+  for (const e of readGenerationInfo.suppressed) {
+    if (typeof modelElementsByUniqueKey[e] !== 'undefined') {
+      suppress(modelElementsByUniqueKey[e]);
+    }
+  }
+
   // --- Draw new diagram
   drawCompleteModel(ctx, g_width, g_height);
 }
@@ -215,9 +223,17 @@ async function SaveDisplayedDiagram() {
 
   // Store pinning
   generationInfoExternal.pinned = [];
-  for (const e of diagramms[diagramInfos.displayedDiagram].pinned) {
-    if (typeof e !== 'undefined') {
-      generationInfoExternal.pinned.push(uniqueKey(modelElementsByIndex[e].technicalType, modelElementsByIndex[e].uniqueName));
+  for (const idx of diagramms[diagramInfos.displayedDiagram].pinned) {
+    if (typeof idx !== 'undefined') {
+      generationInfoExternal.pinned.push(uniqueKey(modelElementsByIndex[idx].technicalType, modelElementsByIndex[idx].uniqueName));
+    }
+  }
+
+  // Store suppression
+  generationInfoExternal.suppressed = [];
+  for (const idx of diagramms[diagramInfos.activeDiagram].generationInfoInternal.suppressed) {
+    if (typeof idx !== 'undefined') {
+      generationInfoExternal.suppressed.push(uniqueKey(modelElementsByIndex[idx].technicalType, modelElementsByIndex[idx].uniqueName));
     }
   }
 
@@ -299,7 +315,9 @@ async function ImportOldDiagram() {
           return;
         }
       }
+
       if (n.tagName == 'element') {
+
         let n_type = '';
         let n_class = '';
         let n_method = '';
@@ -307,6 +325,7 @@ async function ImportOldDiagram() {
         let n_x = '';
         let n_y = '';
         let n_add_explicitly = false;
+        let n_suppressed = false;
         for (const e of n.children) {
           if (e.tagName == 'type') {
             n_type = e.textContent;
@@ -329,6 +348,11 @@ async function ImportOldDiagram() {
           if (e.tagName == 'ACTSuppressOthers') {
             // Here it is assumed that there are no xml files where not the next neighbors are added explicitly
             n_add_explicitly = true;
+          }
+          if (e.tagName == 'supressWithChildren') {
+            if (e.textContent == 'true') {
+              n_suppressed = true;
+            }
           }
         }
 
@@ -359,6 +383,10 @@ async function ImportOldDiagram() {
                       }
                     }
                     if (step == 2) {
+                      // --- Suppress elements on this diagram
+                      if (n_suppressed) {
+                        suppress(e2);
+                      }
                       // --- Position elements on this diagram
                       if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[e2.index] !== 'undefined') {
                         diagramms[diagramInfos.activeDiagram].complModelPosition[e2.index].x = parseFloat(n_x) * factorOldToNew;
@@ -379,6 +407,11 @@ async function ImportOldDiagram() {
                     }
                   }
                   if (step == 2) {
+                    // --- Suppress elements on this diagram
+                    if (n_suppressed) {
+                      suppress(e2);
+                    }
+
                     // --- Position elements on this diagram
                     if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[e2.index] !== 'undefined') {
                       diagramms[diagramInfos.activeDiagram].complModelPosition[e2.index].x = parseFloat(n_x) * factorOldToNew;
@@ -387,7 +420,6 @@ async function ImportOldDiagram() {
                   }
 
                 }
-
 
               }
             }
@@ -400,7 +432,24 @@ async function ImportOldDiagram() {
 
         }
 
-      }
+        if (n_type == 'FAMIXClass') {
+          if (step == 2) {
+            for (const e2 of modelElementsByIndex) {
+              if (typeof e2 !== 'undefined') {
+                if (e2.element == 'SOMIX.Grouping' && e2.name == n_class) {
+                  // --- Suppress elements on this diagram
+                  if (n_suppressed) {
+                    suppress(e2);
+                  }
+                }
+              }
+            }
+          }
+
+
+        }
+
+      } // if (n.tagName == 'element') {
     }
   }
 
