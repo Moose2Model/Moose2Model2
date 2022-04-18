@@ -456,9 +456,20 @@ function drawCompleteModel(ctx, width, height) {
                         if (mEBI.element == 'SOMIX.Code' || mEBI.element == 'SOMIX.Data') {
                             ctx.textAlign = 'center';
                             ctx.font = scaledFontSize + 'px  sans-serif';
-                            ctx.fillText(mEBI.name, cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
-                                cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y + fontsize * .3));
+                            ctx.fillText(mEBI.name, cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x),
+                                cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y + fontsize * .3));
                             ctx.textAlign = 'standard';
+
+                            // Draw comment texts
+                            if (typeof diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index] !== 'undefined') {
+                                if (diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].text != '') {
+                                    ctx.font = scaledFontSize + 'px  sans-serif';
+                                    ctx.fillText(diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].text, 
+                                        cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].x),
+                                        cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].y));
+                                }
+                            }
+
                         }
                     } // if (diagramms[diagramInfos.displayedDiagram].diagramType == circuitDiagramForSoftwareDiagramType && stepDraw == 1) {
 

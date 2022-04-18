@@ -1,8 +1,8 @@
 'use strict';
 
 let lastElement;
-const defaultOffsetX = -20;
-const defaultOffsetY = 20;
+const defaultOffsetX = 50;
+const defaultOffsetY = -50;
 
 function comment(element) {
     lastElement = element;
