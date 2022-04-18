@@ -453,8 +453,9 @@ function drawCompleteModel(ctx, width, height) {
                         const fontsize = fontSizeGeneral * scale;
                         ctx.fillStyle = 'black';
                         let scaledFontSize = cameraToCanvasScale(fontsize);
+                        let scaledLineSpace = scaledFontSize * 1.5;
                         if (mEBI.element == 'SOMIX.Code' || mEBI.element == 'SOMIX.Data') {
-                            ctx.textAlign = 'center';
+                            ctx.textAlign = 'left';
                             ctx.font = scaledFontSize + 'px  sans-serif';
                             ctx.fillText(mEBI.name, cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x),
                                 cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y + fontsize * .3));
@@ -464,9 +465,15 @@ function drawCompleteModel(ctx, width, height) {
                             if (typeof diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index] !== 'undefined') {
                                 if (diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].text != '') {
                                     ctx.font = scaledFontSize + 'px  sans-serif';
-                                    ctx.fillText(diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].text, 
-                                        cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].x),
-                                        cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].y));
+                                    // Handle line breaks
+                                    let textLines = diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].text.split('\n');
+                                    let TextPositionY = diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].y;
+                                    for (const textLine of textLines) {
+                                        ctx.fillText(textLine,
+                                            cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].x),
+                                            cameraToCanvasY(TextPositionY));
+                                        TextPositionY += scaledLineSpace;
+                                    }
                                 }
                             }
 
