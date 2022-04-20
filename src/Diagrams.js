@@ -170,6 +170,20 @@ async function ReadDisplayedDiagram() {
       diagramms[diagramInfos.activeDiagram].complModelPosition[element.index].y = e.y;
     }
   }
+
+  // --- Add comments to this diagram
+  for (const e of readGenerationInfo.comments) {
+    if (typeof modelElementsByUniqueKey[e.uniqueKey] !== 'undefined') {
+      let element = modelElementsByUniqueKey[e.uniqueKey];
+      if (typeof element !== 'undefined') {
+        diagramms[diagramInfos.activeDiagram].generationInfoInternal.commentsByID[element.index] = {};
+        diagramms[diagramInfos.activeDiagram].generationInfoInternal.commentsByID[element.index].x = e.x;
+        diagramms[diagramInfos.activeDiagram].generationInfoInternal.commentsByID[element.index].y = e.y;
+        diagramms[diagramInfos.activeDiagram].generationInfoInternal.commentsByID[element.index].text = e.text;
+      }
+    }
+  }
+
   // --- Pin elements on this diagram
   for (const e of readGenerationInfo.pinned) {
     if (typeof modelElementsByUniqueKey[e] !== 'undefined') {
