@@ -209,9 +209,9 @@ async function SaveDisplayedDiagram() {
     generationInfoExternal.addedWithNeighbors.push(uniqueKey(modelElementsByIndex[e].technicalType, modelElementsByIndex[e].uniqueName));
   }
 
-  // Store positions
+  // Store positions with comments
   generationInfoExternal.positions = [];
-
+  generationInfoExternal.comments = [];
 
   for (const e of diagramms[diagramInfos.displayedDiagram].complModelPosition) {
     if (typeof e !== 'undefined') {
@@ -220,6 +220,16 @@ async function SaveDisplayedDiagram() {
       position.x = Math.round(100 * e.x) / 100;
       position.y = Math.round(100 * e.y) / 100;
       generationInfoExternal.positions.push(position);
+
+      if (typeof diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[e.index] !== 'undefined') {
+        let comment = {};
+        comment.uniqueKey = uniqueKey(modelElementsByIndex[e.index].technicalType, modelElementsByIndex[e.index].uniqueName);
+        comment.x = Math.round(100 * diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[e.index].x) / 100;
+        comment.y = Math.round(100 * diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[e.index].y) / 100;
+        comment.text = diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[e.index].text;
+        generationInfoExternal.comments.push(comment);
+      }
+
     }
   }
 
@@ -238,6 +248,7 @@ async function SaveDisplayedDiagram() {
       generationInfoExternal.suppressed.push(uniqueKey(modelElementsByIndex[idx].technicalType, modelElementsByIndex[idx].uniqueName));
     }
   }
+
 
   // Make and export JSON file
 
