@@ -351,6 +351,9 @@ async function ImportOldDiagram() {
         let n_attribute = '';
         let n_x = '';
         let n_y = '';
+        let n_comment = '';
+        let n_comment_x = 0;
+        let n_comment_y = 0;
         let n_add_explicitly = false;
         let n_suppressed = false;
         for (const e of n.children) {
@@ -372,6 +375,19 @@ async function ImportOldDiagram() {
           if (e.tagName == 'y') {
             n_y = e.textContent;
           }
+          if (e.tagName == 'comment') {
+            n_comment = e.textContent;
+/*             // The first character is apparently an artificial " . Remove it.
+            n_comment = n_comment.substring(1);  */
+            n_comment = n_comment.replace('<br>','\n')
+          }
+          if (e.tagName == 'commentx') {
+            n_comment_x = e.textContent;
+          }
+          if (e.tagName == 'commenty') {
+            n_comment_y = e.textContent;
+          }
+
           if (e.tagName == 'ACTSuppressOthers') {
             // Here it is assumed that there are no xml files where not the next neighbors are added explicitly
             n_add_explicitly = true;
@@ -414,12 +430,22 @@ async function ImportOldDiagram() {
                       if (n_suppressed) {
                         suppress(e2);
                       }
-                      // --- Position elements on this diagram
                       if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[e2.index] !== 'undefined') {
+                        // --- Position elements on this diagram
                         diagramms[diagramInfos.activeDiagram].complModelPosition[e2.index].x = parseFloat(n_x) * factorOldToNew;
                         diagramms[diagramInfos.activeDiagram].complModelPosition[e2.index].y = parseFloat(n_y) * factorOldToNew;
+
+                        // --- Add Comments
+                        if (n_comment != '') {
+                          diagramms[diagramInfos.activeDiagram].generationInfoInternal.commentsByID[e2.index] = {};
+                          diagramms[diagramInfos.activeDiagram].generationInfoInternal.commentsByID[e2.index].x = parseFloat(n_comment_x) * factorOldToNew;
+                          diagramms[diagramInfos.activeDiagram].generationInfoInternal.commentsByID[e2.index].y = parseFloat(n_comment_y) * factorOldToNew;
+                          diagramms[diagramInfos.activeDiagram].generationInfoInternal.commentsByID[e2.index].text = n_comment;
+                        }
+
                       }
                     }
+                    // End duplicate 1/2
                   }
                 }
 
@@ -439,12 +465,21 @@ async function ImportOldDiagram() {
                       suppress(e2);
                     }
 
-                    // --- Position elements on this diagram
                     if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[e2.index] !== 'undefined') {
+                      // --- Position elements on this diagram
                       diagramms[diagramInfos.activeDiagram].complModelPosition[e2.index].x = parseFloat(n_x) * factorOldToNew;
                       diagramms[diagramInfos.activeDiagram].complModelPosition[e2.index].y = parseFloat(n_y) * factorOldToNew;
+                      // --- Add Comments
+                      if (n_comment != '') {
+                        diagramms[diagramInfos.activeDiagram].generationInfoInternal.commentsByID[e2.index] = {};
+                        diagramms[diagramInfos.activeDiagram].generationInfoInternal.commentsByID[e2.index].x = parseFloat(n_comment_x) * factorOldToNew;
+                        diagramms[diagramInfos.activeDiagram].generationInfoInternal.commentsByID[e2.index].y = parseFloat(n_comment_y) * factorOldToNew;
+                        diagramms[diagramInfos.activeDiagram].generationInfoInternal.commentsByID[e2.index].text = n_comment;
+                      }
+
                     }
                   }
+                  // End duplicate 2/2
 
                 }
 
