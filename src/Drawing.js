@@ -455,13 +455,14 @@ function drawCompleteModel(ctx, width, height) {
                         let scaledFontSize = cameraToCanvasScale(fontsize);
                         let scaledLineSpace = scaledFontSize * 1.5;
                         if (mEBI.element == 'SOMIX.Code' || mEBI.element == 'SOMIX.Data') {
-                            ctx.textAlign = 'left';
+                            ctx.textAlign = 'center';
                             ctx.font = scaledFontSize + 'px  sans-serif';
                             ctx.fillText(mEBI.name, cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x),
                                 cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y + fontsize * .3));
-                            ctx.textAlign = 'standard';
+                            ctx.textAlign = 'start';
 
                             // Draw comment texts
+                            ctx.textAlign = 'left';
                             if (typeof diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index] !== 'undefined') {
                                 if (diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].text != '') {
                                     ctx.font = scaledFontSize + 'px  sans-serif';
@@ -476,6 +477,8 @@ function drawCompleteModel(ctx, width, height) {
                                     }
                                 }
                             }
+                            // Reset the text alignment. Needed because not everywhere it is specified when center is required.
+                            ctx.textAlign = 'start';
 
                         }
                     } // if (diagramms[diagramInfos.displayedDiagram].diagramType == circuitDiagramForSoftwareDiagramType && stepDraw == 1) {
@@ -720,7 +723,7 @@ function drawCompleteModel(ctx, width, height) {
                                     ctx.font = scaledFontSize + 'px  sans-serif';
                                     ctx.fillText(mEBI.name, cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
                                         cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y + fontsize * .3));
-                                    ctx.textAlign = 'standard';
+                                    ctx.textAlign = 'start';
                                 }
                             }
                             else if (diagramms[diagramInfos.displayedDiagram].diagramType == circuitDiagramForSoftwareDiagramType) {
@@ -739,9 +742,10 @@ function drawCompleteModel(ctx, width, height) {
     //     // Draw further informations
     // ctx.moveTo(g_width - 20, g_height - 10);
     ctx.fillStyle = 'black';
+    ctx.textAlign = 'left';
     ctx.font = generalFontSize + 'px  sans-serif';
     ctx.fillText(Math.round(100 * diagramms[diagramInfos.displayedDiagram].cameraSettings.zoomfactor) + '%', g_width - 40, g_height - 10);
-
+    ctx.textAlign = 'start';
 };
 
 
