@@ -151,6 +151,13 @@ function drawCompleteModel(ctx, width, height) {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+    // Prepare constants to write texts correctly
+    const fontsize = fontSizeGeneral * scale;
+    let scaledFontSize = cameraToCanvasScale(fontsize);
+    const lineSpace = fontsize * 1.5;
+    let scaledLineSpace = cameraToCanvasScale(lineSpace);
+    //let scaledLineSpace = scaledFontSize * 1.5;
+
     if (diagramms[diagramInfos.displayedDiagram].complModelPosition.length == 0) {
         ctx.font = '15px sans-serif';
         ctx.fillStyle = 'black'
@@ -160,20 +167,20 @@ function drawCompleteModel(ctx, width, height) {
 
     // Draw background
     if (diagramms[diagramInfos.displayedDiagram].diagramSettings.displayNewElementBox == true) {
+        // Draw landing box
         ctx.lineWidth = cameraToCanvasScale(1);
         ctx.setLineDash([cameraToCanvasScale(8), cameraToCanvasScale(2)]);
         ctx.strokeStyle = 'gray'
         ctx.strokeRect(cameraToCanvasX(newElBoxX), cameraToCanvasY(newElBoxY), cameraToCanvasScale(newElBoxWidth), cameraToCanvasScale(newElBoxHeight));
         ctx.setLineDash([]);
 
+
+
+        // Write explanation text for landing box
         ctx.fillStyle = 'gray';
-
-        // var textMeasurement = ctx.measureText('foo'); // TextMetrics object
-        // textMeasurement.width; // 16;
-
-        let scaledFontSize = cameraToCanvasScale(generalFontSize);
+        let scaledFontSizeLandingBox = cameraToCanvasScale(generalFontSize);
         ctx.textAlign = 'right';
-        ctx.font = scaledFontSize + 'px  sans-serif';
+        ctx.font = scaledFontSizeLandingBox + 'px  sans-serif';
         ctx.fillText('New elements are placed here', cameraToCanvasX(newElBoxX + newElBoxWidth), cameraToCanvasY(newElBoxY + newElBoxHeight + generalFontSize));
         ctx.textAlign = 'start';
 
@@ -185,7 +192,7 @@ function drawCompleteModel(ctx, width, height) {
         if (typeof cmp !== 'undefined') {
             if (cmp.visible) {
                 let mEBI = modelElementsByIndex[cmp.index];
-                // Draw elements for Circuit Diagrams
+                // Determine Bounding box of elements and comments
                 // This is done before drawing the edges, because the edges have to "react" on the actual size of the elements
 
                 if (diagramms[diagramInfos.displayedDiagram].diagramType == circuitDiagramForSoftwareDiagramType) {
@@ -206,21 +213,21 @@ function drawCompleteModel(ctx, width, height) {
                             SizeOnPane = codeSize * scale;
                             //         size = cameraToCanvasScale(SizeOnPane);
 
-                            //         ctx.fillRect(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x) - size / 2,
-                            //             cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y) - size / 2, size, size);
+                            //         ctx.fillRect(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x) - size / 2,
+                            //             cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y) - size / 2, size, size);
                             break;
                         case 'SOMIX.Data':
                             //         ctx.fillStyle = 'lightBlue';
                             SizeOnPane = dataSize * scale;
                             //         size = cameraToCanvasScale(SizeOnPane);
-                            //         ctx.arc(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
-                            //             cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y), size / 2, 0, 2 * Math.PI);
+                            //         ctx.arc(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x),
+                            //             cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y), size / 2, 0, 2 * Math.PI);
                             //         ctx.fill();
                             break;
                     }
 
-                    // ctx.fillRect(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x - size / 2),
-                    //     cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y - size / 2), size, size);
+                    // ctx.fillRect(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x - size / 2),
+                    //     cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y - size / 2), size, size);
 
                     if (diagramms[diagramInfos.displayedDiagram].diagramSettings.displayElementNames == true) {
                         if (mEBI.element == 'SOMIX.Grouping') {
@@ -242,41 +249,66 @@ function drawCompleteModel(ctx, width, height) {
 
                             // Set values for bounding box
 
-                            let temp1 = diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x - SizeOnPane / 2;
-                            let temp2 = diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x - textWidthOnPane / 2;
+                            let temp1 = diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x - SizeOnPane / 2;
+                            let temp2 = diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x - textWidthOnPane / 2;
                             let temp;
                             if (temp1 < temp2) {
                                 temp = temp1;
                             } else {
                                 temp = temp2;
                             }
-                            diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].boxX1 = temp;
+                            diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxX1 = temp;
 
-                            temp1 = diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x + SizeOnPane / 2;
-                            temp2 = diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x + textWidthOnPane / 2;
+                            temp1 = diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x + SizeOnPane / 2;
+                            temp2 = diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x + textWidthOnPane / 2;
                             if (temp1 < temp2) {
                                 temp = temp2;
                             } else {
                                 temp = temp1;
                             }
-                            diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].boxX2 = temp;
+                            diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxX2 = temp;
 
-                            diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].boxY1 =
-                                diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y - SizeOnPane / 2;
+                            diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxY1 =
+                                diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y - SizeOnPane / 2;
 
-                            diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].boxY2 =
-                                diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y + SizeOnPane / 2;
+                            diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxY2 =
+                                diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y + SizeOnPane / 2;
                         }
+                    }
 
+                    // Determine box for comments
 
-                        // ctx.fillText(mEBI.name, cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
-                        //     cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y + fontsize * .3));
-                        // ctx.textAlign = 'standard';
+                    if (typeof diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index] !== 'undefined') {
+                        if (diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].text != '') {
+                            // Handle line breaks
+                            let textLines = diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].text.split('\n');
+                            let commentWidth = 0;
+                            let commentHeight = 0;
+                            for (const textLine of textLines) {
+                                let textInfo = ctx.measureText(textLine);
+                                let cW = textInfo.width;
+                                if (cW > commentWidth) {
+                                    commentWidth = cW;
+                                }
+                                commentHeight += lineSpace;
+                            }
+                            diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].boxX1 =
+                                diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].x - fontsize ;
+                            diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].boxX2 =
+                                diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].x + commentWidth + fontsize ;
+                            diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].boxY1 =
+                                diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].y - lineSpace;
+                            diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].boxY2 =
+                                diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].y + commentHeight - lineSpace;
+                        }
                     }
                 }
             }
         }
     }
+
+
+
 
 
     for (let stepDraw = 1; stepDraw <= 2; stepDraw++) {
@@ -392,17 +424,17 @@ function drawCompleteModel(ctx, width, height) {
                                 SizeOnPane = codeSize * scale;
                                 size = cameraToCanvasScale(SizeOnPane);
 
-                                ctx.fillRect(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x) - size / 2,
-                                    cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y) - size / 2, size, size);
+                                ctx.fillRect(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x) - size / 2,
+                                    cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y) - size / 2, size, size);
 
                                 if (circuitDiagramMarkExplicitlyAdded) {
-                                    if (diagramms[diagramInfos.displayedDiagram].generationInfoInternal.addedWithNeighbors.includes(mEBI['index'])) {
+                                    if (diagramms[diagramInfos.displayedDiagram].generationInfoInternal.addedWithNeighbors.includes(mEBI.index)) {
                                         ctx.strokeStyle = circuitDiagramColorHighlightedCode;
                                         SizeOnPane = codeSize * scale;
                                         size = cameraToCanvasScale(SizeOnPane);
                                         ctx.beginPath();
-                                        ctx.strokeRect(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x) - size / 2,
-                                            cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y) - size / 2, size, size);
+                                        ctx.strokeRect(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x) - size / 2,
+                                            cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y) - size / 2, size, size);
                                     }
 
                                 }
@@ -424,13 +456,13 @@ function drawCompleteModel(ctx, width, height) {
                                 }
                                 SizeOnPane = dataSize * scale;
                                 size = cameraToCanvasScale(SizeOnPane);
-                                ctx.arc(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
-                                    cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y), size / 2, 0, 2 * Math.PI);
+                                ctx.arc(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x),
+                                    cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y), size / 2, 0, 2 * Math.PI);
                                 ctx.fill();
 
 
                                 if (circuitDiagramMarkExplicitlyAdded) {
-                                    if (diagramms[diagramInfos.displayedDiagram].generationInfoInternal.addedWithNeighbors.includes(mEBI['index'])) {
+                                    if (diagramms[diagramInfos.displayedDiagram].generationInfoInternal.addedWithNeighbors.includes(mEBI.index)) {
 
                                         if (mEBI.technicalType == 'DBTable') {
                                             ctx.strokeStyle = circuitDiagramColorHighlightedDataPersistent;
@@ -441,8 +473,8 @@ function drawCompleteModel(ctx, width, height) {
                                         size = cameraToCanvasScale(SizeOnPane);
 
                                         ctx.beginPath();
-                                        ctx.arc(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
-                                            cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y), size / 2, 0, 2 * Math.PI);
+                                        ctx.arc(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x),
+                                            cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y), size / 2, 0, 2 * Math.PI);
                                         ctx.stroke();
                                     }
                                 }
@@ -450,10 +482,8 @@ function drawCompleteModel(ctx, width, height) {
                                 break;
                         }
 
-                        const fontsize = fontSizeGeneral * scale;
+
                         ctx.fillStyle = 'black';
-                        let scaledFontSize = cameraToCanvasScale(fontsize);
-                        let scaledLineSpace = scaledFontSize * 1.5;
                         if (mEBI.element == 'SOMIX.Code' || mEBI.element == 'SOMIX.Data') {
                             ctx.textAlign = 'center';
                             ctx.font = scaledFontSize + 'px  sans-serif';
@@ -475,11 +505,22 @@ function drawCompleteModel(ctx, width, height) {
                                             cameraToCanvasY(TextPositionY));
                                         TextPositionY += scaledLineSpace;
                                     }
+                                    // Draw box around comments
+                                    ctx.lineWidth = cameraToCanvasScale(1);
+                                    ctx.setLineDash([cameraToCanvasScale(8), cameraToCanvasScale(2)]);
+                                    ctx.strokeStyle = 'gray';
+                                    let commentBoxWidth = diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].boxX2 -
+                                        diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].boxX1;
+                                    let commentBoxHeight = diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].boxY2 -
+                                        diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].boxY1;
+                                    ctx.strokeRect(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].boxX1),
+                                        cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].boxY1),
+                                        cameraToCanvasScale(commentBoxWidth),
+                                        cameraToCanvasScale(commentBoxHeight));
+                                    ctx.setLineDash([]);
                                 }
                             }
-                            // Reset the text alignment. Needed because not everywhere it is specified when center is required.
                             ctx.textAlign = 'start';
-
                         }
                     } // if (diagramms[diagramInfos.displayedDiagram].diagramType == circuitDiagramForSoftwareDiagramType && stepDraw == 1) {
 
@@ -712,8 +753,8 @@ function drawCompleteModel(ctx, width, height) {
                                         size = cameraToCanvasScale(2 * scale);
                                         break;
                                 }
-                                ctx.arc(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
-                                    cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y), size, 0, 2 * Math.PI);
+                                ctx.arc(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x),
+                                    cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y), size, 0, 2 * Math.PI);
                                 ctx.fill();
                                 if (diagramms[diagramInfos.displayedDiagram].diagramSettings.displayElementNames == true) {
                                     const fontsize = 3;
@@ -721,8 +762,8 @@ function drawCompleteModel(ctx, width, height) {
                                     let scaledFontSize = cameraToCanvasScale(fontsize * scale);
                                     ctx.textAlign = 'center';
                                     ctx.font = scaledFontSize + 'px  sans-serif';
-                                    ctx.fillText(mEBI.name, cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].x),
-                                        cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y + fontsize * .3));
+                                    ctx.fillText(mEBI.name, cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x),
+                                        cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y + fontsize * .3));
                                     ctx.textAlign = 'start';
                                 }
                             }
