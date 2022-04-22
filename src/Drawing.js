@@ -285,6 +285,8 @@ function drawCompleteModel(ctx, width, height) {
                             let commentWidth = 0;
                             let commentHeight = 0;
                             for (const textLine of textLines) {
+                                // Set to unscaled fontsize so that the text width is calculated unscaled
+                                ctx.font = fontsize + 'px  sans-serif';
                                 let textInfo = ctx.measureText(textLine);
                                 let cW = textInfo.width;
                                 if (cW > commentWidth) {
@@ -503,7 +505,7 @@ function drawCompleteModel(ctx, width, height) {
                                         ctx.fillText(textLine,
                                             cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].x),
                                             cameraToCanvasY(TextPositionY));
-                                        TextPositionY += scaledLineSpace;
+                                        TextPositionY += lineSpace;
                                     }
                                     // Draw box around comments
                                     ctx.lineWidth = cameraToCanvasScale(1);
