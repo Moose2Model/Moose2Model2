@@ -296,11 +296,11 @@ function drawCompleteModel(ctx, width, height) {
                                 commentHeight += lineSpace;
                             }
                             diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].boxX1 =
-                                diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].x - commentBoxBorder + 0.1 * fontsize ;
+                                diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].x - commentBoxBorder + 0.1 * fontsize;
                             diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].boxX2 =
-                                diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].x + commentWidth + commentBoxBorder - 0.1 * fontsize ;
+                                diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].x + commentWidth + commentBoxBorder - 0.1 * fontsize;
                             diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].boxY1 =
-                                diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].y - fontsize - commentBoxBorder + 0.3 * fontsize ;
+                                diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].y - fontsize - commentBoxBorder + 0.3 * fontsize;
                             diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].boxY2 =
                                 diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].y + commentHeight - 2 * lineSpace + commentBoxBorder;
                         }
@@ -778,6 +778,11 @@ function drawCompleteModel(ctx, width, height) {
 
                         // End draw lines
                     } // if (diagramms[diagramInfos.displayedDiagram].diagramType != circuitDiagramForSoftwareDiagramType || stepDraw == 2)
+
+                    if (diagramms[diagramInfos.displayedDiagram].diagramType == circuitDiagramForSoftwareDiagramType && stepDraw == 2) {
+                        // Draw lines between element and comments
+                    }
+
                 }
             }
         } // for (const cmp of diagramms[diagramInfos.displayedDiagram].complModelPosition)
