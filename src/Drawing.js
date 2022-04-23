@@ -24,6 +24,7 @@ let circuitDiagramColorAccessesLines = '#3131fd80'; // 50% transparent
 let circuitDiagramColorCommentLines = '#fdab3180';
 let circuitDiagramCallWidth = 2;
 let circuitDiagramAccessWidth = 2;
+let circuitDiagramCommentWidth = 2;
 let circuitDiagramMarkExplicitlyAdded = true;
 
 let arrowLength = 3;
@@ -780,7 +781,81 @@ function drawCompleteModel(ctx, width, height) {
                     } // if (diagramms[diagramInfos.displayedDiagram].diagramType != circuitDiagramForSoftwareDiagramType || stepDraw == 2)
 
                     if (diagramms[diagramInfos.displayedDiagram].diagramType == circuitDiagramForSoftwareDiagramType && stepDraw == 2) {
-                        // Draw lines between element and comments
+                        // Draw lines between elements and comments
+                        if (cmp.visible) {
+                            if (typeof diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index] !== 'undefined') {
+                                if (diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].text != '') {
+
+                                    // Begin Insert to be adapted for comments
+
+                                    let startX = diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x;
+                                    let startY = diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y;
+                                    let endX = (diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].boxX1 +
+                                        diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].boxX2) / 2;
+                                    let endY = (diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].boxY1 +
+                                        diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].boxY2) / 2;
+
+
+                                    if (diagramms[diagramInfos.displayedDiagram].diagramType == circuitDiagramForSoftwareDiagramType) {
+                                        // Keep distance between arrows and bounding box in case of circuit diagrams
+                                        const minLength = 10;
+                                        const stepL = 1;
+                                        let vector = {
+                                            x: endX - startX,
+                                            y: endY - startY
+                                        };
+                                        let vectorLength = Math.sqrt((endX - startX) * (endX - startX) + (endY - startY) * (endY - startY))
+
+                                        let unitVector = {
+                                            x: (endX - startX) / vectorLength,
+                                            y: (endY - startY) / vectorLength
+                                        };
+                                        // retract the end first
+
+                                        const marginEndX = 1;
+                                        const marginEndY = 1;
+
+                                        while (vectorLength > minLength && isInBox(endX, endY,
+                                            diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].boxX1,
+                                            diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].boxX2,
+                                            diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].boxY1,
+                                            diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].boxY2,
+                                            marginEndX, marginEndY)) {
+                                            vectorLength -= stepL;
+                                            endX -= unitVector.x * stepL;
+                                            endY -= unitVector.y * stepL;
+                                        }
+                                        // retract the start last
+
+                                        while (vectorLength > minLength && isInBox(startX, startY,
+                                            diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxX1,
+                                            diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxX2,
+                                            diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxY1,
+                                            diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxY2,
+                                            marginEndX, marginEndY)) {
+                                            vectorLength -= stepL;
+                                            startX += unitVector.x * stepL;
+                                            startY += unitVector.y * stepL;
+                                        }
+
+                                    }
+                                    ctx.beginPath();
+                                    if (diagramms[diagramInfos.displayedDiagram].diagramType != circuitDiagramForSoftwareDiagramType) {
+                                        ctx.lineWidth = cameraToCanvasScale(1 * scale);
+                                        ctx.strokeStyle = 'rgba(0, 0, 255, 0.2)';
+                                    }
+                                    else {
+                                        ctx.lineWidth = cameraToCanvasScale(circuitDiagramCommentWidth);
+                                        ctx.strokeStyle = circuitDiagramColorCommentLines;
+                                    }
+                                    ctx.moveTo(cameraToCanvasX(startX), cameraToCanvasY(startY));
+                                    ctx.lineTo(cameraToCanvasX(endX), cameraToCanvasY(endY));
+                                    ctx.stroke();
+
+                                    // End Insert to be adapted for comments
+                                }
+                            }
+                        }
                     }
 
                 }
