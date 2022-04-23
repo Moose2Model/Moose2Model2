@@ -142,6 +142,7 @@ const groupSize = 8;
 const codeSize = 7;
 const dataSize = 7;
 const generalFontSize = 12;
+const commentBoxBorder = 4;
 
 function drawCompleteModel(ctx, width, height) {
     if (typeof diagramms[diagramInfos.displayedDiagram] === 'undefined') {
@@ -295,13 +296,13 @@ function drawCompleteModel(ctx, width, height) {
                                 commentHeight += lineSpace;
                             }
                             diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].boxX1 =
-                                diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].x - fontsize ;
+                                diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].x - commentBoxBorder + 0.1 * fontsize ;
                             diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].boxX2 =
-                                diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].x + commentWidth + fontsize ;
+                                diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].x + commentWidth + commentBoxBorder - 0.1 * fontsize ;
                             diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].boxY1 =
-                                diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].y - lineSpace;
+                                diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].y - fontsize - commentBoxBorder + 0.3 * fontsize ;
                             diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].boxY2 =
-                                diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].y + commentHeight - lineSpace;
+                                diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].y + commentHeight - 2 * lineSpace + commentBoxBorder;
                         }
                     }
                 }
@@ -509,7 +510,7 @@ function drawCompleteModel(ctx, width, height) {
                                     }
                                     // Draw box around comments
                                     ctx.lineWidth = cameraToCanvasScale(1);
-                                    ctx.setLineDash([cameraToCanvasScale(8), cameraToCanvasScale(2)]);
+                                    ctx.setLineDash([cameraToCanvasScale(2), cameraToCanvasScale(2)]);
                                     ctx.strokeStyle = 'gray';
                                     let commentBoxWidth = diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].boxX2 -
                                         diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].boxX1;
