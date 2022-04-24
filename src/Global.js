@@ -112,6 +112,8 @@ function findNearestElement(x, y, maxDistance) {
     let minIndex = 0;
     let foundGroup = 0;
     let found = {};
+    let foundElement;
+    found.element = foundElement;
 
     for (let i = 1; i < diagramms[diagramInfos.displayedDiagram].complModelPosition.length; i++) { // List start with index 1
         if (typeof diagramms[diagramInfos.displayedDiagram].complModelPosition[i] !== 'undefined') {
@@ -158,6 +160,7 @@ function findNearestElement(x, y, maxDistance) {
         found.element = modelElementsByIndex[foundGroup];
         return found;
     }
+    return found;
 
 }
 
