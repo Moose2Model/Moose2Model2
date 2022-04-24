@@ -435,6 +435,10 @@ async function ImportOldDiagram() {
                         diagramms[diagramInfos.activeDiagram].complModelPosition[e2.index].x = parseFloat(n_x) * factorOldToNew;
                         diagramms[diagramInfos.activeDiagram].complModelPosition[e2.index].y = parseFloat(n_y) * factorOldToNew;
 
+                        // Pin all elements directly after import
+                        // This prevents that the Forced-direction accicentially spoils the layout
+                        diagramms[diagramInfos.activeDiagram].pinned.push(e2.index);
+
                         // --- Add Comments
                         if (n_comment != '') {
                           diagramms[diagramInfos.activeDiagram].generationInfoInternal.commentsByID[e2.index] = {};
@@ -469,6 +473,10 @@ async function ImportOldDiagram() {
                       // --- Position elements on this diagram
                       diagramms[diagramInfos.activeDiagram].complModelPosition[e2.index].x = parseFloat(n_x) * factorOldToNew;
                       diagramms[diagramInfos.activeDiagram].complModelPosition[e2.index].y = parseFloat(n_y) * factorOldToNew;
+
+                      // Pin all elements directly after import
+                      // This prevents that the Forced-direction accicentially spoils the layout
+                      diagramms[diagramInfos.activeDiagram].pinned.push(e2.index);
                       // --- Add Comments
                       if (n_comment != '') {
                         diagramms[diagramInfos.activeDiagram].generationInfoInternal.commentsByID[e2.index] = {};
