@@ -111,6 +111,7 @@ function findNearestElement(x, y, maxDistance) {
     let minDistanceSquared = -1;
     let minIndex = 0;
     let foundGroup = 0;
+    let found = {};
 
     for (let i = 1; i < diagramms[diagramInfos.displayedDiagram].complModelPosition.length; i++) { // List start with index 1
         if (typeof diagramms[diagramInfos.displayedDiagram].complModelPosition[i] !== 'undefined') {
@@ -149,11 +150,13 @@ function findNearestElement(x, y, maxDistance) {
     }
     if (minDistanceSquared < maxDistance * maxDistance && minDistanceSquared != -1) {
         // Return nearest element only when it is nearer than maxDistance
-        return modelElementsByIndex[minIndex];
+        found.element = modelElementsByIndex[minIndex];
+        return found;
     }
 
     if (foundGroup != 0) {
-        return modelElementsByIndex[foundGroup];
+        found.element = modelElementsByIndex[foundGroup];
+        return found;
     }
 
 }

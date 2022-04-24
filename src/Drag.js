@@ -46,7 +46,10 @@ function handleDragMouseDown(e) {
         return;
     }
     if (which == 'left') {
-        draggedElement = findNearestElement(cameraToPaneX(startX), cameraToPaneY(startY), 10);
+        
+        let found = findNearestElement(cameraToPaneX(startX), cameraToPaneY(startY), 10);
+        draggedElement = found.element;
+
         if (typeof draggedElement !== 'undefined') {
             isDragging = true;
             backGroundDragged = false;

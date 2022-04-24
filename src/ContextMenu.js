@@ -106,7 +106,9 @@ function handleContextMenu(e) {
   let linkToEditorText = '';
   let techtypeText = '';
   let uniqueNameText = 'No element found';
-  gMCElementContextHandled = findNearestElement(cameraToPaneX(x), cameraToPaneY(y), cameraToPaneScale(20));
+  let found = findNearestElement(cameraToPaneX(x), cameraToPaneY(y), cameraToPaneScale(20));
+  gMCElementContextHandled = found.element;
+
   gMC_url = '';
   if (typeof gMCElementContextHandled !== 'undefined') {
 
