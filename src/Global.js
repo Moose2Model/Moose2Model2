@@ -111,9 +111,11 @@ function findNearestElement(x, y, maxDistance) {
     let minDistanceSquared = -1;
     let minIndex = 0;
     let foundGroup = 0;
+    let foundComment = 0;
     let found = {};
     let foundElement;
     found.element = foundElement;
+    found.inComment = false;
 
     for (let i = 1; i < diagramms[diagramInfos.displayedDiagram].complModelPosition.length; i++) { // List start with index 1
         if (typeof diagramms[diagramInfos.displayedDiagram].complModelPosition[i] !== 'undefined') {
@@ -133,6 +135,7 @@ function findNearestElement(x, y, maxDistance) {
                         minIndex = i;
                     }
                 }
+                // Check whether is in grouping
                 if (diagramms[diagramInfos.displayedDiagram].diagramType == circuitDiagramForSoftwareDiagramType) {
                     if (typeof diagramms[diagramInfos.displayedDiagram].complModelPosition[i].boxX1 !== 'undefined') {
                         if (mEBI.element == 'SOMIX.Grouping') {
@@ -147,9 +150,31 @@ function findNearestElement(x, y, maxDistance) {
                         }
                     }
                 }
+                // Check whether is in comment
+                if (diagramms[diagramInfos.displayedDiagram].diagramType == circuitDiagramForSoftwareDiagramType) {
+                    if (typeof diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[i] !== 'undefined') {
+                        if (typeof diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[i].boxX1 !== 'undefined') {
+                            if (isInBox(x, y,
+                                diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[i].boxX1,
+                                diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[i].boxX2,
+                                diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[i].boxY1,
+                                diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[i].boxY2,
+                                0, 0)) {
+                                foundComment = diagramms[diagramInfos.displayedDiagram].complModelPosition[i].index;
+                            }
+                        }
+                    }
+                }
             }
         }
     }
+
+    if (foundComment != 0) {
+        found.element = modelElementsByIndex[foundComment];
+        found.inComment = true;
+        return found;
+    }
+
     if (minDistanceSquared < maxDistance * maxDistance && minDistanceSquared != -1) {
         // Return nearest element only when it is nearer than maxDistance
         found.element = modelElementsByIndex[minIndex];

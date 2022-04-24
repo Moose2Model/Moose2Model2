@@ -5,6 +5,7 @@ canvas.addEventListener('mousemove', handleDragMouseMove, false);
 canvas.addEventListener('mouseup', handleDragMouseUp, false);
 canvas.addEventListener('mouseout', handleDragMouseOut, false);
 let isDragging = false;
+let isCommentDragging = false;
 let backGroundDragged = false;
 let startX, startY;
 let draggedElement;
@@ -49,7 +50,10 @@ function handleDragMouseDown(e) {
         let found = {};
         found = findNearestElement(cameraToPaneX(startX), cameraToPaneY(startY), 10);
         //if (typeof found.element !== 'undefined') {
-            draggedElement = found.element;
+        draggedElement = found.element;
+        if (found.inComment) {
+            isCommentDragging = true;
+        }
         //}
 
         if (typeof draggedElement !== 'undefined') {
@@ -81,7 +85,12 @@ function handleDragMouseMove(e) {
         diagramms[diagramInfos.displayedDiagram].cameraSettings.move.y += cameraToPaneScale(dy);
     } else {
         let mEBI = modelElementsByIndex[diagramms[diagramInfos.displayedDiagram].complModelPosition[draggedElement.index].index];
-        if (mEBI.element == 'SOMIX.Code' || mEBI.element == 'SOMIX.Data') {
+
+        if (isCommentDragging) {
+            // move the selected comment by the drag distance
+            diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[draggedElement.index].x += cameraToPaneScale(dx);
+            diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[draggedElement.index].y += cameraToPaneScale(dy);
+        } else if (mEBI.element == 'SOMIX.Code' || mEBI.element == 'SOMIX.Data') {
             // move the selected shape by the drag distance
             diagramms[diagramInfos.displayedDiagram].complModelPosition[draggedElement.index].x += cameraToPaneScale(dx);
             diagramms[diagramInfos.displayedDiagram].complModelPosition[draggedElement.index].y += cameraToPaneScale(dy);
@@ -119,6 +128,7 @@ function handleDragMouseUp(e) {
     e.stopPropagation();
     // the drag is over -- clear the isDragging flag
     isDragging = false;
+    isCommentDragging = false;
     if (diagramms[diagramInfos.displayedDiagram].forceFeedback) {
         requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
     }
@@ -132,6 +142,7 @@ function handleDragMouseOut(e) {
     e.stopPropagation();
     // the drag is over -- clear the isDragging flag
     isDragging = false;
+    isCommentDragging = false;
     if (diagramms[diagramInfos.displayedDiagram].forceFeedback) {
         requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
     }
