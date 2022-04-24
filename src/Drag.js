@@ -48,9 +48,9 @@ function handleDragMouseDown(e) {
     if (which == 'left') {
         let found = {};
         found = findNearestElement(cameraToPaneX(startX), cameraToPaneY(startY), 10);
-        if (typeof found.element !== 'undefined') {
+        //if (typeof found.element !== 'undefined') {
             draggedElement = found.element;
-        }
+        //}
 
         if (typeof draggedElement !== 'undefined') {
             isDragging = true;
