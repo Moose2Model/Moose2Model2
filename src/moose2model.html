@@ -283,6 +283,7 @@
             <button class="diagramMenuButton" onclick="ToggleDiagramMenu()">Diagram
             </button>
             <div class="DiagramMenu-content" id="DiagramMenuID">
+                <input id="ExploreModelButton" value="Explore model">
                 <input id="RemoveAllHighlightingButton" value="Remove all highlighting">
             </div>
         </div>
@@ -310,6 +311,14 @@
         <textarea name="commentTextField" id="commentField" rows="5" cols="" 33></textarea>
         <input type="submit" value="OK" class="commentOK" id="commentOKButton">
         <input type="submit" value="Cancel" class="commentCancel" id="commentCancelButton">
+    </div>
+
+    <!-- Fields when the Explorer for the model is active -->
+    <div class="exploreModel" id="exploreModelID">
+        <label for="exploreModelFilterID">Filter model: </label>
+        <input type="text" id="exploreModelFilterID" class="guessField">
+        <input type="submit" value="Apply Filter" class="filterModel" id="filterModelButtonID">
+        <input type="submit" value="Cancel" class="cancelFilter" id="cancelFilterModelButtonID">
     </div>
 
     <div id=canvasContainer></div>
@@ -340,6 +349,9 @@
         const aCommentElement = document.getElementById('commentElementID');
         aCommentElement.hidden = true; // Hide when page is loaded
 
+        const exploreModel = document.getElementById('exploreModelID');
+        exploreModel.hidden = true; // Hide when page is loaded
+
         const OpenWorkFolderButton = document.getElementById('OpenWorkFolderButton');
         OpenWorkFolderButton.addEventListener('click', SetWorkFolder);
 
@@ -359,6 +371,9 @@
         SaveDiagramButton.addEventListener('click', SaveDisplayedDiagram);
 
         //
+        const ExploreModelButton = document.getElementById('ExploreModelButton');
+        ExploreModelButton.addEventListener('click', ExploreModelRequested);
+
         const RemoveAllHighlightingButton = document.getElementById('RemoveAllHighlightingButton');
         RemoveAllHighlightingButton.addEventListener('click', RemoveAllHighlighting);
 
@@ -441,6 +456,29 @@
         function handleCommentCancel() {
             aCommentElement.hidden = true;
         }
+
+        // Explore Model
+        const filterModelButton = document.getElementById('filterModelButtonID'); // From Input Area
+        filterModelButton.addEventListener('click', handlefilterModel);
+
+        const cancelFilterModelButton = document.getElementById('cancelFilterModelButtonID'); // From Input Area
+        cancelFilterModelButton.addEventListener('click', handleFilterModelCancel);
+
+        let exploreModelFilter = document.getElementById('exploreModelFilterID');
+
+        function ExploreModelRequested() {
+            exploreModel.hidden = false;
+            exploreModelFilter.focus();
+        }
+
+        function handlefilterModel() {
+            
+        }
+
+        function handleFilterModelCancel() {
+            exploreModel.hidden = true;
+        }
+
 
         //
 
