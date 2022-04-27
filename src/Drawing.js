@@ -893,7 +893,7 @@ function draw(always = true) {
     let redraw = true;
     if (typeof diagramms[diagramInfos.displayedDiagram] !== 'undefined') {
         if (diagramms[diagramInfos.displayedDiagram].forceFeedback) {
-            let redraw = forceDirecting(width, height);
+            redraw = forceDirecting(width, height);
         }
     }
     if (redraw || always) {
