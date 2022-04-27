@@ -40,11 +40,13 @@ function handleDragMouseDown(e) {
     startY = parseInt(e.clientY - offsetY);
 
     if (which == 'right') {
-        isDragging = true;
-        backGroundDragged = true;
-        e.preventDefault();
-        e.stopPropagation();
-        return;
+        if (!showModelExplorer) {
+            isDragging = true;
+            backGroundDragged = true;
+            e.preventDefault();
+            e.stopPropagation();
+            return;
+        }
     }
     if (which == 'left') {
         let found = {};

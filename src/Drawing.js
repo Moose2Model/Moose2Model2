@@ -890,23 +890,34 @@ function draw(always = true) {
     g_height = height;
 
     supportRetina();
-    let redraw = true;
-    if (typeof diagramms[diagramInfos.displayedDiagram] !== 'undefined') {
-        if (diagramms[diagramInfos.displayedDiagram].forceFeedback) {
-            redraw = forceDirecting(width, height);
+
+    if (!showModelExplorer) {
+
+        let redraw = true;
+        if (typeof diagramms[diagramInfos.displayedDiagram] !== 'undefined') {
+            if (diagramms[diagramInfos.displayedDiagram].forceFeedback) {
+                redraw = forceDirecting(width, height);
+            }
         }
-    }
-    if (redraw || always) {
-        drawCompleteModel(ctx, width, height);
-    }
-    if (typeof diagramms[diagramInfos.displayedDiagram] !== 'undefined') {
-        if (diagramms[diagramInfos.displayedDiagram].forceFeedback) {
-            requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
+        if (redraw || always) {
+            drawCompleteModel(ctx, width, height);
         }
+        if (typeof diagramms[diagramInfos.displayedDiagram] !== 'undefined') {
+            if (diagramms[diagramInfos.displayedDiagram].forceFeedback) {
+                requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
+            }
+        }
+    } else {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.font = '15px sans-serif';
+        ctx.fillStyle = 'black'
+        ctx.fillText('The model explorer will be displayed here', 10, 50);
     }
     // }
 }
 canvas.addEventListener('mouseover', function (e) {
-    requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
+    // if (!showModelExplorer) {
+        requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
+    // }
 });
 

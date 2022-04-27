@@ -469,6 +469,8 @@
         function ExploreModelRequested() {
             exploreModel.hidden = false;
             exploreModelFilter.focus();
+            showModelExplorer = true;
+            drawAlways();
         }
 
         function handlefilterModel() {
@@ -477,6 +479,7 @@
 
         function handleFilterModelCancel() {
             exploreModel.hidden = true;
+            showModelExplorer = false;
         }
 
 

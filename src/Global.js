@@ -72,6 +72,8 @@ let requestAnimationFrame;
 let mouseover = false;
 // let forceFeedback = false;
 
+let showModelExplorer = false;
+
 // To support mouse event handling
 function reOffset() {
     var BB = canvas.getBoundingClientRect();
