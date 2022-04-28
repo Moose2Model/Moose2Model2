@@ -309,6 +309,7 @@
         <label for="newDiagramField">Enter a name for the new Diagram: </label>
         <input type="text" id="newDiagramField" class="guessField">
         <input type="submit" value="Create" class="createNewDiagram" id="CreateNewDiagramButton">
+        <input type="submit" value="Cancel" class="cancelNewDiagram" id="CancelNewDiagramButton">
     </div>
 
     <!-- Fields when a comment is entered -->
@@ -420,6 +421,9 @@
         const CreateNewDiagramButton = document.getElementById('CreateNewDiagramButton'); // From Input Area
         CreateNewDiagramButton.addEventListener('click', handleNewDiagram);
 
+        const CancelNewDiagramButton = document.getElementById('CancelNewDiagramButton'); // From Input Area
+        CancelNewDiagramButton.addEventListener('click', handleNewDiagramCancel);        
+
         let newDiagramNameElement = document.getElementById('newDiagramField');
 
         function handleNewDiagramRequested() {
@@ -435,6 +439,10 @@
             newDiagramNameElement.value = '';
             // Set also to hidden, when the user clicks elsewhere or make environment not responsive
         }
+
+        function handleNewDiagramCancel() {
+            newDiagramElement.hidden = true;
+        }        
 
         // New comment
 
