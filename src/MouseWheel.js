@@ -4,31 +4,49 @@ canvas.addEventListener('wheel', zoom);
 
 function zoom(event) {
     if (typeof diagramInfos !== 'undefined') {
-        event.preventDefault();
+        if (!showModelExplorer) {
+            event.preventDefault();
 
-        const sign = event.deltaY * -0.01;
-        const originalZoomfactor = diagramms[diagramInfos.displayedDiagram].cameraSettings.zoomfactor;
-        let newZoomfactor = originalZoomfactor;
+            const sign = event.deltaY * -0.01;
+            const originalZoomfactor = diagramms[diagramInfos.displayedDiagram].cameraSettings.zoomfactor;
+            let newZoomfactor = originalZoomfactor;
 
-        let test = Math.pow(2, 1 / 4) * Math.pow(2, 1 / 4) * Math.pow(2, 1 / 4) * Math.pow(2, 1 / 4);
-        if (sign > 0) {
-            newZoomfactor *= Math.pow(2, 1 / 4)
+            let test = Math.pow(2, 1 / 4) * Math.pow(2, 1 / 4) * Math.pow(2, 1 / 4) * Math.pow(2, 1 / 4);
+            if (sign > 0) {
+                newZoomfactor *= Math.pow(2, 1 / 4)
+            }
+            else {
+                newZoomfactor /= Math.pow(2, 1 / 4)
+            }
+
+            // Restrict scale
+            if (newZoomfactor < .0125) {
+                newZoomfactor = originalZoomfactor;
+            } else if (newZoomfactor > 21) {
+                newZoomfactor = originalZoomfactor;
+            }
+            diagramms[diagramInfos.displayedDiagram].cameraSettings.zoomfactor = newZoomfactor;
+
+
+            // clear the canvas and redraw all shapes
+            drawCompleteModel(ctx, g_width, g_height);
         }
         else {
-            newZoomfactor /= Math.pow(2, 1 / 4)
+            event.preventDefault();
+            const sign = event.deltaY * -0.01;
+            if (sign > 0) {
+                if (startExplorerLine >= 0) {
+                    startExplorerLine -= scrollExplorerLine;
+                    if (startExplorerLine < 0) {
+                        startExplorerLine = 0;
+                    }
+                }
+            }
+            else {
+                startExplorerLine += scrollExplorerLine;
+            }
+            drawModelExplorer()
         }
-
-        // Restrict scale
-        if (newZoomfactor < .0125) {
-            newZoomfactor = originalZoomfactor;
-        } else if (newZoomfactor > 21) {
-            newZoomfactor = originalZoomfactor;
-        }
-        diagramms[diagramInfos.displayedDiagram].cameraSettings.zoomfactor = newZoomfactor;
-
-
-        // clear the canvas and redraw all shapes
-        drawCompleteModel(ctx, g_width, g_height);
     }
 
 }
