@@ -5,13 +5,52 @@ let startExplorerLine = 0;
 let scrollExplorerLine = 1;
 
 function filterModel() {
-    filteredModel = modelElementsByIndex;
+    filteredModel = [];
+    let i = 0;
+    for (const mEBI of modelElementsByIndex) {
+        if (typeof mEBI !== 'undefined') {
+            filteredModel[i] = {};
+            filteredModel[i].index = mEBI.index;
+            filteredModel[i].name = mEBI.name;
+            i += 1;
+        }
+    }
+
+    // Build complete name
+    for (const f of filteredModel) {
+        if (typeof f !== 'undefined') {
+            if (typeof parentChildByChild[f.index] !== 'undefined') {
+                for (const pCBC of parentChildByChild[f.index]) {
+                    if (pCBC.isMain) {
+                        f.completeName = modelElementsByIndex[pCBC.parent].name + '>>' + f.name;
+                    }
+                }
+            }
+            if (typeof f.completeName === 'undefined') {
+                f.completeName = f.name;
+            }
+        }
+    }
+
+
+}
+
+function compareModel(a, b) {
+    if (a.completeName < b.completeName) {
+        return -1;
+    }
+    if (a.completeName > b.completeName) {
+        return 1;
+    }
+    return 0;
 }
 
 
 function drawModelExplorer() {
 
     filterModel();
+
+    filteredModel.sort(compareModel);
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -41,7 +80,7 @@ function drawModelExplorer() {
     for (let i = 0; i <= linesForElements; i++) {
         let lineDisplay = startExplorerLine + i;
         if (typeof filteredModel[lineDisplay] !== 'undefined') {
-            ctx.fillText(filteredModel[lineDisplay].name, xPosElements, yPosElements);
+            ctx.fillText(filteredModel[lineDisplay].completeName, xPosElements, yPosElements);
         }
         yPosElements += lineDifference;
     }
