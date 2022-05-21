@@ -6,20 +6,28 @@ let scrollExplorerLine = 1;
 let endExplorerLine = 1;
 let listPositionToEntries = [];
 
+function filterModelText(element) {
+    //if(element.name.test(exploreModelFilter.value) == true){
+    const regex = new RegExp(exploreModelFilter.value);
+    if (regex.test(element.completeName)) {
+        return element;
+    }
+}
+
 function filterModel() {
-    filteredModel = [];
+    let unFilteredModel = [];
     let i = 0;
     for (const mEBI of modelElementsByIndex) {
         if (typeof mEBI !== 'undefined') {
-            filteredModel[i] = {};
-            filteredModel[i].index = mEBI.index;
-            filteredModel[i].name = mEBI.name;
+            unFilteredModel[i] = {};
+            unFilteredModel[i].index = mEBI.index;
+            unFilteredModel[i].name = mEBI.name;
             i += 1;
         }
     }
 
     // Build complete name
-    for (const f of filteredModel) {
+    for (const f of unFilteredModel) {
         if (typeof f !== 'undefined') {
             if (typeof parentChildByChild[f.index] !== 'undefined') {
                 for (const pCBC of parentChildByChild[f.index]) {
@@ -33,6 +41,10 @@ function filterModel() {
             }
         }
     }
+
+    filteredModel = unFilteredModel.filter(filterModelText);
+
+    // exploreModelFilter.value contains the filter string
 
 
 }
@@ -110,7 +122,7 @@ function drawModelExplorer() {
         listPositionToEntry.yMin = yPosElements - fontSize;
         listPositionToEntry.yMax = yPosElements;
         listPositionToEntries.push(listPositionToEntry);
-        
+
         yPosElements += lineDifference;
 
     }
