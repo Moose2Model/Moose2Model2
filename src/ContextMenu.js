@@ -106,7 +106,12 @@ function handleContextMenu(e) {
   let linkToEditorText = '';
   let techtypeText = '';
   let uniqueNameText = 'No element found';
-  let found = findNearestElement(cameraToPaneX(x), cameraToPaneY(y), cameraToPaneScale(20));
+  let found = {};
+  if (!showModelExplorer) {
+    found = findNearestElement(cameraToPaneX(x), cameraToPaneY(y), cameraToPaneScale(20));
+  } else {
+    found = findListEntry(x, y);
+  }
   gMCElementContextHandled = found.element;
 
   gMC_url = '';
@@ -142,7 +147,7 @@ function handleContextMenu(e) {
           m.push('Supress');
         }
       }
-      if (gMCElementContextHandled.element == 'SOMIX.Grouping' ) {
+      if (gMCElementContextHandled.element == 'SOMIX.Grouping') {
         if (diagramms[diagramInfos.activeDiagram].generationInfoInternal.suppressed.includes(gMCElementContextHandled.index)) {
           m.push('Redo supress');
         } else {
@@ -230,9 +235,9 @@ $('#contextMenu').on('click', 'li', function (e) {
     comment(gMCElementContextHandled);
   } else if ($(this).text() == 'Supress' || $(this).text() == 'Supress with all children') {
     suppress(gMCElementContextHandled);
-  }  else if ($(this).text() == 'Redo supress') {
+  } else if ($(this).text() == 'Redo supress') {
     redoSuppress(gMCElementContextHandled);
-  }   else if ($(this).text() == 'Toggle display of names') {
+  } else if ($(this).text() == 'Toggle display of names') {
     toggleNameDisplay();
   } else if ($(this).text() == 'Highlight used by') {
     highlightUsedBy(gMCElementContextHandled.index);

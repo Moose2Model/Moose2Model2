@@ -4,6 +4,7 @@ let filteredModel = [];
 let startExplorerLine = 0;
 let scrollExplorerLine = 1;
 let endExplorerLine = 1;
+let listPositionToEntries = [];
 
 function filterModel() {
     filteredModel = [];
@@ -46,6 +47,19 @@ function compareModel(a, b) {
     return 0;
 }
 
+function findListEntry(x, y) {
+    let found = {};
+    let foundElement;
+    found.inComment = false;
+    for (const e of listPositionToEntries) {
+        if (y >= e.yMin && y < e.yMax) {
+            foundElement = modelElementsByIndex[e.element.index];
+        }
+    }
+    found.element = foundElement;
+    return found;
+}
+
 
 function drawModelExplorer() {
 
@@ -54,7 +68,7 @@ function drawModelExplorer() {
     filteredModel.sort(compareModel);
 
     endExplorerLine = filteredModel.length;
-    if (endExplorerLine == 0){
+    if (endExplorerLine == 0) {
         endExplorerLine = 1;
     }
 
@@ -83,12 +97,22 @@ function drawModelExplorer() {
             }
         } */
 
+    listPositionToEntries = [];
+
     for (let i = 0; i <= linesForElements; i++) {
         let lineDisplay = startExplorerLine + i;
         if (typeof filteredModel[lineDisplay] !== 'undefined') {
             ctx.fillText(filteredModel[lineDisplay].completeName, xPosElements, yPosElements);
         }
+
+        let listPositionToEntry = {}
+        listPositionToEntry.element = filteredModel[lineDisplay];
+        listPositionToEntry.yMin = yPosElements - fontSize;
+        listPositionToEntry.yMax = yPosElements;
+        listPositionToEntries.push(listPositionToEntry);
+        
         yPosElements += lineDifference;
+
     }
 
 
