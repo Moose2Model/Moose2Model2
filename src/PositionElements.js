@@ -54,7 +54,7 @@ function redoAddWithNeighbors(element) {
     // How is this be done best?
     let where = diagramms[diagramInfos.activeDiagram].generationInfoInternal.addedWithNeighbors.indexOf(element.index);
     if (where != -1) {
-        diagramms[diagramInfos.activeDiagram].generationInfoInternal.addedWithNeighbors.splice(where)
+        diagramms[diagramInfos.activeDiagram].generationInfoInternal.addedWithNeighbors.splice(where,1)
 
         // Remember positions
         let positions = diagramms[diagramInfos.activeDiagram].complModelPosition;
