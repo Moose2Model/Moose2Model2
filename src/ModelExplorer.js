@@ -84,6 +84,14 @@ function drawModelExplorer() {
         endExplorerLine = 1;
     }
 
+    if (startExplorerLine > endExplorerLine) {
+        // Make sure that always something is visible
+        startExplorerLine = endExplorerLine - 5;
+        if (startExplorerLine < 0) {
+            startExplorerLine = 0;
+        }
+    }
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     let yPosElements = 50;
