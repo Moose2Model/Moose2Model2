@@ -44,6 +44,15 @@ function zoom(event) {
             }
             else {
                 startExplorerLine += scrollExplorerLine;
+                // Do not scroll farther than the end:
+                if (startExplorerLine > endExplorerLine) {
+                    // Show at least 5 lines at the end
+                    startExplorerLine = endExplorerLine - 5;
+                    if (startExplorerLine < 0) {
+                        startExplorerLine = 0;
+                    }
+                }
+
             }
             drawModelExplorer()
         }

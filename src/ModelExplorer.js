@@ -3,6 +3,7 @@
 let filteredModel = [];
 let startExplorerLine = 0;
 let scrollExplorerLine = 1;
+let endExplorerLine = 1;
 
 function filterModel() {
     filteredModel = [];
@@ -51,6 +52,11 @@ function drawModelExplorer() {
     filterModel();
 
     filteredModel.sort(compareModel);
+
+    endExplorerLine = filteredModel.length;
+    if (endExplorerLine == 0){
+        endExplorerLine = 1;
+    }
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
