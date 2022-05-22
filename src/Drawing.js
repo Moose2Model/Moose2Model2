@@ -488,12 +488,15 @@ function drawCompleteModel(ctx, width, height) {
 
 
                         ctx.fillStyle = 'black';
-                        if (mEBI.element == 'SOMIX.Code' || mEBI.element == 'SOMIX.Data') {
-                            ctx.textAlign = 'center';
-                            ctx.font = scaledFontSize + 'px  sans-serif';
-                            ctx.fillText(mEBI.name, cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x),
-                                cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y + fontsize * .3));
-                            ctx.textAlign = 'start';
+                        if (mEBI.element == 'SOMIX.Code' || mEBI.element == 'SOMIX.Data' || mEBI.element == 'SOMIX.Grouping') {
+
+                            if (mEBI.element == 'SOMIX.Code' || mEBI.element == 'SOMIX.Data') {
+                                ctx.textAlign = 'center';
+                                ctx.font = scaledFontSize + 'px  sans-serif';
+                                ctx.fillText(mEBI.name, cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x),
+                                    cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y + fontsize * .3));
+                                ctx.textAlign = 'start';
+                            }
 
                             // Draw comment texts
                             ctx.textAlign = 'left';
@@ -781,15 +784,25 @@ function drawCompleteModel(ctx, width, height) {
                     } // if (diagramms[diagramInfos.displayedDiagram].diagramType != circuitDiagramForSoftwareDiagramType || stepDraw == 2)
 
                     if (diagramms[diagramInfos.displayedDiagram].diagramType == circuitDiagramForSoftwareDiagramType && stepDraw == 2) {
+
                         // Draw lines between elements and comments
+
                         if (cmp.visible) {
                             if (typeof diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index] !== 'undefined') {
                                 if (diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].text != '') {
-
+                                    let startX;
+                                    let startY;
                                     // Begin Insert to be adapted for comments
-
-                                    let startX = diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x;
-                                    let startY = diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y;
+                                    if (mEBI.element == "SOMIX.Grouping") {
+                                        // The lines from a grouping to a comment shall point to the center of the box around all contained elements
+                                        startX = (diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxX1 +
+                                            diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxX2) / 2;
+                                        startY = (diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxY1 +
+                                            diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxY2) / 2;
+                                    } else {
+                                        startX = diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x;
+                                        startY = diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y;
+                                    }
                                     let endX = (diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].boxX1 +
                                         diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].boxX2) / 2;
                                     let endY = (diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].boxY1 +
@@ -914,7 +927,7 @@ function draw(always = true) {
 }
 canvas.addEventListener('mouseover', function (e) {
     // if (!showModelExplorer) {
-        requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
+    requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
     // }
 });
 

@@ -377,9 +377,9 @@ async function ImportOldDiagram() {
           }
           if (e.tagName == 'comment') {
             n_comment = e.textContent;
-/*             // The first character is apparently an artificial " . Remove it.
-            n_comment = n_comment.substring(1);  */
-            n_comment = n_comment.replace('<br>','\n')
+            /*             // The first character is apparently an artificial " . Remove it.
+                        n_comment = n_comment.substring(1);  */
+            n_comment = n_comment.replace('<br>', '\n')
           }
           if (e.tagName == 'commentx') {
             n_comment_x = e.textContent;
@@ -511,6 +511,16 @@ async function ImportOldDiagram() {
                   if (n_suppressed) {
                     suppress(e2);
                   }
+
+                  // --- Add Comments
+                  if (n_comment != '') {
+                    diagramms[diagramInfos.activeDiagram].generationInfoInternal.commentsByID[e2.index] = {};
+                    diagramms[diagramInfos.activeDiagram].generationInfoInternal.commentsByID[e2.index].x = parseFloat(n_comment_x) * factorOldToNew;
+                    diagramms[diagramInfos.activeDiagram].generationInfoInternal.commentsByID[e2.index].y = parseFloat(n_comment_y) * factorOldToNew;
+                    diagramms[diagramInfos.activeDiagram].generationInfoInternal.commentsByID[e2.index].text = n_comment;
+                  }
+
+
                 }
               }
             }
