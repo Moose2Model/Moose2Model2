@@ -37,6 +37,46 @@
     <p>Use SAP2Moose to create an mse file with a SOMIX metamodel to use the application. Or load this <a
             href="Example.mse">example file</a> to your local computer and load it into the application.</p>
 
+    <h1>First Steps</h1>
+    <h2>Demo</h2>
+    It is possible to display and use demo data. This is especially helpful when no SOMIX model is available. Follow
+    these steps:
+    <li>Open the application in a Browser</li>
+    <li>Choose in the menu Help -> Load demo data</li>
+    <li>Do a right mouse click into the pane and choose "Start Force-directed graph". Wait some time and choose
+        then "Stop Force-directed graph".</li>
+    <li>Click on one of the red or blue circles with the right mouse button. Choose "Add element with all
+        neighbors"</li>
+    <li>Do a right mouse click into the pane and choose Demo Diagram</li>
+    <li>Play around with left and right clicks of the mouse on elements, into boxes and onto the pane. Use also
+        the scrool wheel of the mouse.</li>
+    You may also choose Diagram -> Explore Model. Use this steps:
+    <li>Open the application in a Browser</li>
+    <li>Choose in the menu Help -> Load demo data</li>
+    <li>Enter for instance ^Z.*LOG in the input field. This filters for all elements which start with Y and have a LOG
+        somewhre in the name. You can use any Regex expression.</li>
+    <li>The Button Apply Filter may not yet work, instead move the mouse down.</li>
+    <li>You can scroll with the mouse wheel in the result list.</li>
+    <li>Make a right click on an element and choose "Add element with all neighbors"</li>
+    <li>Choose cancel</li>
+    <li>Make a right click in the pane and choose Demo Diagram.</li>
+    <li>Play around with left and right clicks of the mouse on elements, into boxes and onto the pane. Use also
+        the scrool wheel of the mouse.</li>
+
+
+    <h2>Use a SOMIX model</h2>
+    When you have a SOMIX model (You will need to use SAP2Moose for now):
+    <li>Choose File -> Load Model and load a SOMIX model</li>
+    <li>Choose File -> Open Work Folder (Generation informations for files will be stored in this folder)</li>
+    <li>Choose File -> New Diagram and enter a name for the new diagram.</li>
+    <li>Make a right click into the pane and choose the name of your diagram. This will change the view and display:
+        "This diagram is currentl empty: ..."</li>
+    <li>Make a right mouse click into the pane and choose "Make this diagram active". When you later add elements to a
+        diagram, these elements will be added to the active diagram.</li>
+    <li>Now choose an element and add it to the active diagram like it was described on this page under "First Steps" ->
+        "Demo".</li>
+
+
     <h1>Implemented Features</h1>
     <h2>General features</h2>
     <ul>
@@ -48,36 +88,39 @@
         <li>Zooming with the wheel of the mouse</li>
         <li>Menu Diagram
             <ul>
-                <li>Remove hightlighting of the displayed element</li>
+                <li>Remove all hightlighting of the displayed elements</li>
             </ul>
         </li>
         <li>Context click on elements:
             <ul>
-                <li>Get informations on the element</li>
-                <li>Jump to code with when a link is contained in the model (adt links have to be activated for Eclipse)
-                </li>
-                <li>Remove pinning of recently dragged elements</li>
                 <li>Add an element with all neighbors to the active diagram</li>
                 <li>Redo adding an element with all neighbors to the active diagram</li>
+                <li>Get informations on the element</li>
+                <li>Enter or edit a comment for an element</li>
                 <li>Supress an element with all children</li>
                 <li>Redo supressing an element with all children</li>
+                <li>Jump to code with when a link is contained in the model (adt links have to be activated for
+                    Eclipse)</li>
+                <li>Remove pinning of recently dragged elements</li>
                 <li>Highlight elements or the using or used elements</li>
-                <li>Enter or edit a comment for an element</li>
             </ul>
         </li>
         <li>Context click on pane:
             <ul>
-                <li>Jump to other diagram</li>
+                <li>(Only in the diagram with all model elements: Toogle the display of element names)</li>
                 <li>Set a diagram active (But not the diagram with all elements)</li>
-                <li>Toogle the display of element names</li>
+                <li>Start and Stop Force-directed graph</li>
+                <li>Jump to other diagram</li>
             </ul>
         </li>
         <li>Save information to generate a diagram to file
             <ul>
-                <li>Specify a workfolder first. These folder contains all diagrams which belong to the same model</li>
+                <li>Specify a workfolder first. These folder contains all diagrams which belong to the same model
+                </li>
                 <li>Save the generation information for the displayed diagram. It be stored in a file with extension
                     .m2m and similar name.</li>
-                <li>Read the generation information from an .m2m file. You should have all required model data loaded
+                <li>Read the generation information from an .m2m file. You should have all required model data
+                    loaded
                     before. A diagram with identical name is created.</li>
                 <li>Import xml files from the old Smalltalk version of Moose2Model.</li>
                 <li>Please note that no warning is yet raised when information is lost due to wrong handling.</li>
@@ -89,7 +132,8 @@
     <h2>Diagram with all elements</h2>
     A diagram with all elments is always displayed.
     It can be animated as a force-directed graph. This works well for small models.
-    The main intention of this application is not to make force-directed graph, so other tools might work better here.
+    The main intention of this application is not to make force-directed graph, so other tools might work better
+    here.
     <h2>Circuit Diagram for Software</h2>
     <ul>
         <li>Code is displayed as orange box</li>

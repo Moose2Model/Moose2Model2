@@ -125,8 +125,7 @@ function handleContextMenu(e) {
     linkToEditorText = gMCElementContextHandled.linkToEditor;
     gMC_url = gMCElementContextHandled.linkToEditor; // So that it is globaly available in case the link is clicked
 
-    let InfoText = 'Mouse is Clicked at x: ' + x + ' y: ' + y;
-    var m = [InfoText, nameText, techtypeText, uniqueNameText, linkToEditorText];
+    var m = [nameText, techtypeText, uniqueNameText, linkToEditorText];
     if (typeof diagramInfos.activeDiagram !== 'undefined') {
       if (gMCElementContextHandled.element != 'SOMIX.Grouping') {
         if (diagramms[diagramInfos.activeDiagram].generationInfoInternal.addedWithNeighbors.includes(gMCElementContextHandled.index)) {
