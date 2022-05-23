@@ -414,44 +414,53 @@ async function ImportOldDiagram() {
           for (const e2 of modelElementsByIndex) {
             if (typeof e2 !== 'undefined') {
               if (e2.element == expSOMIX && e2.name == expName) {
-                for (const pc of parentChildByChild[e2.index]) {
-                  let foundElement = modelElementsByIndex[pc.parent];
-                  if (foundElement.name == n_class) {
-                    // Duplicate 1/2
-                    elementFound = true;
-                    if (step == 1) {
-                      // --- Add elements with neighbor to this diagram
-                      if (n_add_explicitly) {
-                        addWithNeighbors(e2);
-                      }
-                    }
-                    if (step == 2) {
-                      // --- Suppress elements on this diagram
-                      if (n_suppressed) {
-                        suppress(e2);
-                      }
-                      if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[e2.index] !== 'undefined') {
-                        // --- Position elements on this diagram
-                        diagramms[diagramInfos.activeDiagram].complModelPosition[e2.index].x = parseFloat(n_x) * factorOldToNew;
-                        diagramms[diagramInfos.activeDiagram].complModelPosition[e2.index].y = parseFloat(n_y) * factorOldToNew;
 
-                        // Pin all elements directly after import
-                        // This prevents that the Forced-direction accicentially spoils the layout
-                        diagramms[diagramInfos.activeDiagram].pinned.push(e2.index);
+                if (typeof parentChildByChild[e2.index] !== 'undefined') {
 
-                        // --- Add Comments
-                        if (n_comment != '') {
-                          diagramms[diagramInfos.activeDiagram].generationInfoInternal.commentsByID[e2.index] = {};
-                          diagramms[diagramInfos.activeDiagram].generationInfoInternal.commentsByID[e2.index].x = parseFloat(n_comment_x) * factorOldToNew;
-                          diagramms[diagramInfos.activeDiagram].generationInfoInternal.commentsByID[e2.index].y = parseFloat(n_comment_y) * factorOldToNew;
-                          diagramms[diagramInfos.activeDiagram].generationInfoInternal.commentsByID[e2.index].text = n_comment;
+
+                  for (const pc of parentChildByChild[e2.index]) {
+                    let foundElement = modelElementsByIndex[pc.parent];
+                    if (foundElement.name == n_class) {
+                      // Duplicate 1/2
+                      elementFound = true;
+                      if (step == 1) {
+                        // --- Add elements with neighbor to this diagram
+                        if (n_add_explicitly) {
+                          addWithNeighbors(e2);
                         }
-
                       }
+                      if (step == 2) {
+                        // --- Suppress elements on this diagram
+                        if (n_suppressed) {
+                          suppress(e2);
+                        }
+                        if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[e2.index] !== 'undefined') {
+                          // --- Position elements on this diagram
+                          diagramms[diagramInfos.activeDiagram].complModelPosition[e2.index].x = parseFloat(n_x) * factorOldToNew;
+                          diagramms[diagramInfos.activeDiagram].complModelPosition[e2.index].y = parseFloat(n_y) * factorOldToNew;
+
+                          // Pin all elements directly after import
+                          // This prevents that the Forced-direction accicentially spoils the layout
+                          diagramms[diagramInfos.activeDiagram].pinned.push(e2.index);
+
+                          // --- Add Comments
+                          if (n_comment != '') {
+                            diagramms[diagramInfos.activeDiagram].generationInfoInternal.commentsByID[e2.index] = {};
+                            diagramms[diagramInfos.activeDiagram].generationInfoInternal.commentsByID[e2.index].x = parseFloat(n_comment_x) * factorOldToNew;
+                            diagramms[diagramInfos.activeDiagram].generationInfoInternal.commentsByID[e2.index].y = parseFloat(n_comment_y) * factorOldToNew;
+                            diagramms[diagramInfos.activeDiagram].generationInfoInternal.commentsByID[e2.index].text = n_comment;
+                          }
+
+                        }
+                      }
+                      // End duplicate 1/2
                     }
-                    // End duplicate 1/2
                   }
+
                 }
+
+
+
 
                 if (!elementFound && expName == n_class) {
 
