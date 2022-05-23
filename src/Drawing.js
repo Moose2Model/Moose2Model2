@@ -348,25 +348,33 @@ function drawCompleteModel(ctx, width, height) {
                                 if (typeof parentChildByParent[mEBI.index] !== 'undefined') {
                                     for (const childrens of parentChildByParent[mEBI.index]) {
                                         if (typeof diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child] !== 'undefined') {
-                                            if (isFirst) {
-                                                bX1 = diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].boxX1;
-                                                bX2 = diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].boxX2;
-                                                bY1 = diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].boxY1;
-                                                bY2 = diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].boxY2;
-                                                isFirst = false;
-                                            };
-                                            if (bX1 > diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].boxX1) {
-                                                bX1 = diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].boxX1
+
+                                            if (typeof diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].boxX1 !== 'undefined' &&
+                                                typeof diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].boxX2 !== 'undefined' &&
+                                                typeof diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].boxY1 !== 'undefined' &&
+                                                typeof diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].boxY2 !== 'undefined') {
+
+                                                if (isFirst) {
+                                                    bX1 = diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].boxX1;
+                                                    bX2 = diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].boxX2;
+                                                    bY1 = diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].boxY1;
+                                                    bY2 = diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].boxY2;
+                                                    isFirst = false;
+                                                };
+                                                if (bX1 > diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].boxX1) {
+                                                    bX1 = diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].boxX1
+                                                }
+                                                if (bX2 < diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].boxX2) {
+                                                    bX2 = diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].boxX2
+                                                }
+                                                if (bY1 > diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].boxY1) {
+                                                    bY1 = diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].boxY1
+                                                }
+                                                if (bY2 < diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].boxY2) {
+                                                    bY2 = diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].boxY2
+                                                }
                                             }
-                                            if (bX2 < diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].boxX2) {
-                                                bX2 = diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].boxX2
-                                            }
-                                            if (bY1 > diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].boxY1) {
-                                                bY1 = diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].boxY1
-                                            }
-                                            if (bY2 < diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].boxY2) {
-                                                bY2 = diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].boxY2
-                                            }
+
                                         }
                                     }
                                 }
