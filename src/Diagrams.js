@@ -166,8 +166,10 @@ async function ReadDisplayedDiagram() {
   for (const e of readGenerationInfo.positions) {
     if (typeof modelElementsByUniqueKey[e.uniqueKey] !== 'undefined') {
       let element = modelElementsByUniqueKey[e.uniqueKey];
-      diagramms[diagramInfos.activeDiagram].complModelPosition[element.index].x = e.x;
-      diagramms[diagramInfos.activeDiagram].complModelPosition[element.index].y = e.y;
+      if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[element.index] !== 'undefined') {
+        diagramms[diagramInfos.activeDiagram].complModelPosition[element.index].x = e.x;
+        diagramms[diagramInfos.activeDiagram].complModelPosition[element.index].y = e.y;
+      }
     }
   }
 
