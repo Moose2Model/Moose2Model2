@@ -203,33 +203,21 @@ function drawCompleteModel(ctx, width, height) {
                     // ctx.beginPath();
                     switch (mEBI.element) {
                         case 'SOMIX.Grouping':
-                            //         ctx.fillStyle = 'gray';
+
                             SizeOnPane = groupSize * scale;
-                            //         size = cameraToCanvasScale(SizeOnPane);
-                            //         ctx.arc(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x),
-                            //             cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y), size / 2, 0, 2 * Math.PI);
-                            //         ctx.fill();
+
                             break;
                         case 'SOMIX.Code':
-                            //         ctx.fillStyle = 'orange';
-                            SizeOnPane = codeSize * scale;
-                            //         size = cameraToCanvasScale(SizeOnPane);
 
-                            //         ctx.fillRect(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x) - size / 2,
-                            //             cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y) - size / 2, size, size);
+                            SizeOnPane = codeSize * scale;
+
                             break;
                         case 'SOMIX.Data':
-                            //         ctx.fillStyle = 'lightBlue';
+
                             SizeOnPane = dataSize * scale;
-                            //         size = cameraToCanvasScale(SizeOnPane);
-                            //         ctx.arc(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x),
-                            //             cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y), size / 2, 0, 2 * Math.PI);
-                            //         ctx.fill();
+
                             break;
                     }
-
-                    // ctx.fillRect(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x - size / 2),
-                    //     cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y - size / 2), size, size);
 
                     if (diagramms[diagramInfos.displayedDiagram].diagramSettings.displayElementNames == true) {
                         if (mEBI.element == 'SOMIX.Grouping') {
