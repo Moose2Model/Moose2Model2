@@ -249,6 +249,16 @@ function drawCompleteModel(ctx, width, height) {
                                 SizeOnPane = dataSize * scale;
                             }
 
+                            // Prevent problems when the position is not a number
+
+                            if (Number.isNaN(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x)){
+                                diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x  = 0;
+                            }
+
+                            if (Number.isNaN(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y)){
+                                diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y  = 0;
+                            }
+
                             // Set values for bounding box
 
                             let temp1 = diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x - SizeOnPane / 2;
