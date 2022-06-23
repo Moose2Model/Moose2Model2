@@ -19,6 +19,14 @@ function commentAdapted(text) {
     if (typeof diagramms[diagramInfos.activeDiagram].generationInfoInternal.commentsByID[lastElement.index] === 'undefined') {
         let mebi = modelElementsByIndex[lastElement.index];
         if (text != '') {
+            if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[lastElement.index].boxX1 === 'undefined'){
+                // So that a comment is always placed
+                diagramms[diagramInfos.activeDiagram].complModelPosition[lastElement.index].boxX1 = 0.
+            }
+            if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[lastElement.index].boxY1 === 'undefined'){
+                // So that a comment is always placed
+                diagramms[diagramInfos.activeDiagram].complModelPosition[lastElement.index].boxY1 = 0.
+            }
             if (mebi.element == 'SOMIX.Code' || mebi.element == 'SOMIX.Data') {
                 diagramms[diagramInfos.activeDiagram].generationInfoInternal.commentsByID[lastElement.index] =
                 {
