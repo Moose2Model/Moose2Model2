@@ -33,7 +33,7 @@
 
             position: absolute;
             top: 25px;
-            left: 50px;
+            left: 50px; /*How far is the displayed diagram info text placed to the right*/
             background-color: white;
             font-family: Arial, Helvetica, sans-serif;
         }
@@ -42,7 +42,7 @@
 
             position: absolute;
             top: 25px;
-            left: 400px;
+            left: 600px; /*How far is the active diagram info text placed to the right*/
             background-color: white;
             font-family: Arial, Helvetica, sans-serif;
         }
@@ -144,7 +144,9 @@
             display: none;
             position: absolute;
             background-color: #f9f9f9;
-            min-width: 160px;
+            /*min-width: 160px;*/
+            min-width: 200px; /*Width, specify both for .FileMenu-content and FileMenu-content input*/
+            /*width: fit-content;*/
             box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
             z-index: 1;
         }
@@ -174,6 +176,7 @@
             border: none;
             outline: none;
             padding: 10px 10px;
+            min-width: 200px;/*Width, specify both for .FileMenu-content and FileMenu-content input*/
             text-decoration: none;
             /* Required so that elements are placed below each other */
             display: block;
@@ -277,8 +280,8 @@
             <button class="fileMenuButton" onclick="ToggleFileMenu()">File
             </button>
             <div class="FileMenu-content" id="FileMenuID">
-                <input id="OpenWorkFolderButton" value="Open Work Folder">
-                <input id="LoadButton" value="Load model">
+                <input id="OpenWorkFolderButton" value="Open Work Folder" minlength="1000">
+                <input id="LoadButton" value="Load SOMIX model from mse file" minlength="1000">
                 <input id="ImportOldDiagramButton" value="Import old Diagram (XML)">
                 <input id="ReadDiagramButton" value="Read Diagram">
                 <input id="NewDiagramButton" value="New Diagram">
