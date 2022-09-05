@@ -129,9 +129,17 @@ function handleContextMenu(e) {
     if (gMCElementContextHandled.element != 'SOMIX.Grouping') {
       if (typeof diagramInfos.activeDiagram !== 'undefined') {
         if (diagramms[diagramInfos.activeDiagram].generationInfoInternal.addedWithNeighbors.includes(gMCElementContextHandled.index)) {
-          m.unshift('Remove: Add element with all neighbors');
+          if (diagramInfos.displayedDiagram == diagramInfos.activeDiagram) {
+            m.unshift('Remove: Add element with all neighbors');
+          } else {
+            m.unshift('Displayed <> Active: Remove: Add element with all neighbors');
+          }
         } else {
-          m.unshift('Add element with all neighbors');
+          if (diagramInfos.displayedDiagram == diagramInfos.activeDiagram) {
+            m.unshift('Add element with all neighbors');
+          } else {
+            m.unshift('Displayed <> Active: Add element with all neighbors');
+          }
         }
       } else {
         m.unshift('Add or Remove not possible - No active diagram');
@@ -229,9 +237,9 @@ $('#contextMenu').on('click', 'li', function (e) {
     // requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
   } else if ($(this).text() == 'Make this diagram active') {
     setDiagramActive(diagramInfos.displayedDiagram);
-  } else if ($(this).text() == 'Add element with all neighbors') {
+  } else if ($(this).text() == 'Add element with all neighbors' || $(this).text() == 'Displayed <> Active: Add element with all neighbors') {
     addWithNeighbors(gMCElementContextHandled);
-  } else if ($(this).text() == 'Remove: Add element with all neighbors') {
+  } else if ($(this).text() == 'Remove: Add element with all neighbors' || $(this).text() == 'Displayed <> Active: Remove: Add element with all neighbors') {
     redoAddWithNeighbors(gMCElementContextHandled);
   } else if ($(this).text() == 'Comment') {
     comment(gMCElementContextHandled);
