@@ -126,14 +126,17 @@ function handleContextMenu(e) {
     gMC_url = gMCElementContextHandled.linkToEditor; // So that it is globaly available in case the link is clicked
 
     var m = [nameText, techtypeText, uniqueNameText, linkToEditorText];
-    if (typeof diagramInfos.activeDiagram !== 'undefined') {
-      if (gMCElementContextHandled.element != 'SOMIX.Grouping') {
+    if (gMCElementContextHandled.element != 'SOMIX.Grouping') {
+      if (typeof diagramInfos.activeDiagram !== 'undefined') {
         if (diagramms[diagramInfos.activeDiagram].generationInfoInternal.addedWithNeighbors.includes(gMCElementContextHandled.index)) {
           m.unshift('Remove: Add element with all neighbors');
         } else {
           m.unshift('Add element with all neighbors');
         }
+      } else {
+        m.unshift('Add or Remove not possible - No active diagram');
       }
+
     }
     if (typeof diagramInfos.activeDiagram !== 'undefined') {
 
