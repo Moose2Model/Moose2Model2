@@ -340,6 +340,8 @@
     </div>
 
     <script src="Global.js?v=25"></script>
+    <script src="FileExtractorGlobal.js?v=25"></script>
+    <script src="FileExtractorPreprocess.js?v=25"></script>
     <script src="Comment.js?v=25"></script>
     <script src="ForceDirecting.js?v=25"></script>
     <script src="Diagrams.js?v=25"></script>
@@ -366,6 +368,9 @@
 
         const OpenWorkFolderButton = document.getElementById('OpenWorkFolderButton');
         OpenWorkFolderButton.addEventListener('click', SetWorkFolder);
+
+        const ExtractSOMIXButton = document.getElementById('ExtractSOMIXButton');
+        ExtractSOMIXButton.addEventListener('click', SetExtractedFolder);
 
         const LoadMseButton = document.getElementById('LoadButton');
         LoadMseButton.addEventListener('click', LoadModel);
