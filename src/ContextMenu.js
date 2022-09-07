@@ -9,9 +9,9 @@ let gMCElementContextHandled;
 let contextMenuClickStarted = false;
 let lastMousedowndAt = { x: 0, y: 0 };
 
-let $menu = $('#contextMenu');
+let jqueryMenu = $('#contextMenu');
 // hide the context menu
-$menu.hide();
+jqueryMenu.hide();
 
 
 canvas.addEventListener('mousedown', handleContextMouseDown, false);
@@ -51,7 +51,7 @@ function handleContextMouseDown(e) {
     }
   }
 
-  $menu.hide();
+  jqueryMenu.hide();
 }
 
 // function handleDragMouseMove(e) {
@@ -59,7 +59,7 @@ function handleContextMouseDown(e) {
 // }
 
 function handleContextMouseOut(e) {
-  $menu.hide();
+  jqueryMenu.hide();
 }
 
 function handleContextMenu(e) {
@@ -201,12 +201,12 @@ function handleContextMenu(e) {
 
 
   // showContextMenu(x, y);
-  $menu.show();
+  jqueryMenu.show();
   // var m = ['Start Force-directed graph', 'Stop Force-directed graph'];
-  $menu.empty();
-  $menu.css({ left: x, top: y });
+  jqueryMenu.empty();
+  jqueryMenu.css({ left: x, top: y });
   for (var i = 0; i < m.length; i++) {
-    $('<li>', { text: m[i], 'data-fn': i, }).appendTo($menu[0]);
+    $('<li>', { text: m[i], 'data-fn': i, }).appendTo(jqueryMenu[0]);
   }
 
   return (false);
@@ -215,7 +215,7 @@ function handleContextMenu(e) {
 /**React on clicks in Menu */
 $('#contextMenu').on('click', 'li', function (e) {
   // hide the context menu
-  $menu.hide();
+  jqueryMenu.hide();
   if ($(this).text() == 'Start Force-directed graph') {
     if (typeof diagramms[diagramInfos.displayedDiagram] !== 'undefined') {
       diagramms[diagramInfos.displayedDiagram].forceFeedback = true;
