@@ -10,11 +10,16 @@ let gMCElementContextHandled;
 let contextMenuClickStarted = false;
 let lastMousedowndAt = { x: 0, y: 0 };
 
-let jqueryMenu = $('#contextMenu');
+//j2 let jqueryMenu = $('#contextMenu');
 const NewMenu = document.getElementById('contextMenu');
+
+NewMenu.style.position = 'absolute';
+
+NewMenu.style.top = '150px';
+NewMenu.style.left = '150px';
 // hide the context menu
-jqueryMenu.hide();
-// NewMenu.hidden = true;
+//j2 jqueryMenu.hide();
+NewMenu.hidden = true;
 
 
 canvas.addEventListener('mousedown', handleContextMouseDown, false);
@@ -54,7 +59,9 @@ function handleContextMouseDown(e) {
     }
   }
 
-  jqueryMenu.hide();
+  //j2 jqueryMenu.hide();
+
+  NewMenu.hidden = true;
 }
 
 // function handleDragMouseMove(e) {
@@ -62,7 +69,9 @@ function handleContextMouseDown(e) {
 // }
 
 function handleContextMouseOut(e) {
-  jqueryMenu.hide();
+  //j2 jqueryMenu.hide();
+
+  NewMenu.hidden = true;
 }
 
 function handleContextMenu(e) {
@@ -204,21 +213,26 @@ function handleContextMenu(e) {
 
 
   // showContextMenu(x, y);
-  jqueryMenu.show();
+  //ok jqueryMenu.show();
+  NewMenu.hidden = false;
   // var m = ['Start Force-directed graph', 'Stop Force-directed graph'];
-  jqueryMenu.empty();
-  jqueryMenu.css({ left: x, top: y });
-  for (var i = 0; i < m.length; i++) {
-    $('<li>', { text: m[i], 'data-fn': i, }).appendTo(jqueryMenu[0]);
-  }
+  //j2  jqueryMenu.empty();
+  //j2 jqueryMenu.css({ left: x, top: y });
+  NewMenu.style.top = y + 'px';
+  NewMenu.style.left = x + 'px';
+  //j2 for (var i = 0; i < m.length; i++) {
+  //j2   $('<li>', { text: m[i], 'data-fn': i, }).appendTo(jqueryMenu[0]);
+  //j2 }
 
   return (false);
 }
 
 /**React on clicks in Menu */
-$('#contextMenu').on('click', 'li', function (e) {
+/* $('#contextMenu').on('click', 'li', function (e) {
   // hide the context menu
   jqueryMenu.hide();
+
+  NewMenu.hidden = true;
   if ($(this).text() == 'Start Force-directed graph') {
     if (typeof diagramms[diagramInfos.displayedDiagram] !== 'undefined') {
       diagramms[diagramInfos.displayedDiagram].forceFeedback = true;
@@ -270,4 +284,4 @@ $('#contextMenu').on('click', 'li', function (e) {
     }
   }
 }
-);
+); */
