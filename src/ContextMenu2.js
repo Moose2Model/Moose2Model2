@@ -21,6 +21,17 @@ NewMenu.style.left = '150px';
 //j2 jqueryMenu.hide();
 NewMenu.hidden = true;
 
+// Test clearing list
+
+while (NewMenu.firstChild) {
+  NewMenu.removeChild(NewMenu.firstChild);
+}
+
+// Test appending item
+var li = document.createElement("li");
+li.appendChild(document.createTextNode("Four"));
+NewMenu.appendChild(li);
+
 
 canvas.addEventListener('mousedown', handleContextMouseDown, false);
 // canvas.addEventListener('mousemove', handleDragMouseMove, false);
@@ -212,17 +223,34 @@ function handleContextMenu(e) {
 
 
 
+
+
   // showContextMenu(x, y);
   //ok jqueryMenu.show();
   NewMenu.hidden = false;
   // var m = ['Start Force-directed graph', 'Stop Force-directed graph'];
-  //j2  jqueryMenu.empty();
+  //ok  jqueryMenu.empty();
+
+  // Clear list with all context menu items
+  while (NewMenu.firstChild) {
+    NewMenu.removeChild(NewMenu.firstChild);
+  }
+
   //j2 jqueryMenu.css({ left: x, top: y });
   NewMenu.style.top = y + 'px';
   NewMenu.style.left = x + 'px';
-  //j2 for (var i = 0; i < m.length; i++) {
-  //j2   $('<li>', { text: m[i], 'data-fn': i, }).appendTo(jqueryMenu[0]);
-  //j2 }
+  //ok for (var i = 0; i < m.length; i++) {
+  //ok   $('<li>', { text: m[i], 'data-fn': i, }).appendTo(jqueryMenu[0]);
+  //ok }
+
+  // append items to context menu
+  for (var i = 0; i < m.length; i++) {
+
+    var li = document.createElement("li");
+    li.appendChild(document.createTextNode(m[i]));
+    NewMenu.appendChild(li);
+
+  }
 
   return (false);
 }
