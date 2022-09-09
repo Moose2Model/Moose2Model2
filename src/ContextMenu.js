@@ -1,6 +1,7 @@
 'use strict';
 // From https://stackoverflow.com/questions/31601393/create-context-menu-using-jquery-with-html-5-canvas
 // Adapted. Requires JQuery
+// New version where JQuery will be removed
 
 let gMC_url = '';
 /** The element that is processed by the context menu */
@@ -9,9 +10,27 @@ let gMCElementContextHandled;
 let contextMenuClickStarted = false;
 let lastMousedowndAt = { x: 0, y: 0 };
 
-let jqueryMenu = $('#contextMenu');
+//j2 let jqueryMenu = $('#contextMenu');
+const NewMenu = document.getElementById('contextMenu');
+
+NewMenu.style.position = 'absolute';
+
+NewMenu.style.top = '150px';
+NewMenu.style.left = '150px';
 // hide the context menu
-jqueryMenu.hide();
+//j2 jqueryMenu.hide();
+NewMenu.hidden = true;
+
+// Test clearing list
+
+while (NewMenu.firstChild) {
+  NewMenu.removeChild(NewMenu.firstChild);
+}
+
+// Test appending item
+var li = document.createElement("li");
+li.appendChild(document.createTextNode("Four"));
+NewMenu.appendChild(li);
 
 
 canvas.addEventListener('mousedown', handleContextMouseDown, false);
@@ -51,7 +70,9 @@ function handleContextMouseDown(e) {
     }
   }
 
-  jqueryMenu.hide();
+  //j2 jqueryMenu.hide();
+
+  NewMenu.hidden = true;
 }
 
 // function handleDragMouseMove(e) {
@@ -59,7 +80,9 @@ function handleContextMouseDown(e) {
 // }
 
 function handleContextMouseOut(e) {
-  jqueryMenu.hide();
+  //j2 jqueryMenu.hide();
+
+  NewMenu.hidden = true;
 }
 
 function handleContextMenu(e) {
@@ -200,22 +223,103 @@ function handleContextMenu(e) {
 
 
 
+
+
   // showContextMenu(x, y);
-  jqueryMenu.show();
+  //ok jqueryMenu.show();
+  NewMenu.hidden = false;
   // var m = ['Start Force-directed graph', 'Stop Force-directed graph'];
-  jqueryMenu.empty();
-  jqueryMenu.css({ left: x, top: y });
+  //ok  jqueryMenu.empty();
+
+  // Clear list with all context menu items
+  while (NewMenu.firstChild) {
+    NewMenu.removeChild(NewMenu.firstChild);
+  }
+
+  //j2 jqueryMenu.css({ left: x, top: y });
+  NewMenu.style.top = y + 'px';
+  NewMenu.style.left = x + 'px';
+  //ok for (var i = 0; i < m.length; i++) {
+  //ok   $('<li>', { text: m[i], 'data-fn': i, }).appendTo(jqueryMenu[0]);
+  //ok }
+
+  // append items to context menu
   for (var i = 0; i < m.length; i++) {
-    $('<li>', { text: m[i], 'data-fn': i, }).appendTo(jqueryMenu[0]);
+
+    var li = document.createElement("li");
+    li.addEventListener('click', ContextMenuClicked);
+
+
+    li.appendChild(document.createTextNode(m[i]));
+    NewMenu.appendChild(li);
+
   }
 
   return (false);
 }
 
+function ContextMenuClicked(e){
+
+  NewMenu.hidden = true;
+  if (this.outerText == 'Start Force-directed graph') {
+    if (typeof diagramms[diagramInfos.displayedDiagram] !== 'undefined') {
+      diagramms[diagramInfos.displayedDiagram].forceFeedback = true;
+      requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
+    }
+  } else if (this.outerText == 'Stop Force-directed graph') {
+    if (typeof diagramms[diagramInfos.displayedDiagram] !== 'undefined') {
+      diagramms[diagramInfos.displayedDiagram].forceFeedback = false;
+      window.cancelAnimationFrame(requestAnimationFrame);
+    }
+  } else if (this.outerText == 'Jump to code') {
+    window.location.href = gMC_url;
+    // requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
+  } else if (this.outerText == 'Remove pinning') {
+    const idx = diagramms[diagramInfos.displayedDiagram].pinned.indexOf(gMCElementContextHandled.index);
+    if (idx !== -1) {
+      diagramms[diagramInfos.displayedDiagram].pinned.splice(idx, 1); // delete this element from list
+    }
+    // requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
+  } else if (this.outerText == 'Make this diagram active') {
+    setDiagramActive(diagramInfos.displayedDiagram);
+  } else if (this.outerText == 'Add element with all neighbors' || this.outerText == 'Displayed <> Active: Add element with all neighbors') {
+    addWithNeighbors(gMCElementContextHandled);
+  } else if (this.outerText == 'Remove: Add element with all neighbors' || this.outerText == 'Displayed <> Active: Remove: Add element with all neighbors') {
+    redoAddWithNeighbors(gMCElementContextHandled);
+  } else if (this.outerText == 'Comment') {
+    comment(gMCElementContextHandled);
+  } else if (this.outerText == 'Supress' || this.outerText == 'Supress with all children') {
+    suppress(gMCElementContextHandled);
+  } else if (this.outerText == 'Redo supress') {
+    redoSuppress(gMCElementContextHandled);
+  } else if (this.outerText == 'Toggle display of names') {
+    toggleNameDisplay();
+  } else if (this.outerText == 'Highlight used by') {
+    highlightUsedBy(gMCElementContextHandled.index);
+  } else if (this.outerText == 'Highlight') {
+    highlight(gMCElementContextHandled.index);
+  } else if (this.outerText == 'Highlight using') {
+    highlightUsing(gMCElementContextHandled.index);
+  }
+  else {
+    // Scan for a name of another diagram
+    for (const c of returnOtherDiagrams()) {
+      if (this.outerText == c) {
+        switchDiagram(c);
+        drawCompleteModel(ctx, g_width, g_height);
+        // draw();
+      }
+    }
+  }
+
+}
+
 /**React on clicks in Menu */
-$('#contextMenu').on('click', 'li', function (e) {
+/* $('#contextMenu').on('click', 'li', function (e) {
   // hide the context menu
   jqueryMenu.hide();
+
+  NewMenu.hidden = true;
   if ($(this).text() == 'Start Force-directed graph') {
     if (typeof diagramms[diagramInfos.displayedDiagram] !== 'undefined') {
       diagramms[diagramInfos.displayedDiagram].forceFeedback = true;
@@ -267,4 +371,4 @@ $('#contextMenu').on('click', 'li', function (e) {
     }
   }
 }
-);
+); */
