@@ -21,6 +21,8 @@ async function* getFilesRecursively(entry) {
 async function SetExtractedFolder() {
     'use strict';
     try {
+        window.alert("This function is currently implemented. It will not either not work, or not work properly");
+
         FEDirectoryHandle = await window.showDirectoryPicker();
 
         // Example
