@@ -247,12 +247,71 @@ function handleContextMenu(e) {
   for (var i = 0; i < m.length; i++) {
 
     var li = document.createElement("li");
+    li.addEventListener('click', ContextMenuClicked);
+
+
     li.appendChild(document.createTextNode(m[i]));
     NewMenu.appendChild(li);
 
   }
 
   return (false);
+}
+
+function ContextMenuClicked(e){
+
+  NewMenu.hidden = true;
+  if (this.outerText == 'Start Force-directed graph') {
+    if (typeof diagramms[diagramInfos.displayedDiagram] !== 'undefined') {
+      diagramms[diagramInfos.displayedDiagram].forceFeedback = true;
+      requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
+    }
+  } else if (this.outerText == 'Stop Force-directed graph') {
+    if (typeof diagramms[diagramInfos.displayedDiagram] !== 'undefined') {
+      diagramms[diagramInfos.displayedDiagram].forceFeedback = false;
+      window.cancelAnimationFrame(requestAnimationFrame);
+    }
+  } else if (this.outerText == 'Jump to code') {
+    window.location.href = gMC_url;
+    // requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
+  } else if (this.outerText == 'Remove pinning') {
+    const idx = diagramms[diagramInfos.displayedDiagram].pinned.indexOf(gMCElementContextHandled.index);
+    if (idx !== -1) {
+      diagramms[diagramInfos.displayedDiagram].pinned.splice(idx, 1); // delete this element from list
+    }
+    // requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
+  } else if (this.outerText == 'Make this diagram active') {
+    setDiagramActive(diagramInfos.displayedDiagram);
+  } else if (this.outerText == 'Add element with all neighbors' || this.outerText == 'Displayed <> Active: Add element with all neighbors') {
+    addWithNeighbors(gMCElementContextHandled);
+  } else if (this.outerText == 'Remove: Add element with all neighbors' || this.outerText == 'Displayed <> Active: Remove: Add element with all neighbors') {
+    redoAddWithNeighbors(gMCElementContextHandled);
+  } else if (this.outerText == 'Comment') {
+    comment(gMCElementContextHandled);
+  } else if (this.outerText == 'Supress' || this.outerText == 'Supress with all children') {
+    suppress(gMCElementContextHandled);
+  } else if (this.outerText == 'Redo supress') {
+    redoSuppress(gMCElementContextHandled);
+  } else if (this.outerText == 'Toggle display of names') {
+    toggleNameDisplay();
+  } else if (this.outerText == 'Highlight used by') {
+    highlightUsedBy(gMCElementContextHandled.index);
+  } else if (this.outerText == 'Highlight') {
+    highlight(gMCElementContextHandled.index);
+  } else if (this.outerText == 'Highlight using') {
+    highlightUsing(gMCElementContextHandled.index);
+  }
+  else {
+    // Scan for a name of another diagram
+    for (const c of returnOtherDiagrams()) {
+      if (this.outerText == c) {
+        switchDiagram(c);
+        drawCompleteModel(ctx, g_width, g_height);
+        // draw();
+      }
+    }
+  }
+
 }
 
 /**React on clicks in Menu */
