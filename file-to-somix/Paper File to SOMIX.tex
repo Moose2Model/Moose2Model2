@@ -1,0 +1,200 @@
+%% 
+%% Copyright 2007-2020 Elsevier Ltd
+%% 
+%% This file is part of the 'Elsarticle Bundle'.
+%% ---------------------------------------------
+%% 
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%% 
+%% The list of all files belonging to the 'Elsarticle Bundle' is
+%% given in the file `manifest.txt'.
+%% 
+%% Template article for Elsevier's document class `elsarticle'
+%% with harvard style bibliographic references
+
+\documentclass[preprint,12pt]{elsarticle}
+%\documentclass[final,5p,times,twocolumn]{elsarticle} 
+% Adapt figure at about line 887 when documentclass is changed
+
+% Suppress display of footer ``Submitted to ...'', see https://tex.stackexchange.com/questions/35712/modify-footer-used-by-elsarticle-cls
+\makeatletter
+\def\ps@pprintTitle{%
+ \let\@oddhead\@empty
+ \let\@evenhead\@empty
+ \def\@oddfoot{\centerline{\thepage}}%
+ \let\@evenfoot\@oddfoot}
+\makeatother
+
+%% Use the option review to obtain double line spacing
+%% \documentclass[authoryear,preprint,review,12pt]{elsarticle}
+
+%% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
+%% for a journal layout:
+%% \documentclass[final,1p,times,authoryear]{elsarticle}
+%% \documentclass[final,1p,times,twocolumn,authoryear]{elsarticle}
+%% \documentclass[final,3p,times,authoryear]{elsarticle}
+%% \documentclass[final,3p,times,twocolumn,authoryear]{elsarticle}
+%% \documentclass[final,5p,times,authoryear]{elsarticle}
+%% \documentclass[final,5p,times,twocolumn,authoryear]{elsarticle}
+
+%% For including figures, graphicx.sty has been loaded in
+%% elsarticle.cls. If you prefer to use the old commands
+%% please give \usepackage{epsfig}
+
+%% The amssymb package provides various useful mathematical symbols
+\usepackage{amssymb}
+%% The amsthm package provides extended theorem environments
+%% \usepackage{amsthm}
+
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers.
+%% \usepackage{lineno}
+
+% To be able to enter URL with breaks:
+\usepackage[hyphens]{url}
+\usepackage{hyperref}
+\usepackage{framed}
+
+\sloppy % See anser in https://tex.stackexchange.com/questions/9107/how-can-i-make-my-text-never-go-over-the-right-margin-by-always-hyphenating-or-b  -  This prevents that SAP2Moose or Moose2Model overlap sometimes the right border.
+
+
+\newdefinition{definition}{Definition}
+
+
+\journal{}
+
+\begin{document}
+
+\begin{frontmatter}
+
+%% Title, authors and addresses
+
+%% use the tnoteref command within \title for footnotes;
+%% use the tnotetext command for theassociated footnote;
+%% use the fnref command within \author or \affiliation for footnotes;
+%% use the fntext command for theassociated footnote;
+%% use the corref command within \author for corresponding author footnotes;
+%% use the cortext command for theassociated footnote;
+%% use the ead command for the email address,
+%% and the form \ead[url] for the home page:
+%% \title{Title\tnoteref{label1}}
+%% \tnotetext[label1]{}
+%% \author{Name\corref{cor1}\fnref{label2}}
+%% \ead{email address}
+%% \ead[url]{home page}
+%% \fntext[label2]{}
+%% \cortext[cor1]{}
+%% \affiliation{organization={},
+%%            addressline={}, 
+%%            city={},
+%%            postcode={}, 
+%%            state={},
+%%            country={}}
+%% \fntext[label3]{}
+
+\title{File to SOMIX}
+
+%% use optional labels to link authors explicitly to addresses:
+%% \author[label1,label2]{}
+%% \affiliation[label1]{organization={},
+%%             addressline={},
+%%             city={},
+%%             postcode={},
+%%             state={},
+%%             country={}}
+%%
+%% \affiliation[label2]{organization={},
+%%             addressline={},
+%%             city={},
+%%             postcode={},
+%%             state={},
+%%             country={}}
+
+\author[1]{Rainer Wolfgang Winkler\corref{cor1}%
+%\fnref{fn1}
+}
+\ead{rainer.winkler@cubeserv.com}
+\address[1]{CubeServ GmbH, Am Prime-Parc 4, 65479 Raunheim, Germany}
+
+\cortext[cor1]{Corresponding author}
+
+%\author{Rainer Wolfgang Winkler}
+%\adress{Test}
+%\affiliation{organization={CubeServ GmbH},%Department and Organization
+%            addressline={Am Prime-Parc 4}, 
+%            city={Raunheim},
+%            postcode={65479}, 
+%%            state={},
+%            country={Germany}}
+
+\begin{abstract}
+One of many possible ways to extract a SOMIX model from files with JavaScript coding is specified.
+
+\end{abstract}
+
+
+\begin{keyword}
+% Up to 6 keywords in british spelling. Avoid general and plural terms.
+%% keywords here, in the form: keyword \sep keyword
+
+%Program Comprehension \sep
+%Software exploration \sep
+%Code Comprehension \sep
+%Software maintenance \sep
+%Software visualization \sep
+%SAP development
+
+%% PACS codes here, in the form: \PACS code \sep code
+
+%% MSC codes here, in the form: \MSC code \sep code
+%% or \MSC[2008] code \sep code (2000 is the default)
+
+\end{keyword}
+
+\end{frontmatter}
+
+%% \linenumbers
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+\label{intro}
+This document describes how Moose2Model extracts a SOMIX metamodel~\cite{r_SOMIX} from file. 
+This extraction follows the principles which are described in~\cite{r_Metamodel_Preprint_2}. 
+
+\section{Extract JavaScript}
+JavaScript is expected to be the coding in html pages. The extraction logic searches therefore for the \textless script\textgreater~tag in files which contain html. JavaScript coding is expected to be in the html file itself and in linked files which contain JavaScript code.
+
+
+\section*{Declaration of Competing Interests} 
+The author declares that he has no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
+
+
+
+\section*{Acknowledgments}
+
+This work was funded by CubeServ GmbH.
+Many colleagues provided valuable support to make this project possible.
+I thank
+Patrick Michels for providing resources and support.
+
+
+
+\begin{thebibliography}{00}
+
+\bibitem{r_SOMIX}
+Moose2Model, \url{https://github.com/Moose2Model/SOMIX} (accessed 12 September 2022).
+\bibitem{r_Metamodel_Preprint_2}
+Winkler, Rainer Wolfgang, A Software Metamodel Restricted to Key Aspects of a Software System for Developers and a Method to Keep Manually Drawn Diagrams Up-to-Date and Correct. Available at SSRN: https://ssrn.com/abstract=4049604 or http://dx.doi.org/10.2139/ssrn.4049604.
+
+
+\end{thebibliography}
+\end{document}
+
+\endinput
+
