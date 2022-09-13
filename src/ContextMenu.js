@@ -171,11 +171,10 @@ function handleContextMenu(e) {
     }
     if (typeof diagramInfos.activeDiagram !== 'undefined') {
       if (diagramInfos.displayedDiagram == diagramInfos.activeDiagram) {
-        m.unshift('Comment');
+        m.push('Comment');
       } else {
-        m.unshift('Displayed <> Active: Comment');
+        m.push('Displayed <> Active: Comment');
       }
-      // m.push('Comment');
 
       if (gMCElementContextHandled.element == 'SOMIX.Code' || gMCElementContextHandled.element == 'SOMIX.Data') {
         if (diagramms[diagramInfos.activeDiagram].generationInfoInternal.suppressed.includes(gMCElementContextHandled.index)) {
