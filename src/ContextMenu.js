@@ -170,8 +170,12 @@ function handleContextMenu(e) {
 
     }
     if (typeof diagramInfos.activeDiagram !== 'undefined') {
-
-      m.push('Comment');
+      if (diagramInfos.displayedDiagram == diagramInfos.activeDiagram) {
+        m.unshift('Comment');
+      } else {
+        m.unshift('Displayed <> Active: Comment');
+      }
+      // m.push('Comment');
 
       if (gMCElementContextHandled.element == 'SOMIX.Code' || gMCElementContextHandled.element == 'SOMIX.Data') {
         if (diagramms[diagramInfos.activeDiagram].generationInfoInternal.suppressed.includes(gMCElementContextHandled.index)) {
@@ -286,7 +290,7 @@ function ContextMenuClicked(e){
     addWithNeighbors(gMCElementContextHandled);
   } else if (this.outerText == 'Remove: Add element with all neighbors' || this.outerText == 'Displayed <> Active: Remove: Add element with all neighbors') {
     redoAddWithNeighbors(gMCElementContextHandled);
-  } else if (this.outerText == 'Comment') {
+  } else if (this.outerText == 'Comment' || this.outerText == 'Displayed <> Active: Comment') {
     comment(gMCElementContextHandled);
   } else if (this.outerText == 'Supress' || this.outerText == 'Supress with all children') {
     suppress(gMCElementContextHandled);
