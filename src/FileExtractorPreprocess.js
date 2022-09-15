@@ -28,8 +28,12 @@ async function SetExtractedFolder() {
         // Example
         for await (const fileHandle of getFilesRecursively(FEDirectoryHandle)) {
             console.log(fileHandle);
+            const relativePaths = await FEDirectoryHandle.resolve(fileHandle);
+            for (const name of relativePaths) {
+                // log each entry
+                console.log(name);
+            }
         }
-
 
 
         // for await (const entry of workDirectoryHandle.values()) {
