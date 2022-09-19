@@ -8,25 +8,50 @@ function getRelativePath(array) {
     return path;
 }
 
-// Example
-async function* getFilesRecursively(entry, directoryArray) {
-    if (entry.kind === 'file') {
-        const file = await entry.getFile();
-        if (file !== null) {
-            //file.relativePath = await directoryHandle.resolve(entry);
-            file.relativePath = getRelativePath(directoryArray);
-            //file.webkitRelativePath = getRelativePath(entry);
+let gIndex;
 
-            yield file;
+async function* getFilesRecursively(fileInfo) {
+    let parentIndex = fileInfo.parentIndex;
+    if (fileInfo.handle.kind === 'file') {
+        fileInfo.file = await fileInfo.handle.getFile();
+        if (fileInfo.file !== null) {
+            fileInfo.file.relativePath = getRelativePath(fileInfo.directoryArray);
+            fileInfo.parentIndex = parentIndex;
+            fileInfo.index = gIndex;
+            gIndex += 1;
+            yield fileInfo;
         }
-    } else if (entry.kind === 'directory') {
-        directoryArray.push(entry.name);
-        for await (const handle of entry.values()) {
-            yield* getFilesRecursively(handle, directoryArray);
+    } else if (fileInfo.handle.kind === 'directory') {
+        fileInfo.directoryArray.push(fileInfo.handle.name);
+        fileInfo.parentIndex = parentIndex;
+        fileInfo.index = gIndex;
+        gIndex += 1;
+        yield fileInfo;
+        for await (const handle of fileInfo.handle.values()) {
+            let fileInfoNewDirectory = {};
+            fileInfoNewDirectory.handle = handle;
+            fileInfoNewDirectory.index = gIndex;
+            //gIndex += 1;
+            fileInfoNewDirectory.parentIndex = fileInfo.index;
+            fileInfoNewDirectory.kind = handle.kind;
+            fileInfoNewDirectory.name = handle.name;
+            fileInfoNewDirectory.directoryArray = fileInfo.directoryArray;
+            fileInfoNewDirectory.file = {};
+            //yield fileInfoNewDirectory;
+            yield* getFilesRecursively(fileInfoNewDirectory);
         }
-        directoryArray.pop();
+        fileInfo.directoryArray.pop();
     }
 }
+
+// Todo: 
+// Do not list only files, but files and directories.
+// fileInfo with therefore contains file system elements. 
+// Which are either: Directories - Mapped to SOMIX Groupings
+//                   Files - Mapped to SOMIX Groupings
+// The code (and data) of files is then a children of the SOMIX Groupings of the file
+// A directory which contains further directory is modelled as SOMIX Groupings where one is the parent of the other one
+// This has to be specified in a separate document where the handling of files in SOMIX is specified.
 
 async function SetExtractedFolder() {
     'use strict';
@@ -35,38 +60,23 @@ async function SetExtractedFolder() {
 
         FEDirectoryHandle = await window.showDirectoryPicker();
 
-        // Example
-        // See https://developer.mozilla.org/en-US/docs/Web/API/FileSystemDirectoryHandle/resolve
-        for await (const fileHandle of getFilesRecursively(FEDirectoryHandle, [])) {
-            console.log(fileHandle);
-            /*             const relativePaths = await FEDirectoryHandle.resolve(fileHandle);
-            
-                        if (relativePaths === null) {
-                            // Not inside directory handle
-                          } else {
-                            // relativePath is an array of names, giving the relative path
-                        
-                            for (const name of relativePaths) {
-                              // log each entry
-                              console.log(name);
-                            }
-                          } */
-
-            /*             for (const name of relativePaths) {
-                            // log each entry
-                            console.log(name);
-                        } */
+        let fileInfoStart = {};
+        fileInfoStart.handle = FEDirectoryHandle;
+        fileInfoStart.index = 0;
+        gIndex = 1;
+        fileInfoStart.parentIndex = 0.
+        fileInfoStart.kind = FEDirectoryHandle.kind;
+        fileInfoStart.name = FEDirectoryHandle.name;
+        fileInfoStart.directoryArray = [];
+        fileInfoStart.file = {};
+        for await (const fileInfo of getFilesRecursively(fileInfoStart)) {
+            console.log(fileInfo.kind);
+            console.log(fileInfo.index);
+            console.log(fileInfo.parentIndex);
+            console.log(fileInfo.name);
+            console.log(fileInfo.directoryArray);
+            console.log(fileInfo.file);
         }
-
-
-        // for await (const entry of workDirectoryHandle.values()) {
-        //     console.log(entry.kind, entry.name);
-        // }
-        // await workDirectoryHandle.removeEntry('d2.txt');
-        // console.log('After removing');
-        // for await (const entry of workDirectoryHandle.values()) {
-        //     console.log(entry.kind, entry.name);
-        // }
     } catch (err) {
         window.alert("Accessing a directory failed");
         return;
