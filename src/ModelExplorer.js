@@ -8,7 +8,7 @@ let listPositionToEntries = [];
 
 function filterModelText(element) {
     //if(element.name.test(exploreModelFilter.value) == true){
-    const regex = new RegExp(exploreModelFilter.value);
+    const regex = new RegExp(exploreModelFilter.value,'i');
     if (regex.test(element.completeName)) {
         return element;
     }
