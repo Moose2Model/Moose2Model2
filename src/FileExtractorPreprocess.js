@@ -13,14 +13,19 @@ let gIndex;
 async function* getFilesRecursively(fileInfo) {
     let parentIndex = fileInfo.parentIndex;
     if (fileInfo.handle.kind === 'file') {
-        fileInfo.file = await fileInfo.handle.getFile();
-        if (fileInfo.file !== null) {
-            fileInfo.file.relativePath = getRelativePath(fileInfo.directoryArray);
+        try {
+            // fileInfo.file = await fileInfo.handle.getFile();
+        } catch (err2) {
+            window.alert("Getting files failed");
+            return;
+        }
+        //if (fileInfo.file !== null) {
+            //fileInfo.file.relativePath = getRelativePath(fileInfo.directoryArray);
             fileInfo.parentIndex = parentIndex;
             fileInfo.index = gIndex;
             gIndex += 1;
             yield fileInfo;
-        }
+        //}
     } else if (fileInfo.handle.kind === 'directory') {
         fileInfo.directoryArray.push(fileInfo.handle.name);
         fileInfo.parentIndex = parentIndex;
@@ -103,7 +108,7 @@ async function SetExtractedFolder() {
             console.log(fileInfo.parentIndex);
             console.log(fileInfo.name);
             console.log(fileInfo.directoryArray);
-            console.log(fileInfo.file);
+            //console.log(fileInfo.file);
             if (fileInfo.handle.kind === 'file') {
                 elementName = 'SOMIX.Data';
                 idVal = fileInfo.index;
@@ -201,7 +206,7 @@ async function SetExtractedFolder() {
                 accessedVal,
                 isWriteVal,
                 isReadVal,
-                isDependentVal);            
+                isDependentVal);
 
             // Clear data before it is read again
             elementName = '';
