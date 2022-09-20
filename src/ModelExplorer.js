@@ -32,7 +32,10 @@ function filterModel() {
             if (typeof parentChildByChild[f.index] !== 'undefined') {
                 for (const pCBC of parentChildByChild[f.index]) {
                     if (pCBC.isMain) {
-                        f.completeName = modelElementsByIndex[pCBC.parent].name + '>>' + f.name;
+                        if (typeof modelElementsByIndex[pCBC.parent] !== 'undefined') {
+                            f.completeName = modelElementsByIndex[pCBC.parent].name + '>>' + f.name;
+                        }
+                        else { f.completeName = f.name; }
                     }
                 }
             }
