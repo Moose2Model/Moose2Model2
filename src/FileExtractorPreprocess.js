@@ -147,7 +147,7 @@ async function SetExtractedFolder() {
                     uniqueNameVal = uniqueNameVal + '/' + e;
                 }
                 // uniqueNameVal = uniqueNameVal + '/' + fileInfo.name;
-                technicalTypeVal = 'Directory';
+                technicalTypeVal = 'Folder';
                 buildModel(
                     elementName,
                     idVal,

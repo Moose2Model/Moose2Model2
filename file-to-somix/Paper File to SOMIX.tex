@@ -166,6 +166,7 @@ One of many possible ways to extract a SOMIX model from files with JavaScript co
 \label{intro}
 This document describes how Moose2Model extracts a SOMIX metamodel~\cite{r_SOMIX} from file. 
 This extraction follows the principles which are described in~\cite{r_Metamodel_Preprint_2}. 
+This logic is implemented in Moose2Model by the function ``Extract File System to SOMIX model''.
 
 \section{Extract File System}
 Directories and files of a file system are mapped as follows.
@@ -182,7 +183,7 @@ Files are mapped to SOMIX.Data. Fields:
 \begin{itemize}
 \item name: The name of the file without any conversion of cases.
 \item uniqueName: A slash which is followed by all  directories where the specified directory is contained separated by a slash. Followed by a slash and the name of the file.
-\item technicalType: 'Directory'.
+\item technicalType: 'Folder'.
 \item linkToEditor: A link to open the specified element in Visual Studio Code.
 \end{itemize}
 
