@@ -115,9 +115,9 @@ async function SetExtractedFolder() {
                 nameVal = fileInfo.name;
                 uniqueNameVal = '';
                 for (const e of fileInfo.directoryArray) {
-                    uniqueNameVal = uniqueNameVal + '.' + e;
+                    uniqueNameVal = uniqueNameVal + '/' + e;
                 }
-                uniqueNameVal = uniqueNameVal + '.' + fileInfo.name;
+                uniqueNameVal = uniqueNameVal + '/' + fileInfo.name;
                 technicalTypeVal = 'File';
                 buildModel(
                     elementName,
@@ -144,9 +144,9 @@ async function SetExtractedFolder() {
                 nameVal = fileInfo.name;
                 uniqueNameVal = '';
                 for (const e of fileInfo.directoryArray) {
-                    uniqueNameVal = uniqueNameVal + '.' + e;
+                    uniqueNameVal = uniqueNameVal + '/' + e;
                 }
-                uniqueNameVal = uniqueNameVal + '.' + fileInfo.name;
+                // uniqueNameVal = uniqueNameVal + '/' + fileInfo.name;
                 technicalTypeVal = 'Directory';
                 buildModel(
                     elementName,
