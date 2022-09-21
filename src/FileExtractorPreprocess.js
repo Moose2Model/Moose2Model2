@@ -61,15 +61,15 @@ async function* getFilesRecursively(fileInfo) {
 
 async function SetExtractedFolder() {
     'use strict';
-    window.alert("This function is currently implemented. It will not either not work, or not work properly");
+    // window.alert("This function is currently implemented. It will not either not work, or not work properly");
 
     FEDirectoryHandle = await window.showDirectoryPicker();
 
     // From async function LoadModel() part 1
 
 
-    document.title = 'Testload from file';
-    loadModelText.innerHTML = 'Loaded SOMIX model: ' + document.title;
+    document.title = FEDirectoryHandle.name;
+    loadModelText.innerHTML = 'Loaded SOMIX model (File System): ' + document.title;
     useStartDiagram();
 
 
