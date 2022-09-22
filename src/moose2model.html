@@ -147,7 +147,7 @@
             position: absolute;
             background-color: #f9f9f9;
             /*min-width: 160px;*/
-            min-width: 270px;
+            min-width: 300px;
             /*Width, specify both for .FileMenu-content and FileMenu-content input*/
             /*width: fit-content;*/
             box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
@@ -179,7 +179,7 @@
             border: none;
             outline: none;
             padding: 10px 10px;
-            min-width: 270px;
+            min-width: 300px;
             /*Width, specify both for .FileMenu-content and FileMenu-content input*/
             text-decoration: none;
             /* Required so that elements are placed below each other */
@@ -267,7 +267,10 @@
             font-size: 15px;
         }
 
-        #LoadButton, #OpenWorkFolderButton, #ImportOldDiagramButton { /* Separators in Menu */
+        #LoadButton,
+        #OpenWorkFolderButton,
+        #ImportOldDiagramButton {
+            /* Separators in Menu */
             border-bottom: 1px solid #CCC;
         }
     </style>
@@ -288,7 +291,8 @@
             <button class="fileMenuButton" onclick="ToggleFileMenu()">File
             </button>
             <div class="FileMenu-content" id="FileMenuID">
-                <input id="ExtractSOMIXButton" value="Extract File System to SOMIX model">
+                <input id="FolderToSOMIXButton" value="Extract File System to SOMIX model">
+                <input id="FolderCodeToSOMIXButton" value="Extract Code from File System to SOMIX model">
                 <input id="LoadButton" value="Load SOMIX model from mse file">
                 <input id="OpenWorkFolderButton" value="Open Work Folder">
                 <input id="ImportOldDiagramButton" value="Import old Diagram (XML)">
@@ -349,6 +353,7 @@
 
     <script src="Global.js?v=33"></script>
     <script src="FileExtractorGlobal.js?v=33"></script>
+    <script src="ExtractCodeFromFiles.js"></script>
     <script src="FileExtractorPreprocess.js?v=33"></script>
     <script src="Comment.js?v=33"></script>
     <script src="ForceDirecting.js?v=33"></script>
@@ -377,8 +382,11 @@
         const OpenWorkFolderButton = document.getElementById('OpenWorkFolderButton');
         OpenWorkFolderButton.addEventListener('click', SetWorkFolder);
 
-        const ExtractSOMIXButton = document.getElementById('ExtractSOMIXButton');
-        ExtractSOMIXButton.addEventListener('click', SetExtractedFolder);
+        const FolderToSOMIXButton = document.getElementById('FolderToSOMIXButton');
+        FolderToSOMIXButton.addEventListener('click', SetExtractedFolder);
+
+        const FolderCodeToSOMIXButton = document.getElementById('FolderCodeToSOMIXButton');
+        FolderCodeToSOMIXButton.addEventListener('click', ExtractCodeFromFolder);
 
         const LoadMseButton = document.getElementById('LoadButton');
         LoadMseButton.addEventListener('click', LoadModel);

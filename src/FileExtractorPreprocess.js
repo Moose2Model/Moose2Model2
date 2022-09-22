@@ -20,11 +20,11 @@ async function* getFilesRecursively(fileInfo) {
             return;
         }
         //if (fileInfo.file !== null) {
-            //fileInfo.file.relativePath = getRelativePath(fileInfo.directoryArray);
-            fileInfo.parentIndex = parentIndex;
-            fileInfo.index = gIndex;
-            gIndex += 1;
-            yield fileInfo;
+        //fileInfo.file.relativePath = getRelativePath(fileInfo.directoryArray);
+        fileInfo.parentIndex = parentIndex;
+        fileInfo.index = gIndex;
+        gIndex += 1;
+        yield fileInfo;
         //}
     } else if (fileInfo.handle.kind === 'directory') {
         fileInfo.directoryArray.push(fileInfo.handle.name);
@@ -231,6 +231,82 @@ async function SetExtractedFolder() {
         window.alert("Accessing a directory failed");
         return;
     }
+
+    // From async function LoadModel() part 2
+
+    positionCircle(g_width, g_height);
+    mouseover = true;
+    draw();
+
+}
+
+
+
+async function ExtractCodeFromFolder() {
+    'use strict';
+    window.alert("This function is currently implemented. It will not either not work, or not work properly");
+
+    FEDirectoryHandle = await window.showDirectoryPicker();
+
+    // From async function LoadModel() part 1
+
+
+    document.title = FEDirectoryHandle.name;
+    loadModelText.innerHTML = 'Loaded SOMIX model (File System): ' + document.title;
+    useStartDiagram();
+
+
+
+
+    /*     initializeBuildModel();
+        let elementName = '';
+        let idVal = 0;
+        let nameVal = '';
+        let uniqueNameVal = '';
+        let technicalTypeVal = '';
+        let linkToEditorVal = '';
+        let parentVal = 0;
+        let childVal = 0;
+        let isMainVal = false;
+        let callerVal = 0;
+        let calledVal = 0;
+        let accessorVal = 0;
+        let accessedVal = 0;
+        let isWriteVal = false;
+        let isReadVal = false;
+        let isDependentVal = false; */
+
+    let fileInfoStart = {};
+    fileInfoStart.handle = FEDirectoryHandle;
+    fileInfoStart.index = 0;
+    gIndex = 1;
+    fileInfoStart.parentIndex = 0.
+    fileInfoStart.kind = FEDirectoryHandle.kind;
+    fileInfoStart.name = FEDirectoryHandle.name;
+    fileInfoStart.directoryArray = [];
+    fileInfoStart.file = {};
+    for await (const fileInfo of getFilesRecursively(fileInfoStart)) {
+
+        fileInfoByIndex[fileInfo.index] = {};
+        fileInfoByIndex[fileInfo.index].handle = fileInfo.handle;
+        fileInfoByIndex[fileInfo.index].index = fileInfo.index;
+        fileInfoByIndex[fileInfo.index].parentIndex = fileInfo.parentIndex;
+        fileInfoByIndex[fileInfo.index].kind = fileInfo.kind;
+        fileInfoByIndex[fileInfo.index].name = fileInfo.name;
+        fileInfoByIndex[fileInfo.index].file = {};
+        fileInfoByIndex[fileInfo.index].directoryArray = [];
+
+        if (fileInfo.handle.kind === 'file') {
+            fileInfoByIndex[fileInfo.index].file = await fileInfo.handle.getFile();
+        }
+
+        for (const d of fileInfo.directoryArray){
+            fileInfoByIndex[fileInfo.index].directoryArray.push(d);
+        }
+
+     }
+
+    AnalyzeFileAndFolder();
 
     // From async function LoadModel() part 2
 
