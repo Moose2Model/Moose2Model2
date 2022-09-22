@@ -103,11 +103,11 @@ async function SetExtractedFolder() {
         fileInfoStart.directoryArray = [];
         fileInfoStart.file = {};
         for await (const fileInfo of getFilesRecursively(fileInfoStart)) {
-            console.log(fileInfo.kind);
-            console.log(fileInfo.index);
-            console.log(fileInfo.parentIndex);
-            console.log(fileInfo.name);
-            console.log(fileInfo.directoryArray);
+            // console.log(fileInfo.kind);
+            // console.log(fileInfo.index);
+            // console.log(fileInfo.parentIndex);
+            // console.log(fileInfo.name);
+            // console.log(fileInfo.directoryArray);
             //console.log(fileInfo.file);
             if (fileInfo.handle.kind === 'file') {
                 elementName = 'SOMIX.Data';
