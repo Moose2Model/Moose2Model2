@@ -104,9 +104,9 @@ function drawModelExplorer() {
 
     ctx.font = fontSize + 'px sans-serif';
     ctx.fillStyle = 'black'
-    ctx.fillText('The model explorer will be displayed here', xPosElements, yPosElements);
+    ctx.fillText('Use regular expressions to filter in the list', xPosElements, yPosElements);
     yPosElements += lineDifference;
-    ctx.fillText('The second line goes here', xPosElements, yPosElements);
+    ctx.fillText('Use the mouse wheel to scroll', xPosElements, yPosElements);
     yPosElements += lineDifference;
 
     let linesForElements = Math.floor((canvas.height - yPosElements) / lineDifference);
