@@ -146,12 +146,27 @@ const generalFontSize = 12;
 const commentBoxBorder = 4;
 
 function drawCompleteModel(ctx, width, height) {
+
+    let fontColor = '';
+    let parentChildColor = 'rgba(0, 0, 0, 0.2)';
+    if (colorTheme == 'DarkTheme') {
+        fontColor = "white";
+        parentChildColor = ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+    } else {
+        fontColor = "black";
+        parentChildColor = ctx.strokeStyle = 'rgba(0, 0, 0, 0.2)';
+    }
     if (typeof diagramms[diagramInfos.displayedDiagram] === 'undefined') {
         // Do not draw when no diagram exists
         return;
     }
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    if (colorTheme == 'DarkTheme') {
+        ctx.fillStyle = "black";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
 
     // Prepare constants to write texts correctly
     const fontsize = fontSizeGeneral * scale;
@@ -162,7 +177,7 @@ function drawCompleteModel(ctx, width, height) {
 
     if (diagramms[diagramInfos.displayedDiagram].complModelPosition.length == 0) {
         ctx.font = '15px sans-serif';
-        ctx.fillStyle = 'black'
+        ctx.fillStyle = fontColor
         ctx.fillText('This diagram is currently empty: ' + diagramInfos.displayedDiagram, 10, 50);
         return;
     }
@@ -225,7 +240,7 @@ function drawCompleteModel(ctx, width, height) {
                         }
                         else if (mEBI.element == 'SOMIX.Code' || mEBI.element == 'SOMIX.Data') {
                             const fontsize = fontSizeGeneral * scale;
-                            ctx.fillStyle = 'black';
+                            ctx.fillStyle = fontColor;
                             let scaledFontSize = cameraToCanvasScale(fontsize);
                             ctx.textAlign = 'center';
                             ctx.font = scaledFontSize + 'px  sans-serif';
@@ -239,12 +254,12 @@ function drawCompleteModel(ctx, width, height) {
 
                             // Prevent problems when the position is not a number
 
-                            if (Number.isNaN(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x)){
-                                diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x  = 0;
+                            if (Number.isNaN(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x)) {
+                                diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x = 0;
                             }
 
-                            if (Number.isNaN(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y)){
-                                diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y  = 0;
+                            if (Number.isNaN(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y)) {
+                                diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y = 0;
                             }
 
                             // Set values for bounding box
@@ -404,7 +419,7 @@ function drawCompleteModel(ctx, width, height) {
                                         cameraToCanvasScale(height));
                                     ctx.setLineDash([]);
 
-                                    ctx.fillStyle = 'black';
+                                    ctx.fillStyle = fontColor;
 
                                     let scaledFontSize = cameraToCanvasScale(generalFontSize);
                                     ctx.textAlign = 'center';
@@ -493,7 +508,7 @@ function drawCompleteModel(ctx, width, height) {
                         }
 
 
-                        ctx.fillStyle = 'black';
+                        ctx.fillStyle = fontColor;
                         if (mEBI.element == 'SOMIX.Code' || mEBI.element == 'SOMIX.Data' || mEBI.element == 'SOMIX.Grouping') {
 
                             if (mEBI.element == 'SOMIX.Code' || mEBI.element == 'SOMIX.Data') {
@@ -548,7 +563,7 @@ function drawCompleteModel(ctx, width, height) {
                                         if (diagramms[diagramInfos.displayedDiagram].complModelPosition[pC.child].visible) {
                                             ctx.lineWidth = cameraToCanvasScale(1 * scale);
                                             ctx.beginPath();
-                                            ctx.strokeStyle = 'rgba(0, 0, 0, 0.2)';
+                                            ctx.strokeStyle = parentChildColor;
                                             ctx.moveTo(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['parent']].x), cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['parent']].y));
                                             ctx.lineTo(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['child']].x), cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['child']].y));
                                             ctx.stroke();
@@ -745,7 +760,7 @@ function drawCompleteModel(ctx, width, height) {
                                         if (diagramms[diagramInfos.displayedDiagram].diagramSettings.displayElementNames) {
                                             ctx.fillStyle = 'gray'; // Texts cannot be read when the ball is black
                                         } else {
-                                            ctx.fillStyle = 'black';
+                                            ctx.fillStyle = fontColor;
                                         }
                                         size = cameraToCanvasScale(4 * scale);
                                         break;
@@ -771,7 +786,7 @@ function drawCompleteModel(ctx, width, height) {
                                 ctx.fill();
                                 if (diagramms[diagramInfos.displayedDiagram].diagramSettings.displayElementNames == true) {
                                     const fontsize = 3;
-                                    ctx.fillStyle = 'black';
+                                    ctx.fillStyle = fontColor;
                                     let scaledFontSize = cameraToCanvasScale(fontsize * scale);
                                     ctx.textAlign = 'center';
                                     ctx.font = scaledFontSize + 'px  sans-serif';
@@ -884,7 +899,7 @@ function drawCompleteModel(ctx, width, height) {
 
     //     // Draw further informations
     // ctx.moveTo(g_width - 20, g_height - 10);
-    ctx.fillStyle = 'black';
+    ctx.fillStyle = fontColor;
     ctx.textAlign = 'left';
     ctx.font = generalFontSize + 'px  sans-serif';
     ctx.fillText(Math.round(100 * diagramms[diagramInfos.displayedDiagram].cameraSettings.zoomfactor) + '%', g_width - 40, g_height - 10);
