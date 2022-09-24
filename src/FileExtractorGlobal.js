@@ -14,3 +14,4 @@ let FEDirectoryHandle;
 };
 */
 let fileInfoByIndex = [];
+let ignoreDotGitFolder = true;

@@ -27,23 +27,25 @@ async function* getFilesRecursively(fileInfo) {
         yield fileInfo;
         //}
     } else if (fileInfo.handle.kind === 'directory') {
-        fileInfo.directoryArray.push(fileInfo.handle.name);
-        fileInfo.parentIndex = parentIndex;
-        fileInfo.index = gIndex;
-        gIndex += 1;
-        yield fileInfo;
-        for await (const handle of fileInfo.handle.values()) {
-            let fileInfoNewDirectory = {};
-            fileInfoNewDirectory.handle = handle;
-            fileInfoNewDirectory.index = gIndex;
-            //gIndex += 1;
-            fileInfoNewDirectory.parentIndex = fileInfo.index;
-            fileInfoNewDirectory.kind = handle.kind;
-            fileInfoNewDirectory.name = handle.name;
-            fileInfoNewDirectory.directoryArray = fileInfo.directoryArray;
-            fileInfoNewDirectory.file = {};
-            //yield fileInfoNewDirectory;
-            yield* getFilesRecursively(fileInfoNewDirectory);
+        if (ignoreDotGitFolder && fileInfo.name != '.git') {
+            fileInfo.directoryArray.push(fileInfo.handle.name);
+            fileInfo.parentIndex = parentIndex;
+            fileInfo.index = gIndex;
+            gIndex += 1;
+            yield fileInfo;
+            for await (const handle of fileInfo.handle.values()) {
+                let fileInfoNewDirectory = {};
+                fileInfoNewDirectory.handle = handle;
+                fileInfoNewDirectory.index = gIndex;
+                //gIndex += 1;
+                fileInfoNewDirectory.parentIndex = fileInfo.index;
+                fileInfoNewDirectory.kind = handle.kind;
+                fileInfoNewDirectory.name = handle.name;
+                fileInfoNewDirectory.directoryArray = fileInfo.directoryArray;
+                fileInfoNewDirectory.file = {};
+                //yield fileInfoNewDirectory;
+                yield* getFilesRecursively(fileInfoNewDirectory);
+            }
         }
         fileInfo.directoryArray.pop();
     }
@@ -300,11 +302,11 @@ async function ExtractCodeFromFolder() {
             fileInfoByIndex[fileInfo.index].file = await fileInfo.handle.getFile();
         }
 
-        for (const d of fileInfo.directoryArray){
+        for (const d of fileInfo.directoryArray) {
             fileInfoByIndex[fileInfo.index].directoryArray.push(d);
         }
 
-     }
+    }
 
     AnalyzeFileAndFolder();
 
