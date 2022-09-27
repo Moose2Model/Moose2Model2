@@ -198,7 +198,7 @@ function drawCompleteModel(ctx, width, height) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     if (colorTheme == 'DarkTheme') {
-        ctx.fillStyle = "#0a0a0a"; // "black";
+        ctx.fillStyle = "#1c1c1c"; // "black";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
     }
 
