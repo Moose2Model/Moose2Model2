@@ -902,7 +902,9 @@ function drawCompleteModel(ctx, width, height) {
     ctx.fillStyle = fontColor;
     ctx.textAlign = 'left';
     ctx.font = generalFontSize + 'px  sans-serif';
-    ctx.fillText(Math.round(100 * diagramms[diagramInfos.displayedDiagram].cameraSettings.zoomfactor) + '%', g_width - 40, g_height - 10);
+    let zoomfactorDisplay = 100 * diagramms[diagramInfos.displayedDiagram].cameraSettings.zoomfactor;
+    ctx.fillText(zoomfactorDisplay.toFixed(1) + '%', g_width - 60, g_height - 10);
+    //ctx.fillText(Math.round(100 * diagramms[diagramInfos.displayedDiagram].cameraSettings.zoomfactor) + '%', g_width - 40, g_height - 10);
     ctx.textAlign = 'start';
 };
 

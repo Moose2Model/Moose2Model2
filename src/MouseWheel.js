@@ -20,7 +20,7 @@ function zoom(event) {
             }
 
             // Restrict scale
-            if (newZoomfactor < .0125) {
+            if (newZoomfactor < .001) {
                 newZoomfactor = originalZoomfactor;
             } else if (newZoomfactor > 21) {
                 newZoomfactor = originalZoomfactor;
