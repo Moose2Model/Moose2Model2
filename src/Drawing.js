@@ -16,12 +16,10 @@ let circuitDiagramColorData = '#ccffff';
 let circuitDiagramColorHighlightedData = '#01ebff';
 let circuitDiagramColorDataPersistent = '#ccff99';
 let circuitDiagramColorHighlightedDataPersistent = '#00ff00';
-// let circuitDiagramColorCallLines = '#cbcbcb'; // Is to some extend transparent in old solution
-// let circuitDiagramColorAccessesLines = '#9898fe'; // Is to some extend transparent in old solution
-// let circuitDiagramColorCommentLines = '#feds98';
 let circuitDiagramColorCallLines = '#97979780'; // 50% transparent
 let circuitDiagramColorAccessesLines = '#3131fd80'; // 50% transparent
 let circuitDiagramColorCommentLines = '#fdab3180';
+
 let circuitDiagramCallWidth = 2;
 let circuitDiagramAccessWidth = 2;
 let circuitDiagramCommentWidth = 2;
@@ -152,10 +150,46 @@ function drawCompleteModel(ctx, width, height) {
     if (colorTheme == 'DarkTheme') {
         fontColor = "white";
         parentChildColor = ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+
+         circuitDiagramColorGrouping = 'gray';
+         //circuitDiagramColorCode = '#ffeb99';
+         //circuitDiagramColorHighlightedCode = '#ff9900';
+         circuitDiagramColorCode = '#7d4b01';//'#ff9900';
+         circuitDiagramColorHighlightedCode = '#ff9900';//'#ffeb99';
+         //circuitDiagramColorData = '#ccffff';
+         //circuitDiagramColorHighlightedData = '#01ebff';
+         circuitDiagramColorData = '#016a94'; // '#01ebff';
+         circuitDiagramColorHighlightedData = '#01ebff'; // '#ccffff';
+         //circuitDiagramColorDataPersistent = '#ccff99';
+         //circuitDiagramColorHighlightedDataPersistent = '#00ff00';
+         circuitDiagramColorDataPersistent = '#016e01'; // '#00ff00';
+         circuitDiagramColorHighlightedDataPersistent = '#00ff00'; //'#ccff99';
+         circuitDiagramColorCallLines = '#97979780'; // 50% transparent
+         circuitDiagramColorAccessesLines = '#3131fd80'; // 50% transparent
+         circuitDiagramColorCommentLines = '#fdab3180';
+
     } else {
+        // White Theme
         fontColor = "black";
         parentChildColor = ctx.strokeStyle = 'rgba(0, 0, 0, 0.2)';
+
+         circuitDiagramColorGrouping = 'gray';
+         circuitDiagramColorCode = '#ffeb99';
+         circuitDiagramColorHighlightedCode = '#ff9900';
+         circuitDiagramColorData = '#ccffff';
+         circuitDiagramColorHighlightedData = '#01ebff';
+         circuitDiagramColorDataPersistent = '#ccff99';
+         circuitDiagramColorHighlightedDataPersistent = '#00ff00';
+         circuitDiagramColorCallLines = '#97979780'; // 50% transparent
+         circuitDiagramColorAccessesLines = '#3131fd80'; // 50% transparent
+         circuitDiagramColorCommentLines = '#fdab3180';
+
     }
+
+
+
+
+
     if (typeof diagramms[diagramInfos.displayedDiagram] === 'undefined') {
         // Do not draw when no diagram exists
         return;
