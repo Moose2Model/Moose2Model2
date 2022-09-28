@@ -435,6 +435,7 @@ function drawCompleteModel(ctx, width, height) {
 
                         let SizeOnPane = 1;
                         let size = 3;
+                        let GroupPadding = 2; // Todo finalize implementation
                         ctx.beginPath();
                         switch (mEBI.element) {
                             case 'SOMIX.Grouping':
@@ -447,10 +448,10 @@ function drawCompleteModel(ctx, width, height) {
                                         diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxX1;
                                     const height = diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxY2 -
                                         diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxY1;
-                                    ctx.strokeRect(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxX1 + 0 * width / 2),
-                                        cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxY1 + 0 * height / 2),
-                                        cameraToCanvasScale(width),
-                                        cameraToCanvasScale(height));
+                                    ctx.strokeRect(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxX1 + 0 * width / 2 - GroupPadding),
+                                        cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxY1 + 0 * height / 2 - GroupPadding),
+                                        cameraToCanvasScale(width + 2* GroupPadding),
+                                        cameraToCanvasScale(height + 2 *GroupPadding));
                                     ctx.setLineDash([]);
 
                                     ctx.fillStyle = fontColor;
@@ -460,7 +461,7 @@ function drawCompleteModel(ctx, width, height) {
                                     ctx.font = scaledFontSize + 'px  sans-serif';
                                     ctx.fillText(mEBI.name,
                                         cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxX1 + width / 2),
-                                        cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxY1 - generalFontSize / 2));
+                                        cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxY1 - generalFontSize / 2 - GroupPadding));
                                     ctx.textAlign = 'start';
                                 } else {
                                     ctx.fillStyle = 'gray';
