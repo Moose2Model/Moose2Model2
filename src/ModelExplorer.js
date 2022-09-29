@@ -108,8 +108,11 @@ function drawModelExplorer() {
     yPosElements += lineDifference;
     ctx.fillText('Use the mouse wheel to scroll', xPosElements, yPosElements);
     yPosElements += lineDifference;
-
-    let linesForElements = Math.floor((canvas.height - yPosElements) / lineDifference);
+ 
+    // devicePixelRatio is 2 for High Resolution Monitors
+    // In that case the canvas.height is twice that sice.
+    // Dividing linesForElements by 2 (=devicePixelRatio makes sure that scrolling works correct for normal and high resolution monitors )
+    let linesForElements = Math.floor((canvas.height - yPosElements) / ( lineDifference * devicePixelRatio ));
     linesForElements -= 1;
     scrollExplorerLine = Math.floor(linesForElements / 2);
 
