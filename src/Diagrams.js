@@ -88,6 +88,10 @@ function newDiagram(name) {
   diagramms[name].generationInfoInternal.suppressedDueTo = [];
   diagramms[name].generationInfoInternal.commentsByID = [];
   diagramms[name].highlighted = [];
+
+  setDiagramActive(name);
+  switchDiagram(name);
+
 }
 
 function switchDiagram(name) {
