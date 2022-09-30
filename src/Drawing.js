@@ -154,38 +154,38 @@ function drawCompleteModel(ctx, width, height) {
         fontColor = "LightGray"; //  "white";
         parentChildColor = ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
 
-         circuitDiagramColorGrouping = 'gray';
-         //circuitDiagramColorCode = '#ffeb99';
-         //circuitDiagramColorHighlightedCode = '#ff9900';
-         circuitDiagramColorCode = '#7d4b01';//'#ff9900';
-         circuitDiagramColorHighlightedCode = '#ff9900';//'#ffeb99';
-         //circuitDiagramColorData = '#ccffff';
-         //circuitDiagramColorHighlightedData = '#01ebff';
-         circuitDiagramColorData = '#016a94'; // '#01ebff';
-         circuitDiagramColorHighlightedData = '#01ebff'; // '#ccffff';
-         //circuitDiagramColorDataPersistent = '#ccff99';
-         //circuitDiagramColorHighlightedDataPersistent = '#00ff00';
-         circuitDiagramColorDataPersistent = '#016e01'; // '#00ff00';
-         circuitDiagramColorHighlightedDataPersistent = '#00ff00'; //'#ccff99';
-         circuitDiagramColorCallLines = '#97979780'; // 50% transparent
-         circuitDiagramColorAccessesLines = '#3131fd80'; // 50% transparent
-         circuitDiagramColorCommentLines = '#fdab3180';
+        circuitDiagramColorGrouping = 'gray';
+        //circuitDiagramColorCode = '#ffeb99';
+        //circuitDiagramColorHighlightedCode = '#ff9900';
+        circuitDiagramColorCode = '#7d4b01';//'#ff9900';
+        circuitDiagramColorHighlightedCode = '#ff9900';//'#ffeb99';
+        //circuitDiagramColorData = '#ccffff';
+        //circuitDiagramColorHighlightedData = '#01ebff';
+        circuitDiagramColorData = '#016a94'; // '#01ebff';
+        circuitDiagramColorHighlightedData = '#01ebff'; // '#ccffff';
+        //circuitDiagramColorDataPersistent = '#ccff99';
+        //circuitDiagramColorHighlightedDataPersistent = '#00ff00';
+        circuitDiagramColorDataPersistent = '#016e01'; // '#00ff00';
+        circuitDiagramColorHighlightedDataPersistent = '#00ff00'; //'#ccff99';
+        circuitDiagramColorCallLines = '#97979780'; // 50% transparent
+        circuitDiagramColorAccessesLines = '#3131fd80'; // 50% transparent
+        circuitDiagramColorCommentLines = '#fdab3180';
 
     } else {
         // White Theme
         fontColor = "black";
         parentChildColor = ctx.strokeStyle = 'rgba(0, 0, 0, 0.2)';
 
-         circuitDiagramColorGrouping = 'gray';
-         circuitDiagramColorCode = '#ffeb99';
-         circuitDiagramColorHighlightedCode = '#ff9900';
-         circuitDiagramColorData = '#ccffff';
-         circuitDiagramColorHighlightedData = '#01ebff';
-         circuitDiagramColorDataPersistent = '#ccff99';
-         circuitDiagramColorHighlightedDataPersistent = '#00ff00';
-         circuitDiagramColorCallLines = '#97979780'; // 50% transparent
-         circuitDiagramColorAccessesLines = '#3131fd80'; // 50% transparent
-         circuitDiagramColorCommentLines = '#fdab3180';
+        circuitDiagramColorGrouping = 'gray';
+        circuitDiagramColorCode = '#ffeb99';
+        circuitDiagramColorHighlightedCode = '#ff9900';
+        circuitDiagramColorData = '#ccffff';
+        circuitDiagramColorHighlightedData = '#01ebff';
+        circuitDiagramColorDataPersistent = '#ccff99';
+        circuitDiagramColorHighlightedDataPersistent = '#00ff00';
+        circuitDiagramColorCallLines = '#97979780'; // 50% transparent
+        circuitDiagramColorAccessesLines = '#3131fd80'; // 50% transparent
+        circuitDiagramColorCommentLines = '#fdab3180';
 
     }
 
@@ -454,8 +454,8 @@ function drawCompleteModel(ctx, width, height) {
                                         diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxY1;
                                     ctx.strokeRect(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxX1 + 0 * width / 2 - GroupPadding),
                                         cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxY1 + 0 * height / 2 - GroupPadding),
-                                        cameraToCanvasScale(width + 2* GroupPadding),
-                                        cameraToCanvasScale(height + 2 *GroupPadding));
+                                        cameraToCanvasScale(width + 2 * GroupPadding),
+                                        cameraToCanvasScale(height + 2 * GroupPadding));
                                     ctx.setLineDash([]);
 
                                     ctx.fillStyle = fontColor;
@@ -935,6 +935,107 @@ function drawCompleteModel(ctx, width, height) {
             }
         } // for (const cmp of diagramms[diagramInfos.displayedDiagram].complModelPosition)
     }
+
+    // Determine bounding rect of complete diagram
+    if (diagramms[diagramInfos.displayedDiagram].diagramType == circuitDiagramForSoftwareDiagramType) {
+        let boundingRectComplete = {}
+
+        for (const e of diagramms[diagramInfos.displayedDiagram].complModelPosition) {
+            if (typeof e !== 'undefined') {
+                if (typeof e.boxX1 !== 'undefined') {
+                    if (typeof boundingRectComplete.X1 === 'undefined') {
+                        boundingRectComplete.X1 = e.boxX1
+                    }
+                    else {
+                        if (e.boxX1 < boundingRectComplete.X1) { boundingRectComplete.X1 = e.boxX1 }
+                    }
+                }
+                if (typeof e.boxX2 !== 'undefined') {
+                    if (typeof boundingRectComplete.X2 === 'undefined') {
+                        boundingRectComplete.X2 = e.boxX2
+                    }
+                    else {
+                        if (e.boxX2 > boundingRectComplete.X2) { boundingRectComplete.X2 = e.boxX2 }
+                    }
+                }
+                if (typeof e.boxY1 !== 'undefined') {
+                    if (typeof boundingRectComplete.Y1 === 'undefined') {
+                        boundingRectComplete.Y1 = e.boxY1
+                    }
+                    else {
+                        if (e.boxY1 < boundingRectComplete.Y1) { boundingRectComplete.Y1 = e.boxY1 }
+                    }
+                }
+                if (typeof e.boxY2 !== 'undefined') {
+                    if (typeof boundingRectComplete.Y2 === 'undefined') {
+                        boundingRectComplete.Y2 = e.boxY2
+                    }
+                    else {
+                        if (e.boxY2 > boundingRectComplete.Y2) { boundingRectComplete.Y2 = e.boxY2 }
+                    }
+                }
+            }
+        }
+
+        for (const e of diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID) {
+            if (typeof e !== 'undefined') {
+                if (typeof e !== 'undefined') {
+                    if (typeof e.boxX1 !== 'undefined') {
+                        if (typeof boundingRectComplete.X1 === 'undefined') {
+                            boundingRectComplete.X1 = e.boxX1
+                        }
+                        else {
+                            if (e.boxX1 < boundingRectComplete.X1) { boundingRectComplete.X1 = e.boxX1 }
+                        }
+                    }
+                    if (typeof e.boxX2 !== 'undefined') {
+                        if (typeof boundingRectComplete.X2 === 'undefined') {
+                            boundingRectComplete.X2 = e.boxX2
+                        }
+                        else {
+                            if (e.boxX2 > boundingRectComplete.X2) { boundingRectComplete.X2 = e.boxX2 }
+                        }
+                    }
+                    if (typeof e.boxY1 !== 'undefined') {
+                        if (typeof boundingRectComplete.Y1 === 'undefined') {
+                            boundingRectComplete.Y1 = e.boxY1
+                        }
+                        else {
+                            if (e.boxY1 < boundingRectComplete.Y1) { boundingRectComplete.Y1 = e.boxY1 }
+                        }
+                    }
+                    if (typeof e.boxY2 !== 'undefined') {
+                        if (typeof boundingRectComplete.Y2 === 'undefined') {
+                            boundingRectComplete.Y2 = e.boxY2
+                        }
+                        else {
+                            if (e.boxY2 > boundingRectComplete.Y2) { boundingRectComplete.Y2 = e.boxY2 }
+                        }
+                    }
+                }
+            }
+        }
+
+        if (typeof boundingRectComplete.X1 !== 'undefined') {
+
+            // Draw box around model
+
+            let boundingRectCompleteMargin = 100; // TODO include also width of element text
+
+            ctx.lineWidth = cameraToCanvasScale(1);
+            //ctx.setLineDash([cameraToCanvasScale(8), cameraToCanvasScale(2)]);
+            ctx.strokeStyle = 'gray'
+            let bRCWidth = boundingRectComplete.X2 - boundingRectComplete.X1;
+            let bRCHeight = boundingRectComplete.Y2 - boundingRectComplete.Y1;
+            ctx.strokeRect(cameraToCanvasX(boundingRectComplete.X1-boundingRectCompleteMargin), 
+                           cameraToCanvasY(boundingRectComplete.Y1-boundingRectCompleteMargin), 
+                           cameraToCanvasScale(bRCWidth+2*boundingRectCompleteMargin), 
+                           cameraToCanvasScale(bRCHeight+2*boundingRectCompleteMargin));
+            ctx.setLineDash([]);
+        }
+    }
+
+    //}
 
     //     // Draw further informations
     // ctx.moveTo(g_width - 20, g_height - 10);
