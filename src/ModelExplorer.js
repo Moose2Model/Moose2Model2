@@ -8,7 +8,7 @@ let listPositionToEntries = [];
 
 function filterModelText(element) {
     //if(element.name.test(exploreModelFilter.value) == true){
-    const regex = new RegExp(exploreModelFilter.value,'i');
+    const regex = new RegExp(exploreModelFilter.value, 'i');
     if (regex.test(element.completeName)) {
         return element;
     }
@@ -95,7 +95,7 @@ function drawModelExplorer() {
         }
     }
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, g_width, g_height);
 
     let yPosElements = 50;
     let xPosElements = 10;
@@ -108,11 +108,8 @@ function drawModelExplorer() {
     yPosElements += lineDifference;
     ctx.fillText('Use the mouse wheel to scroll', xPosElements, yPosElements);
     yPosElements += lineDifference;
- 
-    // devicePixelRatio is 2 for High Resolution Monitors
-    // In that case the canvas.height is twice that sice.
-    // Dividing linesForElements by 2 (=devicePixelRatio makes sure that scrolling works correct for normal and high resolution monitors )
-    let linesForElements = Math.floor((canvas.height - yPosElements) / ( lineDifference * devicePixelRatio ));
+
+    let linesForElements = Math.floor((g_height - yPosElements) / (lineDifference));
     linesForElements -= 1;
     scrollExplorerLine = Math.floor(linesForElements / 2);
 
