@@ -40,6 +40,9 @@ function supportRetina() {
     // scale everything down using CSS
     canvas.style.width = g_width + 'px';
     canvas.style.height = g_height + 'px';
+
+    // Use g_width and g_height to get the size of the screen. canvas.width and canvas.height will lead to errors on retina displays
+
 };
 
 function cameraToCanvasX(x) {
@@ -198,7 +201,8 @@ function drawCompleteModel(ctx, width, height) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     if (colorTheme == 'DarkTheme') {
-        ctx.fillStyle = "#1c1c1c"; // "black";
+        //ctx.fillStyle = "#1c1c1c"; // "black";
+        ctx.fillStyle = "#252525"; // This is the background color from VS Code "black";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
     }
 
