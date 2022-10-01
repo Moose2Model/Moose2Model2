@@ -15,6 +15,7 @@ const circuitDiagramForSoftwareDiagramType = 'C';
  .boxX1, .boxX2, .boxY1, .boxY2
 * @member diagramSettings The settings of a diagram. Use:
  diagramms[diagramInfos.displayedDiagram].diagramSettings.displayNewElementBox - The box for new elements is displayed
+ diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox - The borders for the box for new elements
  diagramms[diagramInfos.displayedDiagram].diagramSettings.displayElementNames - The name of elements is displayed
  diagramms[diagramInfos.displayedDiagram].diagramSettings.displayArrows - Edges are displayed with arrows
 * @member pinned An array with the indizees of all pinned elements
@@ -71,6 +72,14 @@ function newDiagram(name) {
   diagramms[name].diagramType = circuitDiagramForSoftwareDiagramType;
   diagramms[name].diagramSettings = {};
   diagramms[name].diagramSettings.displayNewElementBox = true;
+  // Initial position of box with new elements
+  SOMEXPL_2 += 1;
+  diagramms[name].diagramSettings.newElementBox = {
+    newElBoxX: 0,
+    newElBoxY: 0,
+    newElBoxWidth: 100,
+    newElBoxHeight: 100
+  };
   diagramms[name].diagramSettings.displayElementNames = true;
   diagramms[name].diagramSettings.displayArrows = true;
   diagramms[name].forceFeedback = false;

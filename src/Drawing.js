@@ -223,6 +223,13 @@ function drawCompleteModel(ctx, width, height) {
     // Draw background
     if (diagramms[diagramInfos.displayedDiagram].diagramSettings.displayNewElementBox == true) {
         // Draw landing box
+        SOMEXPL_2 += 1;
+
+        let newElBoxX = diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxX;
+        let newElBoxY = diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxY;
+        let newElBoxWidth = diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxWidth;
+        let newElBoxHeight = diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxHeight;
+
         ctx.lineWidth = cameraToCanvasScale(1);
         ctx.setLineDash([cameraToCanvasScale(8), cameraToCanvasScale(2)]);
         ctx.strokeStyle = 'gray'
@@ -939,39 +946,62 @@ function drawCompleteModel(ctx, width, height) {
     // Determine bounding rect of complete diagram
     if (diagramms[diagramInfos.displayedDiagram].diagramType == circuitDiagramForSoftwareDiagramType) {
         let boundingRectComplete = {}
+        console.log('Start');
 
         for (const e of diagramms[diagramInfos.displayedDiagram].complModelPosition) {
             if (typeof e !== 'undefined') {
-                if (typeof e.boxX1 !== 'undefined') {
-                    if (typeof boundingRectComplete.X1 === 'undefined') {
-                        boundingRectComplete.X1 = e.boxX1
+                if (typeof e.boxX1 !== 'undefined' &&
+                    e.boxX2 !== 'undefined' &&
+                    typeof e.boxY1 !== 'undefined' &&
+                    typeof e.boxY2 !== 'undefined') {
+
+                    SOMEXPL_3 += 1;
+                    let isInNewElementBox = false;
+                    if (typeof diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox !== 'undefined') {
+                        if (typeof diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxX !== 'undefined' &&
+                            typeof diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxY !== 'undefined' &&
+                            typeof diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxWidth !== 'undefined' &&
+                            typeof diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxHeight !== 'undefined') {
+                            if (modelElementsByIndex[e.index].element != 'SOMIX.Grouping') {
+                                // In case of groupings there is currently no positions.
+                                // This may change when later groupings can be added as a simple entity
+                                if (e.x > diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxX &&
+                                    e.x < diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxX +
+                                    diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxWidth &&
+                                    e.y > diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxY &&
+                                    e.y < diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxY +
+                                    diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxHeight) {
+                                    isInNewElementBox = true;
+                                }
+                            }
+                        }
+                    }
+                    if (!isInNewElementBox) {
+                        // SOMEXPL_3 is difficult to fullcill when Groupings are used to determine outer border.
+                        // Exclude them therefore from this logic.
+                        if (modelElementsByIndex[e.index].element != 'SOMIX.Grouping') {
+                            if (typeof boundingRectComplete.X1 === 'undefined' &&
+                                typeof boundingRectComplete.X2 === 'undefined' &&
+                                typeof boundingRectComplete.Y1 === 'undefined' &&
+                                typeof boundingRectComplete.Y2 === 'undefined') {
+                                boundingRectComplete.X1 = e.boxX1;
+                                boundingRectComplete.X2 = e.boxX2;
+                                boundingRectComplete.Y1 = e.boxY1;
+                                boundingRectComplete.Y2 = e.boxY2
+                            }
+                            else {
+                                if (e.boxX1 < boundingRectComplete.X1) { boundingRectComplete.X1 = e.boxX1 }
+                                if (e.boxX2 > boundingRectComplete.X2) { boundingRectComplete.X2 = e.boxX2 }
+                                if (e.boxY1 < boundingRectComplete.Y1) { boundingRectComplete.Y1 = e.boxY1 }
+                                if (e.boxY2 > boundingRectComplete.Y2) { boundingRectComplete.Y2 = e.boxY2 }
+                            }
+                        }
+
+                        console.log('e', e.x, boundingRectComplete.X1, boundingRectComplete.X2,
+                            diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxX);
                     }
                     else {
-                        if (e.boxX1 < boundingRectComplete.X1) { boundingRectComplete.X1 = e.boxX1 }
-                    }
-                }
-                if (typeof e.boxX2 !== 'undefined') {
-                    if (typeof boundingRectComplete.X2 === 'undefined') {
-                        boundingRectComplete.X2 = e.boxX2
-                    }
-                    else {
-                        if (e.boxX2 > boundingRectComplete.X2) { boundingRectComplete.X2 = e.boxX2 }
-                    }
-                }
-                if (typeof e.boxY1 !== 'undefined') {
-                    if (typeof boundingRectComplete.Y1 === 'undefined') {
-                        boundingRectComplete.Y1 = e.boxY1
-                    }
-                    else {
-                        if (e.boxY1 < boundingRectComplete.Y1) { boundingRectComplete.Y1 = e.boxY1 }
-                    }
-                }
-                if (typeof e.boxY2 !== 'undefined') {
-                    if (typeof boundingRectComplete.Y2 === 'undefined') {
-                        boundingRectComplete.Y2 = e.boxY2
-                    }
-                    else {
-                        if (e.boxY2 > boundingRectComplete.Y2) { boundingRectComplete.Y2 = e.boxY2 }
+
                     }
                 }
             }
@@ -979,46 +1009,37 @@ function drawCompleteModel(ctx, width, height) {
 
         for (const e of diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID) {
             if (typeof e !== 'undefined') {
-                if (typeof e !== 'undefined') {
-                    if (typeof e.boxX1 !== 'undefined') {
-                        if (typeof boundingRectComplete.X1 === 'undefined') {
-                            boundingRectComplete.X1 = e.boxX1
-                        }
-                        else {
-                            if (e.boxX1 < boundingRectComplete.X1) { boundingRectComplete.X1 = e.boxX1 }
-                        }
+                if (typeof e.boxX1 !== 'undefined' &&
+                    e.boxX2 !== 'undefined' &&
+                    typeof e.boxY1 !== 'undefined' &&
+                    typeof e.boxY2 !== 'undefined') {
+                    if (typeof boundingRectComplete.X1 === 'undefined' &&
+                        typeof boundingRectComplete.X2 === 'undefined' &&
+                        typeof boundingRectComplete.Y1 === 'undefined' &&
+                        typeof boundingRectComplete.Y2 === 'undefined') {
+                        boundingRectComplete.X1 = e.boxX1;
+                        boundingRectComplete.X2 = e.boxX2;
+                        boundingRectComplete.Y1 = e.boxY1;
+                        boundingRectComplete.Y2 = e.boxY2
                     }
-                    if (typeof e.boxX2 !== 'undefined') {
-                        if (typeof boundingRectComplete.X2 === 'undefined') {
-                            boundingRectComplete.X2 = e.boxX2
-                        }
-                        else {
-                            if (e.boxX2 > boundingRectComplete.X2) { boundingRectComplete.X2 = e.boxX2 }
-                        }
+                    else {
+                        if (e.boxX1 < boundingRectComplete.X1) { boundingRectComplete.X1 = e.boxX1 }
+                        if (e.boxX2 > boundingRectComplete.X2) { boundingRectComplete.X2 = e.boxX2 }
+                        if (e.boxY1 < boundingRectComplete.Y1) { boundingRectComplete.Y1 = e.boxY1 }
+                        if (e.boxY2 > boundingRectComplete.Y2) { boundingRectComplete.Y2 = e.boxY2 }
                     }
-                    if (typeof e.boxY1 !== 'undefined') {
-                        if (typeof boundingRectComplete.Y1 === 'undefined') {
-                            boundingRectComplete.Y1 = e.boxY1
-                        }
-                        else {
-                            if (e.boxY1 < boundingRectComplete.Y1) { boundingRectComplete.Y1 = e.boxY1 }
-                        }
-                    }
-                    if (typeof e.boxY2 !== 'undefined') {
-                        if (typeof boundingRectComplete.Y2 === 'undefined') {
-                            boundingRectComplete.Y2 = e.boxY2
-                        }
-                        else {
-                            if (e.boxY2 > boundingRectComplete.Y2) { boundingRectComplete.Y2 = e.boxY2 }
-                        }
-                    }
+
+                    console.log('c', e.x, boundingRectComplete.X1, boundingRectComplete.X2,
+                        diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxX);
                 }
             }
         }
-
+        console.log('boundingRectComplete.X2', boundingRectComplete.X2);
         if (typeof boundingRectComplete.X1 !== 'undefined') {
 
             // Draw box around model
+
+            SOMEXPL_1 += 1;
 
             let boundingRectCompleteMargin = 100; // TODO include also width of element text
 
@@ -1027,11 +1048,22 @@ function drawCompleteModel(ctx, width, height) {
             ctx.strokeStyle = 'gray'
             let bRCWidth = boundingRectComplete.X2 - boundingRectComplete.X1;
             let bRCHeight = boundingRectComplete.Y2 - boundingRectComplete.Y1;
-            ctx.strokeRect(cameraToCanvasX(boundingRectComplete.X1-boundingRectCompleteMargin), 
-                           cameraToCanvasY(boundingRectComplete.Y1-boundingRectCompleteMargin), 
-                           cameraToCanvasScale(bRCWidth+2*boundingRectCompleteMargin), 
-                           cameraToCanvasScale(bRCHeight+2*boundingRectCompleteMargin));
+            ctx.strokeRect(cameraToCanvasX(boundingRectComplete.X1 - boundingRectCompleteMargin),
+                cameraToCanvasY(boundingRectComplete.Y1 - boundingRectCompleteMargin),
+                cameraToCanvasScale(bRCWidth + 2 * boundingRectCompleteMargin),
+                cameraToCanvasScale(bRCHeight + 2 * boundingRectCompleteMargin));
             ctx.setLineDash([]);
+
+            // Set box with new elements
+
+            SOMEXPL_2 += 1;
+            diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox = {
+                newElBoxX: boundingRectComplete.X1 - boundingRectCompleteMargin + bRCWidth + 2 * boundingRectCompleteMargin + 10,
+                newElBoxY: boundingRectComplete.Y1 - boundingRectCompleteMargin,
+                newElBoxWidth: 50 * scale,
+                newElBoxHeight: bRCHeight + 2 * boundingRectCompleteMargin
+            }
+
         }
     }
 

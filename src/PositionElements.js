@@ -1,10 +1,5 @@
 'use strict';
 
-const newElBoxX = 0;
-const newElBoxY = 0;
-const newElBoxWidth = 100 * scale;
-const newElBoxHeight = 100 * scale;
-
 
 function positionCircle(width, height) {
     const offset = 20;
@@ -92,6 +87,11 @@ function addWithNeighbors(element) {
 
     // Switch Force-Directing off, so that new elements remain in the box where they have been placed
     diagramms[diagramInfos.activeDiagram].forceFeedback = false;
+
+    let newElBoxX = diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxX;
+    let newElBoxY = diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxY;
+    let newElBoxWidth = diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxWidth;
+    let newElBoxHeight = diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxHeight;
 
     let position;
     if (typeof element !== 'undefined') {

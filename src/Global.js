@@ -74,6 +74,8 @@ let mouseover = false;
 
 let showModelExplorer = false;
 
+
+
 // To support mouse event handling
 function reOffset() {
     var BB = canvas.getBoundingClientRect();
