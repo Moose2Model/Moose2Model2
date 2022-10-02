@@ -75,6 +75,7 @@ function newDiagram(name) {
   // Initial position of box with new elements
   SOMEXPL_2 += 1;
   diagramms[name].diagramSettings.newElementBox = {
+    isInitial: true,
     newElBoxX: 0,
     newElBoxY: 0,
     newElBoxWidth: 100,

@@ -224,28 +224,28 @@ function drawCompleteModel(ctx, width, height) {
     if (diagramms[diagramInfos.displayedDiagram].diagramSettings.displayNewElementBox == true) {
         // Draw landing box
         SOMEXPL_2 += 1;
+        if (!diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.isInitial) {
+            let newElBoxX = diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxX;
+            let newElBoxY = diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxY;
+            let newElBoxWidth = diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxWidth;
+            let newElBoxHeight = diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxHeight;
 
-        let newElBoxX = diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxX;
-        let newElBoxY = diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxY;
-        let newElBoxWidth = diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxWidth;
-        let newElBoxHeight = diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxHeight;
-
-        ctx.lineWidth = cameraToCanvasScale(1);
-        ctx.setLineDash([cameraToCanvasScale(8), cameraToCanvasScale(2)]);
-        ctx.strokeStyle = 'gray'
-        ctx.strokeRect(cameraToCanvasX(newElBoxX), cameraToCanvasY(newElBoxY), cameraToCanvasScale(newElBoxWidth), cameraToCanvasScale(newElBoxHeight));
-        ctx.setLineDash([]);
+            ctx.lineWidth = cameraToCanvasScale(1);
+            ctx.setLineDash([cameraToCanvasScale(8), cameraToCanvasScale(2)]);
+            ctx.strokeStyle = 'gray'
+            ctx.strokeRect(cameraToCanvasX(newElBoxX), cameraToCanvasY(newElBoxY), cameraToCanvasScale(newElBoxWidth), cameraToCanvasScale(newElBoxHeight));
+            ctx.setLineDash([]);
 
 
 
-        // Write explanation text for landing box
-        ctx.fillStyle = 'gray';
-        let scaledFontSizeLandingBox = cameraToCanvasScale(generalFontSize);
-        ctx.textAlign = 'right';
-        ctx.font = scaledFontSizeLandingBox + 'px  sans-serif';
-        ctx.fillText('New elements are placed here', cameraToCanvasX(newElBoxX + newElBoxWidth), cameraToCanvasY(newElBoxY + newElBoxHeight + generalFontSize));
-        ctx.textAlign = 'start';
-
+            // Write explanation text for landing box
+            ctx.fillStyle = 'gray';
+            let scaledFontSizeLandingBox = cameraToCanvasScale(generalFontSize);
+            ctx.textAlign = 'right';
+            ctx.font = scaledFontSizeLandingBox + 'px  sans-serif';
+            ctx.fillText('New elements are placed here', cameraToCanvasX(newElBoxX + newElBoxWidth), cameraToCanvasY(newElBoxY + newElBoxHeight + generalFontSize));
+            ctx.textAlign = 'start';
+        }
     }
 
     // Prepare drawing of elements
@@ -946,7 +946,6 @@ function drawCompleteModel(ctx, width, height) {
     // Determine bounding rect of complete diagram
     if (diagramms[diagramInfos.displayedDiagram].diagramType == circuitDiagramForSoftwareDiagramType) {
         let boundingRectComplete = {}
-        console.log('Start');
 
         for (const e of diagramms[diagramInfos.displayedDiagram].complModelPosition) {
             if (typeof e !== 'undefined') {
@@ -997,8 +996,6 @@ function drawCompleteModel(ctx, width, height) {
                             }
                         }
 
-                        console.log('e', e.x, boundingRectComplete.X1, boundingRectComplete.X2,
-                            diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxX);
                     }
                     else {
 
@@ -1034,7 +1031,6 @@ function drawCompleteModel(ctx, width, height) {
                 }
             }
         }
-        console.log('boundingRectComplete.X2', boundingRectComplete.X2);
         if (typeof boundingRectComplete.X1 !== 'undefined') {
 
             // Draw box around model
@@ -1056,13 +1052,28 @@ function drawCompleteModel(ctx, width, height) {
 
             // Set box with new elements
 
-            SOMEXPL_2 += 1;
-            diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox = {
-                newElBoxX: boundingRectComplete.X1 - boundingRectCompleteMargin + bRCWidth + 2 * boundingRectCompleteMargin + 10,
-                newElBoxY: boundingRectComplete.Y1 - boundingRectCompleteMargin,
-                newElBoxWidth: 50 * scale,
-                newElBoxHeight: bRCHeight + 2 * boundingRectCompleteMargin
+            let tempNewElBoxX1 = boundingRectComplete.X1 - boundingRectCompleteMargin + bRCWidth + 2 * boundingRectCompleteMargin + 10;
+            let tempNewElBoxX2 = tempNewElBoxX1 + 100 * scale;
+
+            if (diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.isInitial ||
+                // Enlarge landing not always to keep it longer at the same place
+                tempNewElBoxX1 > diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxX +
+                diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxWidth) {
+
+                SOMEXPL_2 += 1;
+                diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxX = tempNewElBoxX1;
+                diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxWidth = tempNewElBoxX2 - tempNewElBoxX1;
             }
+            else if (tempNewElBoxX1 < diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxX) {
+                diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxX = tempNewElBoxX1;
+                diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxWidth +=
+                    diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxX - tempNewElBoxX1;
+            }
+
+            diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.isInitial = false;
+            diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxY = boundingRectComplete.Y1 - boundingRectCompleteMargin;
+            diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxHeight = bRCHeight + 2 * boundingRectCompleteMargin;
+
 
         }
     }
