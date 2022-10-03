@@ -170,6 +170,21 @@ async function ReadDisplayedDiagram() {
 
   // --- Clear the displayed diagram when needed -> The user may be warned in some cases
   // Will be implicitly done by calling newDiagram
+
+  // --- Set position of landing box
+  SOMEXPL_5 += 1;
+  if (typeof readGenerationInfo.newElementBox !== 'undefined') {
+    diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox = readGenerationInfo.newElementBox;
+  } else {
+    diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox = {
+      isInitial: true,
+      newElBoxX: 0,
+      newElBoxY: 0,
+      newElBoxWidth: 100,
+      newElBoxHeight: 100
+    };
+  }
+
   // --- Add elements with neighbor to this diagram
   for (const e of readGenerationInfo.addedWithNeighbors) {
     if (typeof modelElementsByUniqueKey[e] !== 'undefined') {
@@ -231,6 +246,12 @@ async function SaveDisplayedDiagram() {
 
 
   let generationInfoExternal = {};
+
+  // Store position of landing box
+  SOMEXPL_4 += 1;
+  if (!diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.isInitial) {
+    generationInfoExternal.newElementBox = diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox;
+  }
 
   // Store which elements are added with neighbors
 

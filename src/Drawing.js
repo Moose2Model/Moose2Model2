@@ -957,20 +957,22 @@ function drawCompleteModel(ctx, width, height) {
                     SOMEXPL_3 += 1;
                     let isInNewElementBox = false;
                     if (typeof diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox !== 'undefined') {
-                        if (typeof diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxX !== 'undefined' &&
-                            typeof diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxY !== 'undefined' &&
-                            typeof diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxWidth !== 'undefined' &&
-                            typeof diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxHeight !== 'undefined') {
-                            if (modelElementsByIndex[e.index].element != 'SOMIX.Grouping') {
-                                // In case of groupings there is currently no positions.
-                                // This may change when later groupings can be added as a simple entity
-                                if (e.x > diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxX &&
-                                    e.x < diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxX +
-                                    diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxWidth &&
-                                    e.y > diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxY &&
-                                    e.y < diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxY +
-                                    diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxHeight) {
-                                    isInNewElementBox = true;
+                        if (!diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.isInitial) {
+                            if (typeof diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxX !== 'undefined' &&
+                                typeof diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxY !== 'undefined' &&
+                                typeof diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxWidth !== 'undefined' &&
+                                typeof diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxHeight !== 'undefined') {
+                                if (modelElementsByIndex[e.index].element != 'SOMIX.Grouping') {
+                                    // In case of groupings there is currently no positions.
+                                    // This may change when later groupings can be added as a simple entity
+                                    if (e.x > diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxX &&
+                                        e.x < diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxX +
+                                        diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxWidth &&
+                                        e.y > diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxY &&
+                                        e.y < diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxY +
+                                        diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxHeight) {
+                                        isInNewElementBox = true;
+                                    }
                                 }
                             }
                         }
