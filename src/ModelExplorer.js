@@ -103,7 +103,7 @@ function drawModelExplorer() {
     let lineDifference = fontSize;
 
     ctx.font = fontSize + 'px sans-serif';
-    ctx.fillStyle = 'black'
+    ctx.fillStyle = fontColor;//'black'
     ctx.fillText('Use regular expressions to filter in the list', xPosElements, yPosElements);
     yPosElements += lineDifference;
     ctx.fillText('Use the mouse wheel to scroll', xPosElements, yPosElements);
