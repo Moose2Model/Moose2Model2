@@ -1028,8 +1028,8 @@ function drawCompleteModel(ctx, width, height) {
                         if (e.boxY2 > boundingRectComplete.Y2) { boundingRectComplete.Y2 = e.boxY2 }
                     }
 
-                    console.log('c', e.x, boundingRectComplete.X1, boundingRectComplete.X2,
-                        diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxX);
+/*                     console.log('c', e.x, boundingRectComplete.X1, boundingRectComplete.X2,
+                        diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxX); */
                 }
             }
         }

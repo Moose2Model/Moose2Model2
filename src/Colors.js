@@ -9,18 +9,30 @@ colorTheme = 'DarkTheme'; // The default
 
 let backGroundCanvas = "#252525";
 let borderBackground = '#333333';
+let highlightedBorderBackground = '#3f3f40';
 let fontColor = "LightGray";
+let menuBGColor = '#303031';
+let menuHighlightedBGColor = '#21395e';
+let menuSeparatorColor = 'gray';
 
 function changeColors() {
 
     if (colorTheme == 'DarkTheme') {
         borderBackground = '#333333';
+        highlightedBorderBackground = '#3f3f40';
+        menuBGColor = '#303031';
+        menuHighlightedBGColor = '#21395e';
+        menuSeparatorColor = '#454545';
         backGroundCanvas = "#252525";
         fontColor = "LightGray";
         //document.canvas.border.style.color = 'rgb(206, 206, 206)';
     }
     else {
         borderBackground = 'white';
+        highlightedBorderBackground = '#e9e9e9';
+        menuBGColor = '#f9f9f9';
+        menuHighlightedBGColor = '#dddddd';
+        menuSeparatorColor = '#cccccc';
         backGroundCanvas = "white";
         fontColor = 'black';
         //document.canvas.border.style.color = 'rgb(206, 206, 206)';
@@ -59,25 +71,53 @@ function changeColors() {
 
     cols = document.getElementsByClassName('fileMenuButton');
     for (let i = 0; i < cols.length; i++) {
-        cols[i].style.backgroundColor = borderBackground;
+        //cols[i].style.backgroundColor = borderBackground;
+        cols[i].style.setProperty("--menuBGColor", borderBackground); 
+        cols[i].style.setProperty("--menuHighBGColor", highlightedBorderBackground); 
+        
         cols[i].style.color = fontColor;
     }
 
     cols = document.getElementsByClassName('FileMenu-content');
     for (let i = 0; i < cols.length; i++) {
-        cols[i].style.backgroundColor = borderBackground;
-        cols[i].style.color = fontColor;
+        //cols[i].style.backgroundColor = borderBackground;
+        cols[i].style.setProperty("--menuItemBGColor", menuBGColor); 
+        cols[i].style.setProperty("--menuItemHighBGColor", menuHighlightedBGColor); 
+        cols[i].style.setProperty("--fontColor", fontColor); 
+        //cols[i].style.color = fontColor;
+    }
+
+    cols = document.getElementsByClassName('DiagramMenu-content');
+    for (let i = 0; i < cols.length; i++) {
+        //cols[i].style.backgroundColor = borderBackground;
+        cols[i].style.setProperty("--menuItemBGColor", menuBGColor); 
+        cols[i].style.setProperty("--menuItemHighBGColor", menuHighlightedBGColor); 
+        cols[i].style.setProperty("--fontColor", fontColor); 
+        //cols[i].style.color = fontColor;
+    }
+
+    cols = document.getElementsByClassName('HelpMenu-content');
+    for (let i = 0; i < cols.length; i++) {
+        //cols[i].style.backgroundColor = borderBackground;
+        cols[i].style.setProperty("--menuItemBGColor", menuBGColor); 
+        cols[i].style.setProperty("--menuItemHighBGColor", menuHighlightedBGColor); 
+        cols[i].style.setProperty("--fontColor", fontColor); 
+        //cols[i].style.color = fontColor;
     }
 
     cols = document.getElementsByClassName('diagramMenuButton');
     for (let i = 0; i < cols.length; i++) {
-        cols[i].style.backgroundColor = borderBackground;
+        //cols[i].style.backgroundColor = borderBackground;
+        cols[i].style.setProperty("--menuBGColor", borderBackground); 
+        cols[i].style.setProperty("--menuHighBGColor", highlightedBorderBackground); 
         cols[i].style.color = fontColor;
     }
 
     cols = document.getElementsByClassName('helpMenuButton');
     for (let i = 0; i < cols.length; i++) {
-        cols[i].style.backgroundColor = borderBackground;
+        //cols[i].style.backgroundColor = borderBackground;
+        cols[i].style.setProperty("--menuBGColor", borderBackground); 
+        cols[i].style.setProperty("--menuHighBGColor", highlightedBorderBackground); 
         cols[i].style.color = fontColor;
     } 
 
@@ -87,6 +127,17 @@ function changeColors() {
 
     element = document.getElementById('pane');
     element.style.backgroundColor = backGroundCanvas;
+
+    // Chane color or separators for menus
+
+    element = document.getElementById('LoadButton');
+    element.style.borderColor = menuSeparatorColor;
+
+    element = document.getElementById('OpenWorkFolderButton');
+    element.style.borderColor = menuSeparatorColor;
+
+    element = document.getElementById('ImportOldDiagramButton');
+    element.style.borderColor = menuSeparatorColor;
 
 /*     element = document.getElementById('FolderToSOMIXButton');
     element.style.backgroundColor = borderBackground;

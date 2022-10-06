@@ -5,10 +5,14 @@
     <meta charset="utf-8" />
     <title>Moose2Model</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <script src="Requirement.js?v=43"></script>
+    <script src="Requirement.js?v=44"></script>
     <style>
         :root {
             --menuBGColor: #333333;
+            --menuHighBGColor: #3f3f40;
+            --menuItemBGColor: #303031;
+            --menuItemHighBGColor: #21395e;
+            --fontColor: white;
         }
 
 
@@ -18,7 +22,7 @@
 
         .toprow {
 
-            background-color: white;
+            background-color: white; 
             font-family: Arial, Helvetica, sans-serif;
         }
 
@@ -98,7 +102,7 @@
             padding-right: 20px;
             padding-top: 5px;
 
-            background-color: inherit;
+           /* background-color: inherit;*/
             font-family: inherit;
         }
 
@@ -114,7 +118,7 @@
             padding-right: 20px;
             padding-top: 5px;
 
-            background-color: inherit;
+            /* background-color: inherit; */
             font-family: inherit;
         }
 
@@ -130,32 +134,33 @@
             padding-right: 20px;
             padding-top: 5px;
 
-            background-color: inherit;
+            background-color: inherit; 
             font-family: inherit;
         }
 
-/*         .navbar button:hover,
+         .navbar button:hover,
         .dropdownFileMenu:hover .fileMenuButton,
         .fileMenuButton:focus {
-            background-color: rgb(223, 223, 223);
-        } */
+            background-color: var(--menuHighBGColor); /* rgb(223, 223, 223); */
+        } 
 
-/*         .navbar button:hover,
+         .navbar button:hover,
         .dropdownDiagramMenu:hover .diagramMenuButton,
         .diagramMenuButton:focus {
-            background-color: rgb(223, 223, 223);
-        } */
+            background-color: var(--menuHighBGColor); /* background-color: rgb(223, 223, 223); */
+        } 
 
         .navbar button:hover/*,
          .dropdownHelpMenu:hover .helpMenuButton,
         .helpMenuButton:focus */ {
-            background-color: rgb(223, 223, 223);
+            background-color: var(--menuHighBGColor); /* background-color: rgb(223, 223, 223); */
         } 
 
         .FileMenu-content {
             display: none;
             position: absolute;
-            background-color: #f9f9f9;
+            background-color: red;
+            /*background-color: var(--menuItemBGColor); /* #f9f9f9; */
             /*Width, specify both for .FileMenu-content and FileMenu-content input*/
             min-width: 340px;
             box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
@@ -165,7 +170,7 @@
         .DiagramMenu-content {
             display: none;
             position: absolute;
-            background-color: #f9f9f9;
+            background-color: #5b2d2d;
             /*Width, specify both for .DiagramMenu-content and DiagramMenu-content input*/
             min-width: 241px;
             box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
@@ -184,7 +189,8 @@
         .FileMenu-content input,
         a input {
             float: none;
-            color: black;
+            background-color: var(--menuItemBGColor);
+            color: var(--fontColor);
             border: none;
             outline: none;
             padding: 10px 10px;
@@ -199,7 +205,8 @@
         .DiagramMenu-content input,
         a input {
             float: none;
-            color: black;
+            background-color: var(--menuItemBGColor);
+            color: var(--fontColor);
             border: none;
             outline: none;
             padding: 10px 10px;
@@ -214,7 +221,8 @@
         .HelpMenu-content input,
         a input {
             float: none;
-            color: black;
+            background-color: var(--menuItemBGColor);
+            color: var(--fontColor);
             border: none;
             outline: none;
             padding: 10px 10px;
@@ -226,17 +234,17 @@
 
         .FileMenu-content input:hover,
         a:hover {
-            background-color: #ddd;
+            background-color: var(--menuItemHighBGColor); /* #ddd;*/
         }
 
         .DiagramMenu-content input:hover,
         a:hover {
-            background-color: #ddd;
+            background-color: var(--menuItemHighBGColor); /* #ddd;*/ 
         }
 
         .HelpMenu-content input:hover,
         a:hover {
-            background-color: #ddd;
+            background-color: var(--menuItemHighBGColor); /* #ddd;*/
         }
 
         .show {
@@ -287,7 +295,7 @@
         #OpenWorkFolderButton,
         #ImportOldDiagramButton {
             /* Separators in Menu */
-            border-bottom: 1px solid #CCC;
+            border-bottom: 1px solid #cccccc;
         }
     </style>
 
@@ -368,23 +376,23 @@
     </ul>
     </div>
 
-    <script src="Colors.js?v=43"></script>
-    <script src="Global.js?v=43"></script>
-    <script src="FileExtractorGlobal.js?v=43"></script>
+    <script src="Colors.js?v=44"></script>
+    <script src="Global.js?v=44"></script>
+    <script src="FileExtractorGlobal.js?v=44"></script>
     <script src="ExtractCodeFromFiles.js"></script>
-    <script src="FileExtractorPreprocess.js?v=43"></script>
-    <script src="Comment.js?v=43"></script>
-    <script src="ForceDirecting.js?v=43"></script>
-    <script src="Diagrams.js?v=43"></script>
-    <script src="AnalyzeMseFile.js?v=43"></script>
-    <script src="PositionElements.js?v=43"></script>
-    <script src="ModelExplorer.js?v=43"></script>
-    <script src="Drawing.js?v=43"></script>
-    <script src="ContextMenu.js?v=43"></script>
-    <script src="MouseWheel.js?v=43"></script>
-    <script src="Drag.js?v=43"></script>
-    <script src="ExampleInternal.js?v=43"></script>
-    <script src="HTMLLogic.js?v=43"></script>
+    <script src="FileExtractorPreprocess.js?v=44"></script>
+    <script src="Comment.js?v=44"></script>
+    <script src="ForceDirecting.js?v=44"></script>
+    <script src="Diagrams.js?v=44"></script>
+    <script src="AnalyzeMseFile.js?v=44"></script>
+    <script src="PositionElements.js?v=44"></script>
+    <script src="ModelExplorer.js?v=44"></script>
+    <script src="Drawing.js?v=44"></script>
+    <script src="ContextMenu.js?v=44"></script>
+    <script src="MouseWheel.js?v=44"></script>
+    <script src="Drag.js?v=44"></script>
+    <script src="ExampleInternal.js?v=44"></script>
+    <script src="HTMLLogic.js?v=44"></script>
 
     <script>
 
