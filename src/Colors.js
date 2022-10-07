@@ -61,68 +61,68 @@ function changeColors() {
         cols[i].style.backgroundColor = borderBackground;
     }
 
-    
- 
-     cols = document.getElementsByClassName('navbar');
+
+
+    cols = document.getElementsByClassName('navbar');
     for (let i = 0; i < cols.length; i++) {
-        cols[i].style.setProperty("--menuBGColor", borderBackground); 
+        cols[i].style.setProperty("--menuBGColor", borderBackground);
         cols[i].style.color = fontColor;
-    } 
+    }
 
     cols = document.getElementsByClassName('fileMenuButton');
     for (let i = 0; i < cols.length; i++) {
         //cols[i].style.backgroundColor = borderBackground;
-        cols[i].style.setProperty("--menuBGColor", borderBackground); 
-        cols[i].style.setProperty("--menuHighBGColor", highlightedBorderBackground); 
-        
+        cols[i].style.setProperty("--menuBGColor", borderBackground);
+        cols[i].style.setProperty("--menuHighBGColor", highlightedBorderBackground);
+
         cols[i].style.color = fontColor;
     }
 
     cols = document.getElementsByClassName('FileMenu-content');
     for (let i = 0; i < cols.length; i++) {
         //cols[i].style.backgroundColor = borderBackground;
-        cols[i].style.setProperty("--menuItemBGColor", menuBGColor); 
-        cols[i].style.setProperty("--menuItemHighBGColor", menuHighlightedBGColor); 
-        cols[i].style.setProperty("--fontColor", fontColor); 
+        cols[i].style.setProperty("--menuItemBGColor", menuBGColor);
+        cols[i].style.setProperty("--menuItemHighBGColor", menuHighlightedBGColor);
+        cols[i].style.setProperty("--fontColor", fontColor);
         //cols[i].style.color = fontColor;
     }
 
     cols = document.getElementsByClassName('DiagramMenu-content');
     for (let i = 0; i < cols.length; i++) {
         //cols[i].style.backgroundColor = borderBackground;
-        cols[i].style.setProperty("--menuItemBGColor", menuBGColor); 
-        cols[i].style.setProperty("--menuItemHighBGColor", menuHighlightedBGColor); 
-        cols[i].style.setProperty("--fontColor", fontColor); 
+        cols[i].style.setProperty("--menuItemBGColor", menuBGColor);
+        cols[i].style.setProperty("--menuItemHighBGColor", menuHighlightedBGColor);
+        cols[i].style.setProperty("--fontColor", fontColor);
         //cols[i].style.color = fontColor;
     }
 
     cols = document.getElementsByClassName('HelpMenu-content');
     for (let i = 0; i < cols.length; i++) {
         //cols[i].style.backgroundColor = borderBackground;
-        cols[i].style.setProperty("--menuItemBGColor", menuBGColor); 
-        cols[i].style.setProperty("--menuItemHighBGColor", menuHighlightedBGColor); 
-        cols[i].style.setProperty("--fontColor", fontColor); 
+        cols[i].style.setProperty("--menuItemBGColor", menuBGColor);
+        cols[i].style.setProperty("--menuItemHighBGColor", menuHighlightedBGColor);
+        cols[i].style.setProperty("--fontColor", fontColor);
         //cols[i].style.color = fontColor;
     }
 
     cols = document.getElementsByClassName('diagramMenuButton');
     for (let i = 0; i < cols.length; i++) {
         //cols[i].style.backgroundColor = borderBackground;
-        cols[i].style.setProperty("--menuBGColor", borderBackground); 
-        cols[i].style.setProperty("--menuHighBGColor", highlightedBorderBackground); 
+        cols[i].style.setProperty("--menuBGColor", borderBackground);
+        cols[i].style.setProperty("--menuHighBGColor", highlightedBorderBackground);
         cols[i].style.color = fontColor;
     }
 
     cols = document.getElementsByClassName('helpMenuButton');
     for (let i = 0; i < cols.length; i++) {
         //cols[i].style.backgroundColor = borderBackground;
-        cols[i].style.setProperty("--menuBGColor", borderBackground); 
-        cols[i].style.setProperty("--menuHighBGColor", highlightedBorderBackground); 
+        cols[i].style.setProperty("--menuBGColor", borderBackground);
+        cols[i].style.setProperty("--menuHighBGColor", highlightedBorderBackground);
         cols[i].style.color = fontColor;
-    } 
+    }
 
     let element = document.getElementById('contextMenu');
-    element.style.setProperty("--menuBGColor", borderBackground); 
+    element.style.setProperty("--menuBGColor", borderBackground);
     element.style.color = fontColor;
 
     element = document.getElementById('pane');
@@ -139,8 +139,24 @@ function changeColors() {
     element = document.getElementById('ImportOldDiagramButton');
     element.style.borderColor = menuSeparatorColor;
 
-/*     element = document.getElementById('FolderToSOMIXButton');
-    element.style.backgroundColor = borderBackground;
-    element.style.color = fontColor; */
+    // Change color for input of data
+
+    cols = document.getElementsByClassName('exploreModel');
+    for (let i = 0; i < cols.length; i++) {
+        cols[i].style.setProperty("--menuBGColor", borderBackground);
+        cols[i].style.setProperty("--fontColor", fontColor);
+    }
+
+    cols = document.getElementsByClassName('newDiagramElement');
+    for (let i = 0; i < cols.length; i++) {
+        cols[i].style.setProperty("--menuBGColor", borderBackground);
+        cols[i].style.setProperty("--fontColor", fontColor);
+    }
+
+    cols = document.getElementsByClassName('commentElement');
+    for (let i = 0; i < cols.length; i++) {
+        cols[i].style.setProperty("--menuBGColor", borderBackground);
+        cols[i].style.setProperty("--fontColor", fontColor);
+    }
 
 }
