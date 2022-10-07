@@ -378,6 +378,7 @@
             <div class="DiagramMenu-content" id="DiagramMenuID">
                 <input id="ExploreModelButton" value="Explore model">
                 <input id="SwitchThemeButton" value="Switch between dark and white theme">
+                <input id="ZoomToFItButton" value="Zoom to fit on screen">
                 <input id="RemoveAllHighlightingButton" value="Remove all highlighting">
             </div>
         </div>
@@ -485,6 +486,9 @@
         const SwitchThemeButton = document.getElementById('SwitchThemeButton');
         SwitchThemeButton.addEventListener('click', SwitchTheme);
 
+        const ZoomToFItButton = document.getElementById('ZoomToFItButton');
+        ZoomToFItButton.addEventListener('click', ZoomToFit);
+
         const RemoveAllHighlightingButton = document.getElementById('RemoveAllHighlightingButton');
         RemoveAllHighlightingButton.addEventListener('click', RemoveAllHighlighting);
 
@@ -519,6 +523,8 @@
             setDiagramActive('Demo Diagram');
 
             switchDiagram('All model elements');
+
+            ZoomToFit();
 
         }
 

@@ -1,4 +1,7 @@
 'use strict';
+
+let boundingRectCompleteMargin = 100; // TODO include also width of element text
+
 // For Canvas sometimes needed
 
 // function resizeCanvas() {
@@ -942,6 +945,42 @@ function drawCompleteModel(ctx, width, height) {
             }
         } // for (const cmp of diagramms[diagramInfos.displayedDiagram].complModelPosition)
     }
+    // Determine bounding rect of bullet point diagram
+    if (diagramms[diagramInfos.displayedDiagram].diagramType == bulletPointDiagramType) {
+        let boundingRectComplete = {};
+
+        for (const e of diagramms[diagramInfos.displayedDiagram].complModelPosition) {
+            if (typeof e !== 'undefined') {
+                if (typeof boundingRectComplete.X1 === 'undefined' &&
+                    typeof boundingRectComplete.X2 === 'undefined' &&
+                    typeof boundingRectComplete.Y1 === 'undefined' &&
+                    typeof boundingRectComplete.Y2 === 'undefined') {
+                    boundingRectComplete.X1 = e.x;
+                    boundingRectComplete.X2 = e.x;
+                    boundingRectComplete.Y1 = e.y;
+                    boundingRectComplete.Y2 = e.y
+                }
+                else {
+                    if (e.x < boundingRectComplete.X1) { boundingRectComplete.X1 = e.x }
+                    if (e.x > boundingRectComplete.X2) { boundingRectComplete.X2 = e.x }
+                    if (e.y < boundingRectComplete.Y1) { boundingRectComplete.Y1 = e.y }
+                    if (e.y > boundingRectComplete.Y2) { boundingRectComplete.Y2 = e.y }
+                }
+            }
+        }
+        // Set bounding rect in diagram
+        if (typeof boundingRectComplete !== 'undefined') {
+            if (typeof boundingRectComplete.X1 !== 'undefined') {
+                diagramms[diagramInfos.displayedDiagram].boundingRectComplete = {
+                    X1: boundingRectComplete.X1,
+                    X2: boundingRectComplete.X2,
+                    Y1: boundingRectComplete.Y1,
+                    Y2: boundingRectComplete.Y2
+                };
+            }
+        }
+
+    }
 
     // Determine bounding rect of complete diagram
     if (diagramms[diagramInfos.displayedDiagram].diagramType == circuitDiagramForSoftwareDiagramType) {
@@ -1028,8 +1067,8 @@ function drawCompleteModel(ctx, width, height) {
                         if (e.boxY2 > boundingRectComplete.Y2) { boundingRectComplete.Y2 = e.boxY2 }
                     }
 
-/*                     console.log('c', e.x, boundingRectComplete.X1, boundingRectComplete.X2,
-                        diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxX); */
+                    /*                     console.log('c', e.x, boundingRectComplete.X1, boundingRectComplete.X2,
+                                            diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxX); */
                 }
             }
         }
@@ -1038,8 +1077,6 @@ function drawCompleteModel(ctx, width, height) {
             // Draw box around model
 
             SOMEXPL_1 += 1;
-
-            let boundingRectCompleteMargin = 100; // TODO include also width of element text
 
             ctx.lineWidth = cameraToCanvasScale(1);
             //ctx.setLineDash([cameraToCanvasScale(8), cameraToCanvasScale(2)]);
@@ -1075,9 +1112,21 @@ function drawCompleteModel(ctx, width, height) {
             diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.isInitial = false;
             diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxY = boundingRectComplete.Y1 - boundingRectCompleteMargin;
             diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxHeight = bRCHeight + 2 * boundingRectCompleteMargin;
+            // Set bounding rect in diagram
+            diagramms[diagramInfos.displayedDiagram].boundingRectComplete = {
+                X1: boundingRectComplete.X1 - boundingRectCompleteMargin,
+                X2: diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxX + diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox.newElBoxWidth,
+                Y1: boundingRectComplete.Y1 - boundingRectCompleteMargin,
+                Y2: boundingRectComplete.Y1 - boundingRectCompleteMargin + bRCHeight + 2 * boundingRectCompleteMargin
 
+            };
 
         }
+
+        // if (typeof boundingRectComplete.X1 !== 'undefined') {
+        //     // Set bounding rect in diagram
+        //     diagramms[diagramInfos.displayedDiagram].boundingRectComplete = boundingRectComplete;
+        // }
     }
 
     //}

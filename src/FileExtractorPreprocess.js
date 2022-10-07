@@ -239,7 +239,7 @@ async function SetExtractedFolder() {
     positionCircle(g_width, g_height);
     mouseover = true;
     draw();
-
+    ZoomToFit();
 }
 
 
@@ -315,5 +315,6 @@ async function ExtractCodeFromFolder() {
     positionCircle(g_width, g_height);
     mouseover = true;
     draw();
+    ZoomToFit();
 
 }

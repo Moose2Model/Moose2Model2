@@ -13,6 +13,11 @@ const circuitDiagramForSoftwareDiagramType = 'C';
  An element is displayed in a diagram when visible is true
  May have the positions of a box that describes the size of the element (Check whether .boxX1 is defined)
  .boxX1, .boxX2, .boxY1, .boxY2
+* @member boundingRectComplete The bounding rect of a diagram 
+ diagramms[diagramInfos.displayedDiagram].boundingRectComplete.X1 - The left side 
+ diagramms[diagramInfos.displayedDiagram].boundingRectComplete.X2 - The right side
+ diagramms[diagramInfos.displayedDiagram].boundingRectComplete.Y1 - The upper side
+ diagramms[diagramInfos.displayedDiagram].boundingRectComplete.21 - The bottom side
 * @member diagramSettings The settings of a diagram. Use:
  diagramms[diagramInfos.displayedDiagram].diagramSettings.displayNewElementBox - The box for new elements is displayed
  diagramms[diagramInfos.displayedDiagram].diagramSettings.newElementBox - The borders for the box for new elements
@@ -107,6 +112,76 @@ function newDiagram(name) {
 function switchDiagram(name) {
   diagramInfos.displayedDiagram = name;
   displayedDiagramText.innerHTML = 'Displayed diagram: ' + name;
+}
+
+function zoomDisplayedDiagram(sign) {
+  const originalZoomfactor = diagramms[diagramInfos.displayedDiagram].cameraSettings.zoomfactor;
+  let newZoomfactor = originalZoomfactor;
+
+  //let test = Math.pow(2, 1 / 4) * Math.pow(2, 1 / 4) * Math.pow(2, 1 / 4) * Math.pow(2, 1 / 4);
+  if (sign > 0) {
+    newZoomfactor *= Math.pow(2, 1 / 4)
+  }
+  else {
+    newZoomfactor /= Math.pow(2, 1 / 4)
+  }
+
+  // Remove restriction of zoom factor. This causes problems together with zoom to fit.
+  /*             // Restrict scale
+    if (newZoomfactor < .001) {
+        newZoomfactor = originalZoomfactor;
+    } else if (newZoomfactor > 21) {
+        newZoomfactor = originalZoomfactor;
+    } */
+  diagramms[diagramInfos.displayedDiagram].cameraSettings.zoomfactor = newZoomfactor;
+}
+
+function diagramFits() {
+  let fits = false;
+  let canvasX1 = cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].boundingRectComplete.X1);
+  let canvasX2 = cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].boundingRectComplete.X2);
+  let canvasY1 = cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].boundingRectComplete.Y1);
+  let canvasY2 = cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].boundingRectComplete.Y2);
+  if (canvasX1 >= 0 && canvasX2 <= g_width && canvasY1 >= 0 && canvasY2 <= g_height) {
+    fits = true;
+  }
+  return fits;
+}
+
+function ZoomToFit() {
+
+  if (typeof diagramms[diagramInfos.displayedDiagram] === 'undefined') {
+    window.alert('Nothing is displayed');
+  }
+  else {
+    if (typeof diagramms[diagramInfos.displayedDiagram].boundingRectComplete === 'undefined') {
+      window.alert('Nothing is displayed');
+
+    }
+    else {
+      diagramms[diagramInfos.displayedDiagram].cameraSettings.move.x =
+        - (diagramms[diagramInfos.displayedDiagram].boundingRectComplete.X1 +
+          diagramms[diagramInfos.displayedDiagram].boundingRectComplete.X2) / 2;
+      diagramms[diagramInfos.displayedDiagram].cameraSettings.move.y =
+        - (diagramms[diagramInfos.displayedDiagram].boundingRectComplete.Y1 +
+          diagramms[diagramInfos.displayedDiagram].boundingRectComplete.Y2) / 2;
+
+      if (diagramFits()) {
+        while (diagramFits()) {
+          zoomDisplayedDiagram(+1);
+        }
+        zoomDisplayedDiagram(-1);
+      } else {
+        while (!diagramFits()) {
+          zoomDisplayedDiagram(-1);
+        }
+      }
+
+
+      // clear the canvas and redraw all shapes
+      drawCompleteModel(ctx, g_width, g_height);
+    }
+  }
 }
 
 /**Returns an array with all other diagrams */
@@ -231,6 +306,7 @@ async function ReadDisplayedDiagram() {
 
   // --- Draw new diagram
   drawCompleteModel(ctx, g_width, g_height);
+  ZoomToFit();
 }
 
 async function SaveDisplayedDiagram() {
@@ -586,4 +662,5 @@ async function ImportOldDiagram() {
 
   // --- Draw new diagram
   drawCompleteModel(ctx, g_width, g_height);
+  ZoomToFit();
 }

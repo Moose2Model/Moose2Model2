@@ -50,6 +50,7 @@ async function LoadModel() {
         positionCircle(g_width, g_height);
         mouseover = true;
         draw();
+        ZoomToFit();
 
     } else if (fileHandle.kind === 'directory') {
         // Inform user that directories are not supported here

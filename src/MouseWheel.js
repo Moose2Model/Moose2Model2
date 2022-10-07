@@ -8,24 +8,26 @@ function zoom(event) {
             event.preventDefault();
 
             const sign = event.deltaY * -0.01;
-            const originalZoomfactor = diagramms[diagramInfos.displayedDiagram].cameraSettings.zoomfactor;
-            let newZoomfactor = originalZoomfactor;
+            zoomDisplayedDiagram(sign);
+//             const originalZoomfactor = diagramms[diagramInfos.displayedDiagram].cameraSettings.zoomfactor;
+//             let newZoomfactor = originalZoomfactor;
 
-            let test = Math.pow(2, 1 / 4) * Math.pow(2, 1 / 4) * Math.pow(2, 1 / 4) * Math.pow(2, 1 / 4);
-            if (sign > 0) {
-                newZoomfactor *= Math.pow(2, 1 / 4)
-            }
-            else {
-                newZoomfactor /= Math.pow(2, 1 / 4)
-            }
+//             //let test = Math.pow(2, 1 / 4) * Math.pow(2, 1 / 4) * Math.pow(2, 1 / 4) * Math.pow(2, 1 / 4);
+//             if (sign > 0) {
+//                 newZoomfactor *= Math.pow(2, 1 / 4)
+//             }
+//             else {
+//                 newZoomfactor /= Math.pow(2, 1 / 4)
+//             }
 
-            // Restrict scale
-            if (newZoomfactor < .001) {
-                newZoomfactor = originalZoomfactor;
-            } else if (newZoomfactor > 21) {
-                newZoomfactor = originalZoomfactor;
-            }
-            diagramms[diagramInfos.displayedDiagram].cameraSettings.zoomfactor = newZoomfactor;
+//             // Remove restriction of zoom factor. This causes problems together with zoom to fit.
+// /*             // Restrict scale
+//             if (newZoomfactor < .001) {
+//                 newZoomfactor = originalZoomfactor;
+//             } else if (newZoomfactor > 21) {
+//                 newZoomfactor = originalZoomfactor;
+//             } */
+//             diagramms[diagramInfos.displayedDiagram].cameraSettings.zoomfactor = newZoomfactor;
 
 
             // clear the canvas and redraw all shapes
