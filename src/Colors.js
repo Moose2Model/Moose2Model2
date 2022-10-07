@@ -122,7 +122,8 @@ function changeColors() {
     }
 
     let element = document.getElementById('contextMenu');
-    element.style.setProperty("--menuBGColor", borderBackground);
+    element.style.setProperty("--menuItemBGColor", menuBGColor);
+    element.style.setProperty("--menuItemHighBGColor", menuHighlightedBGColor);
     element.style.color = fontColor;
 
     element = document.getElementById('pane');

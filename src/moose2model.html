@@ -22,7 +22,7 @@
 
         .toprow {
 
-            background-color: white; 
+            background-color: white;
             font-family: Arial, Helvetica, sans-serif;
         }
 
@@ -102,7 +102,7 @@
             padding-right: 20px;
             padding-top: 5px;
 
-           /* background-color: inherit;*/
+            /* background-color: inherit;*/
             font-family: inherit;
         }
 
@@ -134,27 +134,33 @@
             padding-right: 20px;
             padding-top: 5px;
 
-            background-color: inherit; 
+            background-color: inherit;
             font-family: inherit;
         }
 
-         .navbar button:hover,
+        .navbar button:hover,
         .dropdownFileMenu:hover .fileMenuButton,
         .fileMenuButton:focus {
-            background-color: var(--menuHighBGColor); /* rgb(223, 223, 223); */
-        } 
+            background-color: var(--menuHighBGColor);
+            /* rgb(223, 223, 223); */
+        }
 
-         .navbar button:hover,
+        .navbar button:hover,
         .dropdownDiagramMenu:hover .diagramMenuButton,
         .diagramMenuButton:focus {
-            background-color: var(--menuHighBGColor); /* background-color: rgb(223, 223, 223); */
-        } 
+            background-color: var(--menuHighBGColor);
+            /* background-color: rgb(223, 223, 223); */
+        }
 
-        .navbar button:hover/*,
+        .navbar button:hover
+
+        /*,
          .dropdownHelpMenu:hover .helpMenuButton,
-        .helpMenuButton:focus */ {
-            background-color: var(--menuHighBGColor); /* background-color: rgb(223, 223, 223); */
-        } 
+        .helpMenuButton:focus */
+            {
+            background-color: var(--menuHighBGColor);
+            /* background-color: rgb(223, 223, 223); */
+        }
 
         .FileMenu-content {
             display: none;
@@ -234,17 +240,20 @@
 
         .FileMenu-content input:hover,
         a:hover {
-            background-color: var(--menuItemHighBGColor); /* #ddd;*/
+            background-color: var(--menuItemHighBGColor);
+            /* #ddd;*/
         }
 
         .DiagramMenu-content input:hover,
         a:hover {
-            background-color: var(--menuItemHighBGColor); /* #ddd;*/ 
+            background-color: var(--menuItemHighBGColor);
+            /* #ddd;*/
         }
 
         .HelpMenu-content input:hover,
         a:hover {
-            background-color: var(--menuItemHighBGColor); /* #ddd;*/
+            background-color: var(--menuItemHighBGColor);
+            /* #ddd;*/
         }
 
         .show {
@@ -295,12 +304,22 @@
             border: 1px solid rgb(51, 51, 51);
             /* border: 1px solid rgb(199, 199, 199); */
             box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.404);
-            background: var(--menuBGColor); /* rgb(65, 44, 123); */
-           /*  background: white; */
+            background: var(--menuItemBGColor);
+            /* rgb(65, 44, 123); */
+            /*  background: white; */
             list-style: none;
-            padding: 3px;
+            padding: 0px;
             font-family: Arial, Helvetica, sans-serif;
             font-size: 15px;
+        }
+
+        #contextMenu li {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        #contextMenu li:hover {
+            background-color: var(--menuItemHighBGColor);
         }
 
         #LoadButton,
