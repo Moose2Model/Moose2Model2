@@ -8,5 +8,6 @@ Open www.moose2model.org. The application runs in the Browser. It is executed on
 ## Documentation
 See the documentation in the application itself
 
-## Status
-This application can be used. It is still in an early phase of implementation. Some things are therefore simple or ugly. This will be fixed in the next months.
+# Mailing list
+
+Please join the Google Group https://groups.google.com/g/somixsuite to get updates about the tool and contact other users.
