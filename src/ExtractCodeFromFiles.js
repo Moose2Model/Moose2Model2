@@ -2,9 +2,13 @@
 /**
  * Analyzes the code in files.
  */
-function AnalyzeFileAndFolder() {
+// TODO Is async still needed?
+async function AnalyzeFileAndFolder() {
 
     initializeBuildModel();
+
+    let fileContent;
+
     let elementName = '';
     let idVal = 0;
     let nameVal = '';
@@ -63,6 +67,13 @@ function AnalyzeFileAndFolder() {
                     isWriteVal,
                     isReadVal,
                     isDependentVal);
+
+                // TODO Analyze content of file
+
+                // TODO when the following two lines are performed only a single file in a folder is returned:
+
+                // let myFile = await fileInfo.handle.getFile();
+                // fileContent = await myFile.text(); // See https://web.dev/file-system-access/
 
 
             } else if (fileInfo.handle.kind === 'directory') {
@@ -155,6 +166,5 @@ function AnalyzeFileAndFolder() {
         }
 
     }
-
 
 }
