@@ -1,5 +1,7 @@
 'use strict';
-
+/**
+ * Analyzes the code in files.
+ */
 function AnalyzeFileAndFolder() {
 
     initializeBuildModel();
@@ -35,7 +37,7 @@ function AnalyzeFileAndFolder() {
 
 
             if (fileInfo.handle.kind === 'file') {
-                elementName = 'SOMIX.Data';
+                elementName = 'SOMIX.Grouping';
                 idVal = fileInfo.index;
                 nameVal = fileInfo.name;
                 uniqueNameVal = '';
