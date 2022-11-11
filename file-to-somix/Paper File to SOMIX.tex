@@ -168,29 +168,53 @@ This document describes how Moose2Model extracts a SOMIX metamodel~\cite{r_SOMIX
 This extraction follows the principles which are described in~\cite{r_Metamodel_Preprint_2}. 
 This logic is implemented in Moose2Model by the function ``Extract File System to SOMIX model''.
 
-\section{Extract File System}
-Directories and files of a file system are mapped as follows.
+See section \ref{ExFile} for a model of a file system which does not contain further details.
+See section \ref{CodeFile} for a model of code and data which is contained in files.
 
-Directories are mapped to SOMIX.Grouping. Fields:
+\section{Extract File System}
+\label{ExFile}
+Directories are mapped to SOMIX.Grouping: 
+
 \begin{itemize}
 \item name: The name of the directory without any conversion of cases.
 \item uniqueName: A slash which is followed by all directories where the specified directory is contained separated by a slash.
-\item technicalType: 'File'.
+\item technicalType: 'Folder'.
 \item linkToEditor: A link to open the specified element in Visual Studio Code.
 \end{itemize}
 
-Files are mapped to SOMIX.Data. Fields:
+Files are mapped to SOMIX.Data:
 \begin{itemize}
 \item name: The name of the file without any conversion of cases.
 \item uniqueName: A slash which is followed by all  directories where the specified directory is contained separated by a slash. Followed by a slash and the name of the file.
-\item technicalType: 'Folder'.
+\item technicalType: 'File'.
 \item linkToEditor: A link to open the specified element in Visual Studio Code.
 \end{itemize}
 
 Files and folders are contained in folders. These is mapped to SOMIX.ParentChild.
 
 \section{Extract JavaScript}
+\label{CodeFile}
 JavaScript is expected to be the coding in html pages. The extraction logic searches therefore for the \textless script\textgreater~tag in files which contain html. JavaScript coding is expected to be in the html file itself and in linked files which contain JavaScript code.
+
+
+Directories are mapped to SOMIX.Grouping:
+\begin{itemize}
+\item name: The name of the directory without any conversion of cases.
+\item uniqueName: A slash which is followed by all directories where the specified directory is contained separated by a slash.
+\item technicalType: 'Folder'.
+\item linkToEditor: A link to open the specified element in Visual Studio Code.
+\end{itemize}
+
+Files are mapped to SOMIX.Grouping:
+\begin{itemize}
+\item name: The name of the file without any conversion of cases.
+\item uniqueName: A slash which is followed by all  directories where the specified directory is contained separated by a slash. Followed by a slash and the name of the file.
+\item technicalType: 'File'.
+\item linkToEditor: A link to open the specified element in Visual Studio Code.
+\end{itemize}
+
+Files and folders are contained in folders. These is mapped to SOMIX.ParentChild.
+
 
 
 \section*{Declaration of Competing Interests} 
