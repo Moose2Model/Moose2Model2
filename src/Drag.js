@@ -101,10 +101,12 @@ function handleDragMouseMove(e) {
                 diagramms[diagramInfos.displayedDiagram].pinned.push(draggedElement.index);
             }
             // Move comments
-            if (typeof diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[draggedElement.index] !== 'undefined') {
-                if (diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[draggedElement.index].text != '') {
-                    diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[draggedElement.index].x += cameraToPaneScale(dx);
-                    diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[draggedElement.index].y += cameraToPaneScale(dy);
+            if (typeof diagramms[diagramInfos.displayedDiagram].generationInfoInternal !== 'undefined') {
+                if (typeof diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[draggedElement.index] !== 'undefined') {
+                    if (diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[draggedElement.index].text != '') {
+                        diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[draggedElement.index].x += cameraToPaneScale(dx);
+                        diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[draggedElement.index].y += cameraToPaneScale(dy);
+                    }
                 }
             }
         } else if (mEBI.element == 'SOMIX.Grouping') {
@@ -112,10 +114,12 @@ function handleDragMouseMove(e) {
             diagramms[diagramInfos.displayedDiagram].complModelPosition[draggedElement.index].x += cameraToPaneScale(dx);
             diagramms[diagramInfos.displayedDiagram].complModelPosition[draggedElement.index].y += cameraToPaneScale(dy);
             // Move comments
-            if (typeof diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[draggedElement.index] !== 'undefined') {
-                if (diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[draggedElement.index].text != '') {
-                    diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[draggedElement.index].x += cameraToPaneScale(dx);
-                    diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[draggedElement.index].y += cameraToPaneScale(dy);
+            if (typeof diagramms[diagramInfos.displayedDiagram].generationInfoInternal !== 'undefined') {
+                if (typeof diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[draggedElement.index] !== 'undefined') {
+                    if (diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[draggedElement.index].text != '') {
+                        diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[draggedElement.index].x += cameraToPaneScale(dx);
+                        diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[draggedElement.index].y += cameraToPaneScale(dy);
+                    }
                 }
             }
             if (typeof parentChildByParent[mEBI.index] !== 'undefined') {
@@ -124,10 +128,12 @@ function handleDragMouseMove(e) {
                         diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].x += cameraToPaneScale(dx);
                         diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].y += cameraToPaneScale(dy);
                         // Move comments
-                        if (typeof diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[childrens.child] !== 'undefined') {
-                            if (diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[childrens.child].text != '') {
-                                diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[childrens.child].x += cameraToPaneScale(dx);
-                                diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[childrens.child].y += cameraToPaneScale(dy);
+                        if (typeof diagramms[diagramInfos.displayedDiagram].generationInfoInternal !== 'undefined') {
+                            if (typeof diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[childrens.child] !== 'undefined') {
+                                if (diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[childrens.child].text != '') {
+                                    diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[childrens.child].x += cameraToPaneScale(dx);
+                                    diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[childrens.child].y += cameraToPaneScale(dy);
+                                }
                             }
                         }
                     }
