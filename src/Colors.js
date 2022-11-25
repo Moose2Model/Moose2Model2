@@ -51,6 +51,11 @@ function changeColors() {
         cols[i].style.backgroundColor = borderBackground;
     }
 
+    cols = document.getElementsByClassName('infoText');
+    for (let i = 0; i < cols.length; i++) {
+        cols[i].style.backgroundColor = borderBackground;
+    }
+
     cols = document.getElementsByClassName('displayedDiagramText');
     for (let i = 0; i < cols.length; i++) {
         cols[i].style.backgroundColor = borderBackground;

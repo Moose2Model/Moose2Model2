@@ -850,7 +850,7 @@ function drawCompleteModel(ctx, width, height) {
                                     ctx.textAlign = 'center';
                                     ctx.font = scaledFontSize + 'px  sans-serif';
                                     ctx.fillText(mEBI.name, cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x),
-                                        cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y + fontsize * 1.4 ));
+                                        cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y + fontsize * 1.4));
                                     ctx.textAlign = 'start';
                                 }
                             }
@@ -1177,6 +1177,11 @@ function draw(always = true) {
         if (typeof diagramms[diagramInfos.displayedDiagram] !== 'undefined') {
             if (diagramms[diagramInfos.displayedDiagram].forceFeedback) {
                 redraw = forceDirecting(width, height);
+                let loadModelText = document.getElementById("InfoID");
+                loadModelText.innerHTML = "Force-Directing is active";
+            } else {
+                let loadModelText = document.getElementById("InfoID");
+                loadModelText.innerHTML = "";
             }
         }
         if (redraw || always) {

@@ -3,6 +3,8 @@
 
 let loadModelText = document.getElementById("LoadedModel");
 loadModelText.innerHTML = "No Model loaded";
+let infoText = document.getElementById("InfoID");
+infoText.innerHTML = "";
 let displayedDiagramText = document.getElementById("DisplayedDiagramID");
 displayedDiagramText.innerHTML = "Nothing is displayed";
 let activeDiagramText = document.getElementById("ActiveDiagramID");
