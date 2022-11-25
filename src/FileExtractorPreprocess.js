@@ -308,7 +308,7 @@ async function ExtractCodeFromFolder() {
 
     }
 
-    AnalyzeFileAndFolder();
+    await AnalyzeFileAndFolder();
 
     // From async function LoadModel() part 2
 

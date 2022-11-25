@@ -2,7 +2,7 @@
 /**
  * Analyzes the code in files.
  */
-// TODO Is async still needed?
+
 async function AnalyzeFileAndFolder() {
 
     initializeBuildModel();
@@ -70,10 +70,8 @@ async function AnalyzeFileAndFolder() {
 
                 // TODO Analyze content of file
 
-                // TODO when the following two lines are performed only a single file in a folder is returned:
-
-                // let myFile = await fileInfo.handle.getFile();
-                // fileContent = await myFile.text(); // See https://web.dev/file-system-access/
+                let myFile = await fileInfo.handle.getFile();
+                fileContent = await myFile.text(); // See https://web.dev/file-system-access/
 
 
             } else if (fileInfo.handle.kind === 'directory') {
