@@ -815,7 +815,12 @@ function drawCompleteModel(ctx, width, height) {
                                         break;
                                     case 'SOMIX.Code':
                                         if (diagramms[diagramInfos.displayedDiagram].diagramSettings.displayElementNames) {
-                                            ctx.fillStyle = 'orange'; // Makes reading easier
+                                            if (colorTheme == 'DarkTheme') {
+                                                ctx.fillStyle = 'red';
+                                            } // Makes reading easier
+                                            else {
+                                                ctx.fillStyle = 'orange';
+                                            }
                                         } else {
                                             ctx.fillStyle = 'red';
                                         }
@@ -823,7 +828,12 @@ function drawCompleteModel(ctx, width, height) {
                                         break;
                                     case 'SOMIX.Data':
                                         if (diagramms[diagramInfos.displayedDiagram].diagramSettings.displayElementNames) {
-                                            ctx.fillStyle = 'lightBlue'; // Makes reading easier
+                                            if (colorTheme == 'DarkTheme') {
+                                                ctx.fillStyle = 'blue';
+                                            } // Makes reading easier
+                                            else {
+                                                ctx.fillStyle = 'lightBlue'; // Makes reading easier}
+                                            }
                                         } else {
                                             ctx.fillStyle = 'blue';
                                         }
