@@ -816,7 +816,7 @@ function drawCompleteModel(ctx, width, height) {
                                     case 'SOMIX.Code':
                                         if (diagramms[diagramInfos.displayedDiagram].diagramSettings.displayElementNames) {
                                             if (colorTheme == 'DarkTheme') {
-                                                ctx.fillStyle = 'red';
+                                                ctx.fillStyle = 'red'; // Better readable in dark theme
                                             } // Makes reading easier
                                             else {
                                                 ctx.fillStyle = 'orange';
@@ -829,7 +829,7 @@ function drawCompleteModel(ctx, width, height) {
                                     case 'SOMIX.Data':
                                         if (diagramms[diagramInfos.displayedDiagram].diagramSettings.displayElementNames) {
                                             if (colorTheme == 'DarkTheme') {
-                                                ctx.fillStyle = 'blue';
+                                                ctx.fillStyle = 'blue'; // Better readable in dark theme
                                             } // Makes reading easier
                                             else {
                                                 ctx.fillStyle = 'lightBlue'; // Makes reading easier}
