@@ -5,6 +5,9 @@
 
 async function AnalyzeFileAndFolder() {
 
+    // The global variable gIndex is set to the next free value
+    // Use gIndex for the index of all file contents which are now to be analyzed
+
     initializeBuildModel();
 
     let fileContent;
@@ -29,7 +32,6 @@ async function AnalyzeFileAndFolder() {
     let fileInfoStart = {};
     fileInfoStart.handle = FEDirectoryHandle;
     fileInfoStart.index = 0;
-    gIndex = 1;
     fileInfoStart.parentIndex = 0.
     fileInfoStart.kind = FEDirectoryHandle.kind;
     fileInfoStart.name = FEDirectoryHandle.name;
