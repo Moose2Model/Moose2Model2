@@ -783,7 +783,7 @@ function drawCompleteModel(ctx, width, height) {
                                             ctx.beginPath();
                                             if (diagramms[diagramInfos.displayedDiagram].diagramType != circuitDiagramForSoftwareDiagramType) {
                                                 ctx.lineWidth = cameraToCanvasScale(1 * scale);
-                                                ctx.strokeStyle = 'rgba(0, 0, 255, 0.2)';
+                                                ctx.strokeStyle = circuitDiagramColorAccessesLines; //'rgba(0, 0, 255, 0.2)';
                                             }
                                             else {
                                                 ctx.lineWidth = cameraToCanvasScale(circuitDiagramAccessWidth);
