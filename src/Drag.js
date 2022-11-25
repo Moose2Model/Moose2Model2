@@ -50,7 +50,7 @@ function handleDragMouseDown(e) {
     }
     if (which == 'left') {
         let found = {};
-        found = findNearestElement(cameraToPaneX(startX), cameraToPaneY(startY), 10);
+        found = findNearestElement(cameraToPaneX(startX), cameraToPaneY(startY), cameraToPaneScale(20));
         //if (typeof found.element !== 'undefined') {
         draggedElement = found.element;
         if (found.inComment) {
