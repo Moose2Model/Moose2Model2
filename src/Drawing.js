@@ -850,7 +850,7 @@ function drawCompleteModel(ctx, width, height) {
                                     ctx.textAlign = 'center';
                                     ctx.font = scaledFontSize + 'px  sans-serif';
                                     ctx.fillText(mEBI.name, cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x),
-                                        cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y + fontsize * .3));
+                                        cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y + fontsize * 1.4 ));
                                     ctx.textAlign = 'start';
                                 }
                             }
