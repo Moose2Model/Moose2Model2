@@ -86,6 +86,9 @@ function handleDragMouseMove(e) {
         diagramms[diagramInfos.displayedDiagram].cameraSettings.move.x += cameraToPaneScale(dx);
         diagramms[diagramInfos.displayedDiagram].cameraSettings.move.y += cameraToPaneScale(dy);
     } else {
+        
+        activeDiagramChanged();
+
         let mEBI = modelElementsByIndex[diagramms[diagramInfos.displayedDiagram].complModelPosition[draggedElement.index].index];
 
         if (isCommentDragging) {

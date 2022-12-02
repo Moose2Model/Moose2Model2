@@ -268,6 +268,7 @@ function ContextMenuClicked(e){
     if (typeof diagramms[diagramInfos.displayedDiagram] !== 'undefined') {
       diagramms[diagramInfos.displayedDiagram].forceFeedback = true;
       requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
+      activeDiagramChanged();
     }
   } else if (this.outerText == 'Stop Force-directed graph') {
     if (typeof diagramms[diagramInfos.displayedDiagram] !== 'undefined') {
@@ -287,14 +288,19 @@ function ContextMenuClicked(e){
     setDiagramActive(diagramInfos.displayedDiagram);
   } else if (this.outerText == 'Add element with all neighbors' || this.outerText == 'Displayed <> Active: Add element with all neighbors') {
     addWithNeighbors(gMCElementContextHandled);
+    activeDiagramChanged();
   } else if (this.outerText == 'Remove: Add element with all neighbors' || this.outerText == 'Displayed <> Active: Remove: Add element with all neighbors') {
     redoAddWithNeighbors(gMCElementContextHandled);
+    activeDiagramChanged();
   } else if (this.outerText == 'Comment' || this.outerText == 'Displayed <> Active: Comment') {
     comment(gMCElementContextHandled);
+    activeDiagramChanged();
   } else if (this.outerText == 'Supress' || this.outerText == 'Supress with all children') {
     suppress(gMCElementContextHandled);
+    activeDiagramChanged();
   } else if (this.outerText == 'Redo supress') {
     redoSuppress(gMCElementContextHandled);
+    activeDiagramChanged();
   } else if (this.outerText == 'Toggle display of names') {
     toggleNameDisplay();
   } else if (this.outerText == 'Highlight used by') {

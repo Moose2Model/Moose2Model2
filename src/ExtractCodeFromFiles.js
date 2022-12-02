@@ -73,6 +73,7 @@ async function AnalyzeFileAndFolder() {
                 // TODO Analyze content of file
 
                 let myFile = await fileInfo.handle.getFile();
+                // Todo: Analyze content of files only when they are needed
                 fileContent = await myFile.text(); // See https://web.dev/file-system-access/
 
 

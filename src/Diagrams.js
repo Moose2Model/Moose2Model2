@@ -7,6 +7,7 @@ const circuitDiagramForSoftwareDiagramType = 'C';
 /**  Global class which contains references to all processed documents
 * @member type The type of the diagram. Either completeDiagramType or circuitDiagramForSoftwareType
 * @member diagramType The type how elements are displayed. Either bulletPointDiagramType or circuitDiagramForSoftwareDiagramType. 
+* @member changed True when a diagram is changed. Is set to false whenever a diagram is saved.
 * @member complModelPosition An array with positions.
  Use as: diagramms[diagramInfos.displayedDiagram].complModelPosition[index].x and diagramms[diagramInfos.displayedDiagram].complModelPosition[index].y
  Contains also the index of the element in diagramms[diagramInfos.displayedDiagram].complModelPosition[index].index
@@ -48,10 +49,11 @@ function useStartDiagram() {
   const move = { x: 0, y: 0 };
   diagramInfos.displayedDiagram = startDiagram;
   let name = diagramInfos.displayedDiagram; // Minimizes problems with copy paste from this method to method newDiagram
-  displayedDiagramText.innerHTML = 'Displayed diagram: ' + diagramInfos.displayedDiagram;
+  displayedDiagramText.innerHTML = 'Displayed diagram: ' + diagramNameWithChangeMark(diagramInfos.displayedDiagram);
   diagramms[name] = {};
   diagramms[name].type = completeDiagramType;
   diagramms[name].diagramType = bulletPointDiagramType;
+  diagramms[name].changed = false;
   diagramms[name].diagramSettings = {};
   diagramms[name].diagramSettings.displayNewElementBox = false;
   diagramms[name].diagramSettings.displayElementNames = false;
@@ -75,6 +77,7 @@ function newDiagram(name) {
   diagramms[name] = {};
   diagramms[name].type = circuitDiagramForSoftwareType;
   diagramms[name].diagramType = circuitDiagramForSoftwareDiagramType;
+  diagramms[name].changed = false;
   diagramms[name].diagramSettings = {};
   diagramms[name].diagramSettings.displayNewElementBox = true;
   // Initial position of box with new elements
@@ -111,7 +114,39 @@ function newDiagram(name) {
 
 function switchDiagram(name) {
   diagramInfos.displayedDiagram = name;
-  displayedDiagramText.innerHTML = 'Displayed diagram: ' + name;
+  displayedDiagramText.innerHTML = 'Displayed diagram: ' + diagramNameWithChangeMark(name);
+}
+
+function activeDiagramChanged() {
+  diagramms[diagramInfos.activeDiagram].changed = true;
+  // Redraw the texts in the header.
+  // This is required to make sure that the user sees the marking immediately after a change
+  displayedDiagramText.innerHTML = 'Displayed diagram: ' + diagramNameWithChangeMark(diagramInfos.displayedDiagram);
+  activeDiagramText.innerHTML = 'Active diagram: ' + diagramNameWithChangeMark(diagramInfos.activeDiagram);
+}
+
+function diagramIsSaved(diagramName) {
+  diagramms[diagramName].changed = false;
+  // Redraw the texts in the header.
+  // This is required to make sure that the user sees the marking immediately after a change
+  displayedDiagramText.innerHTML = 'Displayed diagram: ' + diagramNameWithChangeMark(diagramInfos.displayedDiagram);
+  activeDiagramText.innerHTML = 'Active diagram: ' + diagramNameWithChangeMark(diagramInfos.activeDiagram);
+}
+
+function diagramNameWithChangeMark(diagramName) {
+  if (typeof diagramms[diagramName] !== 'undefined') {
+    if (typeof diagramms[diagramName].diagramType !== 'undefined') {
+      if (diagramms[diagramName].diagramType == circuitDiagramForSoftwareDiagramType) {
+        if (diagramms[diagramName].changed) {
+          return diagramName + ' ⬤';
+        } else {
+          return diagramName;
+        };
+      } else {
+        return diagramName;
+      }
+    }
+  }
 }
 
 function zoomDisplayedDiagram(sign) {
@@ -197,7 +232,7 @@ function returnOtherDiagrams() {
 
 function setDiagramActive(name) {
   diagramInfos.activeDiagram = name;
-  activeDiagramText.innerHTML = 'Active diagram: ' + name;
+  activeDiagramText.innerHTML = 'Active diagram: ' + diagramNameWithChangeMark(name);
 }
 
 function toggleNameDisplay() {
@@ -370,7 +405,7 @@ async function SaveDisplayedDiagram() {
 
   // Store suppression
   generationInfoExternal.suppressed = [];
-  for (const idx of diagramms[diagramInfos.activeDiagram].generationInfoInternal.suppressed) {
+  for (const idx of diagramms[diagramInfos.displayedDiagram].generationInfoInternal.suppressed) {
     if (typeof idx !== 'undefined') {
       generationInfoExternal.suppressed.push(uniqueKey(modelElementsByIndex[idx].technicalType, modelElementsByIndex[idx].uniqueName));
     }
@@ -385,6 +420,8 @@ async function SaveDisplayedDiagram() {
   const writable = await newFileHandle.createWritable();
   await writable.write(jsonExport);
   await writable.close();
+
+  diagramIsSaved(diagramInfos.displayedDiagram);
 
 }
 
