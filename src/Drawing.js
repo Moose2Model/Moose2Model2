@@ -48,6 +48,45 @@ function supportRetina() {
 
 };
 
+/** Contains an object where the position is the object key and the number of added elements is an integer:
+ *      {
+            key: count
+        };
+ */
+let snappedElements = {};
+/** The spacing of the grid to display in x direction */
+const gridSizeX = 20;
+/** The spacing of the grid to display in y direction */
+const gridSizeY = 20;
+
+function resetSnapToGrid() {
+    snappedElements = {};
+}
+
+function snapToGrid(x, y, index) {
+    let snapped = {};
+    let offset = 0;
+
+    const grid_x = Math.round(x / gridSizeX);
+    const grid_y = Math.round(y / gridSizeY);
+    const key = grid_x.toString + '_' + grid_y.toString;
+    if (typeof snappedElements[key] === 'undefined') {
+        snappedElements[key] = [index];
+    } else {
+        if (snappedElements[key].indexOf(index) == -1) {
+            snappedElements[key].push(index);
+        };
+    }
+    // So that multiple elements are not placed at the same position
+    // offset will be zero for index 1, so the first element at a grid position will be positioned exactly on the grid
+    offset = 1 - (1 / snappedElements[key].indexOf(index));
+
+    snapped.x = ( grid_x + offset ) * gridSizeX;
+    snapped.y = ( grid_y + offset ) * gridSizeY;
+
+    return snapped;
+}
+
 function cameraToCanvasX(x) {
 
     return diagramms[diagramInfos.displayedDiagram].cameraSettings.zoomfactor * (x + diagramms[diagramInfos.displayedDiagram].cameraSettings.move.x) + g_width / 2;
