@@ -268,7 +268,7 @@ function ContextMenuClicked(e){
     if (typeof diagramms[diagramInfos.displayedDiagram] !== 'undefined') {
       diagramms[diagramInfos.displayedDiagram].forceFeedback = true;
       requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
-      activeDiagramChanged();
+      displayedDiagramChanged();
     }
   } else if (this.outerText == 'Stop Force-directed graph') {
     if (typeof diagramms[diagramInfos.displayedDiagram] !== 'undefined') {

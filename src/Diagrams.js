@@ -125,6 +125,14 @@ function activeDiagramChanged() {
   activeDiagramText.innerHTML = 'Active diagram: ' + diagramNameWithChangeMark(diagramInfos.activeDiagram);
 }
 
+function displayedDiagramChanged() {
+  diagramms[diagramInfos.displayedDiagram].changed = true;
+  // Redraw the texts in the header.
+  // This is required to make sure that the user sees the marking immediately after a change
+  displayedDiagramText.innerHTML = 'Displayed diagram: ' + diagramNameWithChangeMark(diagramInfos.displayedDiagram);
+  activeDiagramText.innerHTML = 'Active diagram: ' + diagramNameWithChangeMark(diagramInfos.activeDiagram);
+}
+
 function diagramIsSaved(diagramName) {
   diagramms[diagramName].changed = false;
   // Redraw the texts in the header.
