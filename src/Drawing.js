@@ -69,7 +69,7 @@ function snapToGrid(x, y, index) {
 
     const grid_x = Math.round(x / gridSizeX);
     const grid_y = Math.round(y / gridSizeY);
-    const key = grid_x.toString + '_' + grid_y.toString;
+    const key = grid_x.toString() + '_' + grid_y.toString();
     if (typeof snappedElements[key] === 'undefined') {
         snappedElements[key] = [index];
     } else {
@@ -79,10 +79,10 @@ function snapToGrid(x, y, index) {
     }
     // So that multiple elements are not placed at the same position
     // offset will be zero for index 1, so the first element at a grid position will be positioned exactly on the grid
-    offset = 1 - (1 / snappedElements[key].indexOf(index));
+    offset = 1 - (1 / (1 + snappedElements[key].indexOf(index)));
 
-    snapped.x = ( grid_x + offset ) * gridSizeX;
-    snapped.y = ( grid_y + offset ) * gridSizeY;
+    snapped.x = (grid_x + offset) * gridSizeX;
+    snapped.y = (grid_y - offset) * gridSizeY;
 
     return snapped;
 }
@@ -189,6 +189,8 @@ const generalFontSize = 12;
 const commentBoxBorder = 4;
 
 function drawCompleteModel(ctx, width, height) {
+
+    resetSnapToGrid();
 
     let fontColor = '';
     let parentChildColor = 'rgba(0, 0, 0, 0.2)';
@@ -349,10 +351,16 @@ function drawCompleteModel(ctx, width, height) {
                                 diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y = 0;
                             }
 
+                            // To handle Snap to Grid 
+
+                            let snapped = snapToGrid(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x,
+                                diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y,
+                                mEBI.index)
+
                             // Set values for bounding box
 
-                            let temp1 = diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x - SizeOnPane / 2;
-                            let temp2 = diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x - textWidthOnPane / 2;
+                            let temp1 = snapped.x - SizeOnPane / 2;
+                            let temp2 = snapped.x - textWidthOnPane / 2;
                             let temp;
                             if (temp1 < temp2) {
                                 temp = temp1;
@@ -361,8 +369,8 @@ function drawCompleteModel(ctx, width, height) {
                             }
                             diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxX1 = temp;
 
-                            temp1 = diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x + SizeOnPane / 2;
-                            temp2 = diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x + textWidthOnPane / 2;
+                            temp1 = snapped.x + SizeOnPane / 2;
+                            temp2 = snapped.x + textWidthOnPane / 2;
                             if (temp1 < temp2) {
                                 temp = temp2;
                             } else {
@@ -371,10 +379,10 @@ function drawCompleteModel(ctx, width, height) {
                             diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxX2 = temp;
 
                             diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxY1 =
-                                diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y - SizeOnPane / 2;
+                                snapped.y - SizeOnPane / 2;
 
                             diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].boxY2 =
-                                diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y + SizeOnPane / 2;
+                                snapped.y + SizeOnPane / 2;
                         }
                     }
 
@@ -396,14 +404,18 @@ function drawCompleteModel(ctx, width, height) {
                                 }
                                 commentHeight += lineSpace;
                             }
+
+                            let snapped = snapToGrid(diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].x,
+                                diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].y, mEBI.index);
+
                             diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].boxX1 =
-                                diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].x - commentBoxBorder + 0.1 * fontsize;
+                                snapped.x - commentBoxBorder + 0.1 * fontsize;
                             diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].boxX2 =
-                                diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].x + commentWidth + commentBoxBorder - 0.1 * fontsize;
+                                snapped.x + commentWidth + commentBoxBorder - 0.1 * fontsize;
                             diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].boxY1 =
-                                diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].y - fontsize - commentBoxBorder + 0.3 * fontsize;
+                                snapped.y - fontsize - commentBoxBorder + 0.3 * fontsize;
                             diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].boxY2 =
-                                diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].y + commentHeight - lineSpace + commentBoxBorder;
+                                snapped.y + commentHeight - lineSpace + commentBoxBorder;
                         }
                     }
                 }
@@ -490,6 +502,7 @@ function drawCompleteModel(ctx, width, height) {
                         let size = 3;
                         let GroupPadding = 2; // Todo finalize implementation
                         ctx.beginPath();
+                        let snapped;
                         switch (mEBI.element) {
                             case 'SOMIX.Grouping':
                                 const drawGroupsAsBoxes = true;
@@ -537,8 +550,12 @@ function drawCompleteModel(ctx, width, height) {
                                 SizeOnPane = codeSize * scale;
                                 size = cameraToCanvasScale(SizeOnPane);
 
-                                ctx.fillRect(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x) - size / 2,
-                                    cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y) - size / 2, size, size);
+                                let snapped2 = snapToGrid(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x,
+                                    diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y,
+                                    mEBI.index);
+
+                                ctx.fillRect(cameraToCanvasX(snapped2.x) - size / 2,
+                                    cameraToCanvasY(snapped2.y) - size / 2, size, size);
 
                                 if (circuitDiagramMarkExplicitlyAdded) {
                                     if (diagramms[diagramInfos.displayedDiagram].generationInfoInternal.addedWithNeighbors.includes(mEBI.index)) {
@@ -546,8 +563,8 @@ function drawCompleteModel(ctx, width, height) {
                                         SizeOnPane = codeSize * scale;
                                         size = cameraToCanvasScale(SizeOnPane);
                                         ctx.beginPath();
-                                        ctx.strokeRect(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x) - size / 2,
-                                            cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y) - size / 2, size, size);
+                                        ctx.strokeRect(cameraToCanvasX(snapped2.x) - size / 2,
+                                            cameraToCanvasY(snapped2.y) - size / 2, size, size);
                                     }
 
                                 }
@@ -567,10 +584,16 @@ function drawCompleteModel(ctx, width, height) {
                                         ctx.fillStyle = circuitDiagramColorData;
                                     }
                                 }
+
+
+                                let snapped3 = snapToGrid(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x,
+                                    diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y,
+                                    mEBI.index);
+
                                 SizeOnPane = dataSize * scale;
                                 size = cameraToCanvasScale(SizeOnPane);
-                                ctx.arc(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x),
-                                    cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y), size / 2, 0, 2 * Math.PI);
+                                ctx.arc(cameraToCanvasX(snapped3.x),
+                                    cameraToCanvasY(snapped3.y), size / 2, 0, 2 * Math.PI);
                                 ctx.fill();
 
 
@@ -586,8 +609,8 @@ function drawCompleteModel(ctx, width, height) {
                                         size = cameraToCanvasScale(SizeOnPane);
 
                                         ctx.beginPath();
-                                        ctx.arc(cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x),
-                                            cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y), size / 2, 0, 2 * Math.PI);
+                                        ctx.arc(cameraToCanvasX(snapped3.x),
+                                            cameraToCanvasY(snapped3.y), size / 2, 0, 2 * Math.PI);
                                         ctx.stroke();
                                     }
                                 }
@@ -602,8 +625,13 @@ function drawCompleteModel(ctx, width, height) {
                             if (mEBI.element == 'SOMIX.Code' || mEBI.element == 'SOMIX.Data') {
                                 ctx.textAlign = 'center';
                                 ctx.font = scaledFontSize + 'px  sans-serif';
-                                ctx.fillText(mEBI.name, cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x),
-                                    cameraToCanvasY(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y + fontsize * .3));
+
+                                snapped = snapToGrid(diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x,
+                                    diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y,
+                                    mEBI.index);
+
+                                ctx.fillText(mEBI.name, cameraToCanvasX(snapped.x),
+                                    cameraToCanvasY(snapped.y + fontsize * .3));
                                 ctx.textAlign = 'start';
                             }
 
@@ -611,13 +639,18 @@ function drawCompleteModel(ctx, width, height) {
                             ctx.textAlign = 'left';
                             if (typeof diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index] !== 'undefined') {
                                 if (diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].text != '') {
+
+                                    snapped = snapToGrid(diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].x,
+                                        diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].y,
+                                        mEBI.index)
+
                                     ctx.font = scaledFontSize + 'px  sans-serif';
                                     // Handle line breaks
                                     let textLines = diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].text.split('\n');
-                                    let TextPositionY = diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].y;
+                                    let TextPositionY = snapped.y;
                                     for (const textLine of textLines) {
                                         ctx.fillText(textLine,
-                                            cameraToCanvasX(diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].x),
+                                            cameraToCanvasX(snapped.x),
                                             cameraToCanvasY(TextPositionY));
                                         TextPositionY += lineSpace;
                                     }
@@ -676,6 +709,16 @@ function drawCompleteModel(ctx, width, height) {
                                             let startY = diagramms[diagramInfos.displayedDiagram].complModelPosition[cC['caller']].y;
                                             let endX = diagramms[diagramInfos.displayedDiagram].complModelPosition[cC['called']].x;
                                             let endY = diagramms[diagramInfos.displayedDiagram].complModelPosition[cC['called']].y;
+
+                                            if (diagramms[diagramInfos.displayedDiagram].diagramType == circuitDiagramForSoftwareDiagramType) {
+                                                let snapped = snapToGrid(startX, startY, cC['caller']);
+                                                startX = snapped.x;
+                                                startY = snapped.y;
+
+                                                snapped = snapToGrid(endX, endX, cC['called']);
+                                                endX = snapped.x;
+                                                endX = snapped.y;
+                                            }
 
                                             if (diagramms[diagramInfos.displayedDiagram].diagramType == circuitDiagramForSoftwareDiagramType) {
                                                 // Keep distance between arrows and bounding box in case of circuit diagrams
@@ -775,6 +818,18 @@ function drawCompleteModel(ctx, width, height) {
                                             let startY = diagramms[diagramInfos.displayedDiagram].complModelPosition[aA['accessor']].y;
                                             let endX = diagramms[diagramInfos.displayedDiagram].complModelPosition[aA['accessed']].x;
                                             let endY = diagramms[diagramInfos.displayedDiagram].complModelPosition[aA['accessed']].y;
+
+                                            
+
+                                            if (diagramms[diagramInfos.displayedDiagram].diagramType == circuitDiagramForSoftwareDiagramType) {
+                                                let snapped = snapToGrid(startX, startY, aA['accessor']);
+                                                startX = snapped.x;
+                                                startY = snapped.y;
+
+                                                snapped = snapToGrid(endX, endX, aA['accessed']);
+                                                endX = snapped.x;
+                                                endX = snapped.y;
+                                            }
 
                                             if (diagramms[diagramInfos.displayedDiagram].diagramType == circuitDiagramForSoftwareDiagramType) {
                                                 // Keep distance between arrows and bounding box in case of circuit diagrams
@@ -921,6 +976,9 @@ function drawCompleteModel(ctx, width, height) {
                                     } else {
                                         startX = diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].x;
                                         startY = diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI.index].y;
+                                        let snapped = snapToGrid(startX, startY, mEBI.index);
+                                        startX = snapped.x;
+                                        startY = snapped.y;
                                     }
                                     let endX = (diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].boxX1 +
                                         diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[mEBI.index].boxX2) / 2;
