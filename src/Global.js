@@ -130,7 +130,20 @@ function findNearestElement(x, y, maxDistance) {
                     (diagramms[diagramInfos.displayedDiagram].diagramType == circuitDiagramForSoftwareDiagramType &&
                         mEBI.element != 'SOMIX.Grouping')
                 ) {
-                    let distance = (x - diagramms[diagramInfos.displayedDiagram].complModelPosition[i].x) * (x - diagramms[diagramInfos.displayedDiagram].complModelPosition[i].x) + (y - diagramms[diagramInfos.displayedDiagram].complModelPosition[i].y) * (y - diagramms[diagramInfos.displayedDiagram].complModelPosition[i].y);
+
+                    let snapped;
+                    if (diagramms[diagramInfos.displayedDiagram].diagramType == circuitDiagramForSoftwareDiagramType) {
+                        snapped = snapToGrid(diagramms[diagramInfos.displayedDiagram].complModelPosition[i].x,
+                            diagramms[diagramInfos.displayedDiagram].complModelPosition[i].y,
+                            i);
+                    } else {
+                        snapped = {
+                            x: diagramms[diagramInfos.displayedDiagram].complModelPosition[i].x,
+                            y: diagramms[diagramInfos.displayedDiagram].complModelPosition[i].y
+                        }
+                    }
+
+                    let distance = (x - snapped.x) * (x - snapped.x) + (y - snapped.y) * (y - snapped.y);
                     if (minDistanceSquared < 0) {
                         minDistanceSquared = distance;
                         minIndex = i;
