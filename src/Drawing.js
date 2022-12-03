@@ -715,9 +715,9 @@ function drawCompleteModel(ctx, width, height) {
                                                 startX = snapped.x;
                                                 startY = snapped.y;
 
-                                                snapped = snapToGrid(endX, endX, cC['called']);
+                                                snapped = snapToGrid(endX, endY, cC['called']);
                                                 endX = snapped.x;
-                                                endX = snapped.y;
+                                                endY = snapped.y;
                                             }
 
                                             if (diagramms[diagramInfos.displayedDiagram].diagramType == circuitDiagramForSoftwareDiagramType) {
@@ -826,9 +826,9 @@ function drawCompleteModel(ctx, width, height) {
                                                 startX = snapped.x;
                                                 startY = snapped.y;
 
-                                                snapped = snapToGrid(endX, endX, aA['accessed']);
+                                                snapped = snapToGrid(endX, endY, aA['accessed']);
                                                 endX = snapped.x;
-                                                endX = snapped.y;
+                                                endY = snapped.y;
                                             }
 
                                             if (diagramms[diagramInfos.displayedDiagram].diagramType == circuitDiagramForSoftwareDiagramType) {
