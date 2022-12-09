@@ -62,7 +62,7 @@ const gridSizeY = 20;
 function resetSnapToGrid() {
     snappedElements = {};
 }
-
+/** Snap elements to grid, but place elements at the same position slightly repositioned */
 function snapToGrid(x, y, index) {
     let snapped = {};
     let offset = 0;
@@ -85,6 +85,14 @@ function snapToGrid(x, y, index) {
     snapped.y = (grid_y - offset) * gridSizeY;
 
     return snapped;
+}
+/** Snap elements exactly to the grid in x direction */
+function snapToGridX(x) {
+    return gridSizeX * Math.round(x / gridSizeX);
+}
+/** Snap elements exactly to the grid in y direction */
+function snapToGridY(y) {
+    return gridSizeY * Math.round(y / gridSizeY);
 }
 
 function cameraToCanvasX(x) {
@@ -819,7 +827,7 @@ function drawCompleteModel(ctx, width, height) {
                                             let endX = diagramms[diagramInfos.displayedDiagram].complModelPosition[aA['accessed']].x;
                                             let endY = diagramms[diagramInfos.displayedDiagram].complModelPosition[aA['accessed']].y;
 
-                                            
+
 
                                             if (diagramms[diagramInfos.displayedDiagram].diagramType == circuitDiagramForSoftwareDiagramType) {
                                                 let snapped = snapToGrid(startX, startY, aA['accessor']);

@@ -5,6 +5,8 @@ canvas.addEventListener('mousemove', handleDragMouseMove, false);
 canvas.addEventListener('mouseup', handleDragMouseUp, false);
 canvas.addEventListener('mouseout', handleDragMouseOut, false);
 let isDragging = false;
+/** Flag that dragging just started. Required for actions that are done only once when the dragging started. */
+let isDraggingJustStarted = false;
 let isCommentDragging = false;
 let backGroundDragged = false;
 let startX, startY;
@@ -42,6 +44,7 @@ function handleDragMouseDown(e) {
     if (which == 'right') {
         if (!showModelExplorer) {
             isDragging = true;
+            isDraggingJustStarted = true;
             backGroundDragged = true;
             e.preventDefault();
             e.stopPropagation();
@@ -60,6 +63,7 @@ function handleDragMouseDown(e) {
 
         if (typeof draggedElement !== 'undefined') {
             isDragging = true;
+            isDraggingJustStarted = true;
             backGroundDragged = false;
             e.preventDefault();
             e.stopPropagation();
@@ -113,6 +117,49 @@ function handleDragMouseMove(e) {
                 }
             }
         } else if (mEBI.element == 'SOMIX.Grouping') {
+
+            if (isDraggingJustStarted && diagramms[diagramInfos.displayedDiagram].diagramType == circuitDiagramForSoftwareDiagramType) {
+                // Snap dragged elements that are part of a grouping to the grid.
+                // This ensures that all ements of a grouping move smoothly.
+                // Groups are not snapped
+                // Snap comments
+                if (typeof diagramms[diagramInfos.displayedDiagram].generationInfoInternal !== 'undefined') {
+                    if (typeof diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[draggedElement.index] !== 'undefined') {
+                        if (diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[draggedElement.index].text != '') {
+                            diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[draggedElement.index].x =
+                                snapToGridX(diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[draggedElement.index].x);
+                            diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[draggedElement.index].y =
+                                snapToGridY(diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[draggedElement.index].y);
+                        }
+                    }
+                }
+
+                // Snap Child elements
+
+                if (typeof parentChildByParent[mEBI.index] !== 'undefined') {
+                    for (const childrens of parentChildByParent[mEBI.index]) {
+                        if (typeof diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child] !== 'undefined') {
+                            diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].x = 
+                            snapToGridX(diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].x);
+                            diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].y = 
+                            snapToGridY(diagramms[diagramInfos.displayedDiagram].complModelPosition[childrens.child].y);
+                            // Snap comments
+                            if (typeof diagramms[diagramInfos.displayedDiagram].generationInfoInternal !== 'undefined') {
+                                if (typeof diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[childrens.child] !== 'undefined') {
+                                    if (diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[childrens.child].text != '') {
+                                        diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[childrens.child].x = 
+                                        snapToGridX(diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[childrens.child].x);
+                                        diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[childrens.child].y = 
+                                        snapToGridY(diagramms[diagramInfos.displayedDiagram].generationInfoInternal.commentsByID[childrens.child].y);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+
             // move the selected shape by the drag distance
             diagramms[diagramInfos.displayedDiagram].complModelPosition[draggedElement.index].x += cameraToPaneScale(dx);
             diagramms[diagramInfos.displayedDiagram].complModelPosition[draggedElement.index].y += cameraToPaneScale(dy);
@@ -145,6 +192,8 @@ function handleDragMouseMove(e) {
         }
     }
 
+    isDraggingJustStarted = false;
+
     // clear the canvas and redraw all shapes
     drawCompleteModel(ctx, g_width, g_height);
 
@@ -160,6 +209,7 @@ function handleDragMouseUp(e) {
     e.stopPropagation();
     // the drag is over -- clear the isDragging flag
     isDragging = false;
+    isDraggingJustStarted = false;
     isCommentDragging = false;
     if (diagramms[diagramInfos.displayedDiagram].forceFeedback) {
         requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
@@ -174,6 +224,7 @@ function handleDragMouseOut(e) {
     e.stopPropagation();
     // the drag is over -- clear the isDragging flag
     isDragging = false;
+    isDraggingJustStarted = false;
     isCommentDragging = false;
     if (diagramms[diagramInfos.displayedDiagram].forceFeedback) {
         requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
