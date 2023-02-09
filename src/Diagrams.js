@@ -249,11 +249,38 @@ function toggleNameDisplay() {
   }
 }
 
+async function* getM2mFilesRecursively(entry, layer) {
+  if (entry.kind === 'file') {
+    const file = await entry.getFile();
+    if (file !== null) {
+      //file.relativePath = getRelativePath(entry);
+      yield file;
+    }
+    // m2m files in Subfolders are not analyzed
+  } else if (entry.kind === 'directory' && layer == 0) {
+    for await (const handle of entry.values()) {
+      yield* getM2mFilesRecursively(handle, layer + 1);
+    }
+  }
+}
+
 async function ReadDisplayedDiagram() {
   if (typeof workDirectoryHandle === 'undefined') {
     window.alert("You have to specify a work directory first");
     return;
   }
+
+  // Begin new logic #77
+
+  for await (const fileHandle of getM2mFilesRecursively(workDirectoryHandle, 0)) {
+    let fileExt = fileHandle.name.split('.').pop();
+    if (fileExt.toLowerCase() == 'm2m') {
+      console.log(fileHandle);
+    }
+  }
+
+  // End new logic #77
+
   const pickerOpts = {
     types: [
       {
