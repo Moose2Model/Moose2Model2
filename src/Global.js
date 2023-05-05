@@ -73,6 +73,8 @@ let mouseover = false;
 // let forceFeedback = false;
 
 let showModelExplorer = false;
+let showM2mExplorer = false;
+let showExplorer = false;
 
 
 

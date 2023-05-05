@@ -1,5 +1,7 @@
 'use strict';
 
+let drawingCount = 0;
+
 let boundingRectCompleteMargin = 100; // TODO include also width of element text
 
 // For Canvas sometimes needed
@@ -199,6 +201,8 @@ const commentBoxBorder = 4;
 function drawCompleteModel(ctx, width, height) {
 
     resetSnapToGrid();
+
+    drawingCount += 1;
 
     let fontColor = '';
     let parentChildColor = 'rgba(0, 0, 0, 0.2)';
@@ -1254,6 +1258,7 @@ function drawCompleteModel(ctx, width, height) {
     let zoomfactorDisplay = 100 * diagramms[diagramInfos.displayedDiagram].cameraSettings.zoomfactor;
     ctx.fillText(zoomfactorDisplay.toFixed(1) + '%', g_width - 60, g_height - 10);
     //ctx.fillText(Math.round(100 * diagramms[diagramInfos.displayedDiagram].cameraSettings.zoomfactor) + '%', g_width - 40, g_height - 10);
+    ctx.fillText(drawingCount, g_width - 60, g_height - 30);
     ctx.textAlign = 'start';
 };
 
@@ -1276,7 +1281,7 @@ function draw(always = true) {
 
     supportRetina();
 
-    if (!showModelExplorer) {
+    if (!showExplorer) {
 
         let redraw = true;
         if (typeof diagramms[diagramInfos.displayedDiagram] !== 'undefined') {
@@ -1298,7 +1303,11 @@ function draw(always = true) {
             }
         }
     } else {
-        drawModelExplorer();
+        if (showModelExplorer) {
+            drawModelExplorer();
+        } else if (showM2mExplorer) {
+            drawM2mExplorer();
+        }
     }
     // }
 }

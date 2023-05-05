@@ -42,7 +42,7 @@ function handleDragMouseDown(e) {
     startY = parseInt(e.clientY - offsetY);
 
     if (which == 'right') {
-        if (!showModelExplorer) {
+        if (!showExplorer ) {
             isDragging = true;
             isDraggingJustStarted = true;
             backGroundDragged = true;

@@ -303,8 +303,16 @@
             /*color: red;*/
             /* background-color: blue; */
         }
+        .readM2M {
+            position: absolute;
+            top: 80px;
+            left: 20px;
+            /*color: red;*/
+            /* background-color: blue; */
+        }
 
         .exploreModel input,
+        .readM2M input,
         .newDiagramElement input,
         .commentElement textarea,
         .commentElement input {
@@ -366,7 +374,8 @@
         #commentOKButton,
         #commentCancelButton,
         #filterModelButtonID,
-        #cancelFilterModelButtonID {
+        #cancelFilterModelButtonID,
+        #CloseReadM2mButtonID {
             cursor: pointer;
         }
     </style>
@@ -444,6 +453,11 @@
         <input type="submit" value="Cancel" class="cancelFilter" id="cancelFilterModelButtonID">
     </div>
 
+    <!-- Fields when m2m files are read -->
+    <div class="readM2M" id="readM2mID">
+        <input type="submit" value="Close" class="CloseReadM2mID" id="CloseReadM2mButtonID">
+    </div>    
+
     <div id=canvasContainer></div>
     <canvas id="pane" width="800" height="800"></canvas>
     <ul id=contextMenu>
@@ -462,6 +476,7 @@
     <script src="AnalyzeMseFile.js?v=53"></script>
     <script src="PositionElements.js?v=53"></script>
     <script src="ModelExplorer.js?v=53"></script>
+    <script src="M2mExplorer.js?v=53"></script>
     <script src="Drawing.js?v=53"></script>
     <script src="ContextMenu.js?v=53"></script>
     <script src="MouseWheel.js?v=53"></script>
@@ -481,6 +496,9 @@
 
         const exploreModel = document.getElementById('exploreModelID');
         exploreModel.hidden = true; // Hide when page is loaded
+
+        const readM2m = document.getElementById('readM2mID');
+        readM2m.hidden = true; // Hide when page is loaded        
 
         const OpenWorkFolderButton = document.getElementById('OpenWorkFolderButton');
         OpenWorkFolderButton.addEventListener('click', SetWorkFolder);
@@ -626,6 +644,7 @@
             exploreModel.hidden = false;
             exploreModelFilter.focus();
             showModelExplorer = true;
+            showExplorer  = true;
             drawAlways();
         }
 
@@ -646,8 +665,26 @@
         function handleFilterModelCancel() {
             exploreModel.hidden = true;
             showModelExplorer = false;
+            showExplorer  = false;
         }
 
+        // Read m2m Files
+
+        function readM2mRequested() {
+            readM2m.hidden = false;
+            showM2mExplorer  = true;
+            showExplorer  = true;
+            drawAlways();
+        }        
+
+        const closeReadM2mButtonID = document.getElementById('CloseReadM2mButtonID'); 
+        closeReadM2mButtonID.addEventListener('click', handleReadM2mClose);        
+
+        function handleReadM2mClose() {
+            readM2m.hidden = true;
+            showM2mExplorer  = false;
+            showExplorer  = false;
+        }        
 
         //
 

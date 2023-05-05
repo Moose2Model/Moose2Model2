@@ -130,7 +130,7 @@ function handleContextMenu(e) {
   let techtypeText = '';
   let uniqueNameText = 'No element found';
   let found = {};
-  if (!showModelExplorer) {
+  if (!showExplorer ) {
     found = findNearestElement(cameraToPaneX(x), cameraToPaneY(y), cameraToPaneScale(20));
   } else {
     found = findListEntry(x, y);

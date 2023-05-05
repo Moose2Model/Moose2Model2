@@ -153,6 +153,12 @@ function changeColors() {
         cols[i].style.setProperty("--fontColor", fontColor);
     }
 
+    cols = document.getElementsByClassName('readM2M');
+    for (let i = 0; i < cols.length; i++) {
+        cols[i].style.setProperty("--menuBGColor", borderBackground);
+        cols[i].style.setProperty("--fontColor", fontColor);
+    }
+
     cols = document.getElementsByClassName('newDiagramElement');
     for (let i = 0; i < cols.length; i++) {
         cols[i].style.setProperty("--menuBGColor", borderBackground);
