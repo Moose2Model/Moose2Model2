@@ -130,10 +130,20 @@ function handleContextMenu(e) {
   let techtypeText = '';
   let uniqueNameText = 'No element found';
   let found = {};
-  if (!showExplorer ) {
+  if (!showExplorer) {
     found = findNearestElement(cameraToPaneX(x), cameraToPaneY(y), cameraToPaneScale(20));
   } else {
-    found = findListEntry(x, y);
+    if (showModelExplorer) {
+      found = findListEntry(x, y);
+    }
+    else if (showM2mExplorer) {
+      found = findM2mListEntry(x, y);
+      if (typeof found !== 'undefined') {
+        handleReadM2mClose();
+        ReadDisplayedDiagram(found.element.fileHandle);
+        return (false);
+      }
+    }
   }
   gMCElementContextHandled = found.element;
 
@@ -261,7 +271,7 @@ function handleContextMenu(e) {
   return (false);
 }
 
-function ContextMenuClicked(e){
+function ContextMenuClicked(e) {
 
   NewMenu.hidden = true;
   if (this.outerText == 'Start Force-directed graph') {

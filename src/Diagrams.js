@@ -264,11 +264,22 @@ function toggleNameDisplay() {
 //   }
 // }
 
-async function ReadDisplayedDiagram() {
+async function ReadDisplayedDiagramStart(){
   if (typeof workDirectoryHandle === 'undefined') {
     window.alert("You have to specify a work directory first");
     return;
   }
+  
+  readM2mRequested();
+}
+
+async function ReadDisplayedDiagram(fileHandle) {
+  if (typeof workDirectoryHandle === 'undefined') {
+    window.alert("You have to specify a work directory first");
+    return;
+  }
+
+  ctx.clearRect(0, 0, g_width, g_height);
 
   // Begin new logic #77
 
@@ -279,7 +290,7 @@ async function ReadDisplayedDiagram() {
   //   }
   // }
 
-  readM2mRequested();
+  // readM2mRequested();
 
   // End new logic #77
 
@@ -295,8 +306,10 @@ async function ReadDisplayedDiagram() {
     excludeAcceptAllOption: true,
     multiple: false
   };
-  let fileHandle;
-  [fileHandle] = await window.showOpenFilePicker(pickerOpts);
+  // let fileHandle;
+  if (typeof fileHandle === 'undefined') {
+    [fileHandle] = await window.showOpenFilePicker(pickerOpts);
+  }
   const file = await fileHandle.getFile();
   const contents = await file.text();
   let readGenerationInfo = {};

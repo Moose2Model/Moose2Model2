@@ -11,7 +11,10 @@ async function* getM2mFilesRecursively(entry, layer) {
     const file = await entry.getFile();
     if (file !== null) {
       //file.relativePath = getRelativePath(entry);
-      yield file;
+      let fileInfo = {};
+      fileInfo.file = file;
+      fileInfo.fileHandle = entry;
+      yield fileInfo;
     }
     // m2m files in Subfolders are not analyzed
   } else if (entry.kind === 'directory' && layer == 0) {
@@ -21,6 +24,18 @@ async function* getM2mFilesRecursively(entry, layer) {
   }
 }
 
+function findM2mListEntry(x, y) {
+  let found = {};
+  let foundElement;
+  found.inComment = false;
+  for (const e of listPositionToEntries2) {
+      if (y >= e.yMin && y < e.yMax) {
+          foundElement = e.element;
+      }
+  }
+  found.element = foundElement;
+  return found;
+}
 
 async function drawM2mExplorer() {
 
@@ -29,13 +44,14 @@ async function drawM2mExplorer() {
   m2mFilesInFolder = [];
   let i = 0;
 
-  for await (const fileHandle of getM2mFilesRecursively(workDirectoryHandle, 0)) {
-    let fileExt = fileHandle.name.split('.').pop();
+  for await (const fileInfo of getM2mFilesRecursively(workDirectoryHandle, 0)) {
+    let fileExt = fileInfo.file.name.split('.').pop();
     if (fileExt.toLowerCase() == 'm2m') {
-      console.log(fileHandle);
+      console.log(fileInfo.file);
       m2mFilesInFolder[i] = {};
-      m2mFilesInFolder[i].name = fileHandle.name;
-      m2mFilesInFolder[i].fileHandle = fileHandle;
+      m2mFilesInFolder[i].name = fileInfo.file.name;
+      m2mFilesInFolder[i].file = fileInfo.file;
+      m2mFilesInFolder[i].fileHandle = fileInfo.fileHandle;
       //console.log(fileHandle.name);
       i += 1;
     }
@@ -66,6 +82,10 @@ async function drawM2mExplorer() {
   // ctx.fillText('Use regular expressions to filter in the list', xPosElements, yPosElements);
   // yPosElements += lineDifference;
   ctx.fillText('Use the mouse wheel to scroll', xPosElements, yPosElements);
+  yPosElements += lineDifference;
+  ctx.fillText('Use context click to select', xPosElements, yPosElements);
+  yPosElements += lineDifference;
+  // Add empty line between explanation and files
   yPosElements += lineDifference;
 
   let linesForElements = Math.floor((g_height - yPosElements) / (lineDifference));

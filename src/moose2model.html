@@ -303,6 +303,7 @@
             /*color: red;*/
             /* background-color: blue; */
         }
+
         .readM2M {
             position: absolute;
             top: 80px;
@@ -456,7 +457,7 @@
     <!-- Fields when m2m files are read -->
     <div class="readM2M" id="readM2mID">
         <input type="submit" value="Close" class="CloseReadM2mID" id="CloseReadM2mButtonID">
-    </div>    
+    </div>
 
     <div id=canvasContainer></div>
     <canvas id="pane" width="800" height="800"></canvas>
@@ -516,7 +517,7 @@
         ImportOldDiagramButton.addEventListener('click', ImportOldDiagram);
 
         const ReadDiagramButton = document.getElementById('ReadDiagramButton');
-        ReadDiagramButton.addEventListener('click', ReadDisplayedDiagram);
+        ReadDiagramButton.addEventListener('click', ReadDisplayedDiagramStart);
 
         const NewDiagramButton = document.getElementById('NewDiagramButton'); // From Menu
         NewDiagramButton.addEventListener('click', handleNewDiagramRequested);
@@ -543,7 +544,7 @@
         ToGithubButton.addEventListener('click', JumpToGithub);
 
         const ToNewsGroup = document.getElementById('ToNewsGroup');
-        ToNewsGroup.addEventListener('click', JumpToNewsGroup);        
+        ToNewsGroup.addEventListener('click', JumpToNewsGroup);
 
         const ToHelpButton = document.getElementById('ToHelpButton');
         ToHelpButton.addEventListener('click', JumpToDocu);
@@ -644,7 +645,7 @@
             exploreModel.hidden = false;
             exploreModelFilter.focus();
             showModelExplorer = true;
-            showExplorer  = true;
+            showExplorer = true;
             drawAlways();
         }
 
@@ -665,26 +666,27 @@
         function handleFilterModelCancel() {
             exploreModel.hidden = true;
             showModelExplorer = false;
-            showExplorer  = false;
+            showM2mExplorer = false;
+            showExplorer = false;
         }
 
         // Read m2m Files
 
         function readM2mRequested() {
             readM2m.hidden = false;
-            showM2mExplorer  = true;
-            showExplorer  = true;
+            showM2mExplorer = true;
+            showExplorer = true;
             drawAlways();
-        }        
+        }
 
-        const closeReadM2mButtonID = document.getElementById('CloseReadM2mButtonID'); 
-        closeReadM2mButtonID.addEventListener('click', handleReadM2mClose);        
+        const closeReadM2mButtonID = document.getElementById('CloseReadM2mButtonID');
+        closeReadM2mButtonID.addEventListener('click', handleReadM2mClose);
 
         function handleReadM2mClose() {
             readM2m.hidden = true;
-            showM2mExplorer  = false;
-            showExplorer  = false;
-        }        
+            showM2mExplorer = false;
+            showExplorer = false;
+        }
 
         //
 
@@ -694,7 +696,7 @@
 
         function JumpToNewsGroup() {
             window.open('https://groups.google.com/g/somixsuite', '_blank');
-        }        
+        }
 
         function JumpToDocu() {
             window.open('documentation.html', '_blank');

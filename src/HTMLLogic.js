@@ -40,6 +40,7 @@ async function LoadModel() {
         }
     }
 
+
     if (fileHandle.kind === 'file') {
         // run file code
         // get file contents

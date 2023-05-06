@@ -108,6 +108,8 @@ function drawModelExplorer() {
     yPosElements += lineDifference;
     ctx.fillText('Use the mouse wheel to scroll', xPosElements, yPosElements);
     yPosElements += lineDifference;
+    // Add empty line between explanation and model elements
+    yPosElements += lineDifference;
 
     let linesForElements = Math.floor((g_height - yPosElements) / (lineDifference));
     linesForElements -= 1;
