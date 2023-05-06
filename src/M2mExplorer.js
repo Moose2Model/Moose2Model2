@@ -47,9 +47,11 @@ async function drawM2mExplorer() {
   for await (const fileInfo of getM2mFilesRecursively(workDirectoryHandle, 0)) {
     let fileExt = fileInfo.file.name.split('.').pop();
     if (fileExt.toLowerCase() == 'm2m') {
+      const parts = fileInfo.file.name.split('.');
+      parts.pop();
       console.log(fileInfo.file);
       m2mFilesInFolder[i] = {};
-      m2mFilesInFolder[i].name = fileInfo.file.name;
+      m2mFilesInFolder[i].name = parts.join(".");
       m2mFilesInFolder[i].file = fileInfo.file;
       m2mFilesInFolder[i].fileHandle = fileInfo.fileHandle;
       //console.log(fileHandle.name);
