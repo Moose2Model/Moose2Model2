@@ -3,6 +3,18 @@
  * Analyzes the code in files.
  */
 
+function parseHTML(html) {
+    // Code provided by Chat GPT
+    // create an empty document object
+    const doc = document.implementation.createHTMLDocument('');
+
+    // set the body innerHTML to the HTML string
+    doc.body.innerHTML = html;
+
+    // return the parsed document
+    return doc;
+}
+
 async function AnalyzeFileAndFolder() {
 
     // The global variable gIndex is set to the next free value
@@ -74,8 +86,27 @@ async function AnalyzeFileAndFolder() {
 
                 let myFile = await fileInfo.handle.getFile();
                 // Todo: Analyze content of files only when they are needed
-                fileContent = await myFile.text(); // See https://web.dev/file-system-access/
+                if (fileInfo.extension == 'html' || fileInfo.extension == 'htm') {
+                    fileContent = await myFile.text(); // See https://web.dev/file-system-access/
+                    let htmlDoc = parseHTML(fileContent);
+                    const scriptElements = htmlDoc.querySelectorAll('script');
+                    console.log(fileInfo.name);
+                    console.log(scriptElements);
+                    scriptElements.forEach(scriptElement => {
+                        console.log(scriptElement.src);
+                        console.log(scriptElement.textContent);
+                        console.log("Tokens:");
+                        const tokens = scriptElement.textContent.match(/\b\w+\b|[^\s]/g);
+                        if (tokens !== null) {
+                            tokens.forEach(token => {
+                                console.log(token);
+                            });
+                        }
 
+                    });
+                    // #77 Analyze code here
+                    let a = 1;
+                }
 
             } else if (fileInfo.handle.kind === 'directory') {
                 elementName = 'SOMIX.Grouping';

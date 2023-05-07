@@ -295,6 +295,7 @@ async function ExtractCodeFromFolder() {
         fileInfoByIndex[fileInfo.index].parentIndex = fileInfo.parentIndex;
         fileInfoByIndex[fileInfo.index].kind = fileInfo.kind;
         fileInfoByIndex[fileInfo.index].name = fileInfo.name;
+        fileInfoByIndex[fileInfo.index].extension = fileInfo.name.split('.').pop().toLowerCase();
         fileInfoByIndex[fileInfo.index].file = {};
         fileInfoByIndex[fileInfo.index].directoryArray = [];
 
