@@ -49,7 +49,7 @@ async function drawM2mExplorer() {
     if (fileExt.toLowerCase() == 'm2m') {
       const parts = fileInfo.file.name.split('.');
       parts.pop();
-      console.log(fileInfo.file);
+      //console.log(fileInfo.file);
       m2mFilesInFolder[i] = {};
       m2mFilesInFolder[i].name = parts.join(".");
       m2mFilesInFolder[i].file = fileInfo.file;
