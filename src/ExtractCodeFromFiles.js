@@ -212,7 +212,6 @@ function javaScriptFindGlobal2(jsCode) {
   const variables = {};
   const functions = {};
 
-  let inComment = false;
   let currentFunction = '';
 
   let skipCount = 0;
@@ -223,76 +222,55 @@ function javaScriptFindGlobal2(jsCode) {
       skipCount -= 1;
       return;
     }
-    if (token === '/*') {
-      inComment = true;
-    } else if (token === '*/') {
-      inComment = false;
-    } else if (token.startsWith('//')) {
-      // Ignore line comments
-    } else if (!inComment) {
-      if (token === 'function') {
-        let nextToken = tokens[index + 1];
-        skipCount = 1;
-        if (/^\s*$/.test(nextToken)) {
-          nextToken = tokens[index + 2];
-          skipCount = 2;
+
+    else if (token === 'function') {
+      let nextToken = tokens[index + 1];
+      skipCount = 1;
+      if (/^\s*$/.test(nextToken)) {
+        nextToken = tokens[index + 2];
+        skipCount = 2;
+      }
+      if (/^[a-zA-Z_$]/.test(nextToken)) {
+        if (level == 0) {
+          currentFunction = nextToken;
+          functions[currentFunction] = {
+            uses: []
+          };
         }
-        if (/^[a-zA-Z_$]/.test(nextToken)) {
+      }
+    } else if (/^[a-zA-Z_$]/.test(token)) {
+      let nextToken = tokens[index + 1];
+      if (nextToken === '(') {
+        functions[token] && functions[token].uses.push(currentFunction);
+      } else {
+        if (token === 'let' || token === 'const') {
+          // ignore
+        } else {
           if (level == 0) {
-            currentFunction = nextToken;
-            functions[currentFunction] = {
-              //definition: index,
+            const variable = variables[token] || {
               uses: []
             };
-          }
-        }
-      } else if (/^[a-zA-Z_$]/.test(token)) {
-        let nextToken = tokens[index + 1];
-        if (nextToken === '(') {
-          //functions[token] && functions[token].uses.push(index);
-          functions[token] && functions[token].uses.push(currentFunction);
-        } else {
-          if (token === 'let' || token === 'const') {
-            // ignore
+            variable.uses.push(currentFunction);
+            variables[token] = variable;
           } else {
-            if (level == 0) {
-              const variable = variables[token] || {
-                //definition: index,
-                uses: []
-              };
-              //variable.uses.push(index);
+            if (typeof variables[token] !== 'undefined') {
+              const variable = variables[token]
               variable.uses.push(currentFunction);
               variables[token] = variable;
-            } else {
-              if (typeof variables[token] !== 'undefined') {
-                const variable = variables[token]
-                //variable.uses.push(index);
-                variable.uses.push(currentFunction);
-                variables[token] = variable;
-              }
             }
           }
         }
-        if (currentFunction !== '') {
-          //functions[currentFunction].uses.push(index);
-        }
-      } else if (token === '{') {
-        if (level == 0) {
-          if (currentFunction !== '') {
-            //functions[currentFunction] && (functions[currentFunction].bodyStart = index);
-          }
-        }
-        level += 1;
-      } else if (token === '}') {
-
-        if (level == 1) {
-          if (currentFunction !== '') {
-            //functions[currentFunction] && (functions[currentFunction].bodyEnd = index);
-            currentFunction = '';
-          }
-        }
-        level -= 1;
       }
+    } else if (token === '{') {
+      level += 1;
+    } else if (token === '}') {
+
+      if (level == 1) {
+        if (currentFunction !== '') {
+          currentFunction = '';
+        }
+      }
+      level -= 1;
     }
   });
   let result = {};
@@ -349,8 +327,8 @@ function testFindGlobal2() {
     foo: { uses: ["", "foo2"] },
     foo2: { uses: [] }
   };
-  console.log('Variables:', variablesExp);
-  console.log('Functions:', functionsExp);
+  console.log('VariablesExp:', variablesExp);
+  console.log('FunctionsExp:', functionsExp);
 
   // Check whether analysis is done as expected
 
