@@ -201,157 +201,14 @@ async function AnalyzeFileAndFolder() {
 
 }
 
-function javaScriptFindGlobal(code) {
-  const tokens = code.match(/\/\/.*?$|\/\*[\s\S]*?\*\/|([a-zA-Z_$][a-zA-Z0-9_$]*)|[\{\}]|\b(let|const)\b/gm);
-  //const tokens = jsCode.match(/\/\/.*?$|[^\S\r\n]+|\r?\n|\/\*[\s\S]*?\*\/|([a-zA-Z_$][a-zA-Z0-9_$]*)|\b(let|const)\b/gm);
+function javaScriptFindGlobal2(jsCode) {
 
-  const globalVars = new Set();
-  const globalFuncs = new Set();
-
-  let inComment = false;
-  let level = 1;
-  const scopes = [];
-  scopes.push(new Set());
-
-  tokens.forEach((token, index) => {
-    if (token === '/*') {
-      // inComment = true;
-    } else if (token === '*/') {
-      // inComment = false;
-    } else if (token.startsWith('//')) {
-      // Ignore line comments
-    } else if (!inComment) {
-      if (token === 'let' || token === 'const') {
-        const nextToken = tokens[index + 1];
-        if (/^[a-zA-Z_$]/.test(nextToken)) {
-          const currentScope = scopes[scopes.length - 1];
-          // if (!currentScope || !currentScope.has(nextToken)) {
-          if (level == 1) {
-            globalVars.add(nextToken);
-          }
-          currentScope && currentScope.add(nextToken);
-        }
-      }
-      else if (token === 'function') {
-        const nextToken = tokens[index + 1];
-        if (/^[a-zA-Z_$]/.test(nextToken)) {
-          const currentScope = scopes[scopes.length - 1];
-          // if (!currentScope || !currentScope.has(nextToken)) {
-          if (level == 1) {
-            globalFuncs.add(nextToken);
-          }
-          currentScope && currentScope.add(nextToken);
-        }
-      } else if (/^[a-zA-Z_$]/.test(token)) {
-        let found = false;
-        for (let i = scopes.length - 1; i >= 0; i--) {
-          if (scopes[i].has(token)) {
-            found = true;
-            break;
-          }
-        }
-        if (!found) {
-          //globalVars.add(token);
-        }
-      } else if (token === '{') {
-        level += 1;
-        scopes.push(new Set());
-      } else if (token === '}') {
-        level -= 1;
-        scopes.pop();
-      }
-    }
-
-  });
-  let result = {};
-  result.var = globalVars;
-  result.func = globalFuncs;
-  return result;
-}
-
-function testFindGlobal() {
-  const jsCode = `
-    let x = 42;
-    const y = 3.14;
-    /* let x1 = 100; */
-    // let z = 100;
-    function foo() {
-      let z = 100;
-      function local(){
-        console.log('local');
-      }
-      console.log('Hello, world!');
-      local();
-    }
-  `;
-
-  // const tokens = jsCode.match(/\/\/.*?$|\/\*[\s\S]*?\*\/|([a-zA-Z_$][a-zA-Z0-9_$]*)|\b(let|const)\b/gm);
-  // //const tokens = jsCode.match(/\/\/.*?$|[^\S\r\n]+|\r?\n|\/\*[\s\S]*?\*\/|([a-zA-Z_$][a-zA-Z0-9_$]*)|\b(let|const)\b/gm);
-
-  // const globalVars = new Set();
-
-  // let inComment = false;
-  // const scopes = [];
-
-  // tokens.forEach((token, index) => {
-  //     if (token === '/*') {
-  //         // inComment = true;
-  //     } else if (token === '*/') {
-  //         // inComment = false;
-  //     } else if (token.startsWith('//')) {
-  //         // Ignore line comments
-  //     } else if (!inComment) {
-  //         if (token === 'let' || token === 'const') {
-  //             const nextToken = tokens[index + 1];
-  //             if (/^[a-zA-Z_$]/.test(nextToken)) {
-  //                 const currentScope = scopes[scopes.length - 1];
-  //                 if (!currentScope || !currentScope.has(nextToken)) {
-  //                     globalVars.add(nextToken);
-  //                 }
-  //                 currentScope && currentScope.add(nextToken);
-  //             }
-  //         } else if (/^[a-zA-Z_$]/.test(token)) {
-  //             let found = false;
-  //             for (let i = scopes.length - 1; i >= 0; i--) {
-  //                 if (scopes[i].has(token)) {
-  //                     found = true;
-  //                     break;
-  //                 }
-  //             }
-  //             if (!found) {
-  //                 //globalVars.add(token);
-  //             }
-  //         } else if (token === '{') {
-  //             scopes.push(new Set());
-  //         } else if (token === '}') {
-  //             scopes.pop();
-  //         }
-  //     }
-  // });
-
-  const result = javaScriptFindGlobal(jsCode);
-
-  console.log(result.var);
-  console.log(result.func);
-
-}
-
-function testFindGlobal2() {
-  const jsCode = `
-    let x = 42;
-    const y = 3.14;
-    function foo() {
-      let z = 100;
-      console.log(x + y + z);
-      function subfoo(){
-
-      }
-      subfoo(){
-        y = 3;
-      };
-    }
-    foo();
-  `;
+  // This is currently a draft
+  // Shadowing by local variables and functions is not handled
+  // Ambiguity due to variables and functions with the same name is not handled
+  // Positions are returned as index. But no logic exists to find which function uses a variable
+  // Because positions are referenced as index, stable unit tests are difficult to implement
+  // Required is the logic to say whether something is used global (In that case in which file) or in a global function
 
   const tokens = jsCode.match(/\/\/.*?$|[^\S\r\n]+|\r?\n|\/\*[\s\S]*?\*\/|([a-zA-Z_$][a-zA-Z0-9_$]*)|[\{\}]|[\(\)]|\b(let|const|function)\b/gm);
 
@@ -359,7 +216,7 @@ function testFindGlobal2() {
   const functions = {};
 
   let inComment = false;
-  let currentFunction = null;
+  let currentFunction = '';
 
   let skipCount = 0;
   let level = 0;
@@ -395,7 +252,8 @@ function testFindGlobal2() {
       } else if (/^[a-zA-Z_$]/.test(token)) {
         let nextToken = tokens[index + 1];
         if (nextToken === '(') {
-          functions[token] && functions[token].uses.push(index);
+          //functions[token] && functions[token].uses.push(index);
+          functions[token] && functions[token].uses.push(currentFunction);
         } else {
           if (token === 'let' || token === 'const') {
             // ignore
@@ -405,23 +263,25 @@ function testFindGlobal2() {
                 definition: index,
                 uses: []
               };
-              variable.uses.push(index);
+              //variable.uses.push(index);
+              variable.uses.push(currentFunction);
               variables[token] = variable;
             } else {
               if (typeof variables[token] !== 'undefined') {
                 const variable = variables[token]
-                variable.uses.push(index);
+                //variable.uses.push(index);
+                variable.uses.push(currentFunction);
                 variables[token] = variable;
               }
             }
           }
         }
-        if (currentFunction) {
+        if (currentFunction !== '') {
           //functions[currentFunction].uses.push(index);
         }
       } else if (token === '{') {
         if (level == 0) {
-          if (currentFunction) {
+          if (currentFunction !== '') {
             functions[currentFunction] && (functions[currentFunction].bodyStart = index);
           }
         }
@@ -429,17 +289,56 @@ function testFindGlobal2() {
       } else if (token === '}') {
 
         if (level == 1) {
-          if (currentFunction) {
+          if (currentFunction !== '') {
             functions[currentFunction] && (functions[currentFunction].bodyEnd = index);
-            currentFunction = null;
+            currentFunction = '';
           }
         }
         level -= 1;
       }
     }
   });
+  let result = {};
+  for (let v in variables) {
+    (variables[v].uses) && variables[v].uses.sort();
+    (variables[v].uses) && (variables[v].uses = [...new Set(variables[v].uses)]);
+  }
+  for (let f in functions) {
+    (functions[f].uses) && functions[f].uses.sort();
+    (functions[f].uses) && (functions[f].uses = [...new Set(functions[f].uses)]);
+  }
+  result.variables = variables;
+  result.functions = functions;
+  return result;
+}
 
-  console.log('Variables:', variables);
-  console.log('Functions:', functions);
+function testFindGlobal2() {
+  const jsCode = `
+    let x = 42;
+    const y = 3.14;
+    // const yc = 3.14;
+    /* 
+    const yd = 3.14; 
+    */
+    function foo() {
+      let z = 100;
+      console.log(x + y + z);
+      function subfoo(){
+
+      }
+      subfoo(){
+        y = 3;
+      };
+    }
+    foo();
+    function foo2(){
+      foo();
+    }
+  `;
+
+  const result = javaScriptFindGlobal2(jsCode);
+
+  console.log('Variables:', result.variables);
+  console.log('Functions:', result.functions);
 
 }
