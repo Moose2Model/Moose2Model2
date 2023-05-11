@@ -205,10 +205,7 @@ function javaScriptFindGlobal2(jsCode) {
 
   // This is currently a draft
   // Shadowing by local variables and functions is not handled
-  // Ambiguity due to variables and functions with the same name is not handled
-  // Positions are returned as index. But no logic exists to find which function uses a variable
-  // Because positions are referenced as index, stable unit tests are difficult to implement
-  // Required is the logic to say whether something is used global (In that case in which file) or in a global function
+  // Ambiguity due to variables and functions with the same name is not needed to be handled. This appears to forbidden in strict mode. And otherwise fucntions overwrite the variable.
 
   const tokens = jsCode.match(/\/\/.*?$|[^\S\r\n]+|\r?\n|\/\*[\s\S]*?\*\/|([a-zA-Z_$][a-zA-Z0-9_$]*)|[\{\}]|[\(\)]|\b(let|const|function)\b/gm);
 
@@ -244,7 +241,7 @@ function javaScriptFindGlobal2(jsCode) {
           if (level == 0) {
             currentFunction = nextToken;
             functions[currentFunction] = {
-              definition: index,
+              //definition: index,
               uses: []
             };
           }
@@ -260,7 +257,7 @@ function javaScriptFindGlobal2(jsCode) {
           } else {
             if (level == 0) {
               const variable = variables[token] || {
-                definition: index,
+                //definition: index,
                 uses: []
               };
               //variable.uses.push(index);
@@ -282,7 +279,7 @@ function javaScriptFindGlobal2(jsCode) {
       } else if (token === '{') {
         if (level == 0) {
           if (currentFunction !== '') {
-            functions[currentFunction] && (functions[currentFunction].bodyStart = index);
+            //functions[currentFunction] && (functions[currentFunction].bodyStart = index);
           }
         }
         level += 1;
@@ -290,7 +287,7 @@ function javaScriptFindGlobal2(jsCode) {
 
         if (level == 1) {
           if (currentFunction !== '') {
-            functions[currentFunction] && (functions[currentFunction].bodyEnd = index);
+            //functions[currentFunction] && (functions[currentFunction].bodyEnd = index);
             currentFunction = '';
           }
         }
@@ -301,11 +298,11 @@ function javaScriptFindGlobal2(jsCode) {
   let result = {};
   for (let v in variables) {
     (variables[v].uses) && variables[v].uses.sort();
-    (variables[v].uses) && (variables[v].uses = [...new Set(variables[v].uses)]);
+    (variables[v].uses) && (variables[v].uses = [...new Set(variables[v].uses)]); // Remove duplicates
   }
   for (let f in functions) {
     (functions[f].uses) && functions[f].uses.sort();
-    (functions[f].uses) && (functions[f].uses = [...new Set(functions[f].uses)]);
+    (functions[f].uses) && (functions[f].uses = [...new Set(functions[f].uses)]); // Remove duplicates
   }
   result.variables = variables;
   result.functions = functions;
@@ -333,6 +330,9 @@ function testFindGlobal2() {
     foo();
     function foo2(){
       foo();
+      y = 1; 
+       
+      foo();
     }
   `;
 
@@ -340,5 +340,31 @@ function testFindGlobal2() {
 
   console.log('Variables:', result.variables);
   console.log('Functions:', result.functions);
+
+  const variablesExp = {
+    x: { uses: ["", "foo"] },
+    y: { uses: ["", "foo", "foo2"] }
+  };
+  const functionsExp = {
+    foo: { uses: ["", "foo2"] },
+    foo2: { uses: [] }
+  };
+  console.log('Variables:', variablesExp);
+  console.log('Functions:', functionsExp);
+
+  // Check whether analysis is done as expected
+
+  const v1 = JSON.stringify(result.variables);
+  const v2 = JSON.stringify(variablesExp);
+
+  const f1 = JSON.stringify(result.functions);
+  const f2 = JSON.stringify(functionsExp);
+
+  if (v1 === v2 &&
+    f1 === f2) {
+    console.log("OK");
+  } else {
+    console.log("Error");
+  }
 
 }
