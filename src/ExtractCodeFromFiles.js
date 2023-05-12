@@ -84,10 +84,9 @@ async function AnalyzeFileAndFolder() {
 
         // TODO Analyze content of file
 
-        let myFile = await fileInfo.handle.getFile();
         // Todo: Analyze content of files only when they are needed
         if (fileInfo.extension == 'html' || fileInfo.extension == 'htm') {
-          fileContent = await myFile.text(); // See https://web.dev/file-system-access/
+          fileContent = await fileInfo.file.text(); // See https://web.dev/file-system-access/
           let htmlDoc = parseHTML(fileContent);
           const scriptElements = htmlDoc.querySelectorAll('script');
           console.log(fileInfo.name);
@@ -335,7 +334,7 @@ function testFindGlobal3() {
   `;
   const jsCode2 = `foo();
   let z1 = 42;
-  function test(){}`;
+ `;
 
   const jsCodes = [{ container: 'First', code: jsCode }, { container: 'Second', code: jsCode2 }]
 
