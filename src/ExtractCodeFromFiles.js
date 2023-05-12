@@ -334,7 +334,8 @@ function testFindGlobal3() {
     }
   `;
   const jsCode2 = `foo();
-  let z1 = 42;`;
+  let z1 = 42;
+  function test(){}`;
 
   const jsCodes = [{ container: 'First', code: jsCode }, { container: 'Second', code: jsCode2 }]
 
@@ -369,6 +370,7 @@ function testFindGlobal3() {
     console.log("OK");
   } else {
     console.log("Error");
+    window.alert('Self test testFindGlobal3 failed with an error. The application may not run correct.');
   }
 
 
