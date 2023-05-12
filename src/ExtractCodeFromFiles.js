@@ -345,4 +345,166 @@ function testFindGlobal2() {
     console.log("Error");
   }
 
+
+
+}
+
+function javaScriptFindGlobal3(codeParts) {
+
+  // This is currently a draft
+  // Shadowing by local variables and functions is not handled
+  // Ambiguity due to variables and functions with the same name is not needed to be handled. This appears to forbidden in strict mode. And otherwise fucntions overwrite the variable.
+
+  const variables = {};
+  const functions = {};
+
+  let currentFunction = '';
+
+  let skipCount = 0;
+  let level = 0;
+  for (const codePart of codeParts) {
+    const tokens = codePart.code.match(/\/\/.*?$|[^\S\r\n]+|\r?\n|\/\*[\s\S]*?\*\/|([a-zA-Z_$][a-zA-Z0-9_$]*)|[\{\}]|[\(\)]|\b(let|const|function)\b/gm);
+
+
+
+    tokens.forEach((token, index) => {
+      if (skipCount > 0) {
+        skipCount -= 1;
+        return;
+      }
+
+      else if (token === 'function') {
+        let nextToken = tokens[index + 1];
+        skipCount = 1;
+        if (/^\s*$/.test(nextToken)) {
+          nextToken = tokens[index + 2];
+          skipCount = 2;
+        }
+        if (/^[a-zA-Z_$]/.test(nextToken)) {
+          if (level == 0) {
+            currentFunction = nextToken;
+            functions[currentFunction] = {
+              container: codePart.container,
+              uses: []
+            };
+          }
+        }
+      } else if (/^[a-zA-Z_$]/.test(token)) {
+        let nextToken = tokens[index + 1];
+        if (nextToken === '(') {
+          functions[token] && functions[token].uses.push(currentFunction);
+        } else {
+          if (token === 'let' || token === 'const') {
+            // ignore
+          } else {
+            if (level == 0) {
+              const variable = variables[token] || {
+                uses: []
+              };
+              variable.container = codePart.container;
+              variable.uses.push(currentFunction);
+              variables[token] = variable;
+            }
+            else {
+              if (typeof variables[token] !== 'undefined') {
+                const variable = variables[token]
+                variable.container = codePart.container;
+                variable.uses.push(currentFunction);
+                variables[token] = variable;
+              }
+            }
+          }
+        }
+      } else if (token === '{') {
+        level += 1;
+      } else if (token === '}') {
+
+        if (level == 1) {
+          if (currentFunction !== '') {
+            currentFunction = '';
+          }
+        }
+        level -= 1;
+      }
+    });
+  }
+  let result = {};
+  for (let v in variables) {
+    (variables[v].uses) && variables[v].uses.sort();
+    (variables[v].uses) && (variables[v].uses = [...new Set(variables[v].uses)]); // Remove duplicates
+  }
+  for (let f in functions) {
+    (functions[f].uses) && functions[f].uses.sort();
+    (functions[f].uses) && (functions[f].uses = [...new Set(functions[f].uses)]); // Remove duplicates
+  }
+  result.variables = variables;
+  result.functions = functions;
+  return result;
+}
+
+function testFindGlobal3() {
+  const jsCode = `
+    let x = 42;
+    const y = 3.14;
+    // const yc = 3.14;
+    /* 
+    const yd = 3.14; 
+    */
+    function foo() {
+      let z = 100;
+      console.log(x + y + z);
+      function subfoo(){
+
+      }
+      subfoo(){
+        y = 3;
+      };
+    }
+    foo();
+    function foo2(){
+      foo();
+      y = 1; 
+       
+      foo();
+    }
+  `;
+  const jsCode2 = `foo();
+  let z1 = 42;`;
+
+  const jsCodes = [{ container: 'First', code: jsCode }, { container: 'Second', code: jsCode2 }]
+
+  const result = javaScriptFindGlobal3(jsCodes);
+
+  console.log('Variables:', result.variables);
+  console.log('Functions:', result.functions);
+
+  const variablesExp = {
+    x: { uses: ["", "foo"], container: 'First' },
+    y: { uses: ["", "foo", "foo2"], container: 'First' },
+    z1: { uses: [""], container: 'Second' }
+  };
+  const functionsExp = {
+    foo: { container: 'First', uses: ["", "foo2"] },
+    foo2: { container: 'First', uses: [] }
+  };
+  console.log('VariablesExp:', variablesExp);
+  console.log('FunctionsExp:', functionsExp);
+
+  // Check whether analysis is done as expected
+
+  const v1 = JSON.stringify(result.variables);
+  const v2 = JSON.stringify(variablesExp);
+
+  const f1 = JSON.stringify(result.functions);
+  const f2 = JSON.stringify(functionsExp);
+
+  if (v1 === v2 &&
+    f1 === f2) {
+    console.log("OK");
+  } else {
+    console.log("Error");
+  }
+
+
+
 }
