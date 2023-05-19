@@ -18,86 +18,88 @@ function javaScriptFindGlobal3(codeParts) {
 
   let skipCount = 0;
   let level = 0;
-  for (const codePart of codeParts) {
-    const tokens = codePart.code.match(/\/\/.*?$|:|[^\S\r\n]+|\r?\n|\/\*[\s\S]*?\*\/|([a-zA-Z_$][a-zA-Z0-9_$]*)|[\{\}]|[\(\)]|\b(let|const|function)\b/gm);
+  for (const codePart of codeParts) { // for (const codePart of codeParts)
+    if (codePart.code) {
+      const tokens = codePart.code.match(/\/\/.*?$|:|[^\S\r\n]+|\r?\n|\/\*[\s\S]*?\*\/|([a-zA-Z_$][a-zA-Z0-9_$]*)|[\{\}]|[\(\)]|\b(let|const|function)\b/gm);
 
 
-    if (tokens) {
-      tokens.forEach((token, index) => { // tokens.forEach
-        if (skipCount > 0) {
-          skipCount -= 1;
-          return;
-        }
-
-        else if (token === 'function') {
-          let nextToken = tokens[index + 1];
-          skipCount = 1;
-          if (/^\s*$/.test(nextToken)) {
-            nextToken = tokens[index + 2];
-            skipCount = 2;
+      if (tokens) {
+        tokens.forEach((token, index) => { // tokens.forEach
+          if (skipCount > 0) {
+            skipCount -= 1;
+            return;
           }
-          if (/^[a-zA-Z_$]/.test(nextToken)) {
-            if (level == 0) {
-              currentFunction = nextToken;
-              functions[currentFunction] = {
-                container: codePart.container,
-                uses: []
-              };
+
+          else if (token === 'function') {
+            let nextToken = tokens[index + 1];
+            skipCount = 1;
+            if (/^\s*$/.test(nextToken)) {
+              nextToken = tokens[index + 2];
+              skipCount = 2;
             }
-          }
-        } else if (/^[a-zA-Z_$]/.test(token)) {
-          let nextToken = tokens[index + 1];
-          let nextToken2 = tokens[index + 2];
-          if (nextToken === '(') {
-            functions[token] && functions[token].uses.push(currentFunction);
-          } else if (nextToken === ':' || (/^\s*$/.test(nextToken) && nextToken2 === ':')) // Check for '{ x:' or '{ x :' these are no references to variables
-          {
-            // ignore this is a specification for a class member
-          }
-          else {
-            if (token === 'let' || token === 'const') {
-              // ignore
-            } else {
+            if (/^[a-zA-Z_$]/.test(nextToken)) {
               if (level == 0) {
-                let isExistingVariable = false;
-                if (variables[token]) {
-                  isExistingVariable = true;
-                }
-                const variable = variables[token] || {
+                currentFunction = nextToken;
+                functions[currentFunction] = {
+                  container: codePart.container,
                   uses: []
                 };
-                variable.container = codePart.container;
-                if (isExistingVariable) {
-                  variable.uses.push(currentFunction);
-                }
-                variables[token] = variable;
               }
-              else {
-                if (typeof variables[token] !== 'undefined') {
-                  const variable = variables[token]
+            }
+          } else if (/^[a-zA-Z_$]/.test(token)) {
+            let nextToken = tokens[index + 1];
+            let nextToken2 = tokens[index + 2];
+            if (nextToken === '(') {
+              functions[token] && functions[token].uses && functions[token].uses.push(currentFunction);
+            } else if (nextToken === ':' || (/^\s*$/.test(nextToken) && nextToken2 === ':')) // Check for '{ x:' or '{ x :' these are no references to variables
+            {
+              // ignore this is a specification for a class member
+            }
+            else {
+              if (token === 'let' || token === 'const') {
+                // ignore
+              } else {
+                if (level == 0) {
+                  let isExistingVariable = false;
+                  if (variables[token]) {
+                    isExistingVariable = true;
+                  }
+                  const variable = variables[token] || {
+                    uses: []
+                  };
                   variable.container = codePart.container;
-                  variable.uses.push(currentFunction);
+                  if (isExistingVariable) {
+                    variable.uses.push(currentFunction);
+                  }
                   variables[token] = variable;
                 }
+                else {
+                  if (typeof variables[token] !== 'undefined') {
+                    const variable = variables[token]
+                    variable.container = codePart.container;
+                    variable.uses && variable.uses.push(currentFunction);
+                    variables[token] = variable;
+                  }
+                }
               }
             }
-          }
-        } else if (token === '{') {
-          level += 1;
-        } else if (token === '}') {
+          } else if (token === '{') {
+            level += 1;
+          } else if (token === '}') {
 
-          if (level == 1) {
-            if (currentFunction !== '') {
-              currentFunction = '';
+            if (level == 1) {
+              if (currentFunction !== '') {
+                currentFunction = '';
+              }
             }
+            level -= 1;
           }
-          level -= 1;
-        }
-      } // END tokens.forEach
+        } // END tokens.forEach
 
-      );
+        );
+      }
     }
-  }
+  } // END for (const codePart of codeParts)
   let result = {};
   for (let v in variables) {
     (variables[v].uses) && variables[v].uses.sort();
@@ -195,25 +197,63 @@ async function AnalyzeFileAndFolder() {
 
         // Todo: Analyze content of files only when they are needed
         if (fileInfo.extension == 'html' || fileInfo.extension == 'htm') {
+          let jsCodes = [];
           fileContent = await fileInfo.file.text(); // See https://web.dev/file-system-access/
           let htmlDoc = parseHTML(fileContent);
-          const scriptElements = htmlDoc.querySelectorAll('script');
+          let scriptElements = htmlDoc.querySelectorAll('script');
           console.log(fileInfo.name);
           console.log(scriptElements);
-          scriptElements.forEach(scriptElement => {
-            console.log(scriptElement.src);
-            console.log(scriptElement.textContent);
-            console.log("Tokens:");
-            const tokens = scriptElement.textContent.match(/\b\w+\b|[^\s]/g);
-            if (tokens !== null) {
-              tokens.forEach(token => {
-                console.log(token);
-              });
-            }
+          scriptElements = Array.from(scriptElements);
+          if (Array.isArray(scriptElements)) {
+            await Promise.all(scriptElements.map(async (scriptElement) => {
+              console.log(scriptElement.src);
+              //console.log(scriptElement.textContent);
 
-          });
-          // #77 Analyze code here
-          let a = 1;
+              // A
+              const filePath = scriptElement.src;
+
+              // Remove the 'file://' protocol from the filePath
+              const pathWithoutProtocol = filePath.replace(/^file:\/\//, '');
+
+              // Remove the query parameter from the path
+              const pathWithoutQuery = pathWithoutProtocol.split('?')[0];
+
+              // Extract the file name from the path
+              const fileName = pathWithoutQuery.split('/').pop();
+
+              // Extract the list of folders
+              const folders = pathWithoutQuery.split('/').slice(0, -1);
+
+              console.log('File name:', fileName);
+              console.log('Folders:', folders);
+              // End A
+              let foundFile = {};
+              foundFile = fileInfoByIndex.find(obj => ((obj) && (obj.name) && (obj.name === fileName)));
+              if (foundFile) {
+                let jsContent;
+                try {
+                  jsContent = await foundFile.file.text();
+                } catch (error) { };
+                if (jsContent) {
+                  jsCodes.push({ container: 'Dummy', code: jsContent });
+                }
+              }
+              jsCodes.push({ container: 'Dummy', code: scriptElement.textContent });
+              // console.log("Tokens:");
+              // const tokens = scriptElement.textContent.match(/\b\w+\b|[^\s]/g);
+              // if (tokens !== null) {
+              //   tokens.forEach(token => {
+              //     console.log(token);
+              //   });
+              // }
+
+            }));
+          }
+
+
+          // #78 Analyze code here
+          let analyzedJSCode = javaScriptFindGlobal3(jsCodes);
+          console.log(analyzedJSCode);
         }
 
       } else if (fileInfo.handle.kind === 'directory') {
