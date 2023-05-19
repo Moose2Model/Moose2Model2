@@ -3,6 +3,112 @@
  * Analyzes the code in files.
  */
 
+
+
+function javaScriptFindGlobal3(codeParts) {
+
+  // This is currently a draft
+  // Shadowing by local variables and functions is not handled
+  // Ambiguity due to variables and functions with the same name is not needed to be handled. This appears to forbidden in strict mode. And otherwise fucntions overwrite the variable.
+
+  const variables = {};
+  const functions = {};
+
+  let currentFunction = '';
+
+  let skipCount = 0;
+  let level = 0;
+  for (const codePart of codeParts) {
+    const tokens = codePart.code.match(/\/\/.*?$|:|[^\S\r\n]+|\r?\n|\/\*[\s\S]*?\*\/|([a-zA-Z_$][a-zA-Z0-9_$]*)|[\{\}]|[\(\)]|\b(let|const|function)\b/gm);
+
+
+
+    tokens.forEach((token, index) => {
+      if (skipCount > 0) {
+        skipCount -= 1;
+        return;
+      }
+
+      else if (token === 'function') {
+        let nextToken = tokens[index + 1];
+        skipCount = 1;
+        if (/^\s*$/.test(nextToken)) {
+          nextToken = tokens[index + 2];
+          skipCount = 2;
+        }
+        if (/^[a-zA-Z_$]/.test(nextToken)) {
+          if (level == 0) {
+            currentFunction = nextToken;
+            functions[currentFunction] = {
+              container: codePart.container,
+              uses: []
+            };
+          }
+        }
+      } else if (/^[a-zA-Z_$]/.test(token)) {
+        let nextToken = tokens[index + 1];
+        let nextToken2 = tokens[index + 2];
+        if (nextToken === '(') {
+          functions[token] && functions[token].uses.push(currentFunction);
+        } else if (nextToken === ':' || (/^\s*$/.test(nextToken) && nextToken2 === ':')) // Check for '{ x:' or '{ x :' these are no references to variables
+        { 
+          // ignore this is a specification for a class member
+        }
+        else {
+          if (token === 'let' || token === 'const') {
+            // ignore
+          } else {
+            if (level == 0) {
+              let isExistingVariable = false;
+              if (variables[token]) {
+                isExistingVariable = true;
+              }
+              const variable = variables[token] || {
+                uses: []
+              };
+              variable.container = codePart.container;
+              if (isExistingVariable) {
+                variable.uses.push(currentFunction);
+              }
+              variables[token] = variable;
+            }
+            else {
+              if (typeof variables[token] !== 'undefined') {
+                const variable = variables[token]
+                variable.container = codePart.container;
+                variable.uses.push(currentFunction);
+                variables[token] = variable;
+              }
+            }
+          }
+        }
+      } else if (token === '{') {
+        level += 1;
+      } else if (token === '}') {
+
+        if (level == 1) {
+          if (currentFunction !== '') {
+            currentFunction = '';
+          }
+        }
+        level -= 1;
+      }
+    });
+  }
+  let result = {};
+  for (let v in variables) {
+    (variables[v].uses) && variables[v].uses.sort();
+    (variables[v].uses) && (variables[v].uses = [...new Set(variables[v].uses)]); // Remove duplicates
+  }
+  for (let f in functions) {
+    (functions[f].uses) && functions[f].uses.sort();
+    (functions[f].uses) && (functions[f].uses = [...new Set(functions[f].uses)]); // Remove duplicates
+  }
+  result.variables = variables;
+  result.functions = functions;
+  return result;
+}
+
 function parseHTML(html) {
   // Code provided by Chat GPT
   // create an empty document object
@@ -198,110 +304,6 @@ async function AnalyzeFileAndFolder() {
 
   }
 
-}
-
-function javaScriptFindGlobal3(codeParts) {
-
-  // This is currently a draft
-  // Shadowing by local variables and functions is not handled
-  // Ambiguity due to variables and functions with the same name is not needed to be handled. This appears to forbidden in strict mode. And otherwise fucntions overwrite the variable.
-
-  const variables = {};
-  const functions = {};
-
-  let currentFunction = '';
-
-  let skipCount = 0;
-  let level = 0;
-  for (const codePart of codeParts) {
-    const tokens = codePart.code.match(/\/\/.*?$|:|[^\S\r\n]+|\r?\n|\/\*[\s\S]*?\*\/|([a-zA-Z_$][a-zA-Z0-9_$]*)|[\{\}]|[\(\)]|\b(let|const|function)\b/gm);
-
-
-
-    tokens.forEach((token, index) => {
-      if (skipCount > 0) {
-        skipCount -= 1;
-        return;
-      }
-
-      else if (token === 'function') {
-        let nextToken = tokens[index + 1];
-        skipCount = 1;
-        if (/^\s*$/.test(nextToken)) {
-          nextToken = tokens[index + 2];
-          skipCount = 2;
-        }
-        if (/^[a-zA-Z_$]/.test(nextToken)) {
-          if (level == 0) {
-            currentFunction = nextToken;
-            functions[currentFunction] = {
-              container: codePart.container,
-              uses: []
-            };
-          }
-        }
-      } else if (/^[a-zA-Z_$]/.test(token)) {
-        let nextToken = tokens[index + 1];
-        let nextToken2 = tokens[index + 2];
-        if (nextToken === '(') {
-          functions[token] && functions[token].uses.push(currentFunction);
-        } else if (nextToken === ':' || (/^\s*$/.test(nextToken) && nextToken2 === ':')) // Check for '{ x:' or '{ x :' these are no references to variables
-        { 
-          // ignore this is a specification for a class member
-        }
-        else {
-          if (token === 'let' || token === 'const') {
-            // ignore
-          } else {
-            if (level == 0) {
-              let isExistingVariable = false;
-              if (variables[token]) {
-                isExistingVariable = true;
-              }
-              const variable = variables[token] || {
-                uses: []
-              };
-              variable.container = codePart.container;
-              if (isExistingVariable) {
-                variable.uses.push(currentFunction);
-              }
-              variables[token] = variable;
-            }
-            else {
-              if (typeof variables[token] !== 'undefined') {
-                const variable = variables[token]
-                variable.container = codePart.container;
-                variable.uses.push(currentFunction);
-                variables[token] = variable;
-              }
-            }
-          }
-        }
-      } else if (token === '{') {
-        level += 1;
-      } else if (token === '}') {
-
-        if (level == 1) {
-          if (currentFunction !== '') {
-            currentFunction = '';
-          }
-        }
-        level -= 1;
-      }
-    });
-  }
-  let result = {};
-  for (let v in variables) {
-    (variables[v].uses) && variables[v].uses.sort();
-    (variables[v].uses) && (variables[v].uses = [...new Set(variables[v].uses)]); // Remove duplicates
-  }
-  for (let f in functions) {
-    (functions[f].uses) && functions[f].uses.sort();
-    (functions[f].uses) && (functions[f].uses = [...new Set(functions[f].uses)]); // Remove duplicates
-  }
-  result.variables = variables;
-  result.functions = functions;
-  return result;
 }
 
 function testFindGlobal3() {
