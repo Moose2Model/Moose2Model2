@@ -235,24 +235,24 @@ function javaScriptFindGlobal4(indexHTML, indexModel, codeParts) {
     // (variables[v].used) && variables[v].used.sort();
     // (variables[v].used) && (variables[v].used = [...new Set(variables[v].used)]); // Remove duplicates
 
-    
+
     // Sort the array by currentFunctionIndex
-    (variables[v].used) && variables[v].used.sort(function(a, b) {
+    (variables[v].used) && variables[v].used.sort(function (a, b) {
       return a.currentFunctionIndex - b.currentFunctionIndex;
     });
-    
+
     // Remove duplicate elements
-    variables[v].used = variables[v].used.filter(function(obj, index, self) {
+    (variables[v].used) && (variables[v].used = variables[v].used.filter(function (obj, index, self) {
       return (
         index ===
-        self.findIndex(function(o) {
+        self.findIndex(function (o) {
           return (
             o.currentFunction === obj.currentFunction &&
             o.currentFunctionIndex === obj.currentFunctionIndex
           );
         })
       );
-    });
+    }));
 
 
 
@@ -264,22 +264,22 @@ function javaScriptFindGlobal4(indexHTML, indexModel, codeParts) {
     // (functions[f].used) && (functions[f].used = [...new Set(functions[f].used)]); // Remove duplicates
 
     // Sort the array by currentFunctionIndex
-    (functions[f].used) && functions[f].used.sort(function(a, b) {
+    (functions[f].used) && functions[f].used.sort(function (a, b) {
       return a.currentFunctionIndex - b.currentFunctionIndex;
     });
-    
+
     // Remove duplicate elements
-    functions[f].used = functions[f].used.filter(function(obj, index, self) {
+    (functions[f].used) && (functions[f].used = functions[f].used.filter(function (obj, index, self) {
       return (
         index ===
-        self.findIndex(function(o) {
+        self.findIndex(function (o) {
           return (
             o.currentFunction === obj.currentFunction &&
             o.currentFunctionIndex === obj.currentFunctionIndex
           );
         })
       );
-    });
+    }));
 
 
 
@@ -433,7 +433,7 @@ async function AnalyzeFileAndFolder() {
 
 
           // #78 Analyze code here
-          let analyzedJSCode = javaScriptFindGlobal3(jsCodes);
+          let analyzedJSCode = javaScriptFindGlobal4(fileInfo.index, gIndex, jsCodes);
           console.log(analyzedJSCode);
         }
 
