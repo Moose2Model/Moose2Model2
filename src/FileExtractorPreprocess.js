@@ -7,7 +7,8 @@ function getRelativePath(array) {
     }
     return path;
 }
-
+// Add comment to the next variable
+/**  Points to the next unused index in a model */
 let gIndex;
 
 async function* getFilesRecursively(fileInfo) {

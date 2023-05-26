@@ -114,7 +114,7 @@ function javaScriptFindGlobal3(codeParts) {
   return result;
 }
 
-function javaScriptFindGlobal4(codeParts) {
+function javaScriptFindGlobal4(indexHTML, indexModel, codeParts) {
 
   // This is currently a draft
   // Shadowing by local variables and functions is not handled
@@ -124,6 +124,10 @@ function javaScriptFindGlobal4(codeParts) {
   const functions = {};
 
   let currentFunction = '';
+  let currentFunctionIndex = indexHTML;
+  let currentFunctionContainer = {};
+  currentFunctionContainer.currentFunction = currentFunction;
+  currentFunctionContainer.currentFunctionIndex = currentFunctionIndex;
 
   let skipCount = 0;
   let level = 0;
@@ -149,17 +153,24 @@ function javaScriptFindGlobal4(codeParts) {
             if (/^[a-zA-Z_$]/.test(nextToken)) {
               if (level == 0) {
                 currentFunction = nextToken;
+                currentFunctionIndex = indexModel;
+                currentFunctionContainer.currentFunction = currentFunction;
+                currentFunctionContainer.currentFunctionIndex = currentFunctionIndex;
                 functions[currentFunction] = {
+                  index: indexModel,
                   container: codePart.container,
-                  uses: []
+                  used: []
                 };
+                indexModel += 1;
               }
             }
           } else if (/^[a-zA-Z_$]/.test(token)) {
             let nextToken = tokens[index + 1];
             let nextToken2 = tokens[index + 2];
             if (nextToken === '(') {
-              functions[token] && functions[token].uses && functions[token].uses.push(currentFunction);
+              // Create a copy of the original object
+              var copiedObject = Object.assign({}, currentFunctionContainer);
+              functions[token] && functions[token].used && functions[token].used.push(copiedObject);
             } else if (nextToken === ':' || (/^\s*$/.test(nextToken) && nextToken2 === ':')) // Check for '{ x:' or '{ x :' these are no references to variables
             {
               // ignore this is a specification for a class member
@@ -174,11 +185,16 @@ function javaScriptFindGlobal4(codeParts) {
                     isExistingVariable = true;
                   }
                   const variable = variables[token] || {
-                    uses: []
+                    index: indexModel,
+                    used: []
                   };
-                  variable.container = codePart.container;
+                  if (!isExistingVariable) {
+                    indexModel += 1;
+                    variable.container = codePart.container;
+                  }
                   if (isExistingVariable) {
-                    variable.uses.push(currentFunction);
+                    var copiedObject = Object.assign({}, currentFunctionContainer);
+                    variable.used.push(copiedObject);
                   }
                   variables[token] = variable;
                 }
@@ -186,7 +202,8 @@ function javaScriptFindGlobal4(codeParts) {
                   if (typeof variables[token] !== 'undefined') {
                     const variable = variables[token]
                     variable.container = codePart.container;
-                    variable.uses && variable.uses.push(currentFunction);
+                    var copiedObject = Object.assign({}, currentFunctionContainer);
+                    variable.used && variable.used.push(copiedObject);
                     variables[token] = variable;
                   }
                 }
@@ -199,6 +216,10 @@ function javaScriptFindGlobal4(codeParts) {
             if (level == 1) {
               if (currentFunction !== '') {
                 currentFunction = '';
+                currentFunctionIndex = indexHTML;
+                currentFunctionContainer = {};
+                currentFunctionContainer.currentFunction = currentFunction;
+                currentFunctionContainer.currentFunctionIndex = currentFunctionIndex;
               }
             }
             level -= 1;
@@ -211,15 +232,16 @@ function javaScriptFindGlobal4(codeParts) {
   } // END for (const codePart of codeParts)
   let result = {};
   for (let v in variables) {
-    (variables[v].uses) && variables[v].uses.sort();
-    (variables[v].uses) && (variables[v].uses = [...new Set(variables[v].uses)]); // Remove duplicates
+    (variables[v].used) && variables[v].used.sort();
+    (variables[v].used) && (variables[v].used = [...new Set(variables[v].used)]); // Remove duplicates
   }
   for (let f in functions) {
-    (functions[f].uses) && functions[f].uses.sort();
-    (functions[f].uses) && (functions[f].uses = [...new Set(functions[f].uses)]); // Remove duplicates
+    (functions[f].used) && functions[f].used.sort();
+    (functions[f].used) && (functions[f].used = [...new Set(functions[f].used)]); // Remove duplicates
   }
   result.variables = variables;
   result.functions = functions;
+  result.index = indexModel;
   return result;
 }
 
@@ -565,23 +587,37 @@ function testFindGlobal4() {
 
   const jsCodes = [{ container: 'First', code: jsCode }, { container: 'Second', code: jsCode2 }]
 
-  const result = javaScriptFindGlobal3(jsCodes);
+  const result = javaScriptFindGlobal4(1, 2, jsCodes);
 
   console.log('Variables:', result.variables);
   console.log('Functions:', result.functions);
+  console.log('Index after analysis:', result.index);
 
   const variablesExp = {
-    x: { uses: ["", "foo"], container: 'First' },
-    y: { uses: ["foo", "foo2"], container: 'First' },
-    cl: { uses: ['foo2'], container: 'First' },
-    z1: { uses: [], container: 'Second' }
+    x: {
+      index: 2, used: [
+        { currentFunction: '', currentFunctionIndex: 1 },
+        { currentFunction: 'foo', currentFunctionIndex: 5 }], container: 'First'
+    },
+    y: {
+      index: 3, used: [{ currentFunction: 'foo', currentFunctionIndex: 5 }, { currentFunction: 'foo', currentFunctionIndex: 5 },
+      { currentFunction: 'foo2', currentFunctionIndex: 6 }], container: 'First'
+    },
+    cl: {
+      index: 4, used: [
+        { currentFunction: 'foo2', currentFunctionIndex: 6 },{ currentFunction: 'foo2', currentFunctionIndex: 6 }], container: 'First'
+    },
+    z1: { index: 7, used: [], container: 'Second' }
   };
   const functionsExp = {
-    foo: { container: 'First', uses: ["", "foo2"] },
-    foo2: { container: 'First', uses: [] }
+    foo: { index: 5, container: 'First', used: [{ currentFunction: '', currentFunctionIndex: 1 }, { currentFunction: 'foo2', currentFunctionIndex: 6 }, { currentFunction: 'foo2', currentFunctionIndex: 6 }, { currentFunction: '', currentFunctionIndex: 1 }] },
+    foo2: { index: 6, container: 'First', used: [] }
   };
+  const indexExp = 8;
+
   console.log('VariablesExp:', variablesExp);
   console.log('FunctionsExp:', functionsExp);
+  console.log('IndexExp:', indexExp);
 
   // Check whether analysis is done as expected
 
@@ -592,7 +628,8 @@ function testFindGlobal4() {
   const f2 = JSON.stringify(functionsExp);
 
   if (v1 === v2 &&
-    f1 === f2) {
+    f1 === f2 &&
+    result.index === indexExp) {
     console.log("OK");
   } else {
     console.log("Error");
