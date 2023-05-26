@@ -232,12 +232,62 @@ function javaScriptFindGlobal4(indexHTML, indexModel, codeParts) {
   } // END for (const codePart of codeParts)
   let result = {};
   for (let v in variables) {
-    (variables[v].used) && variables[v].used.sort();
-    (variables[v].used) && (variables[v].used = [...new Set(variables[v].used)]); // Remove duplicates
+    // (variables[v].used) && variables[v].used.sort();
+    // (variables[v].used) && (variables[v].used = [...new Set(variables[v].used)]); // Remove duplicates
+
+    
+    // Sort the array by currentFunctionIndex
+    (variables[v].used) && variables[v].used.sort(function(a, b) {
+      return a.currentFunctionIndex - b.currentFunctionIndex;
+    });
+    
+    // Remove duplicate elements
+    variables[v].used = variables[v].used.filter(function(obj, index, self) {
+      return (
+        index ===
+        self.findIndex(function(o) {
+          return (
+            o.currentFunction === obj.currentFunction &&
+            o.currentFunctionIndex === obj.currentFunctionIndex
+          );
+        })
+      );
+    });
+
+
+
+
+
   }
   for (let f in functions) {
-    (functions[f].used) && functions[f].used.sort();
-    (functions[f].used) && (functions[f].used = [...new Set(functions[f].used)]); // Remove duplicates
+    // (functions[f].used) && functions[f].used.sort();
+    // (functions[f].used) && (functions[f].used = [...new Set(functions[f].used)]); // Remove duplicates
+
+    // Sort the array by currentFunctionIndex
+    (functions[f].used) && functions[f].used.sort(function(a, b) {
+      return a.currentFunctionIndex - b.currentFunctionIndex;
+    });
+    
+    // Remove duplicate elements
+    functions[f].used = functions[f].used.filter(function(obj, index, self) {
+      return (
+        index ===
+        self.findIndex(function(o) {
+          return (
+            o.currentFunction === obj.currentFunction &&
+            o.currentFunctionIndex === obj.currentFunctionIndex
+          );
+        })
+      );
+    });
+
+
+
+
+
+
+
+
   }
   result.variables = variables;
   result.functions = functions;
@@ -600,17 +650,17 @@ function testFindGlobal4() {
         { currentFunction: 'foo', currentFunctionIndex: 5 }], container: 'First'
     },
     y: {
-      index: 3, used: [{ currentFunction: 'foo', currentFunctionIndex: 5 }, { currentFunction: 'foo', currentFunctionIndex: 5 },
+      index: 3, used: [{ currentFunction: 'foo', currentFunctionIndex: 5 },
       { currentFunction: 'foo2', currentFunctionIndex: 6 }], container: 'First'
     },
     cl: {
       index: 4, used: [
-        { currentFunction: 'foo2', currentFunctionIndex: 6 },{ currentFunction: 'foo2', currentFunctionIndex: 6 }], container: 'First'
+        { currentFunction: 'foo2', currentFunctionIndex: 6 }], container: 'First'
     },
     z1: { index: 7, used: [], container: 'Second' }
   };
   const functionsExp = {
-    foo: { index: 5, container: 'First', used: [{ currentFunction: '', currentFunctionIndex: 1 }, { currentFunction: 'foo2', currentFunctionIndex: 6 }, { currentFunction: 'foo2', currentFunctionIndex: 6 }, { currentFunction: '', currentFunctionIndex: 1 }] },
+    foo: { index: 5, container: 'First', used: [{ currentFunction: '', currentFunctionIndex: 1 }, { currentFunction: 'foo2', currentFunctionIndex: 6 }] },
     foo2: { index: 6, container: 'First', used: [] }
   };
   const indexExp = 8;
