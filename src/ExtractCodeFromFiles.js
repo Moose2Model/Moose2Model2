@@ -378,6 +378,7 @@ async function AnalyzeFileAndFolder() {
 
         // Todo: Analyze content of files only when they are needed
         if (fileInfo.extension == 'html' || fileInfo.extension == 'htm') {
+          let htmlFileName = fileInfo.name;
           let jsCodes = [];
           fileContent = await fileInfo.file.text(); // See https://web.dev/file-system-access/
           let htmlDoc = parseHTML(fileContent);
@@ -416,10 +417,10 @@ async function AnalyzeFileAndFolder() {
                   jsContent = await foundFile.file.text();
                 } catch (error) { };
                 if (jsContent) {
-                  jsCodes.push({ container: 'Dummy', code: jsContent });
+                  jsCodes.push({ container: foundFile.name, code: jsContent });
                 }
               }
-              jsCodes.push({ container: 'Dummy', code: scriptElement.textContent });
+              jsCodes.push({ container: htmlFileName, code: scriptElement.textContent });
               // console.log("Tokens:");
               // const tokens = scriptElement.textContent.match(/\b\w+\b|[^\s]/g);
               // if (tokens !== null) {
