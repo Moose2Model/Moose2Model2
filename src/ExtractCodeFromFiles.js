@@ -307,6 +307,9 @@ function parseHTML(html) {
   return doc;
 }
 
+
+
+
 async function AnalyzeFileAndFolder() {
 
   // The global variable gIndex is set to the next free value
@@ -342,6 +345,8 @@ async function AnalyzeFileAndFolder() {
   fileInfoStart.directoryArray = [];
   fileInfoStart.file = {};
 
+  // Loop 1 where files and folders are analyzed
+
   for (const fileInfo of fileInfoByIndex) {
     if (typeof fileInfo !== 'undefined') {
 
@@ -376,70 +381,72 @@ async function AnalyzeFileAndFolder() {
 
         // TODO Analyze content of file
 
-        // Todo: Analyze content of files only when they are needed
-        if (fileInfo.extension == 'html' || fileInfo.extension == 'htm') {
-          let htmlFileName = fileInfo.name;
-          let jsCodes = [];
-          fileContent = await fileInfo.file.text(); // See https://web.dev/file-system-access/
-          let htmlDoc = parseHTML(fileContent);
-          let scriptElements = htmlDoc.querySelectorAll('script');
-          console.log(fileInfo.name);
-          console.log(scriptElements);
-          scriptElements = Array.from(scriptElements);
-          if (Array.isArray(scriptElements)) {
-            await Promise.all(scriptElements.map(async (scriptElement) => {
-              console.log(scriptElement.src);
-              //console.log(scriptElement.textContent);
+        // // Todo: Analyze content of files only when they are needed
+        // if (fileInfo.extension == 'html' || fileInfo.extension == 'htm') {
+        //   let htmlFileName = fileInfo.name;
+        //   let jsCodes = [];
+        //   fileContent = await fileInfo.file.text(); // See https://web.dev/file-system-access/
+        //   let htmlDoc = parseHTML(fileContent);
+        //   let scriptElements = htmlDoc.querySelectorAll('script');
+        //   console.log(fileInfo.name);
+        //   console.log(scriptElements);
+        //   scriptElements = Array.from(scriptElements);
+        //   if (Array.isArray(scriptElements)) {
+        //     await Promise.all(scriptElements.map(async (scriptElement) => {
+        //       console.log(scriptElement.src);
+        //       //console.log(scriptElement.textContent);
 
-              // A
-              const filePath = scriptElement.src;
+        //       // A
+        //       const filePath = scriptElement.src;
 
-              // Remove the 'file://' protocol from the filePath
-              const pathWithoutProtocol = filePath.replace(/^file:\/\//, '');
+        //       // Remove the 'file://' protocol from the filePath
+        //       const pathWithoutProtocol = filePath.replace(/^file:\/\//, '');
 
-              // Remove the query parameter from the path
-              const pathWithoutQuery = pathWithoutProtocol.split('?')[0];
+        //       // Remove the query parameter from the path
+        //       const pathWithoutQuery = pathWithoutProtocol.split('?')[0];
 
-              // Extract the file name from the path
-              const fileName = pathWithoutQuery.split('/').pop();
+        //       // Extract the file name from the path
+        //       const fileName = pathWithoutQuery.split('/').pop();
 
-              // Extract the list of folders
-              const folders = pathWithoutQuery.split('/').slice(0, -1);
+        //       // Extract the list of folders
+        //       const folders = pathWithoutQuery.split('/').slice(0, -1);
 
-              console.log('File name:', fileName);
-              console.log('Folders:', folders);
-              // End A
-              let foundFile = {};
-              foundFile = fileInfoByIndex.find(obj => ((obj) && (obj.name) && (obj.name === fileName)));
-              if (foundFile) {
-                let jsContent;
-                try {
-                  jsContent = await foundFile.file.text();
-                } catch (error) { };
-                if (jsContent) {
-                  jsCodes.push({ container: foundFile.name, code: jsContent });
-                }
-              }
-              jsCodes.push({ container: htmlFileName, code: scriptElement.textContent });
-              // console.log("Tokens:");
-              // const tokens = scriptElement.textContent.match(/\b\w+\b|[^\s]/g);
-              // if (tokens !== null) {
-              //   tokens.forEach(token => {
-              //     console.log(token);
-              //   });
-              // }
+        //       console.log('File name:', fileName);
+        //       console.log('Folders:', folders);
+        //       // End A
+        //       let foundFile = {};
+        //       foundFile = fileInfoByIndex.find(obj => ((obj) && (obj.name) && (obj.name === fileName)));
+        //       if (foundFile) {
+        //         let jsContent;
+        //         try {
+        //           jsContent = await foundFile.file.text();
+        //         } catch (error) { };
+        //         if (jsContent) {
+        //           jsCodes.push({ container: foundFile.name, code: jsContent });
+        //         }
+        //       }
+        //       jsCodes.push({ container: htmlFileName, code: scriptElement.textContent });
+        //       // console.log("Tokens:");
+        //       // const tokens = scriptElement.textContent.match(/\b\w+\b|[^\s]/g);
+        //       // if (tokens !== null) {
+        //       //   tokens.forEach(token => {
+        //       //     console.log(token);
+        //       //   });
+        //       // }
 
-            }));
-          }
+        //     }));
+        //   }
 
 
-          // #78 Analyze code here
-          let analyzedJSCode = javaScriptFindGlobal4(fileInfo.index, gIndex, jsCodes);
-          console.log(analyzedJSCode);
-        }
+        //   // #78 Analyze code here
+        //   let analyzedJSCode = javaScriptFindGlobal4(fileInfo.index, gIndex, jsCodes);
+        //   console.log(analyzedJSCode);
+        // }
 
       } else if (fileInfo.handle.kind === 'directory') {
         elementName = 'SOMIX.Grouping';
+
+
         idVal = fileInfo.index;
         nameVal = fileInfo.name;
         uniqueNameVal = '';
@@ -528,6 +535,406 @@ async function AnalyzeFileAndFolder() {
     }
 
   }
+
+  // Loop 2 where JavaScript files are analyzed
+  for (const fileInfo of fileInfoByIndex) {
+    if (fileInfo) {
+      if (fileInfo.handle.kind === 'file') {
+        // Todo: Analyze content of files only when they are needed
+        if (fileInfo.extension == 'html' || fileInfo.extension == 'htm') {
+          let htmlFileName = fileInfo.name;
+          let htmlFileIndex = fileInfo.index;
+          let jsCodes = [];
+          fileContent = await fileInfo.file.text(); // See https://web.dev/file-system-access/
+          let htmlDoc = parseHTML(fileContent);
+          let scriptElements = htmlDoc.querySelectorAll('script');
+          console.log(fileInfo.name);
+          console.log(scriptElements);
+          scriptElements = Array.from(scriptElements);
+          if (Array.isArray(scriptElements)) {
+            await Promise.all(scriptElements.map(async (scriptElement) => {
+              console.log(scriptElement.src);
+              //console.log(scriptElement.textContent);
+
+              // A
+              const filePath = scriptElement.src;
+
+              // Remove the 'file://' protocol from the filePath
+              const pathWithoutProtocol = filePath.replace(/^file:\/\//, '');
+
+              // Remove the query parameter from the path
+              const pathWithoutQuery = pathWithoutProtocol.split('?')[0];
+
+              // Extract the file name from the path
+              const fileName = pathWithoutQuery.split('/').pop();
+
+              // Extract the list of folders
+              const folders = pathWithoutQuery.split('/').slice(0, -1);
+
+              console.log('File name:', fileName);
+              console.log('Folders:', folders);
+              // End A
+              let foundFile = {};
+              foundFile = fileInfoByIndex.find(obj => ((obj) && (obj.name) && (obj.name === fileName)));
+              if (foundFile) {
+                let jsContent;
+                try {
+                  jsContent = await foundFile.file.text();
+                } catch (error) { };
+                if (jsContent) {
+                  jsCodes.push({ container: { name: foundFile.name, index: foundFile.index }, code: jsContent });
+                }
+              }
+              jsCodes.push({ container: { name: htmlFileName, index: htmlFileIndex }, code: scriptElement.textContent });
+              // console.log("Tokens:");
+              // const tokens = scriptElement.textContent.match(/\b\w+\b|[^\s]/g);
+              // if (tokens !== null) {
+              //   tokens.forEach(token => {
+              //     console.log(token);
+              //   });
+              // }
+
+            }));
+          }
+
+
+          // #78 Analyze code here
+          let analyzedJSCode = javaScriptFindGlobal4(fileInfo.index, gIndex, jsCodes);
+          console.log(analyzedJSCode);
+          console.log(modelElementsByUniqueKey);
+
+          // Loop over all functions
+
+          for (let functionName in analyzedJSCode.functions) {
+            if (analyzedJSCode.functions.hasOwnProperty(functionName)) {
+              const functionData = analyzedJSCode.functions[functionName];
+              const memberName = functionName;
+              const memberIndex = functionData.index;
+
+
+
+              // Clear data before it is read again
+              elementName = '';
+              idVal = 0;
+              nameVal = '';
+              uniqueNameVal = '';
+              technicalTypeVal = '';
+              linkToEditorVal = '';
+              parentVal = '';
+              childVal = '';
+              isMainVal = false;
+              callerVal = 0;
+              calledVal = 0;
+              accessorVal = 0;
+              accessedVal = 0;
+              isWriteVal = false;
+              isReadVal = false;
+              isDependentVal = false;
+
+              elementName = 'SOMIX.Code';
+              idVal = memberIndex;
+              nameVal = memberName;
+
+              buildModel(
+                elementName,
+                idVal,
+                nameVal,
+                uniqueNameVal,
+                technicalTypeVal,
+                linkToEditorVal,
+                parentVal,
+                childVal,
+                isMainVal,
+                callerVal,
+                calledVal,
+                accessorVal,
+                accessedVal,
+                isWriteVal,
+                isReadVal,
+                isDependentVal);
+
+              // Clear data before it is read again
+              elementName = '';
+              idVal = 0;
+              nameVal = '';
+              uniqueNameVal = '';
+              technicalTypeVal = '';
+              linkToEditorVal = '';
+              parentVal = '';
+              childVal = '';
+              isMainVal = false;
+              callerVal = 0;
+              calledVal = 0;
+              accessorVal = 0;
+              accessedVal = 0;
+              isWriteVal = false;
+              isReadVal = false;
+              isDependentVal = false;
+
+              elementName = 'SOMIX.ParentChild';
+              parentVal = functionData.container.index;
+              childVal = memberIndex;
+              isMainVal = true;
+
+              buildModel(
+                elementName,
+                idVal,
+                nameVal,
+                uniqueNameVal,
+                technicalTypeVal,
+                linkToEditorVal,
+                parentVal,
+                childVal,
+                isMainVal,
+                callerVal,
+                calledVal,
+                accessorVal,
+                accessedVal,
+                isWriteVal,
+                isReadVal,
+                isDependentVal);
+
+              // console.log(`Member Name: ${memberName}`);
+              // console.log(`Member Index: ${memberIndex}`);
+              // console.log('--------------------------');
+            }
+          }
+
+
+          // Loop over all variables
+
+          for (let variableName in analyzedJSCode.variables) {
+            if (analyzedJSCode.variables.hasOwnProperty(variableName)) {
+              const variableData = analyzedJSCode.variables[variableName];
+              const memberName = variableName;
+              const memberIndex = variableData.index;
+
+
+
+              // Clear data before it is read again
+              elementName = '';
+              idVal = 0;
+              nameVal = '';
+              uniqueNameVal = '';
+              technicalTypeVal = '';
+              linkToEditorVal = '';
+              parentVal = '';
+              childVal = '';
+              isMainVal = false;
+              callerVal = 0;
+              calledVal = 0;
+              accessorVal = 0;
+              accessedVal = 0;
+              isWriteVal = false;
+              isReadVal = false;
+              isDependentVal = false;
+
+              elementName = 'SOMIX.Data';
+              idVal = memberIndex;
+              nameVal = memberName;
+
+              buildModel(
+                elementName,
+                idVal,
+                nameVal,
+                uniqueNameVal,
+                technicalTypeVal,
+                linkToEditorVal,
+                parentVal,
+                childVal,
+                isMainVal,
+                callerVal,
+                calledVal,
+                accessorVal,
+                accessedVal,
+                isWriteVal,
+                isReadVal,
+                isDependentVal);
+
+              // Clear data before it is read again
+              elementName = '';
+              idVal = 0;
+              nameVal = '';
+              uniqueNameVal = '';
+              technicalTypeVal = '';
+              linkToEditorVal = '';
+              parentVal = '';
+              childVal = '';
+              isMainVal = false;
+              callerVal = 0;
+              calledVal = 0;
+              accessorVal = 0;
+              accessedVal = 0;
+              isWriteVal = false;
+              isReadVal = false;
+              isDependentVal = false;
+
+              elementName = 'SOMIX.ParentChild';
+              parentVal = variableData.container.index;
+              childVal = memberIndex;
+              isMainVal = true;
+
+              buildModel(
+                elementName,
+                idVal,
+                nameVal,
+                uniqueNameVal,
+                technicalTypeVal,
+                linkToEditorVal,
+                parentVal,
+                childVal,
+                isMainVal,
+                callerVal,
+                calledVal,
+                accessorVal,
+                accessedVal,
+                isWriteVal,
+                isReadVal,
+                isDependentVal);
+
+              // console.log(`Member Name: ${memberName}`);
+              // console.log(`Member Index: ${memberIndex}`);
+              // console.log('--------------------------');
+            }
+          }
+
+          // Loop over all functions to analyze usages
+
+          for (let functionName in analyzedJSCode.functions) {
+            if (analyzedJSCode.functions.hasOwnProperty(functionName)) {
+              const functionData = analyzedJSCode.functions[functionName];
+              const memberName = functionName;
+              const memberIndex = functionData.index;
+
+              functionData.used.forEach((element, index) => {
+                // Access the properties of each element
+                const currentFunction = element.currentFunction;
+                const currentFunctionIndex = element.currentFunctionIndex;
+                // console.log(`Element ${index + 1}:`);
+                // console.log(`Current Function: ${currentFunction}`);
+                // console.log(`Current Function Index: ${currentFunctionIndex}`);
+                // console.log('--------------------------');
+
+                // Clear data before it is read again
+                elementName = '';
+                idVal = 0;
+                nameVal = '';
+                uniqueNameVal = '';
+                technicalTypeVal = '';
+                linkToEditorVal = '';
+                parentVal = '';
+                childVal = '';
+                isMainVal = false;
+                callerVal = 0;
+                calledVal = 0;
+                accessorVal = 0;
+                accessedVal = 0;
+                isWriteVal = false;
+                isReadVal = false;
+                isDependentVal = false;
+
+                elementName = 'SOMIX.Call';
+                callerVal = element.currentFunctionIndex;
+                calledVal = memberIndex;
+
+                buildModel(
+                  elementName,
+                  idVal,
+                  nameVal,
+                  uniqueNameVal,
+                  technicalTypeVal,
+                  linkToEditorVal,
+                  parentVal,
+                  childVal,
+                  isMainVal,
+                  callerVal,
+                  calledVal,
+                  accessorVal,
+                  accessedVal,
+                  isWriteVal,
+                  isReadVal,
+                  isDependentVal);
+
+              });
+            }
+          }
+
+
+
+
+          // Loop over all variables to analyze accesses
+
+          for (let variableName in analyzedJSCode.variables) {
+            if (analyzedJSCode.variables.hasOwnProperty(variableName)) {
+              const variableData = analyzedJSCode.variables[variableName];
+              const memberName = variableName;
+              const memberIndex = variableData.index;
+              if (variableData.used) {
+                variableData.used.forEach((element, index) => {
+                  // Access the properties of each element
+                  const currentFunction = element.currentFunction;
+                  const currentFunctionIndex = element.currentFunctionIndex;
+                  // console.log(`Element ${index + 1}:`);
+                  // console.log(`Current Function: ${currentFunction}`);
+                  // console.log(`Current Function Index: ${currentFunctionIndex}`);
+                  // console.log('--------------------------');
+
+                  // Clear data before it is read again
+                  elementName = '';
+                  idVal = 0;
+                  nameVal = '';
+                  uniqueNameVal = '';
+                  technicalTypeVal = '';
+                  linkToEditorVal = '';
+                  parentVal = '';
+                  childVal = '';
+                  isMainVal = false;
+                  callerVal = 0;
+                  calledVal = 0;
+                  accessorVal = 0;
+                  accessedVal = 0;
+                  isWriteVal = false;
+                  isReadVal = false;
+                  isDependentVal = false;
+
+                  elementName = 'SOMIX.Access';
+                  accessorVal = element.currentFunctionIndex;
+                  accessedVal = memberIndex;
+
+                  buildModel(
+                    elementName,
+                    idVal,
+                    nameVal,
+                    uniqueNameVal,
+                    technicalTypeVal,
+                    linkToEditorVal,
+                    parentVal,
+                    childVal,
+                    isMainVal,
+                    callerVal,
+                    calledVal,
+                    accessorVal,
+                    accessedVal,
+                    isWriteVal,
+                    isReadVal,
+                    isDependentVal);
+
+                });
+              }
+            }
+          }
+
+
+
+
+
+
+
+        }
+      }
+    }
+  }
+
 
 }
 
