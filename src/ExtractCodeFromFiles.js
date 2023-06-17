@@ -32,6 +32,7 @@ function javaScriptFindGlobal4(indexHTML, indexModel, codeParts) {
     for (const codePart of codeParts) { // for (const codePart of codeParts)
       if (codePart.code) {
 
+<<<<<<< HEAD
         // Known errors:
         // Thic code finds tokens in multiline comments
 
@@ -59,6 +60,29 @@ function javaScriptFindGlobal4(indexHTML, indexModel, codeParts) {
         //   |               // OR
         //   \b(let|const|function)\b  // Match keywords (let, const, function)
         // /gm);
+=======
+      let tokens = codePart.code.match(/\/\/.*?$|:|[^\S\r\n]+|\r?\n|\/\*[\s\S]*?\*\/|([a-zA-Z_$][a-zA-Z0-9_$]*)|[\{\}]|[\(\)]|\b(let|const|function)\b/gm);
+
+
+      //   /\/\/.*?$       // Match single-line comments
+      //   |               // OR
+      //   :               // Match colon symbol
+      //   |               // OR
+      //   [^\S\r\n]+      // Match whitespace characters except newlines
+      //   |               // OR
+      //   \r?\n          // Match newline characters
+      //   |               // OR
+      //   \/\*[\s\S]*?\*\/  // Match multiline comments
+      //   |               // OR
+      //   ([a-zA-Z_$][a-zA-Z0-9_$]*)  // Match variables or identifiers
+      //   |               // OR
+      //   [\{\}]          // Match curly brackets
+      //   |               // OR
+      //   [\(\)]          // Match parentheses
+      //   |               // OR
+      //   \b(let|const|function)\b  // Match keywords (let, const, function)
+      // /gm);
+>>>>>>> parent of d219de1 (#78 Exclude single line strings in code)
 
 
         if (tokens) {
@@ -107,6 +131,7 @@ function javaScriptFindGlobal4(indexHTML, indexModel, codeParts) {
                     };
                     indexModel += 1;
                   }
+<<<<<<< HEAD
                 }
               }
             } else if (/^[a-zA-Z_$]/.test(token)) {
@@ -173,25 +198,44 @@ function javaScriptFindGlobal4(indexHTML, indexModel, codeParts) {
                         variables[token] = variable;
                       }
                     }
+=======
+                  if (isExistingVariable) {
+                    var copiedObject = Object.assign({}, currentFunctionContainer);
+                    variable.used.push(copiedObject);
+                  }
+                  if ((!isExistingVariable && braketLevel == 0) || isExistingVariable) {
+                    variables[token] = variable;
+                  }
+                }
+                else {
+                  if (typeof variables[token] !== 'undefined') {
+                    const variable = variables[token]
+                    // 17.06.2023 This was apparently wrong and caused the container to be overwritten
+                    //variable.container = codePart.container;
+                    var copiedObject = Object.assign({}, currentFunctionContainer);
+                    variable.used && variable.used.push(copiedObject);
+                    variables[token] = variable;
+>>>>>>> parent of d219de1 (#78 Exclude single line strings in code)
                   }
                 }
               }
-            } else if (token === '{') {
-              level += 1;
-            } else if (token === '}') {
-
-              if (level == 1) {
-                if (currentFunction !== '') {
-                  currentFunction = '';
-                  currentFunctionIndex = indexHTML;
-                  currentFunctionContainer = {};
-                  currentFunctionContainer.currentFunction = currentFunction;
-                  currentFunctionContainer.currentFunctionIndex = currentFunctionIndex;
-                }
-              }
-              level -= 1;
             }
-          } // END tokens.forEach
+          } else if (token === '{') {
+            level += 1;
+          } else if (token === '}') {
+
+            if (level == 1) {
+              if (currentFunction !== '') {
+                currentFunction = '';
+                currentFunctionIndex = indexHTML;
+                currentFunctionContainer = {};
+                currentFunctionContainer.currentFunction = currentFunction;
+                currentFunctionContainer.currentFunctionIndex = currentFunctionIndex;
+              }
+            }
+            level -= 1;
+          }
+        } // END tokens.forEach
 
           );
         }
@@ -1000,7 +1044,6 @@ function testFindGlobal4() {
   const jsCode = `
     let x = 42;
     const y = x;
-    '#21395e';
     const cl = {xp: 2};
     // const yc = 3.14;
     /* 
