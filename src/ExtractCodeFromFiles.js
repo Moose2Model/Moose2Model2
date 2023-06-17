@@ -32,35 +32,6 @@ function javaScriptFindGlobal4(indexHTML, indexModel, codeParts) {
     for (const codePart of codeParts) { // for (const codePart of codeParts)
       if (codePart.code) {
 
-<<<<<<< HEAD
-        // Known errors:
-        // Thic code finds tokens in multiline comments
-
-        //let tokens = codePart.code.match(/\/\/.*?$|:|[^\S\r\n]+|\r?\n|\/\*[\s\S]*?\*\/|([a-zA-Z_$][a-zA-Z0-9_$]*)|[\{\}]|[\(\)]|\b(let|const|function)\b/gm);
-        let tokens = codePart.code.match(/\/\/.*?$|:|[^\S\r\n]+|\r?\n|\/\*[\s\S]*?\*\/|(['"`])(.*?)\1|([a-zA-Z_$][a-zA-Z0-9_$]*)|[\{\}]|[\(\)]|\b(let|const|function)\b/gm);
-
-        //   /(['"`])(.*?)\1
-        //   /\/\/.*?$       // Match single-line comments
-        //   |               // OR
-        //   :               // Match colon symbol
-        //   |               // OR
-        //   [^\S\r\n]+      // Match whitespace characters except newlines
-        //   |               // OR
-        //   \r?\n          // Match newline characters
-        //   |               // OR
-        //   \/\*[\s\S]*?\*\/  // Match multiline comments
-        //   |               // OR
-        //   (['"`])(.*?)\1  // Matches strings enclosed in single quotes, double quotes, or backticks 
-        //   |               // OR
-        //   ([a-zA-Z_$][a-zA-Z0-9_$]*)  // Match variables or identifiers
-        //   |               // OR
-        //   [\{\}]          // Match curly brackets
-        //   |               // OR
-        //   [\(\)]          // Match parentheses
-        //   |               // OR
-        //   \b(let|const|function)\b  // Match keywords (let, const, function)
-        // /gm);
-=======
       let tokens = codePart.code.match(/\/\/.*?$|:|[^\S\r\n]+|\r?\n|\/\*[\s\S]*?\*\/|([a-zA-Z_$][a-zA-Z0-9_$]*)|[\{\}]|[\(\)]|\b(let|const|function)\b/gm);
 
 
@@ -82,7 +53,6 @@ function javaScriptFindGlobal4(indexHTML, indexModel, codeParts) {
       //   |               // OR
       //   \b(let|const|function)\b  // Match keywords (let, const, function)
       // /gm);
->>>>>>> parent of d219de1 (#78 Exclude single line strings in code)
 
 
         if (tokens) {
@@ -131,74 +101,6 @@ function javaScriptFindGlobal4(indexHTML, indexModel, codeParts) {
                     };
                     indexModel += 1;
                   }
-<<<<<<< HEAD
-                }
-              }
-            } else if (/^[a-zA-Z_$]/.test(token)) {
-              let nextToken = tokens[index + 1];
-              let nextToken2 = tokens[index + 2];
-              if (nextToken === '(') {
-                // Create a copy of the original object
-                if (analyzeUsage ) {
-                  var copiedObject = Object.assign({}, currentFunctionContainer);
-                  functions[token] && functions[token].used && functions[token].used.push(copiedObject);
-                }
-              } else if (nextToken === ':' || (/^\s*$/.test(nextToken) && nextToken2 === ':')) // Check for '{ x:' or '{ x :' these are no references to variables
-              {
-                // ignore this is a specification for a class member
-              }
-              else {
-                const reservedWords = [
-                  'abstract', 'await', 'boolean', 'break', 'byte', 'case', 'catch', 'char', 'class', 'const',
-                  'continue', 'debugger', 'default', 'delete', 'do', 'double', 'else', 'enum', 'export', 'extends',
-                  'false', 'final', 'finally', 'float', 'for', 'function', 'goto', 'if', 'implements', 'import',
-                  'in', 'instanceof', 'int', 'interface', 'let', 'long', 'native', 'new', 'null', 'package', 'private',
-                  'protected', 'public', 'return', 'short', 'static', 'super', 'switch', 'synchronized', 'this', 'throw',
-                  'throws', 'transient', 'true', 'try', 'typeof', 'var', 'void', 'volatile', 'while', 'with', 'yield'
-                  // exclude also constructor
-                  , 'constructor'
-                ];
-
-                // if (token === 'let' || token === 'const' || token === 'constructor') {
-                if (reservedWords.includes(token)) {
-                  // ignore
-                } else {
-                  if (level == 0) {
-                    let isExistingVariable = false;
-                    if (variables[token]) {
-                      isExistingVariable = true;
-                    }
-                    const variable = variables[token] || {
-                      index: indexModel,
-                      used: []
-                    };
-                    if (!isExistingVariable) {
-                      indexModel += 1;
-                      variable.container = codePart.container;
-                    }
-                    if (isExistingVariable && analyzeUsage) {
-                      var copiedObject = Object.assign({}, currentFunctionContainer);
-                      variable.used.push(copiedObject);
-                    }
-                    if ((!isExistingVariable && braketLevel == 0 && !analyzeUsage) || (isExistingVariable && analyzeUsage  )) {
-                      if (token === 'e') {
-                        console.log('e');
-                      }
-                      variables[token] = variable;
-                    }
-                  }
-                  else {
-                    if (typeof variables[token] !== 'undefined') {
-                      const variable = variables[token]
-                      // 17.06.2023 This was apparently wrong and caused the container to be overwritten
-                      //variable.container = codePart.container;
-                      if (analyzeUsage) {
-                        var copiedObject = Object.assign({}, currentFunctionContainer);
-                        variable.used && variable.used.push(copiedObject);
-                        variables[token] = variable;
-                      }
-                    }
-=======
                   if (isExistingVariable) {
                     var copiedObject = Object.assign({}, currentFunctionContainer);
                     variable.used.push(copiedObject);
@@ -215,7 +117,6 @@ function javaScriptFindGlobal4(indexHTML, indexModel, codeParts) {
                     var copiedObject = Object.assign({}, currentFunctionContainer);
                     variable.used && variable.used.push(copiedObject);
                     variables[token] = variable;
->>>>>>> parent of d219de1 (#78 Exclude single line strings in code)
                   }
                 }
               }
