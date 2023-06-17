@@ -176,7 +176,7 @@ function javaScriptFindGlobal4(indexHTML, indexModel, codeParts) {
               // ignore this is a specification for a class member
             }
             else {
-              if (token === 'let' || token === 'const') {
+              if (token === 'let' || token === 'const' || token === 'constructor') {
                 // ignore
               } else {
                 if (level == 0) {
@@ -774,6 +774,9 @@ async function AnalyzeFileAndFolder() {
               isDependentVal = false;
 
               elementName = 'SOMIX.ParentChild';
+              if (!variableData.container) {
+                console.log('Undefined variable container', variableData);
+              };
               parentVal = variableData.container.index;
               childVal = memberIndex;
               isMainVal = true;
