@@ -247,7 +247,7 @@ async function SetExtractedFolder() {
 
 async function ExtractCodeFromFolder() {
     'use strict';
-    window.alert("This function is currently implemented. It will either not work, or not work properly");
+    //window.alert("This function is currently implemented. It will either not work, or not work properly");
 
     FEDirectoryHandle = await window.showDirectoryPicker();
 
