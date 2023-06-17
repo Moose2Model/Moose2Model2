@@ -25,7 +25,9 @@ function javaScriptFindGlobal4(indexHTML, indexModel, codeParts) {
   let level = 0;
   for (const codePart of codeParts) { // for (const codePart of codeParts)
     if (codePart.code) {
-      const tokens = codePart.code.match(/\/\/.*?$|:|[^\S\r\n]+|\r?\n|\/\*[\s\S]*?\*\/|([a-zA-Z_$][a-zA-Z0-9_$]*)|[\{\}]|[\(\)]|\b(let|const|function)\b/gm);
+      
+      const tokens = codePart.code.match(/\/\/.*?$|:|[^\S\r\n]+|\r?\n|\/\*[\s\S]*?\*\/|(["'`])(?:\\\1|[\s\S])*?\1|([a-zA-Z_$][a-zA-Z0-9_$]*)|[\{\}]|[\(\)]|\b(let|const|function)\b/gm);
+
 
 
       if (tokens) {
