@@ -1297,7 +1297,7 @@ function testFindGlobal4() {
 function testFindGlobal5() {
   const jsCode = `
     let x = 42;
-    const y = x;
+    const y = x; // Has to be found as usage in code of js file
     const cl = {xp: 2};
     // const yc = 3.14;
     /* 
@@ -1305,6 +1305,7 @@ function testFindGlobal5() {
     */
     function foo(para1) {
       let z = 100;
+      z1 = 43; // Has to be found as usage due to hoisting
       console.log(x + y + z);
       function subfoo(){
 
@@ -1324,6 +1325,7 @@ function testFindGlobal5() {
   `;
   const jsCode2 = `foo();
   let z1 = 42;
+  x = 1; // Has to be found as usage in code of js file
  `;
 
   const jsCodes = [{ container: 'First', code: jsCode }, { container: 'Second', code: jsCode2 }]
