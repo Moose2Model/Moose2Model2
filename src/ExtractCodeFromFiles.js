@@ -34,6 +34,8 @@ function javaScriptFindGlobal4(indexHTML, indexModel, codeParts) {
 
       let tokens = codePart.code.match(/\/\/.*?$|:|[^\S\r\n]+|\r?\n|\/\*[\s\S]*?\*\/|([a-zA-Z_$][a-zA-Z0-9_$]*)|[\{\}]|[\(\)]|\b(let|const|function)\b/gm);
 
+      let tokens = codePart.code.match(/\/\/.*?$|:|[^\S\r\n]+|\r?\n|\/\*[\s\S]*?\*\/|([a-zA-Z_$][a-zA-Z0-9_$]*)|[\{\}]|[\(\)]|\b(let|const|function)\b/gm);
+
 
       //   /\/\/.*?$       // Match single-line comments
       //   |               // OR
@@ -124,6 +126,19 @@ function javaScriptFindGlobal4(indexHTML, indexModel, codeParts) {
           } else if (token === '{') {
             level += 1;
           } else if (token === '}') {
+
+            if (level == 1) {
+              if (currentFunction !== '') {
+                currentFunction = '';
+                currentFunctionIndex = indexHTML;
+                currentFunctionContainer = {};
+                currentFunctionContainer.currentFunction = currentFunction;
+                currentFunctionContainer.currentFunctionIndex = currentFunctionIndex;
+              }
+            }
+            level -= 1;
+          }
+        } // END tokens.forEach
 
             if (level == 1) {
               if (currentFunction !== '') {
