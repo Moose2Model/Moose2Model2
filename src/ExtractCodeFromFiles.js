@@ -23,6 +23,7 @@ function javaScriptFindGlobal4(indexHTML, indexModel, codeParts) {
 
   let skipCount = 0;
   let level = 0;
+  let braketLevel = 0;
   for (const codePart of codeParts) { // for (const codePart of codeParts)
     if (codePart.code) {
 
@@ -54,6 +55,14 @@ function javaScriptFindGlobal4(indexHTML, indexModel, codeParts) {
 
       if (tokens) {
         tokens.forEach((token, index) => { // tokens.forEach
+
+          if (token === '(') {
+            braketLevel += 1;
+          }
+          if (token === ')') {
+            braketLevel -= 1; // TODO check for negative values 
+          }
+
           if (skipCount > 0) {
             skipCount -= 1;
             return;
@@ -124,7 +133,9 @@ function javaScriptFindGlobal4(indexHTML, indexModel, codeParts) {
                     var copiedObject = Object.assign({}, currentFunctionContainer);
                     variable.used.push(copiedObject);
                   }
-                  variables[token] = variable;
+                  if ((!isExistingVariable && braketLevel == 0) || isExistingVariable) {
+                    variables[token] = variable;
+                  }
                 }
                 else {
                   if (typeof variables[token] !== 'undefined') {
@@ -991,19 +1002,19 @@ function testFindGlobal4() {
     },
     y: {
       index: 3, used: [{ currentFunction: 'foo', currentFunctionIndex: 5 },
-      { currentFunction: 'foo2', currentFunctionIndex: 6 }], container: 'First'
+      { currentFunction: 'foo2', currentFunctionIndex: 7 }], container: 'First'
     },
     cl: {
       index: 4, used: [
-        { currentFunction: 'foo2', currentFunctionIndex: 6 }], container: 'First'
+        { currentFunction: 'foo2', currentFunctionIndex: 7 }], container: 'First'
     },
-    z1: { index: 7, used: [], container: 'Second' }
+    z1: { index: 8, used: [], container: 'Second' }
   };
   const functionsExp = {
-    foo: { index: 5, container: 'First', used: [{ currentFunction: '', currentFunctionIndex: 1 }, { currentFunction: 'foo2', currentFunctionIndex: 6 }] },
-    foo2: { index: 6, container: 'First', used: [] }
+    foo: { index: 5, container: 'First', used: [{ currentFunction: '', currentFunctionIndex: 1 }, { currentFunction: 'foo2', currentFunctionIndex: 7 }] },
+    foo2: { index: 7, container: 'First', used: [] }
   };
-  const indexExp = 8;
+  const indexExp = 9;
 
   console.log('VariablesExp:', variablesExp);
   console.log('FunctionsExp:', functionsExp);
