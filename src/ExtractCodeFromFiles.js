@@ -29,9 +29,9 @@ function javaScriptFindGlobal4(indexHTML, indexModel, codeParts) {
       // Known errors:
       // Thic code finds tokens in multiline comments
 
-      const tokens = codePart.code.match(/\/\/.*?$|:|[^\S\r\n]+|\r?\n|\/\*[\s\S]*?\*\/|([a-zA-Z_$][a-zA-Z0-9_$]*)|[\{\}]|[\(\)]|\b(let|const|function)\b/gm);
+      let tokens = codePart.code.match(/\/\/.*?$|:|[^\S\r\n]+|\r?\n|\/\*[\s\S]*?\*\/|([a-zA-Z_$][a-zA-Z0-9_$]*)|[\{\}]|[\(\)]|\b(let|const|function)\b/gm);
 
-      
+
       //   /\/\/.*?$       // Match single-line comments
       //   |               // OR
       //   :               // Match colon symbol
@@ -51,8 +51,6 @@ function javaScriptFindGlobal4(indexHTML, indexModel, codeParts) {
       //   \b(let|const|function)\b  // Match keywords (let, const, function)
       // /gm);
 
-  
-      
 
       if (tokens) {
         tokens.forEach((token, index) => { // tokens.forEach
@@ -94,7 +92,19 @@ function javaScriptFindGlobal4(indexHTML, indexModel, codeParts) {
               // ignore this is a specification for a class member
             }
             else {
-              if (token === 'let' || token === 'const' || token === 'constructor') {
+              const reservedWords = [
+                'abstract', 'await', 'boolean', 'break', 'byte', 'case', 'catch', 'char', 'class', 'const',
+                'continue', 'debugger', 'default', 'delete', 'do', 'double', 'else', 'enum', 'export', 'extends',
+                'false', 'final', 'finally', 'float', 'for', 'function', 'goto', 'if', 'implements', 'import',
+                'in', 'instanceof', 'int', 'interface', 'let', 'long', 'native', 'new', 'null', 'package', 'private',
+                'protected', 'public', 'return', 'short', 'static', 'super', 'switch', 'synchronized', 'this', 'throw',
+                'throws', 'transient', 'true', 'try', 'typeof', 'var', 'void', 'volatile', 'while', 'with', 'yield'
+                // exclude also constructor
+                , 'constructor'
+              ];
+
+              // if (token === 'let' || token === 'const' || token === 'constructor') {
+              if (reservedWords.includes(token)) {
                 // ignore
               } else {
                 if (level == 0) {
@@ -467,12 +477,12 @@ async function AnalyzeFileAndFolder() {
           fileContent = await fileInfo.file.text(); // See https://web.dev/file-system-access/
           let htmlDoc = parseHTML(fileContent);
           let scriptElements = htmlDoc.querySelectorAll('script');
-          console.log(fileInfo.name);
-          console.log(scriptElements);
+          //console.log(fileInfo.name);
+          //console.log(scriptElements);
           scriptElements = Array.from(scriptElements);
           if (Array.isArray(scriptElements)) {
             await Promise.all(scriptElements.map(async (scriptElement) => {
-              console.log(scriptElement.src);
+              //console.log(scriptElement.src);
               //console.log(scriptElement.textContent);
 
               // A
@@ -490,8 +500,8 @@ async function AnalyzeFileAndFolder() {
               // Extract the list of folders
               const folders = pathWithoutQuery.split('/').slice(0, -1);
 
-              console.log('File name:', fileName);
-              console.log('Folders:', folders);
+              //console.log('File name:', fileName);
+              //console.log('Folders:', folders);
               // End A
               let foundFile = {};
               foundFile = fileInfoByIndex.find(obj => ((obj) && (obj.name) && (obj.name === fileName)));
@@ -519,9 +529,9 @@ async function AnalyzeFileAndFolder() {
 
           // #78 Analyze code here
           let analyzedJSCode = javaScriptFindGlobal4(fileInfo.index, gIndex, jsCodes);
-          console.log(analyzedJSCode);
-          console.log(analyzedJSCode.variables.modelElementsByUniqueKey);
-          console.log(analyzedJSCode.variables.modelElementsByIndex);
+          //console.log(analyzedJSCode);
+          //console.log(analyzedJSCode.variables.modelElementsByUniqueKey);
+          //console.log(analyzedJSCode.variables.modelElementsByIndex);
 
           // Loop over all functions
 
@@ -692,9 +702,6 @@ async function AnalyzeFileAndFolder() {
               isDependentVal = false;
 
               elementName = 'SOMIX.ParentChild';
-              if (!variableData.container) {
-                console.log('Undefined variable container', variableData);
-              };
               parentVal = variableData.container.index;
               childVal = memberIndex;
               isMainVal = true;
@@ -945,7 +952,7 @@ function testFindGlobal4() {
     /* 
     const yd = 3.14; 
     */
-    function foo() {
+    function foo(para1) {
       let z = 100;
       console.log(x + y + z);
       function subfoo(){
