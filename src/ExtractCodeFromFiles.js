@@ -30,9 +30,10 @@ function javaScriptFindGlobal4(indexHTML, indexModel, codeParts) {
       // Known errors:
       // Thic code finds tokens in multiline comments
 
-      let tokens = codePart.code.match(/\/\/.*?$|:|[^\S\r\n]+|\r?\n|\/\*[\s\S]*?\*\/|([a-zA-Z_$][a-zA-Z0-9_$]*)|[\{\}]|[\(\)]|\b(let|const|function)\b/gm);
+      //let tokens = codePart.code.match(/\/\/.*?$|:|[^\S\r\n]+|\r?\n|\/\*[\s\S]*?\*\/|([a-zA-Z_$][a-zA-Z0-9_$]*)|[\{\}]|[\(\)]|\b(let|const|function)\b/gm);
+      let tokens = codePart.code.match(/\/\/.*?$|:|[^\S\r\n]+|\r?\n|\/\*[\s\S]*?\*\/|(['"`])(.*?)\1|([a-zA-Z_$][a-zA-Z0-9_$]*)|[\{\}]|[\(\)]|\b(let|const|function)\b/gm);
 
-
+      //   /(['"`])(.*?)\1
       //   /\/\/.*?$       // Match single-line comments
       //   |               // OR
       //   :               // Match colon symbol
@@ -42,6 +43,8 @@ function javaScriptFindGlobal4(indexHTML, indexModel, codeParts) {
       //   \r?\n          // Match newline characters
       //   |               // OR
       //   \/\*[\s\S]*?\*\/  // Match multiline comments
+      //   |               // OR
+      //   (['"`])(.*?)\1  // Matches strings enclosed in single quotes, double quotes, or backticks 
       //   |               // OR
       //   ([a-zA-Z_$][a-zA-Z0-9_$]*)  // Match variables or identifiers
       //   |               // OR
@@ -144,37 +147,40 @@ function javaScriptFindGlobal4(indexHTML, indexModel, codeParts) {
                     variable.used.push(copiedObject);
                   }
                   if ((!isExistingVariable && braketLevel == 0) || isExistingVariable) {
-                    variables[token] = variable;
+                    if (token === 'e') { 
+                      console.log('e');
+                     }
+                      variables[token] = variable;
+                    }
                   }
-                }
-                else {
-                  if (typeof variables[token] !== 'undefined') {
-                    const variable = variables[token]
-                    // 17.06.2023 This was apparently wrong and caused the container to be overwritten
-                    //variable.container = codePart.container;
-                    var copiedObject = Object.assign({}, currentFunctionContainer);
-                    variable.used && variable.used.push(copiedObject);
-                    variables[token] = variable;
+                  else {
+                    if (typeof variables[token] !== 'undefined') {
+                      const variable = variables[token]
+                      // 17.06.2023 This was apparently wrong and caused the container to be overwritten
+                      //variable.container = codePart.container;
+                      var copiedObject = Object.assign({}, currentFunctionContainer);
+                      variable.used && variable.used.push(copiedObject);
+                      variables[token] = variable;
+                    }
                   }
                 }
               }
-            }
-          } else if (token === '{') {
-            level += 1;
-          } else if (token === '}') {
+            } else if (token === '{') {
+              level += 1;
+            } else if (token === '}') {
 
-            if (level == 1) {
-              if (currentFunction !== '') {
-                currentFunction = '';
-                currentFunctionIndex = indexHTML;
-                currentFunctionContainer = {};
-                currentFunctionContainer.currentFunction = currentFunction;
-                currentFunctionContainer.currentFunctionIndex = currentFunctionIndex;
+              if (level == 1) {
+                if (currentFunction !== '') {
+                  currentFunction = '';
+                  currentFunctionIndex = indexHTML;
+                  currentFunctionContainer = {};
+                  currentFunctionContainer.currentFunction = currentFunction;
+                  currentFunctionContainer.currentFunctionIndex = currentFunctionIndex;
+                }
               }
+              level -= 1;
             }
-            level -= 1;
-          }
-        } // END tokens.forEach
+          } // END tokens.forEach
 
         );
       }
@@ -968,6 +974,7 @@ function testFindGlobal4() {
   const jsCode = `
     let x = 42;
     const y = x;
+    '#21395e';
     const cl = {xp: 2};
     // const yc = 3.14;
     /* 
