@@ -61,6 +61,16 @@ function javaScriptFindGlobal4(indexHTML, indexModel, codeParts) {
           }
           if (token === ')') {
             braketLevel -= 1; // TODO check for negative values 
+            if (braketLevel < 0) {
+              braketLevel = 0;
+            }
+          }
+
+          if (token === '{') {
+            braketLevel = 0;
+          }
+          if (token === '}') {
+            braketLevel = 0;
           }
 
           if (skipCount > 0) {
