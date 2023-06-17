@@ -201,7 +201,8 @@ function javaScriptFindGlobal4(indexHTML, indexModel, codeParts) {
                 else {
                   if (typeof variables[token] !== 'undefined') {
                     const variable = variables[token]
-                    variable.container = codePart.container;
+                    // 17.06.2023 This was apparently wrong and caused the container to be overwritten
+                    //variable.container = codePart.container;
                     var copiedObject = Object.assign({}, currentFunctionContainer);
                     variable.used && variable.used.push(copiedObject);
                     variables[token] = variable;
@@ -635,7 +636,7 @@ async function AnalyzeFileAndFolder() {
               elementName = 'SOMIX.Code';
               idVal = memberIndex;
               nameVal = memberName;
-              uniqueNameVal = 'JSFunction ' + memberName; 
+              uniqueNameVal = 'JSFunction ' + memberName;
 
               buildModel(
                 elementName,
@@ -734,7 +735,7 @@ async function AnalyzeFileAndFolder() {
               elementName = 'SOMIX.Data';
               idVal = memberIndex;
               nameVal = memberName;
-              uniqueNameVal = 'JSVariable ' + memberName; 
+              uniqueNameVal = 'JSVariable ' + memberName;
 
               buildModel(
                 elementName,
@@ -938,8 +939,6 @@ async function AnalyzeFileAndFolder() {
     }
   }
 
-  console.log(modelElementsByUniqueKey);
- // console.log(modelElementsByIndex);
 
 }
 
