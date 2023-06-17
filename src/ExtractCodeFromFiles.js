@@ -25,10 +25,34 @@ function javaScriptFindGlobal4(indexHTML, indexModel, codeParts) {
   let level = 0;
   for (const codePart of codeParts) { // for (const codePart of codeParts)
     if (codePart.code) {
+
+      // Known errors:
+      // Thic code finds tokens in multiline comments
+
+      const tokens = codePart.code.match(/\/\/.*?$|:|[^\S\r\n]+|\r?\n|\/\*[\s\S]*?\*\/|([a-zA-Z_$][a-zA-Z0-9_$]*)|[\{\}]|[\(\)]|\b(let|const|function)\b/gm);
+
       
-      const tokens = codePart.code.match(/\/\/.*?$|:|[^\S\r\n]+|\r?\n|\/\*[\s\S]*?\*\/|(["'`])(?:\\\1|[\s\S])*?\1|([a-zA-Z_$][a-zA-Z0-9_$]*)|[\{\}]|[\(\)]|\b(let|const|function)\b/gm);
+      //   /\/\/.*?$       // Match single-line comments
+      //   |               // OR
+      //   :               // Match colon symbol
+      //   |               // OR
+      //   [^\S\r\n]+      // Match whitespace characters except newlines
+      //   |               // OR
+      //   \r?\n          // Match newline characters
+      //   |               // OR
+      //   \/\*[\s\S]*?\*\/  // Match multiline comments
+      //   |               // OR
+      //   ([a-zA-Z_$][a-zA-Z0-9_$]*)  // Match variables or identifiers
+      //   |               // OR
+      //   [\{\}]          // Match curly brackets
+      //   |               // OR
+      //   [\(\)]          // Match parentheses
+      //   |               // OR
+      //   \b(let|const|function)\b  // Match keywords (let, const, function)
+      // /gm);
 
-
+  
+      
 
       if (tokens) {
         tokens.forEach((token, index) => { // tokens.forEach
