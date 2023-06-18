@@ -3,7 +3,7 @@
  * Analyzes the code in files.
  */
 
-
+const nameOfFileLogic = 'code';
 
 
 function javaScriptFindGlobal4(indexHTML, indexModel, codeParts) {
@@ -583,6 +583,74 @@ async function AnalyzeFileAndFolder() {
           isReadVal,
           isDependentVal);
 
+        // Add element for logic of file
+
+        elementName = 'SOMIX.Code';
+        idVal = fileInfo.indexOfCode;
+        nameVal = nameOfFileLogic;
+        uniqueNameVal = uniqueNameVal + '/' + nameVal;
+        technicalTypeVal = 'Code';
+        buildModel(
+          elementName,
+          idVal,
+          nameVal,
+          uniqueNameVal,
+          technicalTypeVal,
+          linkToEditorVal,
+          parentVal,
+          childVal,
+          isMainVal,
+          callerVal,
+          calledVal,
+          accessorVal,
+          accessedVal,
+          isWriteVal,
+          isReadVal,
+          isDependentVal);
+
+        // Add parent child relationship for logic of file
+
+        // Clear data before it is read again
+        elementName = '';
+        idVal = 0;
+        nameVal = '';
+        uniqueNameVal = '';
+        technicalTypeVal = '';
+        linkToEditorVal = '';
+        parentVal = '';
+        childVal = '';
+        isMainVal = false;
+        callerVal = 0;
+        calledVal = 0;
+        accessorVal = 0;
+        accessedVal = 0;
+        isWriteVal = false;
+        isReadVal = false;
+        isDependentVal = false;
+
+        elementName = 'SOMIX.ParentChild';
+        parentVal = fileInfo.index;
+        childVal = fileInfo.indexOfCode;
+        isMainVal = true;
+        buildModel(
+          elementName,
+          idVal,
+          nameVal,
+          uniqueNameVal,
+          technicalTypeVal,
+          linkToEditorVal,
+          parentVal,
+          childVal,
+          isMainVal,
+          callerVal,
+          calledVal,
+          accessorVal,
+          accessedVal,
+          isWriteVal,
+          isReadVal,
+          isDependentVal);
+
+
       } else if (fileInfo.handle.kind === 'directory') {
         elementName = 'SOMIX.Grouping';
 
@@ -684,6 +752,7 @@ async function AnalyzeFileAndFolder() {
         if (fileInfo.extension == 'html' || fileInfo.extension == 'htm') {
           let htmlFileName = fileInfo.name;
           let htmlFileIndex = fileInfo.index;
+          let htmlcodeIndex = fileInfo.indexOfCode;
           let htimFilePath = '';
           for (const e of fileInfo.directoryArray) {
             htimFilePath = htimFilePath + '/' + e;
@@ -723,10 +792,16 @@ async function AnalyzeFileAndFolder() {
                   for (const e of foundFile.directoryArray) {
                     foundFilePath = foundFilePath + '/' + e;
                   }
-                  jsCodes.push({ container: { name: foundFile.name, path: foundFilePath, index: foundFile.index }, code: jsContent });
+                  jsCodes.push({ 
+                    container: { name: foundFile.name, path: foundFilePath, index: foundFile.index }, 
+                    codeContainer: { name: nameOfFileLogic, path: foundFilePath + '/' + foundFile.name , index: foundFile.indexOfCode },
+                    code: jsContent });
                 }
               }
-              jsCodes.push({ container: { name: htmlFileName, path: htimFilePath, index: htmlFileIndex }, code: scriptElement.textContent });
+              jsCodes.push({ 
+                container: { name: htmlFileName, path: htimFilePath, index: htmlFileIndex },
+                codeContainer: { name: nameOfFileLogic, path: htimFilePath + '/' + htmlFileName, index: htmlcodeIndex },   
+                code: scriptElement.textContent });
 
 
             }));
@@ -734,7 +809,7 @@ async function AnalyzeFileAndFolder() {
 
 
           // #78 Analyze code here
-          let analyzedJSCode = javaScriptFindGlobal4(fileInfo.index, gIndex, jsCodes);
+          let analyzedJSCode = javaScriptFindGlobal5(fileInfo.index, gIndex, jsCodes);
 
           // Loop over all functions
 
