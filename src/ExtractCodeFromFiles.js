@@ -582,7 +582,7 @@ async function AnalyzeFileAndFolder() {
         for (const e of fileInfo.directoryArray) {
           uniqueNameVal = uniqueNameVal + '/' + e;
         }
-        // uniqueNameVal = uniqueNameVal + '/' + fileInfo.name;
+
         technicalTypeVal = 'Folder';
         buildModel(
           elementName,
@@ -673,6 +673,10 @@ async function AnalyzeFileAndFolder() {
         if (fileInfo.extension == 'html' || fileInfo.extension == 'htm') {
           let htmlFileName = fileInfo.name;
           let htmlFileIndex = fileInfo.index;
+          let htimFilePath = '';
+          for (const e of fileInfo.directoryArray) {    
+            htimFilePath = htimFilePath + '/' + e;
+          }
           let jsCodes = [];
           fileContent = await fileInfo.file.text(); // See https://web.dev/file-system-access/
           let htmlDoc = parseHTML(fileContent);
@@ -704,10 +708,14 @@ async function AnalyzeFileAndFolder() {
                   jsContent = await foundFile.file.text();
                 } catch (error) { };
                 if (jsContent) {
-                  jsCodes.push({ container: { name: foundFile.name, index: foundFile.index }, code: jsContent });
+                  let foundFilePath = '';
+                  for (const e of foundFile.directoryArray) {
+                    foundFilePath = foundFilePath + '/' + e;
+                  }
+                  jsCodes.push({ container: { name: foundFile.name, path: foundFilePath, index: foundFile.index }, code: jsContent });
                 }
               }
-              jsCodes.push({ container: { name: htmlFileName, index: htmlFileIndex }, code: scriptElement.textContent });
+              jsCodes.push({ container: { name: htmlFileName, path: htimFilePath, index: htmlFileIndex }, code: scriptElement.textContent });
 
 
             }));
@@ -748,7 +756,8 @@ async function AnalyzeFileAndFolder() {
               elementName = 'SOMIX.Code';
               idVal = memberIndex;
               nameVal = memberName;
-              uniqueNameVal = 'JSFunction ' + memberName;
+              uniqueNameVal = functionData.container.path + '/' + functionData.container.name + '/' + memberName;
+              technicalTypeVal = 'JSFunction';
 
               buildModel(
                 elementName,
@@ -847,7 +856,8 @@ async function AnalyzeFileAndFolder() {
               elementName = 'SOMIX.Data';
               idVal = memberIndex;
               nameVal = memberName;
-              uniqueNameVal = 'JSVariable ' + memberName;
+              uniqueNameVal = variableData.container.path + '/' + variableData.container.name + '/' + memberName;
+              technicalTypeVal = 'JSVariable';
 
               buildModel(
                 elementName,
