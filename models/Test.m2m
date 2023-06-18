@@ -4,7 +4,7 @@
 		"newElBoxX": 1634.0302734375,
 		"newElBoxY": -414,
 		"newElBoxWidth": 400,
-		"newElBoxHeight": 1488
+		"newElBoxHeight": 1628
 	},
 	"addedWithNeighbors": [
 		"JSFunction../src/Drawing.js/cameraToPaneX",
@@ -40,8 +40,13 @@
 		},
 		{
 			"uniqueKey": "File../src/Global.js",
-			"x": -712.41,
-			"y": 956.91
+			"x": -693.38,
+			"y": 1106.75
+		},
+		{
+			"uniqueKey": "Code../src/Global.js/code",
+			"x": 179.03,
+			"y": 809.84
 		},
 		{
 			"uniqueKey": "File../src/HTMLLogic.js",
@@ -59,14 +64,24 @@
 			"y": -145.82
 		},
 		{
+			"uniqueKey": "File../src/moose2model.html",
+			"x": 1799.68,
+			"y": 187.55
+		},
+		{
 			"uniqueKey": "File../src/MouseWheel.js",
 			"x": 339.13,
 			"y": 112.5
 		},
 		{
+			"uniqueKey": "JSFunction../src/moose2model.html/LoadDemoModel",
+			"x": 1900.26,
+			"y": -258.79
+		},
+		{
 			"uniqueKey": "JSFunction../src/Global.js/resizeCanvas",
-			"x": -280,
-			"y": 764
+			"x": -260.97,
+			"y": 909.84
 		},
 		{
 			"uniqueKey": "JSFunction../src/FileExtractorPreprocess.js/SetExtractedFolder",
@@ -160,38 +175,38 @@
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/modelElementsByIndex",
-			"x": 540,
-			"y": 804
+			"x": 559.03,
+			"y": 949.84
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/parentChildByParent",
-			"x": 52,
-			"y": 832
+			"x": 79.03,
+			"y": 989.84
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/ctx",
-			"x": 380,
-			"y": 964
+			"x": 399.03,
+			"y": 1109.84
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/offsetX",
-			"x": 460,
-			"y": 864
+			"x": 479.03,
+			"y": 1009.84
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/offsetY",
-			"x": 420,
-			"y": 804
+			"x": 439.03,
+			"y": 949.84
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/g_width",
-			"x": -420,
-			"y": 764
+			"x": -400.97,
+			"y": 909.84
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/g_height",
-			"x": -160,
-			"y": 764
+			"x": -140.97,
+			"y": 909.84
 		},
 		{
 			"uniqueKey": "JSVariable../src/Diagrams.js/circuitDiagramForSoftwareDiagramType",
@@ -265,7 +280,8 @@
 		"JSVariable../src/Drag.js/isDraggingJustStarted",
 		"JSFunction../src/Diagrams.js/displayedDiagramChanged",
 		"JSVariable../src/Global.js/parentChildByParent",
-		"JSVariable../src/Diagrams.js/circuitDiagramForSoftwareDiagramType"
+		"JSVariable../src/Diagrams.js/circuitDiagramForSoftwareDiagramType",
+		"Code../src/Global.js/code"
 	],
 	"suppressed": []
 }

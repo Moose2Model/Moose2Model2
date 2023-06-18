@@ -2,33 +2,48 @@
 	"newElementBox": {
 		"isInitial": false,
 		"newElBoxX": 261.357421875,
-		"newElBoxY": -234,
+		"newElBoxY": -334,
 		"newElBoxWidth": 400,
-		"newElBoxHeight": 388
+		"newElBoxHeight": 568
 	},
 	"addedWithNeighbors": [
 		"JSVariable../src/FileExtractorPreprocess.js/gIndex"
 	],
 	"positions": [
 		{
+			"uniqueKey": "File../src/ExtractCodeFromFiles.js",
+			"x": 436.8,
+			"y": -2.5
+		},
+		{
 			"uniqueKey": "File../src/FileExtractorPreprocess.js",
 			"x": 78.74,
 			"y": 60.4
 		},
 		{
+			"uniqueKey": "Code../src/FileExtractorPreprocess.js/code",
+			"x": 13.99,
+			"y": -220.6
+		},
+		{
+			"uniqueKey": "JSFunction../src/ExtractCodeFromFiles.js/AnalyzeFileAndFolder",
+			"x": 50.59,
+			"y": 127.74
+		},
+		{
 			"uniqueKey": "JSFunction../src/FileExtractorPreprocess.js/getFilesRecursively",
-			"x": -136.86,
+			"x": -111.4,
 			"y": 30.48
 		},
 		{
 			"uniqueKey": "JSFunction../src/FileExtractorPreprocess.js/SetExtractedFolder",
-			"x": 158.44,
-			"y": -83.74
+			"x": 195.21,
+			"y": -66.77
 		},
 		{
 			"uniqueKey": "JSFunction../src/FileExtractorPreprocess.js/ExtractCodeFromFolder",
-			"x": 14.78,
-			"y": -78.74
+			"x": 17.61,
+			"y": -54.7
 		},
 		{
 			"uniqueKey": "JSVariable../src/FileExtractorPreprocess.js/gIndex",
@@ -41,7 +56,9 @@
 		"JSVariable../src/FileExtractorPreprocess.js/gIndex",
 		"JSFunction../src/FileExtractorPreprocess.js/getFilesRecursively",
 		"JSFunction../src/FileExtractorPreprocess.js/ExtractCodeFromFolder",
-		"JSFunction../src/FileExtractorPreprocess.js/SetExtractedFolder"
+		"JSFunction../src/FileExtractorPreprocess.js/SetExtractedFolder",
+		"Code../src/FileExtractorPreprocess.js/code",
+		"JSFunction../src/ExtractCodeFromFiles.js/AnalyzeFileAndFolder"
 	],
 	"suppressed": []
 }

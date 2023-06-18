@@ -1,0 +1,305 @@
+{
+	"newElementBox": {
+		"isInitial": false,
+		"newElBoxX": 1376.6611927344488,
+		"newElBoxY": -1152.4,
+		"newElBoxWidth": 400,
+		"newElBoxHeight": 2306.4
+	},
+	"addedWithNeighbors": [
+		"JSFunction../src/Comment.js/comment",
+		"JSVariable../src/Diagrams.js/diagramms"
+	],
+	"positions": [
+		{
+			"uniqueKey": "File../src/Comment.js",
+			"x": -1200.32,
+			"y": -759.37
+		},
+		{
+			"uniqueKey": "File../src/ContextMenu.js",
+			"x": 1292.91,
+			"y": -85.78
+		},
+		{
+			"uniqueKey": "File../src/Diagrams.js",
+			"x": -27.4,
+			"y": -859.84
+		},
+		{
+			"uniqueKey": "Code../src/Diagrams.js/code",
+			"x": 401.41,
+			"y": -946.91
+		},
+		{
+			"uniqueKey": "File../src/Drag.js",
+			"x": 734.11,
+			"y": 150.19
+		},
+		{
+			"uniqueKey": "File../src/Drawing.js",
+			"x": 866.15,
+			"y": 616.12
+		},
+		{
+			"uniqueKey": "File../src/ForceDirecting.js",
+			"x": 458.11,
+			"y": -239.13
+		},
+		{
+			"uniqueKey": "File../src/Global.js",
+			"x": 321.48,
+			"y": 132.38
+		},
+		{
+			"uniqueKey": "File../src/moose2model.html",
+			"x": -1331.8,
+			"y": -472.89
+		},
+		{
+			"uniqueKey": "File../src/PositionElements.js",
+			"x": 981.33,
+			"y": -399.05
+		},
+		{
+			"uniqueKey": "JSFunction../src/moose2model.html/handleCommentRequested",
+			"x": -1317.85,
+			"y": -348.71
+		},
+		{
+			"uniqueKey": "JSFunction../src/Global.js/findNearestElement",
+			"x": 266.24,
+			"y": -276.02
+		},
+		{
+			"uniqueKey": "JSFunction../src/Comment.js/comment",
+			"x": -1266.26,
+			"y": -824.45
+		},
+		{
+			"uniqueKey": "JSFunction../src/Comment.js/commentAdapted",
+			"x": -528.69,
+			"y": -525.46
+		},
+		{
+			"uniqueKey": "JSFunction../src/ForceDirecting.js/forceDirecting",
+			"x": -395.05,
+			"y": -923.15
+		},
+		{
+			"uniqueKey": "JSFunction../src/Diagrams.js/useStartDiagram",
+			"x": 221.41,
+			"y": -866.91
+		},
+		{
+			"uniqueKey": "JSFunction../src/Diagrams.js/newDiagram",
+			"x": 281.41,
+			"y": -446.91
+		},
+		{
+			"uniqueKey": "JSFunction../src/Diagrams.js/activeDiagramChanged",
+			"x": 381.41,
+			"y": -906.91
+		},
+		{
+			"uniqueKey": "JSFunction../src/Diagrams.js/displayedDiagramChanged",
+			"x": 401.41,
+			"y": -646.91
+		},
+		{
+			"uniqueKey": "JSFunction../src/Diagrams.js/diagramIsSaved",
+			"x": 161.41,
+			"y": -606.91
+		},
+		{
+			"uniqueKey": "JSFunction../src/Diagrams.js/diagramNameWithChangeMark",
+			"x": 461.41,
+			"y": -586.91
+		},
+		{
+			"uniqueKey": "JSFunction../src/Diagrams.js/zoomDisplayedDiagram",
+			"x": 461.41,
+			"y": -926.91
+		},
+		{
+			"uniqueKey": "JSFunction../src/Diagrams.js/diagramFits",
+			"x": 461.41,
+			"y": -986.91
+		},
+		{
+			"uniqueKey": "JSFunction../src/Diagrams.js/ZoomToFit",
+			"x": 421.41,
+			"y": -746.91
+		},
+		{
+			"uniqueKey": "JSFunction../src/Diagrams.js/returnOtherDiagrams",
+			"x": 201.41,
+			"y": -646.91
+		},
+		{
+			"uniqueKey": "JSFunction../src/Diagrams.js/toggleNameDisplay",
+			"x": 441.41,
+			"y": -826.91
+		},
+		{
+			"uniqueKey": "JSFunction../src/Diagrams.js/ReadDisplayedDiagram",
+			"x": 461.41,
+			"y": -886.91
+		},
+		{
+			"uniqueKey": "JSFunction../src/Diagrams.js/SaveDisplayedDiagram",
+			"x": 421.41,
+			"y": -766.91
+		},
+		{
+			"uniqueKey": "JSFunction../src/Diagrams.js/ImportOldDiagram",
+			"x": 121.41,
+			"y": -566.91
+		},
+		{
+			"uniqueKey": "JSFunction../src/PositionElements.js/positionCircle",
+			"x": 1073.64,
+			"y": -797.63
+		},
+		{
+			"uniqueKey": "JSFunction../src/PositionElements.js/redoAddWithNeighbors",
+			"x": 1073.64,
+			"y": -717.63
+		},
+		{
+			"uniqueKey": "JSFunction../src/PositionElements.js/addWithNeighbors",
+			"x": 1213.64,
+			"y": -417.63
+		},
+		{
+			"uniqueKey": "JSFunction../src/PositionElements.js/suppressChildren",
+			"x": 1253.64,
+			"y": -397.63
+		},
+		{
+			"uniqueKey": "JSFunction../src/PositionElements.js/suppress",
+			"x": 1213.64,
+			"y": -877.63
+		},
+		{
+			"uniqueKey": "JSFunction../src/PositionElements.js/redoSuppress",
+			"x": 1093.64,
+			"y": -577.63
+		},
+		{
+			"uniqueKey": "JSFunction../src/ContextMenu.js/handleContextMenu",
+			"x": 1455.65,
+			"y": 80.59
+		},
+		{
+			"uniqueKey": "JSFunction../src/ContextMenu.js/ContextMenuClicked",
+			"x": 1355.65,
+			"y": -39.41
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drag.js/handleDragMouseDown",
+			"x": 645.87,
+			"y": 142.63
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drag.js/handleDragMouseMove",
+			"x": 865.87,
+			"y": -57.37
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drag.js/handleDragMouseUp",
+			"x": 645.87,
+			"y": -277.37
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drag.js/handleDragMouseOut",
+			"x": 905.87,
+			"y": 62.63
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/cameraToCanvasX",
+			"x": 883.04,
+			"y": 606.7
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/cameraToPaneX",
+			"x": 763.04,
+			"y": 466.7
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/cameraToCanvasY",
+			"x": 663.04,
+			"y": 906.7
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/cameraToPaneY",
+			"x": 783.04,
+			"y": 806.7
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/cameraToCanvasScale",
+			"x": 763.04,
+			"y": 1046.7
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/cameraToPaneScale",
+			"x": 563.04,
+			"y": 946.7
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/highlight",
+			"x": 723.04,
+			"y": 906.7
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/RemoveAllHighlighting",
+			"x": 843.04,
+			"y": 786.7
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/drawCompleteModel",
+			"x": 703.04,
+			"y": 966.7
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/draw",
+			"x": 623.04,
+			"y": 986.7
+		},
+		{
+			"uniqueKey": "JSVariable../src/Comment.js/lastElement",
+			"x": -1148.69,
+			"y": -865.46
+		},
+		{
+			"uniqueKey": "JSVariable../src/Diagrams.js/diagramms",
+			"x": -78.59,
+			"y": -946.91
+		},
+		{
+			"uniqueKey": "JSVariable../src/Diagrams.js/diagramInfos",
+			"x": 41.41,
+			"y": -886.91
+		}
+	],
+	"comments": [
+		{
+			"uniqueKey": "JSFunction../src/Comment.js/comment",
+			"x": -1345.05,
+			"y": -940.82,
+			"text": "Uses diagramms before it is declared."
+		},
+		{
+			"uniqueKey": "JSFunction../src/ForceDirecting.js/forceDirecting",
+			"x": -492.13,
+			"y": -1041.04,
+			"text": "Uses diagramms before it is declared."
+		}
+	],
+	"pinned": [
+		"JSFunction../src/PositionElements.js/redoSuppress",
+		"JSFunction../src/ForceDirecting.js/forceDirecting",
+		"JSFunction../src/Comment.js/comment"
+	],
+	"suppressed": []
+}

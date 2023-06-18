@@ -258,181 +258,194 @@ function javaScriptFindGlobal6(indexHTML, indexModel, codeParts) {
   const variables = {};
   const functions = {};
 
-  let currentFunction = '';
-  let currentFunctionIndex = indexHTML;
-  let currentFunctionContainer = {};
+  let analyseUsage = false;
+
+  // First loop: Find all functions and variables
+  // Second loop: Find all function calls and variable uses 
+  for (let loop = 0; loop < 2; loop++) {
+
+    if (loop == 1) { analyseUsage = true; };
+
+    let currentFunction = '';
+    let currentFunctionIndex = indexHTML;
+    let currentFunctionContainer = {};
 
 
-  let skipCount = 0;
-  let level = 0;
-  let braketLevel = 0;
-  for (const codePart of codeParts) { // for (const codePart of codeParts)
-    if (codePart.code) {
+    let skipCount = 0;
+    let level = 0;
+    let braketLevel = 0;
+    for (const codePart of codeParts) { // for (const codePart of codeParts)
+      if (codePart.code) {
 
-      const codeContainer = codePart.codeContainer;
-      const codeContainerIndex = codePart.codeContainerIndex;
+        const codeContainerName = codePart.codeContainer.name;
+        const codeContainerIndex = codePart.codeContainer.index;
 
-      currentFunctionContainer.currentFunction = codeContainer;
-      currentFunctionContainer.currentFunctionIndex = codeContainerIndex;
+        currentFunctionContainer.currentFunction = codeContainerName;
+        currentFunctionContainer.currentFunctionIndex = codeContainerIndex;
 
-      // Known errors:
-      // Thic code finds tokens in multiline comments
+        // Known errors:
+        // Thic code finds tokens in multiline comments
 
-      let tokens = codePart.code.match(/\/\/.*?$|:|[^\S\r\n]+|\r?\n|\/\*[\s\S]*?\*\/|(['"`])(.*?)\1|([a-zA-Z_$][a-zA-Z0-9_$]*)|[\{\}]|[\(\)]|\b(let|const|function)\b/gm);
-
-
-      //   /\/\/.*?$       // Match single-line comments
-      //   |               // OR
-      //   :               // Match colon symbol
-      //   |               // OR
-      //   [^\S\r\n]+      // Match whitespace characters except newlines
-      //   |               // OR
-      //   \r?\n          // Match newline characters
-      //   |               // OR
-      //   \/\*[\s\S]*?\*\/  // Match multiline comments
-      //   |               // OR
-      //      (['"`])(.*?)\1  // Matches strings enclosed in single quotes, double quotes, or b
-      //   |               // OR
-      //   ([a-zA-Z_$][a-zA-Z0-9_$]*)  // Match variables or identifiers
-      //   |               // OR
-      //   [\{\}]          // Match curly brackets
-      //   |               // OR
-      //   [\(\)]          // Match parentheses
-      //   |               // OR
-      //   \b(let|const|function)\b  // Match keywords (let, const, function)
-      // /gm);
+        let tokens = codePart.code.match(/\/\/.*?$|:|[^\S\r\n]+|\r?\n|\/\*[\s\S]*?\*\/|(['"`])(.*?)\1|([a-zA-Z_$][a-zA-Z0-9_$]*)|[\{\}]|[\(\)]|\b(let|const|function)\b/gm);
 
 
-      if (tokens) {
-        tokens.forEach((token, index) => { // tokens.forEach
+        //   /\/\/.*?$       // Match single-line comments
+        //   |               // OR
+        //   :               // Match colon symbol
+        //   |               // OR
+        //   [^\S\r\n]+      // Match whitespace characters except newlines
+        //   |               // OR
+        //   \r?\n          // Match newline characters
+        //   |               // OR
+        //   \/\*[\s\S]*?\*\/  // Match multiline comments
+        //   |               // OR
+        //      (['"`])(.*?)\1  // Matches strings enclosed in single quotes, double quotes, or b
+        //   |               // OR
+        //   ([a-zA-Z_$][a-zA-Z0-9_$]*)  // Match variables or identifiers
+        //   |               // OR
+        //   [\{\}]          // Match curly brackets
+        //   |               // OR
+        //   [\(\)]          // Match parentheses
+        //   |               // OR
+        //   \b(let|const|function)\b  // Match keywords (let, const, function)
+        // /gm);
 
-          if (token === '(') {
-            braketLevel += 1;
-          }
-          if (token === ')') {
-            braketLevel -= 1; // TODO check for negative values 
-            if (braketLevel < 0) {
+
+        if (tokens) {
+          tokens.forEach((token, index) => { // tokens.forEach
+
+            if (token === '(') {
+              braketLevel += 1;
+            }
+            if (token === ')') {
+              braketLevel -= 1; // TODO check for negative values 
+              if (braketLevel < 0) {
+                braketLevel = 0;
+              }
+            }
+
+            if (token === '{') {
               braketLevel = 0;
             }
-          }
-
-          if (token === '{') {
-            braketLevel = 0;
-          }
-          if (token === '}') {
-            braketLevel = 0;
-          }
-
-          if (skipCount > 0) {
-            skipCount -= 1;
-            return;
-          }
-
-          else if (token === 'function') {
-            let nextToken = tokens[index + 1];
-            skipCount = 1;
-            if (/^\s*$/.test(nextToken)) {
-              nextToken = tokens[index + 2];
-              skipCount = 2;
+            if (token === '}') {
+              braketLevel = 0;
             }
-            if (/^[a-zA-Z_$]/.test(nextToken)) {
-              if (level == 0) {
-                currentFunction = nextToken;
-                currentFunctionIndex = indexModel;
-                currentFunctionContainer.currentFunction = currentFunction;
-                currentFunctionContainer.currentFunctionIndex = currentFunctionIndex;
-                functions[currentFunction] = {
-                  index: indexModel,
-                  container: codePart.container,
-                  used: []
-                };
-                indexModel += 1;
+
+            if (skipCount > 0) {
+              skipCount -= 1;
+              return;
+            }
+
+            else if (token === 'function') {
+              let nextToken = tokens[index + 1];
+              skipCount = 1;
+              if (/^\s*$/.test(nextToken)) {
+                nextToken = tokens[index + 2];
+                skipCount = 2;
               }
-            }
-          } else if (/^[a-zA-Z_$]/.test(token)) {
-            let nextToken = tokens[index + 1];
-            let nextToken2 = tokens[index + 2];
-            if (nextToken === '(') {
-              // Create a copy of the original object
-              var copiedObject = Object.assign({}, currentFunctionContainer);
-              functions[token] && functions[token].used && functions[token].used.push(copiedObject);
-            } else if (nextToken === ':' || (/^\s*$/.test(nextToken) && nextToken2 === ':')) // Check for '{ x:' or '{ x :' these are no references to variables
-            {
-              // ignore this is a specification for a class member
-            }
-            else {
-              const reservedWords = [
-                'abstract', 'await', 'boolean', 'break', 'byte', 'case', 'catch', 'char', 'class', 'const',
-                'continue', 'debugger', 'default', 'delete', 'do', 'double', 'else', 'enum', 'export', 'extends',
-                'false', 'final', 'finally', 'float', 'for', 'function', 'goto', 'if', 'implements', 'import',
-                'in', 'instanceof', 'int', 'interface', 'let', 'long', 'native', 'new', 'null', 'package', 'private',
-                'protected', 'public', 'return', 'short', 'static', 'super', 'switch', 'synchronized', 'this', 'throw',
-                'throws', 'transient', 'true', 'try', 'typeof', 'var', 'void', 'volatile', 'while', 'with', 'yield'
-                // exclude also constructor
-                , 'constructor'
-              ];
-
-              // if (token === 'let' || token === 'const' || token === 'constructor') {
-              if (reservedWords.includes(token)) {
-                // ignore
-              } else {
+              if (/^[a-zA-Z_$]/.test(nextToken)) {
                 if (level == 0) {
-                  let isExistingVariable = false;
-                  if (variables[token]) {
-                    isExistingVariable = true;
-                  }
-                  const variable = variables[token] || {
+                  currentFunction = nextToken;
+                  currentFunctionIndex = indexModel;
+                  currentFunctionContainer.currentFunction = currentFunction;
+                  currentFunctionContainer.currentFunctionIndex = currentFunctionIndex;
+                  functions[currentFunction] = {
                     index: indexModel,
+                    container: codePart.container,
                     used: []
                   };
-                  if (!isExistingVariable) {
-                    indexModel += 1;
-                    variable.container = codePart.container;
-                  }
-                  if (isExistingVariable) {
-                    var copiedObject = Object.assign({}, currentFunctionContainer);
-                    variable.used.push(copiedObject);
-                  }
-                  if ((!isExistingVariable && braketLevel == 0) || isExistingVariable) {
-                    variables[token] = variable;
-                  }
+                  indexModel += 1;
                 }
-                else {
-                  if (typeof variables[token] !== 'undefined') {
-                    const variable = variables[token]
-                    // 17.06.2023 This was apparently wrong and caused the container to be overwritten
-                    //variable.container = codePart.container;
-                    var copiedObject = Object.assign({}, currentFunctionContainer);
-                    variable.used && variable.used.push(copiedObject);
-                    variables[token] = variable;
+              }
+            } else if (/^[a-zA-Z_$]/.test(token)) {
+              let nextToken = tokens[index + 1];
+              let nextToken2 = tokens[index + 2];
+              if (nextToken === '(') {
+                // Create a copy of the original object
+                if (analyseUsage) {
+                  var copiedObject = Object.assign({}, currentFunctionContainer);
+                  functions[token] && functions[token].used && functions[token].used.push(copiedObject);
+                }
+              } else if (nextToken === ':' || (/^\s*$/.test(nextToken) && nextToken2 === ':')) // Check for '{ x:' or '{ x :' these are no references to variables
+              {
+                // ignore this is a specification for a class member
+              }
+              else {
+                const reservedWords = [
+                  'abstract', 'await', 'boolean', 'break', 'byte', 'case', 'catch', 'char', 'class', 'const',
+                  'continue', 'debugger', 'default', 'delete', 'do', 'double', 'else', 'enum', 'export', 'extends',
+                  'false', 'final', 'finally', 'float', 'for', 'function', 'goto', 'if', 'implements', 'import',
+                  'in', 'instanceof', 'int', 'interface', 'let', 'long', 'native', 'new', 'null', 'package', 'private',
+                  'protected', 'public', 'return', 'short', 'static', 'super', 'switch', 'synchronized', 'this', 'throw',
+                  'throws', 'transient', 'true', 'try', 'typeof', 'var', 'void', 'volatile', 'while', 'with', 'yield'
+                  // exclude also constructor
+                  , 'constructor'
+                ];
+
+                // if (token === 'let' || token === 'const' || token === 'constructor') {
+                if (reservedWords.includes(token)) {
+                  // ignore
+                } else {
+                  if (level == 0) {
+                    let isExistingVariable = false;
+                    if (variables[token]) {
+                      isExistingVariable = true;
+                    }
+                    const variable = variables[token] || {
+                      index: indexModel,
+                      used: []
+                    };
+                    if (!isExistingVariable) {
+                      indexModel += 1;
+                      variable.container = codePart.container;
+                    }
+                    if (isExistingVariable) {
+                      if (analyseUsage) {
+                        var copiedObject = Object.assign({}, currentFunctionContainer);
+                        variable.used.push(copiedObject);
+                      }
+                    }
+                    if ((!isExistingVariable && braketLevel == 0) || isExistingVariable) {
+                      variables[token] = variable;
+                    }
+                  }
+                  else {
+                    if (typeof variables[token] !== 'undefined') {
+                      const variable = variables[token]
+                      // 17.06.2023 This was apparently wrong and caused the container to be overwritten
+                      //variable.container = codePart.container;
+                      if (analyseUsage) {
+                        var copiedObject = Object.assign({}, currentFunctionContainer);
+                        variable.used && variable.used.push(copiedObject);
+                        variables[token] = variable;
+                      }
+                    }
                   }
                 }
               }
-            }
-          } else if (token === '{') {
-            level += 1;
-          } else if (token === '}') {
+            } else if (token === '{') {
+              level += 1;
+            } else if (token === '}') {
 
-            if (level == 1) {
-              if (currentFunction !== '') {
-                currentFunction = '';
-                currentFunctionIndex = indexHTML;
-                currentFunctionContainer = {};
-                //currentFunctionContainer.currentFunction = currentFunction;
-                //currentFunctionContainer.currentFunctionIndex = currentFunctionIndex;
+              if (level == 1) {
+                if (currentFunction !== '') {
+                  currentFunction = '';
+                  currentFunctionIndex = indexHTML;
+                  currentFunctionContainer = {};
 
-                currentFunctionContainer.currentFunction = codeContainer;
-                currentFunctionContainer.currentFunctionIndex = codeContainerIndex;
+                  currentFunctionContainer.currentFunction = codeContainerName;
+                  currentFunctionContainer.currentFunctionIndex = codeContainerIndex;
+                }
               }
+              level -= 1;
             }
-            level -= 1;
-          }
-        } // END tokens.forEach
+          } // END tokens.forEach
 
-        );
+          );
+        }
       }
-    }
-  } // END for (const codePart of codeParts)
+    } // END for (const codePart of codeParts)
+  } // END for const loop of loops
   let result = {};
   for (let v in variables) {
 
@@ -755,9 +768,9 @@ async function AnalyzeFileAndFolder() {
           let htmlFileName = fileInfo.name;
           let htmlFileIndex = fileInfo.index;
           let htmlcodeIndex = fileInfo.indexOfCode;
-          let htimFilePath = '';
+          let htmlFilePath = '';
           for (const e of fileInfo.directoryArray) {
-            htimFilePath = htimFilePath + '/' + e;
+            htmlFilePath = htmlFilePath + '/' + e;
           }
           let jsCodes = [];
           fileContent = await fileInfo.file.text(); // See https://web.dev/file-system-access/
@@ -794,16 +807,18 @@ async function AnalyzeFileAndFolder() {
                   for (const e of foundFile.directoryArray) {
                     foundFilePath = foundFilePath + '/' + e;
                   }
-                  jsCodes.push({ 
-                    container: { name: foundFile.name, path: foundFilePath, index: foundFile.index }, 
-                    codeContainer: { name: nameOfFileLogic, path: foundFilePath + '/' + foundFile.name , index: foundFile.indexOfCode },
-                    code: jsContent });
+                  jsCodes.push({
+                    container: { name: foundFile.name, path: foundFilePath, index: foundFile.index },
+                    codeContainer: { name: nameOfFileLogic, path: foundFilePath + '/' + foundFile.name, index: foundFile.indexOfCode },
+                    code: jsContent
+                  });
                 }
               }
-              jsCodes.push({ 
-                container: { name: htmlFileName, path: htimFilePath, index: htmlFileIndex },
-                codeContainer: { name: nameOfFileLogic, path: htimFilePath + '/' + htmlFileName, index: htmlcodeIndex },   
-                code: scriptElement.textContent });
+              jsCodes.push({
+                container: { name: htmlFileName, path: htmlFilePath, index: htmlFileIndex },
+                codeContainer: { name: nameOfFileLogic, path: htmlFilePath + '/' + htmlFileName, index: htmlcodeIndex },
+                code: scriptElement.textContent
+              });
 
 
             }));
@@ -811,7 +826,10 @@ async function AnalyzeFileAndFolder() {
 
 
           // #78 Analyze code here
-          let analyzedJSCode = javaScriptFindGlobal5(fileInfo.index, gIndex, jsCodes);
+          let analyzedJSCode = javaScriptFindGlobal6(fileInfo.index, gIndex, jsCodes);
+          if (analyzedJSCode.index) {
+            gIndex = analyzedJSCode.index;
+          }
 
           // Loop over all functions
 
@@ -1179,6 +1197,8 @@ function testFindGlobal5() {
 
   const result = javaScriptFindGlobal5(1, 2, jsCodes);
 
+  console.log('testFindGlobal5');
+
   console.log('Variables:', result.variables);
   console.log('Functions:', result.functions);
   console.log('Index after analysis:', result.index);
@@ -1274,6 +1294,8 @@ function testFindGlobal6() {
   const jsCodes = [{ container: 'First', codeContainer: 'FirstCode', codeContainerIndex: 100, code: jsCode }, { container: 'Second', codeContainer: 'SecondCode', codeContainerIndex: 101, code: jsCode2 }]
 
   const result = javaScriptFindGlobal6(1, 2, jsCodes);
+
+  console.log('testFindGlobal6');
 
   console.log('Variables:', result.variables);
   console.log('Functions:', result.functions);

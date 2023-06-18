@@ -1,0 +1,136 @@
+{
+	"newElementBox": {
+		"isInitial": false,
+		"newElBoxX": 262.033203125,
+		"newElBoxY": -654,
+		"newElBoxWidth": 400,
+		"newElBoxHeight": 1108
+	},
+	"addedWithNeighbors": [
+		"JSVariable../src/Global.js/modelElementsByIndex"
+	],
+	"positions": [
+		{
+			"uniqueKey": "File../src/Comment.js",
+			"x": 3.48,
+			"y": 64.86
+		},
+		{
+			"uniqueKey": "File../src/Diagrams.js",
+			"x": 117.57,
+			"y": 309.51
+		},
+		{
+			"uniqueKey": "File../src/Drag.js",
+			"x": 49.04,
+			"y": 43.16
+		},
+		{
+			"uniqueKey": "File../src/Drawing.js",
+			"x": 71.55,
+			"y": 14.65
+		},
+		{
+			"uniqueKey": "File../src/ForceDirecting.js",
+			"x": 76.36,
+			"y": 89.88
+		},
+		{
+			"uniqueKey": "File../src/Global.js",
+			"x": -443.21,
+			"y": -369.8
+		},
+		{
+			"uniqueKey": "Code../src/Global.js/code",
+			"x": -696,
+			"y": -542
+		},
+		{
+			"uniqueKey": "File../src/ModelExplorer.js",
+			"x": 290.08,
+			"y": 359.15
+		},
+		{
+			"uniqueKey": "File../src/PositionElements.js",
+			"x": -488.48,
+			"y": 179.35
+		},
+		{
+			"uniqueKey": "JSFunction../src/Global.js/findNearestElement",
+			"x": -616,
+			"y": -202
+		},
+		{
+			"uniqueKey": "JSFunction../src/Global.js/initializeBuildModel",
+			"x": -296,
+			"y": -462
+		},
+		{
+			"uniqueKey": "JSFunction../src/Global.js/buildModel",
+			"x": -416,
+			"y": -142
+		},
+		{
+			"uniqueKey": "JSFunction../src/Comment.js/commentAdapted",
+			"x": -677.34,
+			"y": 124.99
+		},
+		{
+			"uniqueKey": "JSFunction../src/ForceDirecting.js/forceDirecting",
+			"x": -89.42,
+			"y": 39.2
+		},
+		{
+			"uniqueKey": "JSFunction../src/Diagrams.js/SaveDisplayedDiagram",
+			"x": 142,
+			"y": 50
+		},
+		{
+			"uniqueKey": "JSFunction../src/Diagrams.js/ImportOldDiagram",
+			"x": 139.62,
+			"y": 198.86
+		},
+		{
+			"uniqueKey": "JSFunction../src/PositionElements.js/positionCircle",
+			"x": -508,
+			"y": 220
+		},
+		{
+			"uniqueKey": "JSFunction../src/PositionElements.js/redoAddWithNeighbors",
+			"x": -268,
+			"y": 340
+		},
+		{
+			"uniqueKey": "JSFunction../src/ModelExplorer.js/filterModel",
+			"x": 550,
+			"y": 360
+		},
+		{
+			"uniqueKey": "JSFunction../src/ModelExplorer.js/findListEntry",
+			"x": 330,
+			"y": 200
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drag.js/handleDragMouseMove",
+			"x": -63.75,
+			"y": -151.64
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/drawCompleteModel",
+			"x": 241.71,
+			"y": -140.82
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/modelElementsByIndex",
+			"x": -476,
+			"y": -402
+		}
+	],
+	"comments": [],
+	"pinned": [
+		"JSFunction../src/Comment.js/commentAdapted",
+		"JSFunction../src/ForceDirecting.js/forceDirecting",
+		"JSFunction../src/Diagrams.js/ImportOldDiagram"
+	],
+	"suppressed": []
+}
