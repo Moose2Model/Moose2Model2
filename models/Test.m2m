@@ -1,0 +1,271 @@
+{
+	"newElementBox": {
+		"isInitial": false,
+		"newElBoxX": 1634.0302734375,
+		"newElBoxY": -414,
+		"newElBoxWidth": 400,
+		"newElBoxHeight": 1488
+	},
+	"addedWithNeighbors": [
+		"JSFunction../src/Drawing.js/cameraToPaneX",
+		"JSVariable../src/Global.js/g_width",
+		"JSFunction../src/Diagrams.js/diagramFits",
+		"JSFunction../src/Drag.js/handleDragMouseMove"
+	],
+	"positions": [
+		{
+			"uniqueKey": "File../src/ContextMenu.js",
+			"x": 643.3,
+			"y": -192.88
+		},
+		{
+			"uniqueKey": "File../src/Diagrams.js",
+			"x": 641.41,
+			"y": 360.73
+		},
+		{
+			"uniqueKey": "File../src/Drag.js",
+			"x": 1537.29,
+			"y": -77.86
+		},
+		{
+			"uniqueKey": "File../src/Drawing.js",
+			"x": -543.22,
+			"y": -54.97
+		},
+		{
+			"uniqueKey": "File../src/FileExtractorPreprocess.js",
+			"x": 59.36,
+			"y": -156.31
+		},
+		{
+			"uniqueKey": "File../src/Global.js",
+			"x": -712.41,
+			"y": 956.91
+		},
+		{
+			"uniqueKey": "File../src/HTMLLogic.js",
+			"x": 748.31,
+			"y": 49.87
+		},
+		{
+			"uniqueKey": "File../src/M2mExplorer.js",
+			"x": 100.21,
+			"y": 464.63
+		},
+		{
+			"uniqueKey": "File../src/ModelExplorer.js",
+			"x": 290.2,
+			"y": -145.82
+		},
+		{
+			"uniqueKey": "File../src/MouseWheel.js",
+			"x": 339.13,
+			"y": 112.5
+		},
+		{
+			"uniqueKey": "JSFunction../src/Global.js/resizeCanvas",
+			"x": -280,
+			"y": 764
+		},
+		{
+			"uniqueKey": "JSFunction../src/FileExtractorPreprocess.js/SetExtractedFolder",
+			"x": 424.73,
+			"y": -304.95
+		},
+		{
+			"uniqueKey": "JSFunction../src/FileExtractorPreprocess.js/ExtractCodeFromFolder",
+			"x": 227.01,
+			"y": -302.95
+		},
+		{
+			"uniqueKey": "JSFunction../src/Diagrams.js/displayedDiagramChanged",
+			"x": 1144,
+			"y": 392
+		},
+		{
+			"uniqueKey": "JSFunction../src/Diagrams.js/diagramFits",
+			"x": 944,
+			"y": 512
+		},
+		{
+			"uniqueKey": "JSFunction../src/Diagrams.js/ZoomToFit",
+			"x": 944,
+			"y": 412
+		},
+		{
+			"uniqueKey": "JSFunction../src/Diagrams.js/ReadDisplayedDiagram",
+			"x": 984,
+			"y": 272
+		},
+		{
+			"uniqueKey": "JSFunction../src/Diagrams.js/ImportOldDiagram",
+			"x": 844,
+			"y": 272
+		},
+		{
+			"uniqueKey": "JSFunction../src/ModelExplorer.js/drawModelExplorer",
+			"x": -249.02,
+			"y": 265.45
+		},
+		{
+			"uniqueKey": "JSFunction../src/M2mExplorer.js/drawM2mExplorer",
+			"x": -21.17,
+			"y": 499.67
+		},
+		{
+			"uniqueKey": "JSFunction../src/ContextMenu.js/ContextMenuClicked",
+			"x": 153.23,
+			"y": -81.23
+		},
+		{
+			"uniqueKey": "JSFunction../src/MouseWheel.js/zoom",
+			"x": 324.16,
+			"y": -90.29
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drag.js/handleDragMouseMove",
+			"x": 1144,
+			"y": -4
+		},
+		{
+			"uniqueKey": "JSFunction../src/HTMLLogic.js/LoadModel",
+			"x": 693.92,
+			"y": -132.24
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/supportRetina",
+			"x": -107.76,
+			"y": -46.32
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/cameraToCanvasX",
+			"x": -275.35,
+			"y": 76.04
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/cameraToPaneX",
+			"x": -523.76,
+			"y": -6.32
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/drawCompleteModel",
+			"x": -363.76,
+			"y": -46.32
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/draw",
+			"x": -221.9,
+			"y": -170.13
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/modelElementsByIndex",
+			"x": 540,
+			"y": 804
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/parentChildByParent",
+			"x": 52,
+			"y": 832
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/ctx",
+			"x": 380,
+			"y": 964
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/offsetX",
+			"x": 460,
+			"y": 864
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/offsetY",
+			"x": 420,
+			"y": 804
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/g_width",
+			"x": -420,
+			"y": 764
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/g_height",
+			"x": -160,
+			"y": 764
+		},
+		{
+			"uniqueKey": "JSVariable../src/Diagrams.js/circuitDiagramForSoftwareDiagramType",
+			"x": 1164,
+			"y": 492
+		},
+		{
+			"uniqueKey": "JSVariable../src/Diagrams.js/diagramms",
+			"x": 724,
+			"y": 392
+		},
+		{
+			"uniqueKey": "JSVariable../src/Diagrams.js/diagramInfos",
+			"x": 764,
+			"y": 332
+		},
+		{
+			"uniqueKey": "JSVariable../src/Drag.js/isDragging",
+			"x": 1504,
+			"y": 136
+		},
+		{
+			"uniqueKey": "JSVariable../src/Drag.js/isDraggingJustStarted",
+			"x": 1344,
+			"y": 156
+		},
+		{
+			"uniqueKey": "JSVariable../src/Drag.js/isCommentDragging",
+			"x": 1404,
+			"y": -84
+		},
+		{
+			"uniqueKey": "JSVariable../src/Drag.js/backGroundDragged",
+			"x": 1364,
+			"y": 36
+		},
+		{
+			"uniqueKey": "JSVariable../src/Drag.js/startX",
+			"x": 1244,
+			"y": -204
+		},
+		{
+			"uniqueKey": "JSVariable../src/Drag.js/startY",
+			"x": 1744,
+			"y": -64
+		},
+		{
+			"uniqueKey": "JSVariable../src/Drag.js/draggedElement",
+			"x": 1504,
+			"y": -184
+		}
+	],
+	"comments": [],
+	"pinned": [
+		"JSVariable../src/Global.js/g_width",
+		"JSFunction../src/ModelExplorer.js/drawModelExplorer",
+		"JSFunction../src/HTMLLogic.js/LoadModel",
+		"JSFunction../src/Drawing.js/draw",
+		"JSFunction../src/Drawing.js/cameraToCanvasX",
+		"JSFunction../src/FileExtractorPreprocess.js/ExtractCodeFromFolder",
+		"JSFunction../src/Diagrams.js/ImportOldDiagram",
+		"JSFunction../src/Diagrams.js/ZoomToFit",
+		"JSFunction../src/Diagrams.js/ReadDisplayedDiagram",
+		"JSFunction../src/Diagrams.js/diagramFits",
+		"JSVariable../src/Global.js/g_height",
+		"JSFunction../src/Global.js/resizeCanvas",
+		"JSFunction../src/Drawing.js/supportRetina",
+		"JSVariable../src/Drag.js/startX",
+		"JSVariable../src/Drag.js/isCommentDragging",
+		"JSVariable../src/Drag.js/backGroundDragged",
+		"JSVariable../src/Drag.js/isDraggingJustStarted",
+		"JSFunction../src/Diagrams.js/displayedDiagramChanged",
+		"JSVariable../src/Global.js/parentChildByParent",
+		"JSVariable../src/Diagrams.js/circuitDiagramForSoftwareDiagramType"
+	],
+	"suppressed": []
+}
