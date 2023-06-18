@@ -1,0 +1,47 @@
+{
+	"newElementBox": {
+		"isInitial": false,
+		"newElBoxX": 261.357421875,
+		"newElBoxY": -234,
+		"newElBoxWidth": 400,
+		"newElBoxHeight": 388
+	},
+	"addedWithNeighbors": [
+		"JSVariable../src/FileExtractorPreprocess.js/gIndex"
+	],
+	"positions": [
+		{
+			"uniqueKey": "File../src/FileExtractorPreprocess.js",
+			"x": 78.74,
+			"y": 60.4
+		},
+		{
+			"uniqueKey": "JSFunction../src/FileExtractorPreprocess.js/getFilesRecursively",
+			"x": -136.86,
+			"y": 30.48
+		},
+		{
+			"uniqueKey": "JSFunction../src/FileExtractorPreprocess.js/SetExtractedFolder",
+			"x": 158.44,
+			"y": -83.74
+		},
+		{
+			"uniqueKey": "JSFunction../src/FileExtractorPreprocess.js/ExtractCodeFromFolder",
+			"x": 14.78,
+			"y": -78.74
+		},
+		{
+			"uniqueKey": "JSVariable../src/FileExtractorPreprocess.js/gIndex",
+			"x": -119.13,
+			"y": -111.6
+		}
+	],
+	"comments": [],
+	"pinned": [
+		"JSVariable../src/FileExtractorPreprocess.js/gIndex",
+		"JSFunction../src/FileExtractorPreprocess.js/getFilesRecursively",
+		"JSFunction../src/FileExtractorPreprocess.js/ExtractCodeFromFolder",
+		"JSFunction../src/FileExtractorPreprocess.js/SetExtractedFolder"
+	],
+	"suppressed": []
+}

@@ -259,14 +259,19 @@ function javaScriptFindGlobal5(indexHTML, indexModel, codeParts) {
   let currentFunction = '';
   let currentFunctionIndex = indexHTML;
   let currentFunctionContainer = {};
-  currentFunctionContainer.currentFunction = currentFunction;
-  currentFunctionContainer.currentFunctionIndex = currentFunctionIndex;
+
 
   let skipCount = 0;
   let level = 0;
   let braketLevel = 0;
   for (const codePart of codeParts) { // for (const codePart of codeParts)
     if (codePart.code) {
+
+      const codeContainer = codePart.codeContainer;
+      const codeContainerIndex = codePart.codeContainerIndex;
+
+      currentFunctionContainer.currentFunction = codeContainer;
+      currentFunctionContainer.currentFunctionIndex = codeContainerIndex;
 
       // Known errors:
       // Thic code finds tokens in multiline comments
@@ -411,8 +416,11 @@ function javaScriptFindGlobal5(indexHTML, indexModel, codeParts) {
                 currentFunction = '';
                 currentFunctionIndex = indexHTML;
                 currentFunctionContainer = {};
-                currentFunctionContainer.currentFunction = currentFunction;
-                currentFunctionContainer.currentFunctionIndex = currentFunctionIndex;
+                //currentFunctionContainer.currentFunction = currentFunction;
+                //currentFunctionContainer.currentFunctionIndex = currentFunctionIndex;
+
+                currentFunctionContainer.currentFunction = codeContainer;
+                currentFunctionContainer.currentFunctionIndex = codeContainerIndex;
               }
             }
             level -= 1;
@@ -425,9 +433,6 @@ function javaScriptFindGlobal5(indexHTML, indexModel, codeParts) {
   } // END for (const codePart of codeParts)
   let result = {};
   for (let v in variables) {
-    // (variables[v].used) && variables[v].used.sort();
-    // (variables[v].used) && (variables[v].used = [...new Set(variables[v].used)]); // Remove duplicates
-
 
     // Sort the array by currentFunctionIndex
     (variables[v].used) && variables[v].used.sort(function (a, b) {
@@ -446,9 +451,6 @@ function javaScriptFindGlobal5(indexHTML, indexModel, codeParts) {
         })
       );
     }));
-
-
-
 
 
   }
@@ -537,6 +539,15 @@ async function AnalyzeFileAndFolder() {
   fileInfoStart.name = FEDirectoryHandle.name;
   fileInfoStart.directoryArray = [];
   fileInfoStart.file = {};
+
+  // Add an index for the logic of a file. This is needed to simplify finding the index for the code of a file.
+
+  fileInfoByIndex.forEach((fileInfo, index) => {
+    if (fileInfo.kind === 'file') {
+      fileInfo.indexOfCode = gIndex;
+      gIndex++;
+    }
+  });
 
   // Loop 1 where files and folders are analyzed
 
@@ -674,7 +685,7 @@ async function AnalyzeFileAndFolder() {
           let htmlFileName = fileInfo.name;
           let htmlFileIndex = fileInfo.index;
           let htimFilePath = '';
-          for (const e of fileInfo.directoryArray) {    
+          for (const e of fileInfo.directoryArray) {
             htimFilePath = htimFilePath + '/' + e;
           }
           let jsCodes = [];
@@ -1174,7 +1185,7 @@ function testFindGlobal5() {
   x = 1; // Has to be found as usage in code of js file
  `;
 
-  const jsCodes = [{ container: 'First', code: jsCode }, { container: 'Second', code: jsCode2 }]
+  const jsCodes = [{ container: 'First', codeContainer: 'FirstCode', codeContainerIndex: 100, code: jsCode }, { container: 'Second', codeContainer: 'SecondCode', codeContainerIndex: 101, code: jsCode2 }]
 
   const result = javaScriptFindGlobal5(1, 2, jsCodes);
 
@@ -1185,8 +1196,10 @@ function testFindGlobal5() {
   const variablesExp = {
     x: {
       index: 2, used: [
-        { currentFunction: '', currentFunctionIndex: 1 },
-        { currentFunction: 'foo', currentFunctionIndex: 5 }], container: 'First'
+        { currentFunction: 'foo', currentFunctionIndex: 5 },
+        { currentFunction: 'FirstCode', currentFunctionIndex: 100 },
+        { currentFunction: 'SecondCode', currentFunctionIndex: 101 },
+      ], container: 'First'
     },
     y: {
       index: 3, used: [{ currentFunction: 'foo', currentFunctionIndex: 5 },
@@ -1199,7 +1212,12 @@ function testFindGlobal5() {
     z1: { index: 8, used: [], container: 'Second' }
   };
   const functionsExp = {
-    foo: { index: 5, container: 'First', used: [{ currentFunction: '', currentFunctionIndex: 1 }, { currentFunction: 'foo2', currentFunctionIndex: 7 }] },
+    foo: {
+      index: 5, container: 'First', used: [
+        { currentFunction: 'foo2', currentFunctionIndex: 7 },
+        { currentFunction: 'FirstCode', currentFunctionIndex: 100 },
+        { currentFunction: 'SecondCode', currentFunctionIndex: 101 }]
+    },
     foo2: { index: 7, container: 'First', used: [] }
   };
   const indexExp = 9;
