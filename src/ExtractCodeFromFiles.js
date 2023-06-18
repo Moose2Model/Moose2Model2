@@ -677,15 +677,11 @@ async function AnalyzeFileAndFolder() {
           fileContent = await fileInfo.file.text(); // See https://web.dev/file-system-access/
           let htmlDoc = parseHTML(fileContent);
           let scriptElements = htmlDoc.querySelectorAll('script');
-          //console.log(fileInfo.name);
-          //console.log(scriptElements);
+
           scriptElements = Array.from(scriptElements);
           if (Array.isArray(scriptElements)) {
             await Promise.all(scriptElements.map(async (scriptElement) => {
-              //console.log(scriptElement.src);
-              //console.log(scriptElement.textContent);
 
-              // A
               const filePath = scriptElement.src;
 
               // Remove the 'file://' protocol from the filePath
@@ -700,9 +696,6 @@ async function AnalyzeFileAndFolder() {
               // Extract the list of folders
               const folders = pathWithoutQuery.split('/').slice(0, -1);
 
-              //console.log('File name:', fileName);
-              //console.log('Folders:', folders);
-              // End A
               let foundFile = {};
               foundFile = fileInfoByIndex.find(obj => ((obj) && (obj.name) && (obj.name === fileName)));
               if (foundFile) {
@@ -715,13 +708,7 @@ async function AnalyzeFileAndFolder() {
                 }
               }
               jsCodes.push({ container: { name: htmlFileName, index: htmlFileIndex }, code: scriptElement.textContent });
-              // console.log("Tokens:");
-              // const tokens = scriptElement.textContent.match(/\b\w+\b|[^\s]/g);
-              // if (tokens !== null) {
-              //   tokens.forEach(token => {
-              //     console.log(token);
-              //   });
-              // }
+
 
             }));
           }
@@ -729,9 +716,6 @@ async function AnalyzeFileAndFolder() {
 
           // #78 Analyze code here
           let analyzedJSCode = javaScriptFindGlobal4(fileInfo.index, gIndex, jsCodes);
-          //console.log(analyzedJSCode);
-          //console.log(analyzedJSCode.variables.modelElementsByUniqueKey);
-          //console.log(analyzedJSCode.variables.modelElementsByIndex);
 
           // Loop over all functions
 
@@ -924,9 +908,6 @@ async function AnalyzeFileAndFolder() {
                 isReadVal,
                 isDependentVal);
 
-              // console.log(`Member Name: ${memberName}`);
-              // console.log(`Member Index: ${memberIndex}`);
-              // console.log('--------------------------');
             }
           }
 
@@ -942,10 +923,6 @@ async function AnalyzeFileAndFolder() {
                 // Access the properties of each element
                 const currentFunction = element.currentFunction;
                 const currentFunctionIndex = element.currentFunctionIndex;
-                // console.log(`Element ${index + 1}:`);
-                // console.log(`Current Function: ${currentFunction}`);
-                // console.log(`Current Function Index: ${currentFunctionIndex}`);
-                // console.log('--------------------------');
 
                 // Clear data before it is read again
                 elementName = '';
@@ -1006,10 +983,6 @@ async function AnalyzeFileAndFolder() {
                   // Access the properties of each element
                   const currentFunction = element.currentFunction;
                   const currentFunctionIndex = element.currentFunctionIndex;
-                  // console.log(`Element ${index + 1}:`);
-                  // console.log(`Current Function: ${currentFunction}`);
-                  // console.log(`Current Function Index: ${currentFunctionIndex}`);
-                  // console.log('--------------------------');
 
                   // Clear data before it is read again
                   elementName = '';
