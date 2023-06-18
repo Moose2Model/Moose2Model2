@@ -1,0 +1,74 @@
+{
+	"newElementBox": {
+		"isInitial": false,
+		"newElBoxX": 228.6962890625,
+		"newElBoxY": -414,
+		"newElBoxWidth": 400,
+		"newElBoxHeight": 588
+	},
+	"addedWithNeighbors": [
+		"JSFunction../src/ExtractCodeFromFiles.js/javaScriptFindGlobal5",
+		"JSFunction../src/ExtractCodeFromFiles.js/javaScriptFindGlobal6",
+		"JSFunction../src/ExtractCodeFromFiles.js/testFindGlobal5",
+		"JSFunction../src/ExtractCodeFromFiles.js/testFindGlobal6"
+	],
+	"positions": [
+		{
+			"uniqueKey": "File../src/ExtractCodeFromFiles.js",
+			"x": 214.37,
+			"y": 73.23
+		},
+		{
+			"uniqueKey": "File../src/moose2model.html",
+			"x": 365.54,
+			"y": -308.1
+		},
+		{
+			"uniqueKey": "JSFunction../src/ExtractCodeFromFiles.js/javaScriptFindGlobal5",
+			"x": -224,
+			"y": 60
+		},
+		{
+			"uniqueKey": "JSFunction../src/ExtractCodeFromFiles.js/javaScriptFindGlobal6",
+			"x": 56,
+			"y": 58
+		},
+		{
+			"uniqueKey": "JSFunction../src/ExtractCodeFromFiles.js/AnalyzeFileAndFolder",
+			"x": -221,
+			"y": -215
+		},
+		{
+			"uniqueKey": "JSFunction../src/ExtractCodeFromFiles.js/testFindGlobal5",
+			"x": -91,
+			"y": -154
+		},
+		{
+			"uniqueKey": "JSFunction../src/ExtractCodeFromFiles.js/testFindGlobal6",
+			"x": 64,
+			"y": -154
+		},
+		{
+			"uniqueKey": "JSVariable../src/moose2model.html/window",
+			"x": 77.67,
+			"y": -295.24
+		}
+	],
+	"comments": [
+		{
+			"uniqueKey": "JSFunction../src/ExtractCodeFromFiles.js/javaScriptFindGlobal6",
+			"x": 106,
+			"y": 8,
+			"text": "Will contain logic with hoisting"
+		}
+	],
+	"pinned": [
+		"JSFunction../src/ExtractCodeFromFiles.js/testFindGlobal6",
+		"JSFunction../src/ExtractCodeFromFiles.js/javaScriptFindGlobal6",
+		"JSFunction../src/ExtractCodeFromFiles.js/javaScriptFindGlobal5",
+		"JSFunction../src/ExtractCodeFromFiles.js/AnalyzeFileAndFolder",
+		"JSFunction../src/ExtractCodeFromFiles.js/testFindGlobal5",
+		"JSVariable../src/moose2model.html/window"
+	],
+	"suppressed": []
+}

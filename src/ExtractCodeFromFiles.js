@@ -6,7 +6,7 @@
 const nameOfFileLogic = 'code';
 
 
-function javaScriptFindGlobal4(indexHTML, indexModel, codeParts) {
+function javaScriptFindGlobal5(indexHTML, indexModel, codeParts) {
 
   // This is currently a draft
   // Shadowing by local variables and functions is not handled
@@ -18,14 +18,19 @@ function javaScriptFindGlobal4(indexHTML, indexModel, codeParts) {
   let currentFunction = '';
   let currentFunctionIndex = indexHTML;
   let currentFunctionContainer = {};
-  currentFunctionContainer.currentFunction = currentFunction;
-  currentFunctionContainer.currentFunctionIndex = currentFunctionIndex;
+
 
   let skipCount = 0;
   let level = 0;
   let braketLevel = 0;
   for (const codePart of codeParts) { // for (const codePart of codeParts)
     if (codePart.code) {
+
+      const codeContainer = codePart.codeContainer;
+      const codeContainerIndex = codePart.codeContainerIndex;
+
+      currentFunctionContainer.currentFunction = codeContainer;
+      currentFunctionContainer.currentFunctionIndex = codeContainerIndex;
 
       // Known errors:
       // Thic code finds tokens in multiline comments
@@ -170,8 +175,11 @@ function javaScriptFindGlobal4(indexHTML, indexModel, codeParts) {
                 currentFunction = '';
                 currentFunctionIndex = indexHTML;
                 currentFunctionContainer = {};
-                currentFunctionContainer.currentFunction = currentFunction;
-                currentFunctionContainer.currentFunctionIndex = currentFunctionIndex;
+                //currentFunctionContainer.currentFunction = currentFunction;
+                //currentFunctionContainer.currentFunctionIndex = currentFunctionIndex;
+
+                currentFunctionContainer.currentFunction = codeContainer;
+                currentFunctionContainer.currentFunctionIndex = codeContainerIndex;
               }
             }
             level -= 1;
@@ -184,9 +192,6 @@ function javaScriptFindGlobal4(indexHTML, indexModel, codeParts) {
   } // END for (const codePart of codeParts)
   let result = {};
   for (let v in variables) {
-    // (variables[v].used) && variables[v].used.sort();
-    // (variables[v].used) && (variables[v].used = [...new Set(variables[v].used)]); // Remove duplicates
-
 
     // Sort the array by currentFunctionIndex
     (variables[v].used) && variables[v].used.sort(function (a, b) {
@@ -205,9 +210,6 @@ function javaScriptFindGlobal4(indexHTML, indexModel, codeParts) {
         })
       );
     }));
-
-
-
 
 
   }
@@ -247,7 +249,7 @@ function javaScriptFindGlobal4(indexHTML, indexModel, codeParts) {
   return result;
 }
 
-function javaScriptFindGlobal5(indexHTML, indexModel, codeParts) {
+function javaScriptFindGlobal6(indexHTML, indexModel, codeParts) {
 
   // This is currently a draft
   // Shadowing by local variables and functions is not handled
@@ -1139,93 +1141,6 @@ async function AnalyzeFileAndFolder() {
 
 }
 
-function testFindGlobal4() {
-  const jsCode = `
-    let x = 42;
-    const y = x;
-    const cl = {xp: 2};
-    // const yc = 3.14;
-    /* 
-    const yd = 3.14; 
-    */
-    function foo(para1) {
-      let z = 100;
-      console.log(x + y + z);
-      function subfoo(){
-
-      }
-      subfoo(){
-        y = 3;
-      };
-    }
-    foo();
-    function foo2(){
-      foo();
-      y = 1; 
-      const cl = {x: 2};
-      const cl = {x : 2};
-      foo();
-    }
-  `;
-  const jsCode2 = `foo();
-  let z1 = 42;
- `;
-
-  const jsCodes = [{ container: 'First', code: jsCode }, { container: 'Second', code: jsCode2 }]
-
-  const result = javaScriptFindGlobal4(1, 2, jsCodes);
-
-  console.log('Variables:', result.variables);
-  console.log('Functions:', result.functions);
-  console.log('Index after analysis:', result.index);
-
-  const variablesExp = {
-    x: {
-      index: 2, used: [
-        { currentFunction: '', currentFunctionIndex: 1 },
-        { currentFunction: 'foo', currentFunctionIndex: 5 }], container: 'First'
-    },
-    y: {
-      index: 3, used: [{ currentFunction: 'foo', currentFunctionIndex: 5 },
-      { currentFunction: 'foo2', currentFunctionIndex: 7 }], container: 'First'
-    },
-    cl: {
-      index: 4, used: [
-        { currentFunction: 'foo2', currentFunctionIndex: 7 }], container: 'First'
-    },
-    z1: { index: 8, used: [], container: 'Second' }
-  };
-  const functionsExp = {
-    foo: { index: 5, container: 'First', used: [{ currentFunction: '', currentFunctionIndex: 1 }, { currentFunction: 'foo2', currentFunctionIndex: 7 }] },
-    foo2: { index: 7, container: 'First', used: [] }
-  };
-  const indexExp = 9;
-
-  console.log('VariablesExp:', variablesExp);
-  console.log('FunctionsExp:', functionsExp);
-  console.log('IndexExp:', indexExp);
-
-  // Check whether analysis is done as expected
-
-  const v1 = JSON.stringify(result.variables);
-  const v2 = JSON.stringify(variablesExp);
-
-  const f1 = JSON.stringify(result.functions);
-  const f2 = JSON.stringify(functionsExp);
-
-  if (v1 === v2 &&
-    f1 === f2 &&
-    result.index === indexExp) {
-    console.log("OK");
-  } else {
-    console.log("Error");
-    window.alert('Self test testFindGlobal3 failed with an error. The application may not run correct.');
-  }
-
-
-
-}
-
 function testFindGlobal5() {
   const jsCode = `
     let x = 42;
@@ -1321,4 +1236,101 @@ function testFindGlobal5() {
 
 
 }
+
+function testFindGlobal6() {
+  const jsCode = `
+    let x = 42;
+    const y = x; // Has to be found as usage in code of js file
+    const cl = {xp: 2};
+    // const yc = 3.14;
+    /* 
+    const yd = 3.14; 
+    */
+    function foo(para1) {
+      let z = 100;
+      z1 = 43; // Has to be found as usage due to hoisting
+      console.log(x + y + z);
+      function subfoo(){
+
+      }
+      subfoo(){
+        y = 3;
+      };
+    }
+    foo();
+    function foo2(){
+      foo();
+      y = 1; 
+      const cl = {x: 2};
+      const cl = {x : 2};
+      foo();
+    }
+  `;
+  const jsCode2 = `foo();
+  let z1 = 42;
+  x = 1; // Has to be found as usage in code of js file
+ `;
+
+  const jsCodes = [{ container: 'First', codeContainer: 'FirstCode', codeContainerIndex: 100, code: jsCode }, { container: 'Second', codeContainer: 'SecondCode', codeContainerIndex: 101, code: jsCode2 }]
+
+  const result = javaScriptFindGlobal6(1, 2, jsCodes);
+
+  console.log('Variables:', result.variables);
+  console.log('Functions:', result.functions);
+  console.log('Index after analysis:', result.index);
+
+  const variablesExp = {
+    x: {
+      index: 2, used: [
+        { currentFunction: 'foo', currentFunctionIndex: 5 },
+        { currentFunction: 'FirstCode', currentFunctionIndex: 100 },
+        { currentFunction: 'SecondCode', currentFunctionIndex: 101 },
+      ], container: 'First'
+    },
+    y: {
+      index: 3, used: [{ currentFunction: 'foo', currentFunctionIndex: 5 },
+      { currentFunction: 'foo2', currentFunctionIndex: 7 }], container: 'First'
+    },
+    cl: {
+      index: 4, used: [
+        { currentFunction: 'foo2', currentFunctionIndex: 7 }], container: 'First'
+    },
+    z1: { index: 8, used: [], container: 'Second' }
+  };
+  const functionsExp = {
+    foo: {
+      index: 5, container: 'First', used: [
+        { currentFunction: 'foo2', currentFunctionIndex: 7 },
+        { currentFunction: 'FirstCode', currentFunctionIndex: 100 },
+        { currentFunction: 'SecondCode', currentFunctionIndex: 101 }]
+    },
+    foo2: { index: 7, container: 'First', used: [] }
+  };
+  const indexExp = 9;
+
+  console.log('VariablesExp:', variablesExp);
+  console.log('FunctionsExp:', functionsExp);
+  console.log('IndexExp:', indexExp);
+
+  // Check whether analysis is done as expected
+
+  const v1 = JSON.stringify(result.variables);
+  const v2 = JSON.stringify(variablesExp);
+
+  const f1 = JSON.stringify(result.functions);
+  const f2 = JSON.stringify(functionsExp);
+
+  if (v1 === v2 &&
+    f1 === f2 &&
+    result.index === indexExp) {
+    console.log("OK");
+  } else {
+    console.log("Error");
+    window.alert('Self test testFindGlobal3 failed with an error. The application may not run correct.');
+  }
+
+
+
+}
+
 
