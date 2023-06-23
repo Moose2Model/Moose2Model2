@@ -1549,7 +1549,8 @@ function testFindGlobal6() {
   function foo3(){}
  `;
 
-  const jsCodes = [{ container: 'First', codeContainer: 'FirstCode', codeContainerIndex: 100, code: jsCode }, { container: 'Second', codeContainer: 'SecondCode', codeContainerIndex: 101, code: jsCode2 }]
+  //const jsCodes = [{ container: 'First', codeContainer: 'FirstCode', codeContainerIndex: 100, code: jsCode }, { container: 'Second', codeContainer: 'SecondCode', codeContainerIndex: 101, code: jsCode2 }]
+  const jsCodes = [{ container: 'First', codeContainer: { name: 'FirstCode', index: 100 }, code: jsCode }, { container: 'Second', codeContainer: { name: 'SecondCode', index: 101 }, code: jsCode2 }]
 
   const result = javaScriptFindGlobal6(1, 2, jsCodes);
 

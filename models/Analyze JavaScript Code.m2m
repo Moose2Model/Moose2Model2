@@ -1,7 +1,7 @@
 {
 	"newElementBox": {
 		"isInitial": false,
-		"newElBoxX": 228.6962890625,
+		"newElBoxX": 352.02022403800777,
 		"newElBoxY": -414,
 		"newElBoxWidth": 400,
 		"newElBoxHeight": 588
@@ -10,7 +10,8 @@
 		"JSFunction../src/ExtractCodeFromFiles.js/javaScriptFindGlobal5",
 		"JSFunction../src/ExtractCodeFromFiles.js/javaScriptFindGlobal6",
 		"JSFunction../src/ExtractCodeFromFiles.js/testFindGlobal5",
-		"JSFunction../src/ExtractCodeFromFiles.js/testFindGlobal6"
+		"JSFunction../src/ExtractCodeFromFiles.js/testFindGlobal6",
+		"JSFunction../src/ExtractCodeFromFiles.js/javaScriptFindGlobal7"
 	],
 	"positions": [
 		{
@@ -30,23 +31,33 @@
 		},
 		{
 			"uniqueKey": "JSFunction../src/ExtractCodeFromFiles.js/javaScriptFindGlobal6",
-			"x": 56,
-			"y": 58
+			"x": -79.57,
+			"y": 56.81
+		},
+		{
+			"uniqueKey": "JSFunction../src/ExtractCodeFromFiles.js/javaScriptFindGlobal7",
+			"x": 200.64,
+			"y": 69.61
 		},
 		{
 			"uniqueKey": "JSFunction../src/ExtractCodeFromFiles.js/AnalyzeFileAndFolder",
-			"x": 187.68,
-			"y": -165.39
+			"x": 54.49,
+			"y": -166.58
 		},
 		{
 			"uniqueKey": "JSFunction../src/ExtractCodeFromFiles.js/testFindGlobal5",
-			"x": -91,
-			"y": -154
+			"x": -214.68,
+			"y": -161.14
 		},
 		{
 			"uniqueKey": "JSFunction../src/ExtractCodeFromFiles.js/testFindGlobal6",
-			"x": 64,
-			"y": -154
+			"x": -72.76,
+			"y": -150.43
+		},
+		{
+			"uniqueKey": "JSFunction../src/ExtractCodeFromFiles.js/testFindGlobal7",
+			"x": 204.87,
+			"y": -158.9
 		},
 		{
 			"uniqueKey": "JSVariable../src/moose2model.html/window",
@@ -57,8 +68,8 @@
 	"comments": [
 		{
 			"uniqueKey": "JSFunction../src/ExtractCodeFromFiles.js/javaScriptFindGlobal6",
-			"x": 106,
-			"y": 8,
+			"x": -29.57,
+			"y": 6.81,
 			"text": "Will contain logic with hoisting"
 		}
 	],
@@ -68,7 +79,9 @@
 		"JSFunction../src/ExtractCodeFromFiles.js/javaScriptFindGlobal5",
 		"JSFunction../src/ExtractCodeFromFiles.js/AnalyzeFileAndFolder",
 		"JSFunction../src/ExtractCodeFromFiles.js/testFindGlobal5",
-		"JSVariable../src/moose2model.html/window"
+		"JSVariable../src/moose2model.html/window",
+		"JSFunction../src/ExtractCodeFromFiles.js/testFindGlobal7",
+		"JSFunction../src/ExtractCodeFromFiles.js/javaScriptFindGlobal7"
 	],
 	"suppressed": []
 }
