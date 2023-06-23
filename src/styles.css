@@ -20,11 +20,17 @@ h1 {
 
 /* Main content styling */
 .container {
-  max-width: 800px;
+  max-width: 1200px;
   margin: 40px auto 20px; /* Center the container horizontally */
   padding: 20px;
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Add a new class for the text content */
+.text-content {
+  max-width: 100%; /* Limit the width of the text content */
+  margin: 0 auto; /* Center the text content horizontally */
 }
 
 /* Links styling */

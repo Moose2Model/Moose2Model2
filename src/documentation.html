@@ -28,158 +28,177 @@
 </head>
 
 <body>
-    <h1>General</h1>
-    <p>Analyze software models in SOMIX format in a JavaScript application. You can run the application from your local
-        file system. </p>
-    <h1>What can be done</h1>
-    <p>The application is currently developed. You may open an issue in the Github repository to report a problem or
-        require a function.</p>
+    <div class="container">
+        <div class="text-content">
+            <h1>General</h1>
+            <p>Analyze software models in SOMIX format in a JavaScript application. You can run the application from
+                your local
+                file system. </p>
+            <h1>What can be done</h1>
+            <p>The application is currently developed. You may open an issue in the Github repository to report a
+                problem or
+                require a function.</p>
 
-    <p>Use SAP2Moose to create an mse file with a SOMIX metamodel to use the application. Or load this <a
-            href="Example.mse">example file</a> to your local computer and load it into the application.</p>
+            <p>Use SAP2Moose to create an mse file with a SOMIX metamodel to use the application. Or load this <a
+                    href="Example.mse">example file</a> to your local computer and load it into the application.</p>
 
-    <p>You can also analyze a folder in your local file system to view and search directories and files. The SOMIX model
-        created for this purpose is currently only created internally in the application.</p>
+            <p>You can also analyze a folder in your local file system to view and search directories and files. The
+                SOMIX model
+                created for this purpose is currently only created internally in the application.</p>
 
-    <h1>First Steps</h1>
-    <h2>Demo</h2>
-    It is possible to display and use demo data. This is especially helpful when no SOMIX model is available. Follow
-    these steps:
-    <li>Open the application in a Browser</li>
-    <li>Choose in the menu Help -> Load demo data</li>
-    <li>Do a right mouse click into the pane and choose "Start Force-directed graph". Wait some time and choose
-        then "Stop Force-directed graph".</li>
-    <li>Click on one of the red or blue circles with the right mouse button. Choose "Add element with all
-        neighbors"</li>
-    <li>Do a right mouse click into the pane and choose Demo Diagram</li>
-    <li>Play around with left and right clicks of the mouse on elements, into boxes and onto the pane. Use also
-        the scrool wheel of the mouse.</li>
-    You may also choose Diagram -> Explore Model. Use this steps:
-    <li>Open the application in a Browser</li>
-    <li>Choose in the menu Help -> Load demo data</li>
-    <li>Enter for instance ^Z.*LOG in the input field. This filters for all elements which start with Z and have a LOG
-        somewhre in the name. You can use any Regex expression. The search is case insensitive.</li>
-    <li>The Button Apply Filter may not yet work, instead move the mouse down.</li>
-    <li>You can scroll with the mouse wheel in the result list.</li>
-    <li>Make a right click on an element and choose "Add element with all neighbors"</li>
-    <li>Choose cancel</li>
-    <li>Make a right click in the pane and choose Demo Diagram.</li>
-    <li>Play around with left and right clicks of the mouse on elements, into boxes and onto the pane. Use also
-        the scrool wheel of the mouse.</li>
+            <h1>First Steps</h1>
+            <h2>Demo</h2>
+            It is possible to display and use demo data. This is especially helpful when no SOMIX model is available.
+            Follow
+            these steps:
+            <li>Open the application in a Browser</li>
+            <li>Choose in the menu Help -> Load demo data</li>
+            <li>Do a right mouse click into the pane and choose "Start Force-directed graph". Wait some time and choose
+                then "Stop Force-directed graph".</li>
+            <li>Click on one of the red or blue circles with the right mouse button. Choose "Add element with all
+                neighbors"</li>
+            <li>Do a right mouse click into the pane and choose Demo Diagram</li>
+            <li>Play around with left and right clicks of the mouse on elements, into boxes and onto the pane. Use also
+                the scrool wheel of the mouse.</li>
+            You may also choose Diagram -> Explore Model. Use this steps:
+            <li>Open the application in a Browser</li>
+            <li>Choose in the menu Help -> Load demo data</li>
+            <li>Enter for instance ^Z.*LOG in the input field. This filters for all elements which start with Z and have
+                a LOG
+                somewhre in the name. You can use any Regex expression. The search is case insensitive.</li>
+            <li>The Button Apply Filter may not yet work, instead move the mouse down.</li>
+            <li>You can scroll with the mouse wheel in the result list.</li>
+            <li>Make a right click on an element and choose "Add element with all neighbors"</li>
+            <li>Choose cancel</li>
+            <li>Make a right click in the pane and choose Demo Diagram.</li>
+            <li>Play around with left and right clicks of the mouse on elements, into boxes and onto the pane. Use also
+                the scrool wheel of the mouse.</li>
 
-    <h2>Generate a SOMIX model from files in a local folder</h2>
-    It is possible to analyze folders in the local file system:
-    <li>Extract a model where files are date and folders are groupings. Choose File -> Extract File System to SOMIX
-        model (w/o .git). A pop up opens where you specify a local folder on
-        your computer.
-        Content in .git folders is ignored. This is in most cases helfull when git is used. Git stores many files which
-        are normally not of interest.</li>
-    <li>Extract a model of the code in files. This is currently in development. Extract Code from File System to SOMIX
-        model (w/o .git). A pop up opens where you specify a local folder on
-        your computer.
-        Content in .git folders is ignored. This is in most cases helfull when git is used. Git stores many files which
-        are normally not of interest.</li>
+            <h2>Generate a SOMIX model from files in a local folder</h2>
+            It is possible to analyze folders in the local file system:
+            <li>Extract a model where files are date and folders are groupings. Choose File -> Extract File System to
+                SOMIX
+                model (w/o .git). A pop up opens where you specify a local folder on
+                your computer.
+                Content in .git folders is ignored. This is in most cases helfull when git is used. Git stores many
+                files which
+                are normally not of interest.</li>
+            <li>Extract a model of the code in files. This is currently in development. Extract Code from File System to
+                SOMIX
+                model (w/o .git). A pop up opens where you specify a local folder on
+                your computer.
+                Content in .git folders is ignored. This is in most cases helfull when git is used. Git stores many
+                files which
+                are normally not of interest.</li>
 
-    <h2>Use a SOMIX model</h2>
-    When you have a SOMIX model (You will need to use SAP2Moose for now):
-    <li>Choose File -> Load Model and load a SOMIX model</li>
-    <li>Choose File -> Open Work Folder (Generation informations for files will be stored in this folder)</li>
-    <li>Choose File -> New Diagram and enter a name for the new diagram.</li>
-    <li>Make a right click into the pane and choose the name of your diagram. This will change the view and display:
-        "This diagram is currentl empty: ..."</li>
-    <li>Make a right mouse click into the pane and choose "Make this diagram active". When you later add elements to a
-        diagram, these elements will be added to the active diagram.</li>
-    <li>Now choose an element and add it to the active diagram like it was described on this page under "First Steps" ->
-        "Demo".</li>
-    <li>To save the displayed diagram choose File -> Save Displayed Diagram.</li>
-    <li>When you repeat your work do <ul>
-            <li>Load a new SOMIX model. This will normally not be the model you used before. The diagram will be
-                automatically adapted to the new software version.</li>
-            <li>Choose File -> Open Work Folder</li>
-            <li>Choose File -> Read Diagram (You will need "Import old Diagram (XML) only when you worked with the
-                Smalltalk version of Moose2Model).</li>
-        </ul>
-    </li>
+            <h2>Use a SOMIX model</h2>
+            When you have a SOMIX model (You will need to use SAP2Moose for now):
+            <li>Choose File -> Load Model and load a SOMIX model</li>
+            <li>Choose File -> Open Work Folder (Generation informations for files will be stored in this folder)</li>
+            <li>Choose File -> New Diagram and enter a name for the new diagram.</li>
+            <li>Make a right click into the pane and choose the name of your diagram. This will change the view and
+                display:
+                "This diagram is currentl empty: ..."</li>
+            <li>Make a right mouse click into the pane and choose "Make this diagram active". When you later add
+                elements to a
+                diagram, these elements will be added to the active diagram.</li>
+            <li>Now choose an element and add it to the active diagram like it was described on this page under "First
+                Steps" ->
+                "Demo".</li>
+            <li>To save the displayed diagram choose File -> Save Displayed Diagram.</li>
+            <li>When you repeat your work do <ul>
+                    <li>Load a new SOMIX model. This will normally not be the model you used before. The diagram will be
+                        automatically adapted to the new software version.</li>
+                    <li>Choose File -> Open Work Folder</li>
+                    <li>Choose File -> Read Diagram (You will need "Import old Diagram (XML) only when you worked with
+                        the
+                        Smalltalk version of Moose2Model).</li>
+                </ul>
+            </li>
 
 
-    <h1>Implemented Features</h1>
-    <h2>General features</h2>
-    <ul>
-        <li>Load a SOMIX model</li>
-        <li>Read a folder and create a SOMIX model of the contained folders and files.</li>
-        <li>Create a new diagram</li>
-        <li>Force-dragged positioning. Start and stop with a context click in background of pane</li>
-        <li>Scrolling by dragging the pane(with "right" mouseclick")</li>
-        <li>Dragging elements (with "left" mouseclick)</li>
-        <li>Zooming with the wheel of the mouse</li>
-        <li>Menu Diagram
+            <h1>Implemented Features</h1>
+            <h2>General features</h2>
             <ul>
-                <li>Search elements in the model. The search is case insensitive.</li>
-                <li>Switch between dark and white theme</li>
-                <li>Remove all hightlighting of the displayed elements</li>
-            </ul>
-        </li>
-        <li>Context click on elements:
-            <ul>
-                <li>Add an element with all neighbors to the active diagram</li>
-                <li>Redo adding an element with all neighbors to the active diagram</li>
-                <li>Get informations on the element</li>
-                <li>Enter or edit a comment for an element</li>
-                <li>Supress an element with all children</li>
-                <li>Redo supressing an element with all children</li>
-                <li>Jump to code with when a link is contained in the model (adt links have to be activated for
-                    Eclipse)</li>
-                <li>Remove pinning of recently dragged elements</li>
-                <li>Highlight elements or the using or used elements</li>
-            </ul>
-        </li>
-        <li>Context click on pane:
-            <ul>
-                <li>(Only in the diagram with all model elements: Toogle the display of element names)</li>
-                <li>Set a diagram active (But not the diagram with all elements)</li>
-                <li>Start and Stop Force-directed graph</li>
-                <li>Jump to other diagram</li>
-            </ul>
-        </li>
-        <li>Save information to generate a diagram to file
-            <ul>
-                <li>Specify a workfolder first. These folder contains all diagrams which belong to the same model
+                <li>Load a SOMIX model</li>
+                <li>Read a folder and create a SOMIX model of the contained folders and files.</li>
+                <li>Create a new diagram</li>
+                <li>Force-dragged positioning. Start and stop with a context click in background of pane</li>
+                <li>Scrolling by dragging the pane(with "right" mouseclick")</li>
+                <li>Dragging elements (with "left" mouseclick)</li>
+                <li>Zooming with the wheel of the mouse</li>
+                <li>Menu Diagram
+                    <ul>
+                        <li>Search elements in the model. The search is case insensitive.</li>
+                        <li>Switch between dark and white theme</li>
+                        <li>Remove all hightlighting of the displayed elements</li>
+                    </ul>
                 </li>
-                <li>Save the generation information for the displayed diagram. It be stored in a file with extension
-                    .m2m and similar name.</li>
-                <li>Read the generation information from an .m2m file. You should have all required model data
-                    loaded
-                    before. A diagram with identical name is created.</li>
-                <li>Import xml files from the old Smalltalk version of Moose2Model.</li>
-                <li>Please note that no warning is yet raised when information is lost due to wrong handling.</li>
+                <li>Context click on elements:
+                    <ul>
+                        <li>Add an element with all neighbors to the active diagram</li>
+                        <li>Redo adding an element with all neighbors to the active diagram</li>
+                        <li>Get informations on the element</li>
+                        <li>Enter or edit a comment for an element</li>
+                        <li>Supress an element with all children</li>
+                        <li>Redo supressing an element with all children</li>
+                        <li>Jump to code with when a link is contained in the model (adt links have to be activated for
+                            Eclipse)</li>
+                        <li>Remove pinning of recently dragged elements</li>
+                        <li>Highlight elements or the using or used elements</li>
+                    </ul>
+                </li>
+                <li>Context click on pane:
+                    <ul>
+                        <li>(Only in the diagram with all model elements: Toogle the display of element names)</li>
+                        <li>Set a diagram active (But not the diagram with all elements)</li>
+                        <li>Start and Stop Force-directed graph</li>
+                        <li>Jump to other diagram</li>
+                    </ul>
+                </li>
+                <li>Save information to generate a diagram to file
+                    <ul>
+                        <li>Specify a workfolder first. These folder contains all diagrams which belong to the same
+                            model
+                        </li>
+                        <li>Save the generation information for the displayed diagram. It be stored in a file with
+                            extension
+                            .m2m and similar name.</li>
+                        <li>Read the generation information from an .m2m file. You should have all required model data
+                            loaded
+                            before. A diagram with identical name is created.</li>
+                        <li>Import xml files from the old Smalltalk version of Moose2Model.</li>
+                        <li>Please note that no warning is yet raised when information is lost due to wrong handling.
+                        </li>
+                    </ul>
+                </li>
             </ul>
-        </li>
-    </ul>
-    </ul>
+            </ul>
 
-    <h2>Header</h2>
+            <h2>Header</h2>
 
-    <ul>
-        <li>Display the diagram which is displayed and which is active.</li>
-        <li>Unsaved changes are marked with a bullet point behind the name of a diagram.</li>
-    </ul>
+            <ul>
+                <li>Display the diagram which is displayed and which is active.</li>
+                <li>Unsaved changes are marked with a bullet point behind the name of a diagram.</li>
+            </ul>
 
-    <h2>Diagram with all elements</h2>
-    A diagram with all elments is always displayed.
-    It can be animated as a force-directed graph. This works well for small models.
-    The main intention of this application is not to make force-directed graph, so other tools might work better
-    here.
-    <h2>Circuit Diagram for Software</h2>
-    <ul>
-        <li>Code is displayed as orange box</li>
-        <li>Data is displayed as blue circle</li>
-        <li>Persistent data is displayed as green circle</li>
-        <li>Groupings are indicated by a dashed box and include all elements contained in them</li>
-        <li>Elements can be commented</li>
-    </ul>
-    <h1>Planned Features</h1>
-    <p>Most current features of Moose2Model as are available currently in Smalltalk. And some more.</p>
-
+            <h2>Diagram with all elements</h2>
+            A diagram with all elments is always displayed.
+            It can be animated as a force-directed graph. This works well for small models.
+            The main intention of this application is not to make force-directed graph, so other tools might work better
+            here.
+            <h2>Circuit Diagram for Software</h2>
+            <ul>
+                <li>Code is displayed as orange box</li>
+                <li>Data is displayed as blue circle</li>
+                <li>Persistent data is displayed as green circle</li>
+                <li>Groupings are indicated by a dashed box and include all elements contained in them</li>
+                <li>Elements can be commented</li>
+            </ul>
+            <h1>Planned Features</h1>
+            <p>Most current features of Moose2Model as are available currently in Smalltalk. And some more.</p>
+        </div>
+    </div>
 </body>
 
 </html>
