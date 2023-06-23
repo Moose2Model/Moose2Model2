@@ -1,0 +1,217 @@
+{
+	"newElementBox": {
+		"isInitial": false,
+		"newElBoxX": -297.3095703125,
+		"newElBoxY": -354,
+		"newElBoxWidth": 400,
+		"newElBoxHeight": 536
+	},
+	"addedWithNeighbors": [
+		"JSFunction../src/Drawing.js/draw"
+	],
+	"positions": [
+		{
+			"uniqueKey": "File../src/Diagrams.js",
+			"x": -841.2,
+			"y": 140.57
+		},
+		{
+			"uniqueKey": "File../src/Drawing.js",
+			"x": -1140.4,
+			"y": -56.99
+		},
+		{
+			"uniqueKey": "File../src/ForceDirecting.js",
+			"x": 663.9,
+			"y": 128.51
+		},
+		{
+			"uniqueKey": "File../src/Global.js",
+			"x": -527.9,
+			"y": -60.99
+		},
+		{
+			"uniqueKey": "File../src/HTMLLogic.js",
+			"x": -303.97,
+			"y": -78.2
+		},
+		{
+			"uniqueKey": "File../src/M2mExplorer.js",
+			"x": 420.39,
+			"y": 105.38
+		},
+		{
+			"uniqueKey": "File../src/ModelExplorer.js",
+			"x": 648.21,
+			"y": -165.13
+		},
+		{
+			"uniqueKey": "File../src/moose2model.html",
+			"x": -1049.02,
+			"y": 143.99
+		},
+		{
+			"uniqueKey": "JSFunction../src/ForceDirecting.js/forceDirecting",
+			"x": -1130.77,
+			"y": 50.11
+		},
+		{
+			"uniqueKey": "JSFunction../src/ModelExplorer.js/drawModelExplorer",
+			"x": -1298.87,
+			"y": 54.26
+		},
+		{
+			"uniqueKey": "JSFunction../src/M2mExplorer.js/drawM2mExplorer",
+			"x": -971.46,
+			"y": 53.78
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/supportRetina",
+			"x": -1256.54,
+			"y": -17.81
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/drawCompleteModel",
+			"x": -1228.19,
+			"y": -79.9
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/draw",
+			"x": -1106.96,
+			"y": -98.4
+		},
+		{
+			"uniqueKey": "JSVariable../src/moose2model.html/document",
+			"x": -628,
+			"y": 64
+		},
+		{
+			"uniqueKey": "JSVariable../src/moose2model.html/window",
+			"x": -708,
+			"y": 64
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/ctx",
+			"x": -786,
+			"y": -117
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/requestAnimationFrame",
+			"x": -786,
+			"y": -57
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/showModelExplorer",
+			"x": -406,
+			"y": -57
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/showM2mExplorer",
+			"x": -546,
+			"y": -57
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/showExplorer",
+			"x": -546,
+			"y": -117
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/g_width",
+			"x": -666,
+			"y": -117
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/g_height",
+			"x": -666,
+			"y": -57
+		},
+		{
+			"uniqueKey": "JSVariable../src/Diagrams.js/diagramms",
+			"x": -888.79,
+			"y": -28.69
+		},
+		{
+			"uniqueKey": "JSVariable../src/Diagrams.js/diagramInfos",
+			"x": -888.79,
+			"y": -88.69
+		},
+		{
+			"uniqueKey": "JSVariable../src/HTMLLogic.js/loadModelText",
+			"x": -454.81,
+			"y": -233.96
+		},
+		{
+			"uniqueKey": "JSVariable../src/HTMLLogic.js/innerHTML",
+			"x": -314.81,
+			"y": -233.96
+		}
+	],
+	"comments": [
+		{
+			"uniqueKey": "File../src/Drawing.js",
+			"x": -1719.45,
+			"y": -107.68,
+			"text": "This diagram is an example of how an overview of JavaScript code \ncan be displayed simply and largely automatically. \nThe diagram is updated almost automatically when the code is changed. \n(This box frames logic and data from the Drawing.js file)."
+		},
+		{
+			"uniqueKey": "JSFunction../src/ModelExplorer.js/drawModelExplorer",
+			"x": -1553.99,
+			"y": 60,
+			"text": "Show explorer for the loaded model"
+		},
+		{
+			"uniqueKey": "JSFunction../src/M2mExplorer.js/drawM2mExplorer",
+			"x": -891.57,
+			"y": 58.32,
+			"text": "Called to decide which file with diagram\ndescriptions is to be read (.m2m files)"
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/drawCompleteModel",
+			"x": -1477.09,
+			"y": -0.36,
+			"text": "Main code to draw a model."
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/draw",
+			"x": -992.73,
+			"y": -134.68,
+			"text": "The main entry function for drawing a diagram."
+		},
+		{
+			"uniqueKey": "JSVariable../src/HTMLLogic.js/loadModelText",
+			"x": -368.44,
+			"y": -177.3,
+			"text": "Todo: Do not display this. \nIt is used in draw only in a local variable."
+		}
+	],
+	"pinned": [
+		"JSVariable../src/Global.js/workDirectoryHandle",
+		"JSVariable../src/moose2model.html/window",
+		"JSFunction../src/HTMLLogic.js/SetWorkFolder",
+		"JSVariable../src/moose2model.html/newDiagramElement",
+		"JSFunction../src/moose2model.html/handleNewDiagramCancel",
+		"JSFunction../src/moose2model.html/handleNewDiagramRequested",
+		"JSFunction../src/moose2model.html/handleNewDiagram",
+		"Code../src/moose2model.html/code",
+		"JSVariable../src/HTMLLogic.js/innerHTML",
+		"JSFunction../src/Drawing.js/drawCompleteModel",
+		"JSFunction../src/Drawing.js/supportRetina",
+		"JSFunction../src/ModelExplorer.js/drawModelExplorer",
+		"JSFunction../src/ForceDirecting.js/forceDirecting",
+		"JSFunction../src/M2mExplorer.js/drawM2mExplorer",
+		"JSVariable../src/Diagrams.js/diagramms",
+		"JSVariable../src/Global.js/ctx",
+		"JSVariable../src/Global.js/showExplorer",
+		"JSVariable../src/Global.js/requestAnimationFrame",
+		"JSVariable../src/Global.js/g_height",
+		"JSVariable../src/Global.js/showM2mExplorer",
+		"JSVariable../src/Global.js/showModelExplorer",
+		"JSVariable../src/moose2model.html/document",
+		"JSFunction../src/Drawing.js/draw"
+	],
+	"suppressed": [
+		"File../src/HTMLLogic.js",
+		"File../src/Global.js",
+		"File../src/moose2model.html"
+	]
+}

@@ -33,6 +33,17 @@ h1 {
   margin: 0 auto; /* Center the text content horizontally */
 }
 
+.image-container {
+  text-align: center; /* Center the image horizontally */
+  margin-bottom: 20px; /* Add spacing below the image */
+}
+
+.image-container img {
+  max-width: 100%; /* Limit the image width to the container */
+  height: auto; /* Maintain aspect ratio */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+}
+
 /* Links styling */
 a {
   color: #337ab7;
