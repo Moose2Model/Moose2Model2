@@ -1,0 +1,369 @@
+{
+	"newElementBox": {
+		"isInitial": false,
+		"newElBoxX": 804,
+		"newElBoxY": -554,
+		"newElBoxWidth": 400,
+		"newElBoxHeight": 1148
+	},
+	"addedWithNeighbors": [
+		"Code../src/moose2model.html/code",
+		"JSVariable../src/moose2model.html/window"
+	],
+	"positions": [
+		{
+			"uniqueKey": "File../src/ContextMenu.js",
+			"x": 331.6,
+			"y": -341.4
+		},
+		{
+			"uniqueKey": "File../src/Diagrams.js",
+			"x": 382.23,
+			"y": 383.19
+		},
+		{
+			"uniqueKey": "File../src/Drag.js",
+			"x": 391.16,
+			"y": 299.54
+		},
+		{
+			"uniqueKey": "File../src/Drawing.js",
+			"x": 228.06,
+			"y": 280.19
+		},
+		{
+			"uniqueKey": "Code../src/Drawing.js/code",
+			"x": 229,
+			"y": -380
+		},
+		{
+			"uniqueKey": "File../src/ExtractCodeFromFiles.js",
+			"x": 330.99,
+			"y": 358.1
+		},
+		{
+			"uniqueKey": "File../src/FileExtractorPreprocess.js",
+			"x": 469.82,
+			"y": 19.96
+		},
+		{
+			"uniqueKey": "File../src/Global.js",
+			"x": 494.26,
+			"y": 294.27
+		},
+		{
+			"uniqueKey": "Code../src/Global.js/code",
+			"x": 292.59,
+			"y": 396.7
+		},
+		{
+			"uniqueKey": "File../src/HTMLLogic.js",
+			"x": 511.18,
+			"y": 63.74
+		},
+		{
+			"uniqueKey": "Code../src/HTMLLogic.js/code",
+			"x": 469.19,
+			"y": 51.13
+		},
+		{
+			"uniqueKey": "File../src/moose2model.html",
+			"x": -590.53,
+			"y": -11.52
+		},
+		{
+			"uniqueKey": "Code../src/moose2model.html/code",
+			"x": -556,
+			"y": -49
+		},
+		{
+			"uniqueKey": "JSFunction../src/moose2model.html/JumpToGithub",
+			"x": 4,
+			"y": 391
+		},
+		{
+			"uniqueKey": "JSFunction../src/moose2model.html/JumpToNewsGroup",
+			"x": 44,
+			"y": 211
+		},
+		{
+			"uniqueKey": "JSFunction../src/moose2model.html/JumpToDocu",
+			"x": -196,
+			"y": -449
+		},
+		{
+			"uniqueKey": "JSFunction../src/Global.js/resizeCanvas",
+			"x": 447.54,
+			"y": 275
+		},
+		{
+			"uniqueKey": "JSFunction../src/ExtractCodeFromFiles.js/testFindGlobal5",
+			"x": 663.57,
+			"y": 331.82
+		},
+		{
+			"uniqueKey": "JSFunction../src/ExtractCodeFromFiles.js/testFindGlobal6",
+			"x": 528.4,
+			"y": 471.05
+		},
+		{
+			"uniqueKey": "JSFunction../src/FileExtractorPreprocess.js/getFilesRecursively",
+			"x": 625.85,
+			"y": 31.17
+		},
+		{
+			"uniqueKey": "JSFunction../src/FileExtractorPreprocess.js/SetExtractedFolder",
+			"x": 444.53,
+			"y": 417.07
+		},
+		{
+			"uniqueKey": "JSFunction../src/FileExtractorPreprocess.js/ExtractCodeFromFolder",
+			"x": 376.22,
+			"y": 178.44
+		},
+		{
+			"uniqueKey": "JSFunction../src/Diagrams.js/ZoomToFit",
+			"x": 382.7,
+			"y": 464.42
+		},
+		{
+			"uniqueKey": "JSFunction../src/Diagrams.js/ReadDisplayedDiagramStart",
+			"x": 584.98,
+			"y": 378.02
+		},
+		{
+			"uniqueKey": "JSFunction../src/Diagrams.js/ReadDisplayedDiagram",
+			"x": 612.96,
+			"y": 372.9
+		},
+		{
+			"uniqueKey": "JSFunction../src/Diagrams.js/SaveDisplayedDiagram",
+			"x": 480.81,
+			"y": 170.86
+		},
+		{
+			"uniqueKey": "JSFunction../src/Diagrams.js/ImportOldDiagram",
+			"x": 385.38,
+			"y": 116.95
+		},
+		{
+			"uniqueKey": "JSFunction../src/ContextMenu.js/ContextMenuClicked",
+			"x": 621.7,
+			"y": 292.48
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drag.js/handleDragMouseUp",
+			"x": 566.14,
+			"y": -111.5
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drag.js/handleDragMouseOut",
+			"x": 559.11,
+			"y": 250.67
+		},
+		{
+			"uniqueKey": "JSFunction../src/HTMLLogic.js/LoadModel",
+			"x": 513.9,
+			"y": 176.14
+		},
+		{
+			"uniqueKey": "JSFunction../src/HTMLLogic.js/SetWorkFolder",
+			"x": 287.1,
+			"y": 220.26
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/drawCompleteModel",
+			"x": 383,
+			"y": -275
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/draw",
+			"x": 428,
+			"y": -356
+		},
+		{
+			"uniqueKey": "JSVariable../src/moose2model.html/newDiagramElement",
+			"x": -596,
+			"y": 271
+		},
+		{
+			"uniqueKey": "JSVariable../src/moose2model.html/document",
+			"x": -776,
+			"y": -29
+		},
+		{
+			"uniqueKey": "JSVariable../src/moose2model.html/hidden",
+			"x": -496,
+			"y": 291
+		},
+		{
+			"uniqueKey": "JSVariable../src/moose2model.html/aCommentElement",
+			"x": -516,
+			"y": 51
+		},
+		{
+			"uniqueKey": "JSVariable../src/moose2model.html/exploreModel",
+			"x": -676,
+			"y": -349
+		},
+		{
+			"uniqueKey": "JSVariable../src/moose2model.html/readM2m",
+			"x": -756,
+			"y": -149
+		},
+		{
+			"uniqueKey": "JSVariable../src/moose2model.html/OpenWorkFolderButton",
+			"x": -676,
+			"y": 51
+		},
+		{
+			"uniqueKey": "JSVariable../src/moose2model.html/FolderToSOMIXButton",
+			"x": -396,
+			"y": 211
+		},
+		{
+			"uniqueKey": "JSVariable../src/moose2model.html/FolderCodeToSOMIXButton",
+			"x": -276,
+			"y": 51
+		},
+		{
+			"uniqueKey": "JSVariable../src/moose2model.html/LoadMseButton",
+			"x": -516,
+			"y": -349
+		},
+		{
+			"uniqueKey": "JSVariable../src/moose2model.html/ImportOldDiagramButton",
+			"x": -436,
+			"y": -29
+		},
+		{
+			"uniqueKey": "JSVariable../src/moose2model.html/ReadDiagramButton",
+			"x": -516,
+			"y": 171
+		},
+		{
+			"uniqueKey": "JSVariable../src/moose2model.html/NewDiagramButton",
+			"x": -396,
+			"y": -349
+		},
+		{
+			"uniqueKey": "JSVariable../src/moose2model.html/SaveDiagramButton",
+			"x": -596,
+			"y": 131
+		},
+		{
+			"uniqueKey": "JSVariable../src/moose2model.html/ExploreModelButton",
+			"x": -436,
+			"y": -269
+		},
+		{
+			"uniqueKey": "JSVariable../src/moose2model.html/SwitchThemeButton",
+			"x": -836,
+			"y": -189
+		},
+		{
+			"uniqueKey": "JSVariable../src/moose2model.html/ZoomToFItButton",
+			"x": -756,
+			"y": -269
+		},
+		{
+			"uniqueKey": "JSVariable../src/moose2model.html/RemoveAllHighlightingButton",
+			"x": -676,
+			"y": 211
+		},
+		{
+			"uniqueKey": "JSVariable../src/moose2model.html/ToGithubButton",
+			"x": -356,
+			"y": -189
+		},
+		{
+			"uniqueKey": "JSVariable../src/moose2model.html/ToNewsGroup",
+			"x": -596,
+			"y": -289
+		},
+		{
+			"uniqueKey": "JSVariable../src/moose2model.html/ToHelpButton",
+			"x": -276,
+			"y": -109
+		},
+		{
+			"uniqueKey": "JSVariable../src/moose2model.html/LoadDemoModelButton",
+			"x": -836,
+			"y": 51
+		},
+		{
+			"uniqueKey": "JSVariable../src/moose2model.html/CreateNewDiagramButton",
+			"x": -316,
+			"y": 131
+		},
+		{
+			"uniqueKey": "JSVariable../src/moose2model.html/CancelNewDiagramButton",
+			"x": -616,
+			"y": -189
+		},
+		{
+			"uniqueKey": "JSVariable../src/moose2model.html/newDiagramNameElement",
+			"x": -676,
+			"y": -29
+		},
+		{
+			"uniqueKey": "JSVariable../src/moose2model.html/commentOKButton",
+			"x": -356,
+			"y": -29
+		},
+		{
+			"uniqueKey": "JSVariable../src/moose2model.html/commentCancelButton",
+			"x": -876,
+			"y": -49
+		},
+		{
+			"uniqueKey": "JSVariable../src/moose2model.html/commentElement",
+			"x": -436,
+			"y": 111
+		},
+		{
+			"uniqueKey": "JSVariable../src/moose2model.html/filterModelButton",
+			"x": -436,
+			"y": -109
+		},
+		{
+			"uniqueKey": "JSVariable../src/moose2model.html/cancelFilterModelButton",
+			"x": -276,
+			"y": -229
+		},
+		{
+			"uniqueKey": "JSVariable../src/moose2model.html/exploreModelFilter",
+			"x": -676,
+			"y": -109
+		},
+		{
+			"uniqueKey": "JSVariable../src/moose2model.html/closeReadM2mButtonID",
+			"x": -516,
+			"y": -189
+		},
+		{
+			"uniqueKey": "JSVariable../src/moose2model.html/window",
+			"x": -216,
+			"y": -29
+		},
+		{
+			"uniqueKey": "JSVariable../src/moose2model.html/onclick",
+			"x": -756,
+			"y": 131
+		}
+	],
+	"comments": [
+		{
+			"uniqueKey": "JSVariable../src/moose2model.html/window",
+			"x": -203,
+			"y": -135,
+			"text": "This is quite likely an artefact"
+		}
+	],
+	"pinned": [
+		"JSFunction../src/Drawing.js/drawCompleteModel",
+		"JSFunction../src/Drawing.js/draw",
+		"Code../src/Drawing.js/code"
+	],
+	"suppressed": []
+}

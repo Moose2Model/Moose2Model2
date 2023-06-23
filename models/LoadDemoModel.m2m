@@ -1,0 +1,76 @@
+{
+	"newElementBox": {
+		"isInitial": false,
+		"newElBoxX": 239.6748046875,
+		"newElBoxY": -532.4,
+		"newElBoxWidth": 400,
+		"newElBoxHeight": 786.4
+	},
+	"addedWithNeighbors": [
+		"JSFunction../src/moose2model.html/LoadDemoModel"
+	],
+	"positions": [
+		{
+			"uniqueKey": "File../src/Global.js",
+			"x": -263.28,
+			"y": -47.72
+		},
+		{
+			"uniqueKey": "File../src/HTMLLogic.js",
+			"x": 5.53,
+			"y": 13.46
+		},
+		{
+			"uniqueKey": "File../src/moose2model.html",
+			"x": 83.13,
+			"y": -304.41
+		},
+		{
+			"uniqueKey": "JSFunction../src/moose2model.html/LoadDemoModel",
+			"x": 13,
+			"y": -303
+		},
+		{
+			"uniqueKey": "JSVariable../src/moose2model.html/document",
+			"x": 73,
+			"y": -223
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/mouseover",
+			"x": -287,
+			"y": -279
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/g_width",
+			"x": -387,
+			"y": -19
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/g_height",
+			"x": -187,
+			"y": -39
+		},
+		{
+			"uniqueKey": "JSVariable../src/HTMLLogic.js/loadModelText",
+			"x": 162.11,
+			"y": -84.83
+		},
+		{
+			"uniqueKey": "JSVariable../src/HTMLLogic.js/innerHTML",
+			"x": 162.2,
+			"y": 148.58
+		}
+	],
+	"comments": [
+		{
+			"uniqueKey": "JSFunction../src/moose2model.html/LoadDemoModel",
+			"x": -118.32,
+			"y": -421.77,
+			"text": "It is not found, that it is used in this code:\nLoadDemoModelButton.addEventListener('click', LoadDemoModel);"
+		}
+	],
+	"pinned": [
+		"JSVariable../src/moose2model.html/document"
+	],
+	"suppressed": []
+}
