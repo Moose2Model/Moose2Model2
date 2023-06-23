@@ -74,7 +74,7 @@ async function SetWorkFolder() {
         //     console.log(entry.kind, entry.name);
         // }
     } catch (err) {
-        window.alert("Accessing a directory failed");
+        window.alert("This application is not supported in your browser. Please use a different browser.");
         return;
     }
 }

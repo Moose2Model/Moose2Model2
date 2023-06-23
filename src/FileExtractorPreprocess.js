@@ -66,8 +66,18 @@ async function* getFilesRecursively(fileInfo) {
 async function SetExtractedFolder() {
     'use strict';
     // window.alert("This function is currently implemented. It will not either not work, or not work properly");
-
-    FEDirectoryHandle = await window.showDirectoryPicker();
+    if (typeof window.showDirectoryPicker === 'function') {
+        try {
+            // Attempt to execute the code
+            FEDirectoryHandle = await window.showDirectoryPicker();
+        } catch (error) {
+            // An error occurred, likely due to browser compatibility
+            displayBrowserError();
+        }
+    } else {
+        // showDirectoryPicker is not supported
+        displayBrowserError();
+    }
 
     // From async function LoadModel() part 1
 
@@ -232,7 +242,7 @@ async function SetExtractedFolder() {
 
         }
     } catch (err) {
-        window.alert("Accessing a directory failed");
+        window.alert("This application is not supported in your browser. Please use a different browser.");
         return;
     }
 
@@ -244,13 +254,27 @@ async function SetExtractedFolder() {
     ZoomToFit();
 }
 
-
+// Function to display the browser error message
+function displayBrowserError() {
+    window.alert("This feature is not supported in your browser. Please use a different browser.");
+}
 
 async function ExtractCodeFromFolder() {
     'use strict';
     window.alert("Extracted is currently only JavaScript code. The parsing logic is currently developed. Assume it to be a prove of concept. Feel free to propose improvements.");
 
-    FEDirectoryHandle = await window.showDirectoryPicker();
+    if (typeof window.showDirectoryPicker === 'function') {
+        try {
+            // Attempt to execute the code
+            FEDirectoryHandle = await window.showDirectoryPicker();
+        } catch (error) {
+            // An error occurred, likely due to browser compatibility
+            displayBrowserError();
+        }
+    } else {
+        // showDirectoryPicker is not supported
+        displayBrowserError();
+    }
 
     // From async function LoadModel() part 1
 
