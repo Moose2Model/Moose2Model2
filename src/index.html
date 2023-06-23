@@ -33,24 +33,45 @@
       <img src="m2mLogo.png" alt="Logo">
     </div>
     <div class="text-content">
-
-      <p>Analyze software models in SOMIX format in a JavaScript application. You can run the application from your
-        local file system. </p>
-      <p>You may read this blog <a
-          href="https://blogs.sap.com/2022/08/28/somix-suite-for-software-visualization/">https://blogs.sap.com/2022/08/28/somix-suite-for-software-visualization/</a>.
-      </p>
+      <p>
+        You may create circuit-diagram like diagrams to facilitate your daily work as developer.
+        Or create beautiful force-directed graphs to visulize your application..</p>
+      You can run the application from your
+      local file system or you may just click on the following button:</p>
 
       <form action="moose2model.html">
         <input type="submit" value="Run Moose2Model in Browser" />
       </form>
 
-      <p>Use SAP2Moose to create an mse file with a SOMIX metamodel to use the application.
-        Or load this <a href="Example.mse">example file</a> to your local computer and load it into the application.
-        There is also the option to load a hard coded demo model directly in the application.
+      <p>You may visualize JavaScript Code from a local folder on your computer. You can also analyze a folder in your
+        local file system to view and search directories and files.</p>
+
+      <p>This application is developed since 2015 with the original purpose to analyze SAP applications. Most users will
+        not need this option. See this blog on how to analyze SAP applications:<a
+          href="https://blogs.sap.com/2022/08/28/somix-suite-for-software-visualization/">https://blogs.sap.com/2022/08/28/somix-suite-for-software-visualization/</a>.
+
       </p>
 
-      <p>You can also analyze a folder in your local file system to view and search directories and files. The SOMIX
-        model created for this purpose is currently only created internally in the application.</p>
+      <p>The intention of this visualization is to visualize applications as being composed of code and data which are
+        coupled and assigned to groupings (The logo at the top shows an example for this). The main aim is to support
+        developers during their daily work.
+        Currently not all details of an application are part of the model.
+        But diagrams which are made with this application are commonly more detailed than conventional architecture
+        diagrams.</p>
+      <p>
+        Diagrams are not stored as images. Instead the information is stored which components shall be in a diagram.
+        These components are then displayed with all components to which they are currently coupled.
+        Components are automatically placed the first time they appear in a diagram. Positions can be changed.
+        Components will always be shown at the place where they have been the last time.
+        This helps to preserve the mental model of the developer. This technique is as far as the author understand
+        special. The author is not aware of other tools which use this technique.</p>
+      <p>It is possible to change positions with force-directing. When model informations are loaded all components are
+        displayed in a diagram 'All model elements". They are placed in a circle. Youy may activate force-direction to
+        place coupled components nearer to each other.</p>
+
+      <p>To test the application you may load this <a href="Example.mse">example file</a> to your local computer and
+        load it into the application.
+        There is also the option to load a hard coded demo model directly in the application. </p>
 
       <p>The project is available on Github at <a
           href="https://github.com/Moose2Model/Moose2Model2">https://github.com/Moose2Model/Moose2Model2</a>.</p>
