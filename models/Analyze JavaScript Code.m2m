@@ -4,7 +4,7 @@
 		"newElBoxX": 251.53632812499998,
 		"newElBoxY": -414,
 		"newElBoxWidth": 400,
-		"newElBoxHeight": 588
+		"newElBoxHeight": 668
 	},
 	"addedWithNeighbors": [
 		"JSFunction../src/ExtractCodeFromFiles.js/javaScriptFindGlobal6",
@@ -13,8 +13,8 @@
 	"positions": [
 		{
 			"uniqueKey": "File../src/ExtractCodeFromFiles.js",
-			"x": 214.37,
-			"y": 73.23
+			"x": 275.37,
+			"y": 149.23
 		},
 		{
 			"uniqueKey": "File../src/moose2model.html",
@@ -23,18 +23,18 @@
 		},
 		{
 			"uniqueKey": "JSFunction../src/ExtractCodeFromFiles.js/javaScriptFindGlobal6",
-			"x": -79.57,
-			"y": 56.81
+			"x": -19,
+			"y": 136
 		},
 		{
 			"uniqueKey": "JSFunction../src/ExtractCodeFromFiles.js/AnalyzeFileAndFolder",
-			"x": 54.49,
-			"y": -166.58
+			"x": 121,
+			"y": -84
 		},
 		{
 			"uniqueKey": "JSFunction../src/ExtractCodeFromFiles.js/testFindGlobal6",
-			"x": -72.76,
-			"y": -150.43
+			"x": -19,
+			"y": -84
 		},
 		{
 			"uniqueKey": "JSVariable../src/moose2model.html/window",
@@ -45,9 +45,15 @@
 	"comments": [
 		{
 			"uniqueKey": "JSFunction../src/ExtractCodeFromFiles.js/javaScriptFindGlobal6",
-			"x": -29.57,
-			"y": 6.81,
+			"x": 41,
+			"y": 76,
 			"text": "Does not yet contain logic with hoisting"
+		},
+		{
+			"uniqueKey": "JSFunction../src/ExtractCodeFromFiles.js/testFindGlobal6",
+			"x": -267,
+			"y": -216,
+			"text": "ToDo: Find a call from moose2model.html here.\nIn AnalyzeFileAndFolder the calling script\nis already processed.\nWhy is the usage not found?"
 		}
 	],
 	"pinned": [
