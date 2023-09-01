@@ -1,365 +1,329 @@
 {
 	"newElementBox": {
 		"isInitial": false,
-		"newElBoxX": 1363.9748590192435,
-		"newElBoxY": -554,
+		"newElBoxX": 364.671875,
+		"newElBoxY": -494,
 		"newElBoxWidth": 400,
-		"newElBoxHeight": 1428
+		"newElBoxHeight": 1208
 	},
 	"addedWithNeighbors": [
 		"Code../src/moose2model.html/code",
-		"JSVariable../src/moose2model.html/window"
+		"JSFunction../src/Colors.js/changeColors",
+		"JSVariable../src/Global.js/showM2mExplorer"
 	],
 	"positions": [
 		{
+			"uniqueKey": "File../src/Colors.js",
+			"x": 1428.35,
+			"y": 124.66
+		},
+		{
 			"uniqueKey": "File../src/ContextMenu.js",
-			"x": 331.6,
-			"y": -341.4
-		},
-		{
-			"uniqueKey": "File../src/Diagrams.js",
-			"x": 933.86,
-			"y": 690.96
-		},
-		{
-			"uniqueKey": "File../src/Drag.js",
-			"x": 554.29,
-			"y": -20
+			"x": 173.6,
+			"y": 48.6
 		},
 		{
 			"uniqueKey": "File../src/Drawing.js",
-			"x": 219.65,
-			"y": 216.28
-		},
-		{
-			"uniqueKey": "Code../src/Drawing.js/code",
-			"x": 211.59,
-			"y": -443.91
+			"x": 561.94,
+			"y": 491.26
 		},
 		{
 			"uniqueKey": "File../src/ExtractCodeFromFiles.js",
-			"x": 330.99,
-			"y": 358.1
-		},
-		{
-			"uniqueKey": "File../src/FileExtractorPreprocess.js",
-			"x": 747.32,
-			"y": -222.22
+			"x": -910.54,
+			"y": 519.83
 		},
 		{
 			"uniqueKey": "File../src/Global.js",
-			"x": 361.4,
-			"y": 205.13
+			"x": 440.4,
+			"y": 48.13
 		},
 		{
 			"uniqueKey": "Code../src/Global.js/code",
-			"x": 167.14,
-			"y": 310.86
-		},
-		{
-			"uniqueKey": "File../src/HTMLLogic.js",
-			"x": 448.95,
-			"y": -134.71
-		},
-		{
-			"uniqueKey": "Code../src/HTMLLogic.js/code",
-			"x": 397.77,
-			"y": -138.45
+			"x": 129,
+			"y": 490
 		},
 		{
 			"uniqueKey": "File../src/moose2model.html",
-			"x": -590.53,
-			"y": -11.52
+			"x": -631.53,
+			"y": -45.52
 		},
 		{
 			"uniqueKey": "Code../src/moose2model.html/code",
-			"x": -556,
-			"y": -49
+			"x": -601,
+			"y": -74
 		},
 		{
-			"uniqueKey": "JSFunction../src/moose2model.html/JumpToGithub",
-			"x": 4,
-			"y": 391
+			"uniqueKey": "File../src/MouseWheel.js",
+			"x": 569.19,
+			"y": 434.98
 		},
 		{
-			"uniqueKey": "JSFunction../src/moose2model.html/JumpToNewsGroup",
-			"x": 44,
-			"y": 211
-		},
-		{
-			"uniqueKey": "JSFunction../src/moose2model.html/JumpToDocu",
-			"x": -196,
-			"y": -449
-		},
-		{
-			"uniqueKey": "JSFunction../src/Global.js/resizeCanvas",
-			"x": 307.14,
-			"y": 190.86
+			"uniqueKey": "JSFunction../src/Colors.js/changeColors",
+			"x": -439,
+			"y": 405
 		},
 		{
 			"uniqueKey": "JSFunction../src/ExtractCodeFromFiles.js/testFindGlobal6",
-			"x": 471.22,
-			"y": 299.51
-		},
-		{
-			"uniqueKey": "JSFunction../src/FileExtractorPreprocess.js/getFilesRecursively",
-			"x": 897.5,
-			"y": -202.18
-		},
-		{
-			"uniqueKey": "JSFunction../src/FileExtractorPreprocess.js/SetExtractedFolder",
-			"x": 717.5,
-			"y": 177.82
-		},
-		{
-			"uniqueKey": "JSFunction../src/FileExtractorPreprocess.js/displayBrowserError",
-			"x": 1337.5,
-			"y": 117.82
-		},
-		{
-			"uniqueKey": "JSFunction../src/FileExtractorPreprocess.js/ExtractCodeFromFolder",
-			"x": 657.5,
-			"y": -62.18
-		},
-		{
-			"uniqueKey": "JSFunction../src/Diagrams.js/ZoomToFit",
-			"x": 925.46,
-			"y": 768.23
-		},
-		{
-			"uniqueKey": "JSFunction../src/Diagrams.js/ReadDisplayedDiagramStart",
-			"x": 1125.46,
-			"y": 688.23
-		},
-		{
-			"uniqueKey": "JSFunction../src/Diagrams.js/ReadDisplayedDiagram",
-			"x": 1165.46,
-			"y": 688.23
-		},
-		{
-			"uniqueKey": "JSFunction../src/Diagrams.js/SaveDisplayedDiagram",
-			"x": 1025.46,
-			"y": 488.23
-		},
-		{
-			"uniqueKey": "JSFunction../src/Diagrams.js/ImportOldDiagram",
-			"x": 925.46,
-			"y": 428.23
-		},
-		{
-			"uniqueKey": "JSFunction../src/ContextMenu.js/ContextMenuClicked",
-			"x": 621.7,
-			"y": 292.48
-		},
-		{
-			"uniqueKey": "JSFunction../src/Drag.js/handleDragMouseUp",
-			"x": 723.13,
-			"y": -439.54
-		},
-		{
-			"uniqueKey": "JSFunction../src/Drag.js/handleDragMouseOut",
-			"x": 724.82,
-			"y": -365.63
-		},
-		{
-			"uniqueKey": "JSFunction../src/HTMLLogic.js/LoadModel",
-			"x": 488.05,
-			"y": -102.54
-		},
-		{
-			"uniqueKey": "JSFunction../src/HTMLLogic.js/SetWorkFolder",
-			"x": 241.32,
-			"y": -94.5
-		},
-		{
-			"uniqueKey": "JSFunction../src/Drawing.js/drawCompleteModel",
-			"x": 371.59,
-			"y": -343.91
+			"x": -722.53,
+			"y": 392.73
 		},
 		{
 			"uniqueKey": "JSFunction../src/Drawing.js/draw",
-			"x": 411.59,
-			"y": -423.91
+			"x": 242.49,
+			"y": 41.31
+		},
+		{
+			"uniqueKey": "JSFunction../src/ContextMenu.js/handleContextMenu",
+			"x": 162,
+			"y": -30
+		},
+		{
+			"uniqueKey": "JSFunction../src/MouseWheel.js/zoom",
+			"x": 237.01,
+			"y": 183.48
+		},
+		{
+			"uniqueKey": "JSFunction../src/moose2model.html/SwitchTheme",
+			"x": -341,
+			"y": 146
+		},
+		{
+			"uniqueKey": "JSFunction../src/moose2model.html/handleFilterModelCancel",
+			"x": -161,
+			"y": 66
+		},
+		{
+			"uniqueKey": "JSFunction../src/moose2model.html/readM2mRequested",
+			"x": -181,
+			"y": 146
+		},
+		{
+			"uniqueKey": "JSFunction../src/moose2model.html/handleReadM2mClose",
+			"x": -161,
+			"y": 6
+		},
+		{
+			"uniqueKey": "JSVariable../src/Colors.js/colorTheme",
+			"x": -359,
+			"y": 545
+		},
+		{
+			"uniqueKey": "JSVariable../src/Colors.js/backGroundCanvas",
+			"x": -499,
+			"y": 605
+		},
+		{
+			"uniqueKey": "JSVariable../src/Colors.js/borderBackground",
+			"x": -379,
+			"y": 465
+		},
+		{
+			"uniqueKey": "JSVariable../src/Colors.js/highlightedBorderBackground",
+			"x": -499,
+			"y": 545
+		},
+		{
+			"uniqueKey": "JSVariable../src/Colors.js/fontColor",
+			"x": -239,
+			"y": 545
+		},
+		{
+			"uniqueKey": "JSVariable../src/Colors.js/menuBGColor",
+			"x": -499,
+			"y": 465
+		},
+		{
+			"uniqueKey": "JSVariable../src/Colors.js/menuHighlightedBGColor",
+			"x": -219,
+			"y": 465
+		},
+		{
+			"uniqueKey": "JSVariable../src/Colors.js/menuSeparatorColor",
+			"x": -359,
+			"y": 605
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/document",
+			"x": 129,
+			"y": 550
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/showM2mExplorer",
+			"x": 49,
+			"y": 410
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/window",
+			"x": 9,
+			"y": 550
+		},
+		{
+			"uniqueKey": "JSVariable../src/ContextMenu.js/style",
+			"x": 42,
+			"y": -30
+		},
+		{
+			"uniqueKey": "JSVariable../src/ContextMenu.js/hidden",
+			"x": 82,
+			"y": -90
 		},
 		{
 			"uniqueKey": "JSVariable../src/moose2model.html/newDiagramElement",
-			"x": -596,
-			"y": 271
-		},
-		{
-			"uniqueKey": "JSVariable../src/moose2model.html/document",
-			"x": -776,
-			"y": -29
-		},
-		{
-			"uniqueKey": "JSVariable../src/moose2model.html/hidden",
-			"x": -496,
-			"y": 291
+			"x": -641,
+			"y": 246
 		},
 		{
 			"uniqueKey": "JSVariable../src/moose2model.html/aCommentElement",
-			"x": -516,
-			"y": 51
+			"x": -561,
+			"y": 26
 		},
 		{
 			"uniqueKey": "JSVariable../src/moose2model.html/exploreModel",
-			"x": -676,
-			"y": -349
+			"x": -721,
+			"y": -374
 		},
 		{
 			"uniqueKey": "JSVariable../src/moose2model.html/readM2m",
-			"x": -756,
-			"y": -149
+			"x": -801,
+			"y": -174
 		},
 		{
 			"uniqueKey": "JSVariable../src/moose2model.html/OpenWorkFolderButton",
-			"x": -676,
-			"y": 51
+			"x": -721,
+			"y": 26
 		},
 		{
 			"uniqueKey": "JSVariable../src/moose2model.html/FolderToSOMIXButton",
-			"x": -396,
-			"y": 211
+			"x": -441,
+			"y": 186
 		},
 		{
 			"uniqueKey": "JSVariable../src/moose2model.html/FolderCodeToSOMIXButton",
-			"x": -276,
-			"y": 51
+			"x": -321,
+			"y": 26
 		},
 		{
 			"uniqueKey": "JSVariable../src/moose2model.html/LoadMseButton",
-			"x": -516,
-			"y": -349
+			"x": -561,
+			"y": -374
 		},
 		{
 			"uniqueKey": "JSVariable../src/moose2model.html/ImportOldDiagramButton",
-			"x": -436,
-			"y": -29
+			"x": -481,
+			"y": -54
 		},
 		{
 			"uniqueKey": "JSVariable../src/moose2model.html/ReadDiagramButton",
-			"x": -516,
-			"y": 171
+			"x": -561,
+			"y": 146
 		},
 		{
 			"uniqueKey": "JSVariable../src/moose2model.html/NewDiagramButton",
-			"x": -396,
-			"y": -349
+			"x": -441,
+			"y": -374
 		},
 		{
 			"uniqueKey": "JSVariable../src/moose2model.html/SaveDiagramButton",
-			"x": -596,
-			"y": 131
+			"x": -641,
+			"y": 106
 		},
 		{
 			"uniqueKey": "JSVariable../src/moose2model.html/ExploreModelButton",
-			"x": -436,
-			"y": -269
+			"x": -481,
+			"y": -294
 		},
 		{
 			"uniqueKey": "JSVariable../src/moose2model.html/SwitchThemeButton",
-			"x": -836,
-			"y": -189
+			"x": -881,
+			"y": -214
 		},
 		{
 			"uniqueKey": "JSVariable../src/moose2model.html/ZoomToFItButton",
-			"x": -756,
-			"y": -269
+			"x": -801,
+			"y": -294
 		},
 		{
 			"uniqueKey": "JSVariable../src/moose2model.html/RemoveAllHighlightingButton",
-			"x": -676,
-			"y": 211
+			"x": -721,
+			"y": 186
 		},
 		{
 			"uniqueKey": "JSVariable../src/moose2model.html/ToGithubButton",
-			"x": -356,
-			"y": -189
+			"x": -401,
+			"y": -214
 		},
 		{
 			"uniqueKey": "JSVariable../src/moose2model.html/ToNewsGroup",
-			"x": -596,
-			"y": -289
+			"x": -641,
+			"y": -314
 		},
 		{
 			"uniqueKey": "JSVariable../src/moose2model.html/ToHelpButton",
-			"x": -276,
-			"y": -109
+			"x": -321,
+			"y": -134
 		},
 		{
 			"uniqueKey": "JSVariable../src/moose2model.html/LoadDemoModelButton",
-			"x": -836,
-			"y": 51
+			"x": -881,
+			"y": 26
 		},
 		{
 			"uniqueKey": "JSVariable../src/moose2model.html/CreateNewDiagramButton",
-			"x": -316,
-			"y": 131
+			"x": -361,
+			"y": 106
 		},
 		{
 			"uniqueKey": "JSVariable../src/moose2model.html/CancelNewDiagramButton",
-			"x": -616,
-			"y": -189
+			"x": -681,
+			"y": -254
 		},
 		{
 			"uniqueKey": "JSVariable../src/moose2model.html/newDiagramNameElement",
-			"x": -676,
-			"y": -29
+			"x": -721,
+			"y": -54
 		},
 		{
 			"uniqueKey": "JSVariable../src/moose2model.html/commentOKButton",
-			"x": -356,
-			"y": -29
+			"x": -321,
+			"y": -94
 		},
 		{
 			"uniqueKey": "JSVariable../src/moose2model.html/commentCancelButton",
-			"x": -876,
-			"y": -49
+			"x": -921,
+			"y": -74
 		},
 		{
 			"uniqueKey": "JSVariable../src/moose2model.html/commentElement",
-			"x": -436,
-			"y": 111
+			"x": -481,
+			"y": 86
 		},
 		{
 			"uniqueKey": "JSVariable../src/moose2model.html/filterModelButton",
-			"x": -436,
-			"y": -109
+			"x": -481,
+			"y": -134
 		},
 		{
 			"uniqueKey": "JSVariable../src/moose2model.html/cancelFilterModelButton",
-			"x": -276,
-			"y": -229
+			"x": -321,
+			"y": -254
 		},
 		{
 			"uniqueKey": "JSVariable../src/moose2model.html/exploreModelFilter",
-			"x": -676,
-			"y": -109
+			"x": -721,
+			"y": -134
 		},
 		{
 			"uniqueKey": "JSVariable../src/moose2model.html/closeReadM2mButtonID",
-			"x": -516,
-			"y": -189
-		},
-		{
-			"uniqueKey": "JSVariable../src/moose2model.html/window",
-			"x": -105,
-			"y": -183.72
+			"x": -561,
+			"y": -214
 		},
 		{
 			"uniqueKey": "JSVariable../src/moose2model.html/onclick",
-			"x": -756,
-			"y": 131
+			"x": -801,
+			"y": 106
 		}
 	],
-	"comments": [
-		{
-			"uniqueKey": "JSVariable../src/moose2model.html/window",
-			"x": -92,
-			"y": -289.72,
-			"text": "This is quite likely an artefact"
-		}
-	],
+	"comments": [],
 	"pinned": [
 		"JSFunction../src/Drawing.js/drawCompleteModel",
 		"JSFunction../src/Drawing.js/draw",
@@ -368,7 +332,28 @@
 		"JSFunction../src/HTMLLogic.js/SetWorkFolder",
 		"JSFunction../src/HTMLLogic.js/LoadModel",
 		"JSFunction../src/ExtractCodeFromFiles.js/testFindGlobal6",
-		"JSVariable../src/moose2model.html/window"
+		"JSFunction../src/Colors.js/changeColors",
+		"JSVariable../src/Global.js/window",
+		"JSVariable../src/Global.js/document",
+		"JSVariable../src/ContextMenu.js/hidden",
+		"JSVariable../src/moose2model.html/commentOKButton",
+		"JSVariable../src/moose2model.html/CancelNewDiagramButton",
+		"JSFunction../src/moose2model.html/SwitchTheme",
+		"JSVariable../src/Colors.js/menuBGColor",
+		"JSVariable../src/Colors.js/borderBackground",
+		"JSVariable../src/Colors.js/menuHighlightedBGColor",
+		"JSVariable../src/Colors.js/highlightedBorderBackground",
+		"JSVariable../src/Colors.js/colorTheme",
+		"JSVariable../src/Colors.js/fontColor",
+		"JSVariable../src/Colors.js/backGroundCanvas",
+		"JSVariable../src/Colors.js/menuSeparatorColor",
+		"JSVariable../src/Global.js/showM2mExplorer",
+		"JSFunction../src/moose2model.html/readM2mRequested",
+		"JSFunction../src/moose2model.html/handleFilterModelCancel",
+		"JSFunction../src/MouseWheel.js/zoom",
+		"JSFunction../src/moose2model.html/handleReadM2mClose",
+		"JSFunction../src/ContextMenu.js/handleContextMenu",
+		"Code../src/Global.js/code"
 	],
 	"suppressed": []
 }

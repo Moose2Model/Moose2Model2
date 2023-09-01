@@ -531,16 +531,49 @@ async function AnalyzeFileAndFolder() {
           for (const e of fileInfo.directoryArray) {
             htmlFilePath = htmlFilePath + '/' + e;
           }
-          let jsCodes = [];
+          let jsCodes = ["","","","",""];
           fileContent = await fileInfo.file.text(); // See https://web.dev/file-system-access/
           let htmlDoc = parseHTML(fileContent);
           let scriptElements = htmlDoc.querySelectorAll('script');
-
           scriptElements = Array.from(scriptElements);
-          if (Array.isArray(scriptElements)) {
-            await Promise.all(scriptElements.map(async (scriptElement) => {
 
-              const filePath = scriptElement.src;
+          // BEGIN Not needed as long as the parser returns the script elements in the correct order
+
+          // let scriptElementsInCorrectOrder = fileContent.match(/<script[\s\S]*?<\/script>/gi);
+
+          // // Normalize line endings to LF ('\n') for all array entries
+          // scriptElementsInCorrectOrder = scriptElementsInCorrectOrder.map(entry => entry.replace(/\r\n/g, '\n'));
+
+          // // Sort the scriptElementsArray based on their position in scriptTags
+          // scriptElements.sort((a, b) => {
+          //   const indexA = scriptElementsInCorrectOrder.indexOf(a.outerHTML);
+          //   const indexB = scriptElementsInCorrectOrder.indexOf(b.outerHTML);
+          //   return indexA - indexB;
+          // });
+
+          // END Not needed as long as the parser returns the script elements in the correct order
+
+          // The content of referenced JavaScript files is read and added to the array jsCodes.
+          // This is not trivial, because due to the asynchronous nature of the file system access, 
+          // the order of the array jsCodes does not match the order of the script elements in the HTML file
+          // when no special actions are taken. Therefore, the script elements are mapped to a new array and an index is added.
+          // This index is used to sort the array jsCodes in the correct order.
+
+          const scriptElementIs = scriptElements.map((scriptElement, index) => {
+
+            const modifiedScriptElement = { scriptElement, index };
+
+            return modifiedScriptElement;
+          });
+
+          const numberOfEntries = scriptElementIs.length;
+
+          jsCodes = new Array(numberOfEntries).fill("");
+
+          if (Array.isArray(scriptElementIs)) {
+            await Promise.all(scriptElementIs.map(async (scriptElementI) => {
+
+              const filePath = scriptElementI.scriptElement.src;
 
               // Remove the 'file://' protocol from the filePath
               const pathWithoutProtocol = filePath.replace(/^file:\/\//, '');
@@ -566,23 +599,23 @@ async function AnalyzeFileAndFolder() {
                   for (const e of foundFile.directoryArray) {
                     foundFilePath = foundFilePath + '/' + e;
                   }
-                  jsCodes.push({
+                  jsCodes[scriptElementI.index] = {
                     container: { name: foundFile.name, path: foundFilePath, index: foundFile.index },
                     codeContainer: { name: nameOfFileLogic, path: foundFilePath + '/' + foundFile.name, index: foundFile.indexOfCode },
                     code: jsContent
-                  });
+                  };
                 }
-              }
-              jsCodes.push({
-                container: { name: htmlFileName, path: htmlFilePath, index: htmlFileIndex },
-                codeContainer: { name: nameOfFileLogic, path: htmlFilePath + '/' + htmlFileName, index: htmlcodeIndex },
-                code: scriptElement.textContent
-              });
+              } else {
+                jsCodes[scriptElementI.index] = {
+                  container: { name: htmlFileName, path: htmlFilePath, index: htmlFileIndex },
+                  codeContainer: { name: nameOfFileLogic, path: htmlFilePath + '/' + htmlFileName, index: htmlcodeIndex },
+                  code: scriptElementI.scriptElement.textContent
+                }
+              };
 
 
             }));
           }
-
 
           // #78 Analyze code here
           let analyzedJSCode = javaScriptFindGlobal6(fileInfo.index, gIndex, jsCodes);
@@ -1026,87 +1059,7 @@ function testFindGlobal6() {
 
 }
 
-function testFindGlobal6_1() {
-  console.log('testFindGlobal6_1');
-  const jsCode =
-    `function testFindGlobal6() {};
-  `;
-  const jsCode2 =
-    `testFindGlobal6();
- `;
 
-  //const jsCodes = [{ container: 'First', codeContainer: 'FirstCode', codeContainerIndex: 100, code: jsCode }, { container: 'Second', codeContainer: 'SecondCode', codeContainerIndex: 101, code: jsCode2 }]
-  const jsCodes = [{ container: 'First', codeContainer: { name: 'FirstCode', index: 100 }, code: jsCode },
-  { container: 'Second', codeContainer: { name: 'SecondCode', index: 101 }, code: jsCode2 }]
-
-  const result = javaScriptFindGlobal6(1, 2, jsCodes);
-
-
-
-  console.log('Variables:', result.variables);
-  console.log('Functions:', result.functions);
-  console.log('Index after analysis:', result.index);
-
-  const variablesExp = {
-    x: {
-      index: 2, used: [
-        { currentFunction: 'foo', currentFunctionIndex: 12 },
-        { currentFunction: 'FirstCode', currentFunctionIndex: 100 },
-        { currentFunction: 'SecondCode', currentFunctionIndex: 101 },
-      ], container: 'First'
-    },
-    y: {
-      index: 3, used: [{ currentFunction: 'foo', currentFunctionIndex: 12 },
-      { currentFunction: 'foo2', currentFunctionIndex: 14 },
-      { currentFunction: 'FirstCode', currentFunctionIndex: 100 }], container: 'First'
-    },
-    cl: {
-      index: 4, used: [
-        { currentFunction: 'foo2', currentFunctionIndex: 14 },
-        { currentFunction: 'FirstCode', currentFunctionIndex: 100 }], container: 'First'
-    },
-    z1: {
-      index: 9, used: [
-        { currentFunction: 'foo', currentFunctionIndex: 12 },
-        { currentFunction: 'SecondCode', currentFunctionIndex: 101 }], container: 'Second'
-    }
-  };
-  const functionsExp = {
-    foo: {
-      index: 12, container: 'First', used: [
-        { currentFunction: 'foo2', currentFunctionIndex: 14 },
-        { currentFunction: 'FirstCode', currentFunctionIndex: 100 },
-        { currentFunction: 'SecondCode', currentFunctionIndex: 101 }]
-    },
-    foo2: { index: 14, container: 'First', used: [] },
-    foo3: { index: 15, container: 'Second', used: [] }
-  };
-  const indexExp = 16;
-
-  console.log('VariablesExp:', variablesExp);
-  console.log('FunctionsExp:', functionsExp);
-  console.log('IndexExp:', indexExp);
-
-  // Check whether analysis is done as expected
-
-  const v1 = JSON.stringify(result.variables);
-  const v2 = JSON.stringify(variablesExp);
-
-  const f1 = JSON.stringify(result.functions);
-  const f2 = JSON.stringify(functionsExp);
-
-  if (v1 === v2 &&
-    f1 === f2 &&
-    result.index === indexExp) {
-    console.log("OK");
-  } else {
-    console.log("Error");
-    window.alert('Self test testFindGlobal6_1 failed with an error. The application may not run correct.');
-  }
-
-
-
-}
 
 
 
