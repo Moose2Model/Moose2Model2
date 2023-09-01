@@ -2,9 +2,9 @@
 	"newElementBox": {
 		"isInitial": false,
 		"newElBoxX": 251.53632812499998,
-		"newElBoxY": -414,
+		"newElBoxY": -572.4,
 		"newElBoxWidth": 400,
-		"newElBoxHeight": 668
+		"newElBoxHeight": 826.4
 	},
 	"addedWithNeighbors": [
 		"JSFunction../src/ExtractCodeFromFiles.js/javaScriptFindGlobal6",
@@ -54,6 +54,12 @@
 			"x": -267,
 			"y": -216,
 			"text": "ToDo: Find a call from moose2model.html here.\nIn AnalyzeFileAndFolder the calling script\nis already processed.\nWhy is the usage not found?"
+		},
+		{
+			"uniqueKey": "JSVariable../src/moose2model.html/window",
+			"x": 167.17,
+			"y": -466.24,
+			"text": "According to \nhttps://developer.mozilla.org/en-US/docs/Web/API/Window\nthis is a global variable which exposes\nthe window the application is running in.\nToDo: Handle this more appropriate"
 		}
 	],
 	"pinned": [

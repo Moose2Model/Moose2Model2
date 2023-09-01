@@ -983,9 +983,11 @@ function testFindGlobal6() {
         { currentFunction: 'foo2', currentFunctionIndex: 14 },
         { currentFunction: 'FirstCode', currentFunctionIndex: 100 }], container: 'First'
     },
-    z1: { index: 9, used: [
-      {currentFunction: 'foo', currentFunctionIndex: 12},
-      {currentFunction: 'SecondCode', currentFunctionIndex: 101}], container: 'Second' }
+    z1: {
+      index: 9, used: [
+        { currentFunction: 'foo', currentFunctionIndex: 12 },
+        { currentFunction: 'SecondCode', currentFunctionIndex: 101 }], container: 'Second'
+    }
   };
   const functionsExp = {
     foo: {
@@ -1017,7 +1019,89 @@ function testFindGlobal6() {
     console.log("OK");
   } else {
     console.log("Error");
-    window.alert('Self test testFindGlobal3 failed with an error. The application may not run correct.');
+    window.alert('Self test testFindGlobal6 failed with an error. The application may not run correct.');
+  }
+
+
+
+}
+
+function testFindGlobal6_1() {
+  console.log('testFindGlobal6_1');
+  const jsCode =
+    `function testFindGlobal6() {};
+  `;
+  const jsCode2 =
+    `testFindGlobal6();
+ `;
+
+  //const jsCodes = [{ container: 'First', codeContainer: 'FirstCode', codeContainerIndex: 100, code: jsCode }, { container: 'Second', codeContainer: 'SecondCode', codeContainerIndex: 101, code: jsCode2 }]
+  const jsCodes = [{ container: 'First', codeContainer: { name: 'FirstCode', index: 100 }, code: jsCode },
+  { container: 'Second', codeContainer: { name: 'SecondCode', index: 101 }, code: jsCode2 }]
+
+  const result = javaScriptFindGlobal6(1, 2, jsCodes);
+
+
+
+  console.log('Variables:', result.variables);
+  console.log('Functions:', result.functions);
+  console.log('Index after analysis:', result.index);
+
+  const variablesExp = {
+    x: {
+      index: 2, used: [
+        { currentFunction: 'foo', currentFunctionIndex: 12 },
+        { currentFunction: 'FirstCode', currentFunctionIndex: 100 },
+        { currentFunction: 'SecondCode', currentFunctionIndex: 101 },
+      ], container: 'First'
+    },
+    y: {
+      index: 3, used: [{ currentFunction: 'foo', currentFunctionIndex: 12 },
+      { currentFunction: 'foo2', currentFunctionIndex: 14 },
+      { currentFunction: 'FirstCode', currentFunctionIndex: 100 }], container: 'First'
+    },
+    cl: {
+      index: 4, used: [
+        { currentFunction: 'foo2', currentFunctionIndex: 14 },
+        { currentFunction: 'FirstCode', currentFunctionIndex: 100 }], container: 'First'
+    },
+    z1: {
+      index: 9, used: [
+        { currentFunction: 'foo', currentFunctionIndex: 12 },
+        { currentFunction: 'SecondCode', currentFunctionIndex: 101 }], container: 'Second'
+    }
+  };
+  const functionsExp = {
+    foo: {
+      index: 12, container: 'First', used: [
+        { currentFunction: 'foo2', currentFunctionIndex: 14 },
+        { currentFunction: 'FirstCode', currentFunctionIndex: 100 },
+        { currentFunction: 'SecondCode', currentFunctionIndex: 101 }]
+    },
+    foo2: { index: 14, container: 'First', used: [] },
+    foo3: { index: 15, container: 'Second', used: [] }
+  };
+  const indexExp = 16;
+
+  console.log('VariablesExp:', variablesExp);
+  console.log('FunctionsExp:', functionsExp);
+  console.log('IndexExp:', indexExp);
+
+  // Check whether analysis is done as expected
+
+  const v1 = JSON.stringify(result.variables);
+  const v2 = JSON.stringify(variablesExp);
+
+  const f1 = JSON.stringify(result.functions);
+  const f2 = JSON.stringify(functionsExp);
+
+  if (v1 === v2 &&
+    f1 === f2 &&
+    result.index === indexExp) {
+    console.log("OK");
+  } else {
+    console.log("Error");
+    window.alert('Self test testFindGlobal6_1 failed with an error. The application may not run correct.');
   }
 
 
