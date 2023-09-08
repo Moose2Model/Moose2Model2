@@ -323,7 +323,26 @@
 			"y": 106
 		}
 	],
-	"comments": [],
+	"comments": [
+		{
+			"uniqueKey": "JSFunction../src/ExtractCodeFromFiles.js/testFindGlobal6",
+			"x": -660.53,
+			"y": 302.73,
+			"text": "A function for a self test. It is called\nonce when the script in the html file\nis executed."
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/showM2mExplorer",
+			"x": 99,
+			"y": 360,
+			"text": "This variable is set by functions in \nthe html file and is used by other functions."
+		},
+		{
+			"uniqueKey": "JSVariable../src/ContextMenu.js/hidden",
+			"x": 82,
+			"y": -186,
+			"text": "This is an example for an artefact,\nthe JavaScript extraction is currently\nimplemented."
+		}
+	],
 	"pinned": [
 		"JSFunction../src/Drawing.js/drawCompleteModel",
 		"JSFunction../src/Drawing.js/draw",

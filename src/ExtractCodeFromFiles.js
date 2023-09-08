@@ -96,11 +96,11 @@ function javaScriptFindGlobal6(indexHTML, indexModel, codeParts) {
             else if (token === 'function') {
               let nextToken = tokens[index + 1];
               skipCount = 1;
-              if (/^\s*$/.test(nextToken)) {
+              if (/^\s*$/.test(nextToken)) { // check that nextToken is a whitespace
                 nextToken = tokens[index + 2];
                 skipCount = 2;
               }
-              if (/^[a-zA-Z_$]/.test(nextToken)) {
+              if (/^[a-zA-Z_$]/.test(nextToken)) { // check that nextToken starts with a letter
                 if (level == 0) {
                   currentFunction = nextToken;
                   currentFunctionIndex = indexModel;
@@ -114,7 +114,7 @@ function javaScriptFindGlobal6(indexHTML, indexModel, codeParts) {
                   indexModel += 1;
                 }
               }
-            } else if (/^[a-zA-Z_$]/.test(token)) {
+            } else if (/^[a-zA-Z_$]/.test(token)) { // check that token starts with a letter
               let nextToken = tokens[index + 1];
               let nextToken2 = tokens[index + 2];
               if (nextToken === '(') {
@@ -144,6 +144,18 @@ function javaScriptFindGlobal6(indexHTML, indexModel, codeParts) {
                   // ignore
                 } else {
                   if (level == 0) {
+                    let isExplictVariableDeclaration = false;
+                    // Check whether a declaration of variable occurs due to const, var or let
+                    let previousToken = tokens[index - 1];
+                    let beforePreviousToken = tokens[index - 2];
+                    if (/^\s*$/.test(previousToken)) { // check that previousToken is a whitespace
+
+                      if (beforePreviousToken === 'const' || beforePreviousToken === 'var' || beforePreviousToken === 'let') {
+                        isExplictVariableDeclaration = true;
+                      }
+                    }
+                    //
+
                     let isExistingVariable = false;
                     if (variables[token]) {
                       isExistingVariable = true;
@@ -163,9 +175,12 @@ function javaScriptFindGlobal6(indexHTML, indexModel, codeParts) {
                       }
                     }
                     if ((!isExistingVariable && braketLevel == 0) || isExistingVariable) {
-                      variables[token] = variable;
+                      if (isExplictVariableDeclaration) {
+                        variables[token] = variable;
+                      }
                     }
                   }
+
                   else {
                     if (typeof variables[token] !== 'undefined') {
                       const variable = variables[token]
@@ -177,6 +192,8 @@ function javaScriptFindGlobal6(indexHTML, indexModel, codeParts) {
                         variables[token] = variable;
                       }
                     }
+                    //   }
+                    // }
                   }
                 }
               }
@@ -531,7 +548,7 @@ async function AnalyzeFileAndFolder() {
           for (const e of fileInfo.directoryArray) {
             htmlFilePath = htmlFilePath + '/' + e;
           }
-          let jsCodes = ["","","","",""];
+          let jsCodes = ["", "", "", "", ""];
           fileContent = await fileInfo.file.text(); // See https://web.dev/file-system-access/
           let htmlDoc = parseHTML(fileContent);
           let scriptElements = htmlDoc.querySelectorAll('script');

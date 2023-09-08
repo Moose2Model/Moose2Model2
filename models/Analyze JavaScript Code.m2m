@@ -1,20 +1,36 @@
 {
 	"newElementBox": {
 		"isInitial": false,
-		"newElBoxX": 251.53632812499998,
-		"newElBoxY": -572.4,
-		"newElBoxWidth": 400,
-		"newElBoxHeight": 826.4
+		"newElBoxX": 359.0175697661871,
+		"newElBoxY": -514,
+		"newElBoxWidth": 399.9999999999999,
+		"newElBoxHeight": 788
 	},
 	"addedWithNeighbors": [
 		"JSFunction../src/ExtractCodeFromFiles.js/javaScriptFindGlobal6",
-		"JSFunction../src/ExtractCodeFromFiles.js/testFindGlobal6"
+		"JSFunction../src/ExtractCodeFromFiles.js/testFindGlobal6",
+		"JSFunction../src/ExtractCodeFromFiles.js/AnalyzeFileAndFolder"
 	],
 	"positions": [
 		{
 			"uniqueKey": "File../src/ExtractCodeFromFiles.js",
-			"x": 275.37,
-			"y": 149.23
+			"x": -10.3,
+			"y": 137.92
+		},
+		{
+			"uniqueKey": "File../src/FileExtractorGlobal.js",
+			"x": 151.33,
+			"y": -469.57
+		},
+		{
+			"uniqueKey": "File../src/FileExtractorPreprocess.js",
+			"x": -122.79,
+			"y": -126.24
+		},
+		{
+			"uniqueKey": "File../src/Global.js",
+			"x": 84.8,
+			"y": -448.72
 		},
 		{
 			"uniqueKey": "File../src/moose2model.html",
@@ -22,51 +38,90 @@
 			"y": -308.1
 		},
 		{
+			"uniqueKey": "Code../src/moose2model.html/code",
+			"x": -368.31,
+			"y": -277.15
+		},
+		{
+			"uniqueKey": "JSFunction../src/Global.js/initializeBuildModel",
+			"x": 92.11,
+			"y": -192.74
+		},
+		{
+			"uniqueKey": "JSFunction../src/Global.js/buildModel",
+			"x": 212.11,
+			"y": -192.74
+		},
+		{
 			"uniqueKey": "JSFunction../src/ExtractCodeFromFiles.js/javaScriptFindGlobal6",
-			"x": -19,
-			"y": 136
+			"x": -305.67,
+			"y": 128.69
+		},
+		{
+			"uniqueKey": "JSFunction../src/ExtractCodeFromFiles.js/parseHTML",
+			"x": -125.67,
+			"y": 168.69
 		},
 		{
 			"uniqueKey": "JSFunction../src/ExtractCodeFromFiles.js/AnalyzeFileAndFolder",
-			"x": 121,
-			"y": -84
+			"x": -165.67,
+			"y": -91.31
 		},
 		{
 			"uniqueKey": "JSFunction../src/ExtractCodeFromFiles.js/testFindGlobal6",
-			"x": -19,
-			"y": -84
+			"x": -305.67,
+			"y": -91.31
 		},
 		{
-			"uniqueKey": "JSVariable../src/moose2model.html/window",
-			"x": 77.67,
-			"y": -295.24
+			"uniqueKey": "JSFunction../src/FileExtractorPreprocess.js/ExtractCodeFromFolder",
+			"x": -170.13,
+			"y": -292.14
+		},
+		{
+			"uniqueKey": "JSVariable../src/FileExtractorGlobal.js/FEDirectoryHandle",
+			"x": 89.29,
+			"y": -403.13
+		},
+		{
+			"uniqueKey": "JSVariable../src/FileExtractorGlobal.js/fileInfoByIndex",
+			"x": 189.29,
+			"y": -403.13
+		},
+		{
+			"uniqueKey": "JSVariable../src/ExtractCodeFromFiles.js/nameOfFileLogic",
+			"x": -73.46,
+			"y": -31
+		},
+		{
+			"uniqueKey": "JSVariable../src/FileExtractorPreprocess.js/gIndex",
+			"x": -10.13,
+			"y": -292.14
 		}
 	],
 	"comments": [
 		{
 			"uniqueKey": "JSFunction../src/ExtractCodeFromFiles.js/javaScriptFindGlobal6",
-			"x": 41,
-			"y": 76,
+			"x": -245.67,
+			"y": 68.69,
 			"text": "Does not yet contain logic with hoisting"
 		},
 		{
 			"uniqueKey": "JSFunction../src/ExtractCodeFromFiles.js/testFindGlobal6",
 			"x": -267,
 			"y": -216,
-			"text": "ToDo: Find a call from moose2model.html here.\nIn AnalyzeFileAndFolder the calling script\nis already processed.\nWhy is the usage not found?"
-		},
-		{
-			"uniqueKey": "JSVariable../src/moose2model.html/window",
-			"x": 167.17,
-			"y": -466.24,
-			"text": "According to \nhttps://developer.mozilla.org/en-US/docs/Web/API/Window\nthis is a global variable which exposes\nthe window the application is running in.\nToDo: Handle this more appropriate"
+			"text": ""
 		}
 	],
 	"pinned": [
 		"JSFunction../src/ExtractCodeFromFiles.js/testFindGlobal6",
 		"JSFunction../src/ExtractCodeFromFiles.js/javaScriptFindGlobal6",
 		"JSFunction../src/ExtractCodeFromFiles.js/AnalyzeFileAndFolder",
-		"JSVariable../src/moose2model.html/window"
+		"Code../src/moose2model.html/code",
+		"JSFunction../src/ExtractCodeFromFiles.js/parseHTML",
+		"JSVariable../src/ExtractCodeFromFiles.js/nameOfFileLogic",
+		"JSVariable../src/FileExtractorPreprocess.js/gIndex",
+		"JSVariable../src/FileExtractorGlobal.js/FEDirectoryHandle",
+		"JSFunction../src/Global.js/buildModel"
 	],
 	"suppressed": []
 }

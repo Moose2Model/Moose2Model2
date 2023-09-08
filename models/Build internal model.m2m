@@ -1,0 +1,143 @@
+{
+	"newElementBox": {
+		"isInitial": false,
+		"newElBoxX": -32.29296875,
+		"newElBoxY": -274,
+		"newElBoxWidth": 400,
+		"newElBoxHeight": 708
+	},
+	"addedWithNeighbors": [
+		"JSFunction../src/Global.js/initializeBuildModel",
+		"JSFunction../src/Global.js/buildModel",
+		"JSFunction../src/Global.js/updateMSEIndex"
+	],
+	"positions": [
+		{
+			"uniqueKey": "File../src/AnalyzeMseFile.js",
+			"x": 16.11,
+			"y": 58.6
+		},
+		{
+			"uniqueKey": "File../src/ExtractCodeFromFiles.js",
+			"x": 85.86,
+			"y": 50.32
+		},
+		{
+			"uniqueKey": "File../src/FileExtractorPreprocess.js",
+			"x": 79.68,
+			"y": 38.09
+		},
+		{
+			"uniqueKey": "File../src/Global.js",
+			"x": -429.76,
+			"y": 48.97
+		},
+		{
+			"uniqueKey": "JSFunction../src/Global.js/uniqueKey",
+			"x": -589,
+			"y": 322
+		},
+		{
+			"uniqueKey": "JSFunction../src/Global.js/initializeBuildModel",
+			"x": -529,
+			"y": 84
+		},
+		{
+			"uniqueKey": "JSFunction../src/Global.js/updateMSEIndex",
+			"x": -429,
+			"y": 322
+		},
+		{
+			"uniqueKey": "JSFunction../src/Global.js/buildModel",
+			"x": -425,
+			"y": 197
+		},
+		{
+			"uniqueKey": "JSFunction../src/ExtractCodeFromFiles.js/AnalyzeFileAndFolder",
+			"x": -501.31,
+			"y": -168.15
+		},
+		{
+			"uniqueKey": "JSFunction../src/FileExtractorPreprocess.js/SetExtractedFolder",
+			"x": -253.27,
+			"y": -161.14
+		},
+		{
+			"uniqueKey": "JSFunction../src/AnalyzeMseFile.js/analyzeMseFile",
+			"x": -678.26,
+			"y": -162.7
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/modelElementsByUniqueKey",
+			"x": -217,
+			"y": 0
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/modelElementsByIndex",
+			"x": -220,
+			"y": 52
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/parentChildByParent",
+			"x": -217,
+			"y": 248
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/parentChildByChild",
+			"x": -217,
+			"y": 185
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/callByCaller",
+			"x": -69,
+			"y": 2
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/callByCalled",
+			"x": -64,
+			"y": 61
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/accessByAccessor",
+			"x": -56,
+			"y": 113
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/accessByAccessed",
+			"x": -68,
+			"y": 188
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/indexByMSEIndex",
+			"x": -212,
+			"y": 110
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/currentIndex",
+			"x": -677,
+			"y": 110
+		}
+	],
+	"comments": [],
+	"pinned": [
+		"JSFunction../src/AnalyzeMseFile.js/analyzeMseFile",
+		"JSFunction../src/ExtractCodeFromFiles.js/AnalyzeFileAndFolder",
+		"JSFunction../src/FileExtractorPreprocess.js/SetExtractedFolder",
+		"JSFunction../src/Global.js/uniqueKey",
+		"JSFunction../src/Global.js/updateMSEIndex",
+		"JSFunction../src/Global.js/initializeBuildModel",
+		"JSVariable../src/Global.js/currentIndex",
+		"JSVariable../src/Global.js/accessByAccessor",
+		"JSVariable../src/Global.js/accessByAccessed",
+		"JSVariable../src/Global.js/callByCalled",
+		"JSVariable../src/Global.js/modelElementsByIndex",
+		"JSVariable../src/Global.js/callByCaller",
+		"JSVariable../src/Global.js/indexByMSEIndex",
+		"JSVariable../src/Global.js/parentChildByParent",
+		"JSVariable../src/Global.js/modelElementsByUniqueKey",
+		"JSVariable../src/Global.js/parentChildByChild",
+		"JSFunction../src/Global.js/buildModel",
+		"JSFunction../src/Diagrams.js/SaveDisplayedDiagram"
+	],
+	"suppressed": []
+}
