@@ -1,19 +1,39 @@
 {
 	"newElementBox": {
 		"isInitial": false,
-		"newElBoxX": 239.6748046875,
-		"newElBoxY": -532.4,
-		"newElBoxWidth": 400,
-		"newElBoxHeight": 786.4
+		"newElBoxX": 684.0000000000001,
+		"newElBoxY": -654,
+		"newElBoxWidth": 400.0000000000001,
+		"newElBoxHeight": 628
 	},
 	"addedWithNeighbors": [
 		"JSFunction../src/moose2model.html/LoadDemoModel"
 	],
 	"positions": [
 		{
+			"uniqueKey": "File../src/AnalyzeMseFile.js",
+			"x": 528.8,
+			"y": -134.47
+		},
+		{
+			"uniqueKey": "File../src/Diagrams.js",
+			"x": -268.48,
+			"y": 157.66
+		},
+		{
+			"uniqueKey": "File../src/Drawing.js",
+			"x": 516.68,
+			"y": 30.96
+		},
+		{
+			"uniqueKey": "File../src/ExampleInternal.js",
+			"x": 632.43,
+			"y": -214.85
+		},
+		{
 			"uniqueKey": "File../src/Global.js",
-			"x": -263.28,
-			"y": -47.72
+			"x": -195.5,
+			"y": -298.64
 		},
 		{
 			"uniqueKey": "File../src/HTMLLogic.js",
@@ -26,39 +46,79 @@
 			"y": -304.41
 		},
 		{
+			"uniqueKey": "File../src/PositionElements.js",
+			"x": 336.59,
+			"y": -130.41
+		},
+		{
+			"uniqueKey": "JSFunction../src/Diagrams.js/useStartDiagram",
+			"x": -399.68,
+			"y": -135.78
+		},
+		{
+			"uniqueKey": "JSFunction../src/Diagrams.js/newDiagram",
+			"x": -59.68,
+			"y": -135.78
+		},
+		{
+			"uniqueKey": "JSFunction../src/Diagrams.js/switchDiagram",
+			"x": -279.68,
+			"y": -135.78
+		},
+		{
+			"uniqueKey": "JSFunction../src/Diagrams.js/ZoomToFit",
+			"x": -499.68,
+			"y": -135.78
+		},
+		{
+			"uniqueKey": "JSFunction../src/Diagrams.js/setDiagramActive",
+			"x": -179.68,
+			"y": -135.78
+		},
+		{
+			"uniqueKey": "JSFunction../src/AnalyzeMseFile.js/analyzeMseFile",
+			"x": 317.13,
+			"y": -137.95
+		},
+		{
+			"uniqueKey": "JSFunction../src/PositionElements.js/positionCircle",
+			"x": 185.04,
+			"y": -149.57
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/draw",
+			"x": 554.27,
+			"y": -139.82
+		},
+		{
+			"uniqueKey": "JSFunction../src/ExampleInternal.js/returnExample",
+			"x": 448.42,
+			"y": -141.07
+		},
+		{
 			"uniqueKey": "JSFunction../src/moose2model.html/LoadDemoModel",
 			"x": 13,
 			"y": -303
 		},
 		{
-			"uniqueKey": "JSVariable../src/moose2model.html/document",
-			"x": 73,
-			"y": -223
-		},
-		{
 			"uniqueKey": "JSVariable../src/Global.js/mouseover",
-			"x": -287,
-			"y": -279
+			"x": -212.22,
+			"y": -530.92
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/g_width",
-			"x": -387,
-			"y": -19
+			"x": -292.22,
+			"y": -530.92
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/g_height",
-			"x": -187,
-			"y": -39
+			"x": -112.22,
+			"y": -530.92
 		},
 		{
 			"uniqueKey": "JSVariable../src/HTMLLogic.js/loadModelText",
-			"x": 162.11,
-			"y": -84.83
-		},
-		{
-			"uniqueKey": "JSVariable../src/HTMLLogic.js/innerHTML",
-			"x": 162.2,
-			"y": 148.58
+			"x": 50.92,
+			"y": -148.45
 		}
 	],
 	"comments": [
@@ -70,7 +130,16 @@
 		}
 	],
 	"pinned": [
-		"JSVariable../src/moose2model.html/document"
+		"JSVariable../src/Global.js/g_height",
+		"JSVariable../src/Global.js/g_width",
+		"JSFunction../src/Diagrams.js/switchDiagram",
+		"JSFunction../src/Diagrams.js/ZoomToFit",
+		"JSFunction../src/Diagrams.js/newDiagram",
+		"JSVariable../src/HTMLLogic.js/loadModelText",
+		"JSFunction../src/PositionElements.js/positionCircle",
+		"JSFunction../src/AnalyzeMseFile.js/analyzeMseFile",
+		"JSFunction../src/ExampleInternal.js/returnExample",
+		"JSFunction../src/Drawing.js/draw"
 	],
 	"suppressed": []
 }
