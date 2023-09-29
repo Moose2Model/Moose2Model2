@@ -41,9 +41,28 @@ function javaScriptFindGlobal6(indexHTML, indexModel, codeParts) {
         currentFunctionContainer.currentFunctionIndex = codeContainerIndex;
 
         // Known errors:
-        // Thic code finds tokens in multiline comments
+        // This code finds tokens in multiline comments
 
         let tokens = codePart.code.match(/\/\/.*?$|:|[^\S\r\n]+|\r?\n|\/\*[\s\S]*?\*\/|(['"`])(.*?)\1|([a-zA-Z_$][a-zA-Z0-9_$]*)|[\{\}]|[\(\)]|\b(let|const|function)\b/gm);
+
+
+        // Begin test line number determination
+
+        /*          // Create a second regular expression to extract tokens without multiline comments but keep newline characters
+                 let noMultilineCommentsPattern = /\/\*[\s\S]*?\*\/|\/\/.*?(\r?\n|$)/gm;
+                 let cleanedCode = codePart.code.replace(noMultilineCommentsPattern, match => {
+                   return match.includes('\n') ? match : '\n'; // Replace multiline comments with newline characters
+                 });
+                 
+                 // Tokenize the cleaned code
+                 let cleanedTokens = cleanedCode.match(/\S+/g);
+        
+                 let line = 1; */
+
+        let line = 1;
+
+        // End test line number determination
+
 
 
         //   /\/\/.*?$       // Match single-line comments
@@ -70,6 +89,27 @@ function javaScriptFindGlobal6(indexHTML, indexModel, codeParts) {
 
         if (tokens) {
           tokens.forEach((token, index) => { // tokens.forEach
+
+            // Begin test line number determination
+
+            // If the token is not whitespace, update the line number based on the second token array
+            /*              if (/\S+/.test(token)) {
+                           while (line <= noMultilineCommentsTokens.length && noMultilineCommentsTokens[line - 1] !== token) {
+                            line++;
+                          } 
+                        }  */
+
+            /*             if (/\S+/.test(token)) {
+                          while (line <= cleanedTokens.length && cleanedTokens[line - 1] !== token) {
+                            line++;
+                          }
+                        } */
+
+            // End test line number determination
+
+            if (/\n/.test(token)) {
+              line += 1;
+            }
 
             if (token === '(') {
               braketLevel += 1;
@@ -109,6 +149,7 @@ function javaScriptFindGlobal6(indexHTML, indexModel, codeParts) {
                   functions[currentFunction] = {
                     index: indexModel,
                     container: codePart.container,
+                    line: line,
                     used: []
                   };
                   indexModel += 1;
@@ -167,6 +208,7 @@ function javaScriptFindGlobal6(indexHTML, indexModel, codeParts) {
                     if (!isExistingVariable) {
                       indexModel += 1;
                       variable.container = codePart.container;
+                      variable.line = line;
                     }
                     if (isExistingVariable) {
                       if (analyseUsage) {
@@ -302,7 +344,7 @@ function convertToVscodeLink(input) {
   const filePath = path.replace('file:///', '');
 
   // Build the vscode link
-  const vscodeLink = `vscode://file/${filePath}:1:1`;
+  const vscodeLink = `vscode://file/${filePath}`;
 
   return vscodeLink;
 }
@@ -687,7 +729,7 @@ async function AnalyzeFileAndFolder() {
               uniqueNameVal = functionData.container.path + '/' + functionData.container.name + '/' + memberName;
               technicalTypeVal = 'JSFunction';
               if (functionData.container.urlToVSCode) {
-                linkToEditorVal = functionData.container.urlToVSCode;
+                linkToEditorVal = functionData.container.urlToVSCode + ':' + functionData.line + ':1';
               }
 
               buildModel(
@@ -790,7 +832,7 @@ async function AnalyzeFileAndFolder() {
               uniqueNameVal = variableData.container.path + '/' + variableData.container.name + '/' + memberName;
               technicalTypeVal = 'JSVariable';
               if (variableData.container.urlToVSCode) {
-                linkToEditorVal = variableData.container.urlToVSCode;
+                linkToEditorVal = variableData.container.urlToVSCode + ':' + variableData.line + ':1';
               }
 
               buildModel(
@@ -1040,33 +1082,33 @@ function testFindGlobal6() {
         { currentFunction: 'foo', currentFunctionIndex: 12 },
         { currentFunction: 'FirstCode', currentFunctionIndex: 100 },
         { currentFunction: 'SecondCode', currentFunctionIndex: 101 },
-      ], container: 'First'
+      ], container: 'First', line: 2
     },
     y: {
       index: 3, used: [{ currentFunction: 'foo', currentFunctionIndex: 12 },
       { currentFunction: 'foo2', currentFunctionIndex: 14 },
-      { currentFunction: 'FirstCode', currentFunctionIndex: 100 }], container: 'First'
+      { currentFunction: 'FirstCode', currentFunctionIndex: 100 }], container: 'First', line: 3
     },
     cl: {
       index: 4, used: [
         { currentFunction: 'foo2', currentFunctionIndex: 14 },
-        { currentFunction: 'FirstCode', currentFunctionIndex: 100 }], container: 'First'
+        { currentFunction: 'FirstCode', currentFunctionIndex: 100 }], container: 'First', line: 4
     },
     z1: {
       index: 9, used: [
         { currentFunction: 'foo', currentFunctionIndex: 12 },
-        { currentFunction: 'SecondCode', currentFunctionIndex: 101 }], container: 'Second'
+        { currentFunction: 'SecondCode', currentFunctionIndex: 101 }], container: 'Second', line: 2
     }
   };
   const functionsExp = {
     foo: {
-      index: 12, container: 'First', used: [
+      index: 12, container: 'First', line: 9, used: [
         { currentFunction: 'foo2', currentFunctionIndex: 14 },
         { currentFunction: 'FirstCode', currentFunctionIndex: 100 },
         { currentFunction: 'SecondCode', currentFunctionIndex: 101 }]
     },
-    foo2: { index: 14, container: 'First', used: [] },
-    foo3: { index: 15, container: 'Second', used: [] }
+    foo2: { index: 14, container: 'First', line: 21, used: [] },
+    foo3: { index: 15, container: 'Second', line: 4, used: [] }
   };
   const indexExp = 16;
 
