@@ -1,0 +1,129 @@
+{
+	"newElementBox": {
+		"isInitial": false,
+		"newElBoxX": 105.7021484375,
+		"newElBoxY": -394,
+		"newElBoxWidth": 400,
+		"newElBoxHeight": 588
+	},
+	"addedWithNeighbors": [
+		"JSFunction../src/ForceDirecting.js/forceDirecting"
+	],
+	"positions": [
+		{
+			"uniqueKey": "File../src/Diagrams.js",
+			"x": -213.29,
+			"y": -124.19
+		},
+		{
+			"uniqueKey": "File../src/Drag.js",
+			"x": -145.23,
+			"y": -146.75
+		},
+		{
+			"uniqueKey": "File../src/Drawing.js",
+			"x": 40.98,
+			"y": 78.95
+		},
+		{
+			"uniqueKey": "File../src/ForceDirecting.js",
+			"x": -678.66,
+			"y": -172.16
+		},
+		{
+			"uniqueKey": "File../src/Global.js",
+			"x": -1117.86,
+			"y": -238.29
+		},
+		{
+			"uniqueKey": "JSFunction../src/ForceDirecting.js/forceDirecting",
+			"x": -595,
+			"y": -92
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/draw",
+			"x": -488.94,
+			"y": -287.63
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/modelElementsByIndex",
+			"x": -935,
+			"y": -168
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/parentChildByParent",
+			"x": -932,
+			"y": -213
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/callByCaller",
+			"x": -1073,
+			"y": -222
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/accessByAccessor",
+			"x": -1081,
+			"y": -160
+		},
+		{
+			"uniqueKey": "JSVariable../src/ForceDirecting.js/scale",
+			"x": -672,
+			"y": 27
+		},
+		{
+			"uniqueKey": "JSVariable../src/ForceDirecting.js/oversizeGroups",
+			"x": -755,
+			"y": 28
+		},
+		{
+			"uniqueKey": "JSVariable../src/ForceDirecting.js/maxTimeForceDirectMs",
+			"x": -568,
+			"y": 20
+		},
+		{
+			"uniqueKey": "JSVariable../src/Diagrams.js/circuitDiagramForSoftwareDiagramType",
+			"x": -304,
+			"y": 23
+		},
+		{
+			"uniqueKey": "JSVariable../src/Diagrams.js/diagramms",
+			"x": -304,
+			"y": 83
+		},
+		{
+			"uniqueKey": "JSVariable../src/Diagrams.js/diagramInfos",
+			"x": -304,
+			"y": -37
+		},
+		{
+			"uniqueKey": "JSVariable../src/Drag.js/isDragging",
+			"x": -171,
+			"y": -257
+		},
+		{
+			"uniqueKey": "JSVariable../src/Drag.js/backGroundDragged",
+			"x": -51,
+			"y": -257
+		},
+		{
+			"uniqueKey": "JSVariable../src/Drag.js/draggedElement",
+			"x": -311,
+			"y": -257
+		}
+	],
+	"comments": [],
+	"pinned": [
+		"JSVariable../src/Diagrams.js/circuitDiagramForSoftwareDiagramType",
+		"JSVariable../src/Diagrams.js/diagramInfos",
+		"JSVariable../src/ForceDirecting.js/scale",
+		"JSVariable../src/ForceDirecting.js/maxTimeForceDirectMs",
+		"JSFunction../src/Drawing.js/draw",
+		"JSVariable../src/Global.js/accessByAccessor",
+		"JSVariable../src/Global.js/parentChildByParent",
+		"JSVariable../src/Global.js/callByCaller",
+		"JSVariable../src/Drag.js/draggedElement",
+		"JSVariable../src/Drag.js/isDragging",
+		"JSVariable../src/Drag.js/backGroundDragged"
+	],
+	"suppressed": []
+}

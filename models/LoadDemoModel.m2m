@@ -1,13 +1,14 @@
 {
 	"newElementBox": {
 		"isInitial": false,
-		"newElBoxX": 684.0000000000001,
+		"newElBoxX": 683.9999999999999,
 		"newElBoxY": -654,
 		"newElBoxWidth": 400.0000000000001,
 		"newElBoxHeight": 628
 	},
 	"addedWithNeighbors": [
-		"JSFunction../src/moose2model.html/LoadDemoModel"
+		"JSFunction../src/moose2model.html/LoadDemoModel",
+		"JSVariable../src/moose2model.html/LoadDemoModelButton"
 	],
 	"positions": [
 		{
@@ -37,13 +38,18 @@
 		},
 		{
 			"uniqueKey": "File../src/HTMLLogic.js",
-			"x": 5.53,
-			"y": 13.46
+			"x": 386.66,
+			"y": -188.07
 		},
 		{
 			"uniqueKey": "File../src/moose2model.html",
-			"x": 83.13,
-			"y": -304.41
+			"x": 151.01,
+			"y": -324.21
+		},
+		{
+			"uniqueKey": "Code../src/moose2model.html/code",
+			"x": 267.88,
+			"y": -459.8
 		},
 		{
 			"uniqueKey": "File../src/PositionElements.js",
@@ -87,8 +93,8 @@
 		},
 		{
 			"uniqueKey": "JSFunction../src/Drawing.js/draw",
-			"x": 554.27,
-			"y": -139.82
+			"x": 579.73,
+			"y": -177.3
 		},
 		{
 			"uniqueKey": "JSFunction../src/ExampleInternal.js/returnExample",
@@ -97,8 +103,8 @@
 		},
 		{
 			"uniqueKey": "JSFunction../src/moose2model.html/LoadDemoModel",
-			"x": 13,
-			"y": -303
+			"x": 87.88,
+			"y": -319.8
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/mouseover",
@@ -117,15 +123,20 @@
 		},
 		{
 			"uniqueKey": "JSVariable../src/HTMLLogic.js/loadModelText",
-			"x": 50.92,
-			"y": -148.45
+			"x": 566.99,
+			"y": -401.53
+		},
+		{
+			"uniqueKey": "JSVariable../src/moose2model.html/LoadDemoModelButton",
+			"x": 87.88,
+			"y": -419.8
 		}
 	],
 	"comments": [
 		{
 			"uniqueKey": "JSFunction../src/moose2model.html/LoadDemoModel",
-			"x": -118.32,
-			"y": -421.77,
+			"x": -432.12,
+			"y": -439.8,
 			"text": "It is not found, that it is used in this code:\nLoadDemoModelButton.addEventListener('click', LoadDemoModel);"
 		}
 	],
@@ -139,7 +150,14 @@
 		"JSFunction../src/PositionElements.js/positionCircle",
 		"JSFunction../src/AnalyzeMseFile.js/analyzeMseFile",
 		"JSFunction../src/ExampleInternal.js/returnExample",
-		"JSFunction../src/Drawing.js/draw"
+		"JSFunction../src/Drawing.js/draw",
+		"JSVariable../src/moose2model.html/LoadDemoModelButton",
+		"Code../src/moose2model.html/code",
+		"JSFunction../src/Diagrams.js/ReadDisplayedDiagram",
+		"JSVariable../src/Diagrams.js/diagramInfos",
+		"JSFunction../src/Diagrams.js/ImportOldDiagram",
+		"JSFunction../src/ContextMenu.js/ContextMenuClicked",
+		"JSVariable../src/HTMLLogic.js/displayedDiagramText"
 	],
 	"suppressed": []
 }

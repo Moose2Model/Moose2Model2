@@ -1,0 +1,455 @@
+{
+	"newElementBox": {
+		"isInitial": false,
+		"newElBoxX": 945.365234375,
+		"newElBoxY": -934,
+		"newElBoxWidth": 400,
+		"newElBoxHeight": 1608
+	},
+	"addedWithNeighbors": [
+		"JSFunction../src/Drawing.js/draw",
+		"JSFunction../src/Drawing.js/drawAlways",
+		"JSFunction../src/Drawing.js/drawCompleteModel"
+	],
+	"positions": [
+		{
+			"uniqueKey": "File../src/Colors.js",
+			"x": 119.61,
+			"y": -234.17
+		},
+		{
+			"uniqueKey": "File../src/ContextMenu.js",
+			"x": 35.63,
+			"y": 25.86
+		},
+		{
+			"uniqueKey": "File../src/Diagrams.js",
+			"x": -865.09,
+			"y": 627.81
+		},
+		{
+			"uniqueKey": "File../src/Drag.js",
+			"x": -189.69,
+			"y": -598.6
+		},
+		{
+			"uniqueKey": "File../src/Drawing.js",
+			"x": -785.86,
+			"y": -59.24
+		},
+		{
+			"uniqueKey": "File../src/ForceDirecting.js",
+			"x": -1140.25,
+			"y": 330.25
+		},
+		{
+			"uniqueKey": "File../src/Global.js",
+			"x": 605.64,
+			"y": -139.83
+		},
+		{
+			"uniqueKey": "File../src/HTMLLogic.js",
+			"x": 44.64,
+			"y": 314.58
+		},
+		{
+			"uniqueKey": "File../src/M2mExplorer.js",
+			"x": 51.93,
+			"y": 47.74
+		},
+		{
+			"uniqueKey": "File../src/ModelExplorer.js",
+			"x": 97.34,
+			"y": 89.75
+		},
+		{
+			"uniqueKey": "File../src/moose2model.html",
+			"x": -1119.85,
+			"y": -1184
+		},
+		{
+			"uniqueKey": "File../src/MouseWheel.js",
+			"x": 26.87,
+			"y": 84.77
+		},
+		{
+			"uniqueKey": "File../src/Requirement.js",
+			"x": -637.04,
+			"y": -1128.52
+		},
+		{
+			"uniqueKey": "JSFunction../src/ForceDirecting.js/forceDirecting",
+			"x": -1083,
+			"y": 353
+		},
+		{
+			"uniqueKey": "JSFunction../src/ModelExplorer.js/drawModelExplorer",
+			"x": -361.36,
+			"y": -54.67
+		},
+		{
+			"uniqueKey": "JSFunction../src/M2mExplorer.js/drawM2mExplorer",
+			"x": -211.87,
+			"y": -64.6
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/supportRetina",
+			"x": -1338.79,
+			"y": -337.14
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/resetSnapToGrid",
+			"x": -1118.35,
+			"y": -341.03
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/snapToGrid",
+			"x": -1035,
+			"y": -342
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/cameraToCanvasX",
+			"x": -1215.65,
+			"y": -338.87
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/cameraToCanvasY",
+			"x": -1435.77,
+			"y": -344.6
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/cameraToCanvasScale",
+			"x": -620.3,
+			"y": -324.59
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/cameraToPaneScale",
+			"x": -1311.98,
+			"y": -258.33
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/isInBox",
+			"x": -1289.06,
+			"y": -195.3
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/drawCompleteModel",
+			"x": -950,
+			"y": -426
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/drawAlways",
+			"x": -1223.44,
+			"y": -624.71
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/draw",
+			"x": -1090,
+			"y": -586
+		},
+		{
+			"uniqueKey": "JSFunction../src/ContextMenu.js/ContextMenuClicked",
+			"x": -858.78,
+			"y": -697.31
+		},
+		{
+			"uniqueKey": "JSFunction../src/MouseWheel.js/zoom",
+			"x": -513.93,
+			"y": -747.45
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drag.js/handleDragMouseMove",
+			"x": -248,
+			"y": -511
+		},
+		{
+			"uniqueKey": "JSFunction../src/HTMLLogic.js/LoadModel",
+			"x": -111,
+			"y": 248
+		},
+		{
+			"uniqueKey": "JSFunction../src/moose2model.html/LoadDemoModel",
+			"x": -1164,
+			"y": -825.41
+		},
+		{
+			"uniqueKey": "JSFunction../src/moose2model.html/ExploreModelRequested",
+			"x": -1324,
+			"y": -825.41
+		},
+		{
+			"uniqueKey": "JSFunction../src/moose2model.html/readM2mRequested",
+			"x": -1024,
+			"y": -825.41
+		},
+		{
+			"uniqueKey": "JSVariable../src/Requirement.js/SOMEXPL_1",
+			"x": -440.71,
+			"y": -829.71
+		},
+		{
+			"uniqueKey": "JSVariable../src/Requirement.js/SOMEXPL_2",
+			"x": -660.71,
+			"y": -829.71
+		},
+		{
+			"uniqueKey": "JSVariable../src/Requirement.js/SOMEXPL_3",
+			"x": -540.71,
+			"y": -829.71
+		},
+		{
+			"uniqueKey": "JSVariable../src/Colors.js/colorTheme",
+			"x": -179,
+			"y": -316
+		},
+		{
+			"uniqueKey": "JSVariable../src/Colors.js/fontColor",
+			"x": 1,
+			"y": -376
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/modelElementsByIndex",
+			"x": 655,
+			"y": -156
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/parentChildByParent",
+			"x": 915,
+			"y": 4
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/callByCaller",
+			"x": 855,
+			"y": -316
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/accessByAccessor",
+			"x": 735,
+			"y": -336
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/canvas",
+			"x": 735,
+			"y": 184
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/ctx",
+			"x": 595,
+			"y": -236
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/requestAnimationFrame",
+			"x": 615,
+			"y": 244
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/showModelExplorer",
+			"x": 655,
+			"y": 64
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/showM2mExplorer",
+			"x": 815,
+			"y": -76
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/showExplorer",
+			"x": 595,
+			"y": 144
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/g_width",
+			"x": 735,
+			"y": -136
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/g_height",
+			"x": 755,
+			"y": -216
+		},
+		{
+			"uniqueKey": "JSVariable../src/ForceDirecting.js/scale",
+			"x": -1203,
+			"y": 353
+		},
+		{
+			"uniqueKey": "JSVariable../src/Diagrams.js/bulletPointDiagramType",
+			"x": -1237,
+			"y": 503
+		},
+		{
+			"uniqueKey": "JSVariable../src/Diagrams.js/circuitDiagramForSoftwareDiagramType",
+			"x": -1037,
+			"y": 503
+		},
+		{
+			"uniqueKey": "JSVariable../src/Diagrams.js/diagramms",
+			"x": -1217,
+			"y": 563
+		},
+		{
+			"uniqueKey": "JSVariable../src/Diagrams.js/diagramInfos",
+			"x": -937,
+			"y": 503
+		},
+		{
+			"uniqueKey": "JSVariable../src/Drawing.js/drawingCount",
+			"x": -1075,
+			"y": -2
+		},
+		{
+			"uniqueKey": "JSVariable../src/Drawing.js/boundingRectCompleteMargin",
+			"x": -575,
+			"y": 58
+		},
+		{
+			"uniqueKey": "JSVariable../src/Drawing.js/circuitDiagramColorGrouping",
+			"x": -1095,
+			"y": -262
+		},
+		{
+			"uniqueKey": "JSVariable../src/Drawing.js/circuitDiagramColorCode",
+			"x": -875,
+			"y": 78
+		},
+		{
+			"uniqueKey": "JSVariable../src/Drawing.js/circuitDiagramColorHighlightedCode",
+			"x": -795,
+			"y": 18
+		},
+		{
+			"uniqueKey": "JSVariable../src/Drawing.js/circuitDiagramColorData",
+			"x": -795,
+			"y": 58
+		},
+		{
+			"uniqueKey": "JSVariable../src/Drawing.js/circuitDiagramColorHighlightedData",
+			"x": -575,
+			"y": 158
+		},
+		{
+			"uniqueKey": "JSVariable../src/Drawing.js/circuitDiagramColorDataPersistent",
+			"x": -535,
+			"y": -202
+		},
+		{
+			"uniqueKey": "JSVariable../src/Drawing.js/circuitDiagramColorHighlightedDataPersistent",
+			"x": -1055,
+			"y": -82
+		},
+		{
+			"uniqueKey": "JSVariable../src/Drawing.js/circuitDiagramColorCallLines",
+			"x": -795,
+			"y": -402
+		},
+		{
+			"uniqueKey": "JSVariable../src/Drawing.js/circuitDiagramColorAccessesLines",
+			"x": -875,
+			"y": -382
+		},
+		{
+			"uniqueKey": "JSVariable../src/Drawing.js/circuitDiagramColorCommentLines",
+			"x": -675,
+			"y": 158
+		},
+		{
+			"uniqueKey": "JSVariable../src/Drawing.js/circuitDiagramCallWidth",
+			"x": -695,
+			"y": -382
+		},
+		{
+			"uniqueKey": "JSVariable../src/Drawing.js/circuitDiagramAccessWidth",
+			"x": -775,
+			"y": -182
+		},
+		{
+			"uniqueKey": "JSVariable../src/Drawing.js/circuitDiagramCommentWidth",
+			"x": -895,
+			"y": -102
+		},
+		{
+			"uniqueKey": "JSVariable../src/Drawing.js/circuitDiagramMarkExplicitlyAdded",
+			"x": -975,
+			"y": -22
+		},
+		{
+			"uniqueKey": "JSVariable../src/Drawing.js/arrowLength",
+			"x": -715,
+			"y": -102
+		},
+		{
+			"uniqueKey": "JSVariable../src/Drawing.js/fontSizeGeneral",
+			"x": -975,
+			"y": 98
+		},
+		{
+			"uniqueKey": "JSVariable../src/Drawing.js/groupSize",
+			"x": -875,
+			"y": -282
+		},
+		{
+			"uniqueKey": "JSVariable../src/Drawing.js/codeSize",
+			"x": -1115,
+			"y": 118
+		},
+		{
+			"uniqueKey": "JSVariable../src/Drawing.js/dataSize",
+			"x": -795,
+			"y": -342
+		},
+		{
+			"uniqueKey": "JSVariable../src/Drawing.js/generalFontSize",
+			"x": -955,
+			"y": -322
+		},
+		{
+			"uniqueKey": "JSVariable../src/Drawing.js/commentBoxBorder",
+			"x": -1035,
+			"y": 178
+		},
+		{
+			"uniqueKey": "JSVariable../src/Drag.js/startX",
+			"x": -370,
+			"y": -491
+		},
+		{
+			"uniqueKey": "JSVariable../src/HTMLLogic.js/loadModelText",
+			"x": -18,
+			"y": 241
+		}
+	],
+	"comments": [
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/drawAlways",
+			"x": -1501.66,
+			"y": -727.04,
+			"text": "Uses draw, but this is not found correctly."
+		}
+	],
+	"pinned": [
+		"JSFunction../src/moose2model.html/LoadDemoModel",
+		"JSFunction../src/moose2model.html/readM2mRequested",
+		"JSVariable../src/Requirement.js/SOMEXPL_3",
+		"JSVariable../src/Requirement.js/SOMEXPL_1",
+		"JSVariable../src/HTMLLogic.js/loadModelText",
+		"JSVariable../src/ForceDirecting.js/scale",
+		"JSVariable../src/Diagrams.js/bulletPointDiagramType",
+		"JSVariable../src/Diagrams.js/diagramms",
+		"JSFunction../src/Drag.js/handleDragMouseMove",
+		"JSFunction../src/MouseWheel.js/zoom",
+		"JSFunction../src/ModelExplorer.js/drawModelExplorer",
+		"JSFunction../src/M2mExplorer.js/drawM2mExplorer",
+		"JSFunction../src/ContextMenu.js/ContextMenuClicked",
+		"JSFunction../src/Drawing.js/drawCompleteModel",
+		"JSFunction../src/Drawing.js/draw",
+		"JSFunction../src/Drawing.js/drawAlways",
+		"JSFunction../src/Drawing.js/cameraToCanvasX",
+		"JSFunction../src/Drawing.js/resetSnapToGrid",
+		"JSFunction../src/Drawing.js/cameraToCanvasScale",
+		"JSFunction../src/Drawing.js/supportRetina",
+		"JSFunction../src/Drawing.js/cameraToCanvasY",
+		"JSFunction../src/Drawing.js/cameraToPaneScale",
+		"JSFunction../src/Drawing.js/isInBox"
+	],
+	"suppressed": []
+}
