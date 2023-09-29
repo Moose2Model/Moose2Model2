@@ -2,9 +2,9 @@
 	"newElementBox": {
 		"isInitial": false,
 		"newElBoxX": 359.0175697661871,
-		"newElBoxY": -514,
+		"newElBoxY": -554,
 		"newElBoxWidth": 399.9999999999999,
-		"newElBoxHeight": 788
+		"newElBoxHeight": 828
 	},
 	"addedWithNeighbors": [
 		"JSFunction../src/ExtractCodeFromFiles.js/javaScriptFindGlobal6",
@@ -24,8 +24,8 @@
 		},
 		{
 			"uniqueKey": "File../src/FileExtractorPreprocess.js",
-			"x": -122.79,
-			"y": -126.24
+			"x": -231.68,
+			"y": -257.76
 		},
 		{
 			"uniqueKey": "File../src/Global.js",
@@ -63,6 +63,11 @@
 			"y": 168.69
 		},
 		{
+			"uniqueKey": "JSFunction../src/ExtractCodeFromFiles.js/convertToVscodeLink",
+			"x": 74.21,
+			"y": -51.96
+		},
+		{
 			"uniqueKey": "JSFunction../src/ExtractCodeFromFiles.js/AnalyzeFileAndFolder",
 			"x": -165.67,
 			"y": -91.31
@@ -74,8 +79,8 @@
 		},
 		{
 			"uniqueKey": "JSFunction../src/FileExtractorPreprocess.js/ExtractCodeFromFolder",
-			"x": -170.13,
-			"y": -292.14
+			"x": -288.89,
+			"y": -431.52
 		},
 		{
 			"uniqueKey": "JSVariable../src/FileExtractorGlobal.js/FEDirectoryHandle",
@@ -94,8 +99,8 @@
 		},
 		{
 			"uniqueKey": "JSVariable../src/FileExtractorPreprocess.js/gIndex",
-			"x": -10.13,
-			"y": -292.14
+			"x": -128.89,
+			"y": -431.52
 		}
 	],
 	"comments": [
@@ -121,7 +126,8 @@
 		"JSVariable../src/ExtractCodeFromFiles.js/nameOfFileLogic",
 		"JSVariable../src/FileExtractorPreprocess.js/gIndex",
 		"JSVariable../src/FileExtractorGlobal.js/FEDirectoryHandle",
-		"JSFunction../src/Global.js/buildModel"
+		"JSFunction../src/Global.js/buildModel",
+		"JSFunction../src/ExtractCodeFromFiles.js/convertToVscodeLink"
 	],
 	"suppressed": []
 }

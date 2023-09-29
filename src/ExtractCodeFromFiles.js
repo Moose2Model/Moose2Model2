@@ -294,7 +294,18 @@ function parseHTML(html) {
 }
 
 
+function convertToVscodeLink(input) {
+  // Split the input string by '?' to separate the path and query parameters
+  const [path, query] = input.split('?');
 
+  // Extract the file path from the path part
+  const filePath = path.replace('file:///', '');
+
+  // Build the vscode link
+  const vscodeLink = `vscode://file/${filePath}:1:1`;
+
+  return vscodeLink;
+}
 
 async function AnalyzeFileAndFolder() {
 
@@ -592,6 +603,8 @@ async function AnalyzeFileAndFolder() {
 
               const filePath = scriptElementI.scriptElement.src;
 
+              const urlToVSCode = convertToVscodeLink(filePath);
+
               // Remove the 'file://' protocol from the filePath
               const pathWithoutProtocol = filePath.replace(/^file:\/\//, '');
 
@@ -617,7 +630,7 @@ async function AnalyzeFileAndFolder() {
                     foundFilePath = foundFilePath + '/' + e;
                   }
                   jsCodes[scriptElementI.index] = {
-                    container: { name: foundFile.name, path: foundFilePath, index: foundFile.index },
+                    container: { name: foundFile.name, path: foundFilePath, index: foundFile.index, urlToVSCode: urlToVSCode },
                     codeContainer: { name: nameOfFileLogic, path: foundFilePath + '/' + foundFile.name, index: foundFile.indexOfCode },
                     code: jsContent
                   };
@@ -673,6 +686,9 @@ async function AnalyzeFileAndFolder() {
               nameVal = memberName;
               uniqueNameVal = functionData.container.path + '/' + functionData.container.name + '/' + memberName;
               technicalTypeVal = 'JSFunction';
+              if (functionData.container.urlToVSCode) {
+                linkToEditorVal = functionData.container.urlToVSCode;
+              }
 
               buildModel(
                 elementName,
@@ -773,6 +789,9 @@ async function AnalyzeFileAndFolder() {
               nameVal = memberName;
               uniqueNameVal = variableData.container.path + '/' + variableData.container.name + '/' + memberName;
               technicalTypeVal = 'JSVariable';
+              if (variableData.container.urlToVSCode) {
+                linkToEditorVal = variableData.container.urlToVSCode;
+              }
 
               buildModel(
                 elementName,
