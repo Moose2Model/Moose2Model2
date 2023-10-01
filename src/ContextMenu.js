@@ -212,6 +212,7 @@ function handleContextMenu(e) {
       m.push('Highlight');
       m.push('Highlight using');
     }
+    m.push('Index: ' + gMCElementContextHandled.index);
 
   } else {
     // Handle context menu, when the pane is clicked
