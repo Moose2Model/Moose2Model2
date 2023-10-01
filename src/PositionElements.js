@@ -1,5 +1,80 @@
 'use strict';
 
+/** Contains a list of all elements which are not yet positioned */
+let repositionRequireds = [];
+
+function resetRepositionRequired() { repositionRequireds = []; }
+
+function repositionRequired(index) {
+    if (!repositionRequireds.includes(index)) {
+        repositionRequireds.push(index);
+    }
+}
+
+function removeRepositionRequired(index) {
+    const indexToRemove = repositionRequireds.indexOf(index);
+    if (indexToRemove !== -1) {
+        // Remove the index from the array using splice
+        repositionRequireds.splice(indexToRemove, 1);
+    }
+}
+
+function doRepositioningOfRequired() { // Reposition all elements which are required to be repositioned 
+    // Build a list with all parent groups where at least a single element has a position
+    let parentGroups = [];
+    for (const index of repositionRequireds) {
+        if (typeof parentChildByChild[index] !== 'undefined') {
+            for (const pC of parentChildByChild[index]) {
+                if (pC.isMain) {
+                    for (const pP of parentChildByParent[pC.parent]) {
+                        if (!repositionRequireds.includes(pP.child)) {
+                            if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[pP.child] !== 'undefined') {
+                                if (diagramms[diagramInfos.activeDiagram].complModelPosition[pP.child].visible) {
+                                    if (!parentGroups[pC.parent]) {
+                                        let pG = {};
+                                        pG.parent = pC.parent;
+                                        pG.x = diagramms[diagramInfos.activeDiagram].complModelPosition[pP.child].x;
+                                        pG.y = diagramms[diagramInfos.activeDiagram].complModelPosition[pP.child].y;
+                                        parentGroups[pC.parent] = pG;
+                                    }
+                                    else {
+                                        if (typeof parentGroups[pC.parent].x !== 'undefined') {
+                                            if (parentGroups[pC.parent].x < diagramms[diagramInfos.activeDiagram].complModelPosition[pP.child].x) {
+                                                parentGroups[pC.parent].x = diagramms[diagramInfos.activeDiagram].complModelPosition[pP.child].x;
+                                            }
+                                            if (parentGroups[pC.parent].y < diagramms[diagramInfos.activeDiagram].complModelPosition[pP.child].y) {
+                                                parentGroups[pC.parent].y = diagramms[diagramInfos.activeDiagram].complModelPosition[pP.child].y;
+                                            }
+                                        }
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    // Now reposition all elements which are required to be repositioned
+    for (const index of repositionRequireds) {
+        if (typeof parentChildByChild[index] !== 'undefined') {
+            for (const pC of parentChildByChild[index]) {
+                if (pC.isMain) {
+                    if (typeof parentGroups[pC.parent] !== 'undefined') {
+                        if (typeof parentGroups[pC.parent].x !== 'undefined') { // Reposition only if a parent group exists or has position
+                            diagramms[diagramInfos.activeDiagram].complModelPosition[index].x = parentGroups[pC.parent].x + 20;;
+                            diagramms[diagramInfos.activeDiagram].complModelPosition[index].y = parentGroups[pC.parent].y + 20;;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    resetRepositionRequired();
+}
+
 
 function positionCircle(width, height) {
     const offset = 20;
@@ -105,6 +180,7 @@ function addWithNeighbors(element, highlight_new = false) {
             diagramms[diagramInfos.activeDiagram].complModelPosition[element['index']] = position;
             if (highlight_new) {
                 highlightActive(element['index']);
+                repositionRequired(element['index']);
             }
         }
     }
@@ -129,6 +205,7 @@ function addWithNeighbors(element, highlight_new = false) {
                     diagramms[diagramInfos.activeDiagram].complModelPosition[el.child] = position;
                     if (highlight_new) {
                         highlightActive(el.child);
+                        repositionRequired(el.child);
                     }
                     addNeighbors.push(el.child);
                 }
@@ -170,6 +247,7 @@ function addWithNeighbors(element, highlight_new = false) {
                     diagramms[diagramInfos.activeDiagram].complModelPosition[el.called] = position;
                     if (highlight_new) {
                         highlightActive(el.called);
+                        repositionRequired(el.called);
                     }
                     addNeighbors.push(el.called);
                 }
@@ -192,6 +270,7 @@ function addWithNeighbors(element, highlight_new = false) {
                     diagramms[diagramInfos.activeDiagram].complModelPosition[el.caller] = position;
                     if (highlight_new) {
                         highlightActive(el.caller);
+                        repositionRequired(el.caller);
                     }
                     addNeighbors.push(el.caller);
                 }
@@ -214,6 +293,7 @@ function addWithNeighbors(element, highlight_new = false) {
                     diagramms[diagramInfos.activeDiagram].complModelPosition[el.accessed] = position;
                     if (highlight_new) {
                         highlightActive(el.accessed);
+                        repositionRequired(el.accessed);
                     }
                     addNeighbors.push(el.accessed);
                 }
@@ -235,7 +315,8 @@ function addWithNeighbors(element, highlight_new = false) {
                 if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[el.accessor] === 'undefined') {
                     diagramms[diagramInfos.activeDiagram].complModelPosition[el.accessor] = position;
                     if (highlight_new) {
-                        highlightActive(el.accessor)
+                        highlightActive(el.accessor);
+                        repositionRequired(el.accessor);
                     }
                     addNeighbors.push(el.accessor);
                 }
@@ -261,6 +342,7 @@ function addWithNeighbors(element, highlight_new = false) {
                         if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[el.parent] === 'undefined') {
                             diagramms[diagramInfos.activeDiagram].complModelPosition[el.parent] = position;
                             highlightActive(el.parent);
+                            repositionRequired(el.parent);
                         }
                     }
                 }

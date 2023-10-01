@@ -4,18 +4,21 @@
 		"newElBoxX": 425.6435513364456,
 		"newElBoxY": -574,
 		"newElBoxWidth": 400,
-		"newElBoxHeight": 1168
+		"newElBoxHeight": 1108
 	},
 	"addedWithNeighbors": [
 		"JSFunction../src/PositionElements.js/addWithNeighbors",
 		"JSFunction../src/Diagrams.js/ReadDisplayedDiagram",
-		"JSFunction../src/Diagrams.js/ImportOldDiagram"
+		"JSFunction../src/Diagrams.js/ImportOldDiagram",
+		"JSVariable../src/PositionElements.js/repositionRequireds",
+		"JSFunction../src/PositionElements.js/removeRepositionRequired",
+		"JSFunction../src/PositionElements.js/resetRepositionRequired"
 	],
 	"positions": [
 		{
 			"uniqueKey": "File../src/ContextMenu.js",
-			"x": 50.19,
-			"y": 21.86
+			"x": 144.19,
+			"y": -226.14
 		},
 		{
 			"uniqueKey": "File../src/Diagrams.js",
@@ -30,7 +33,12 @@
 		{
 			"uniqueKey": "File../src/PositionElements.js",
 			"x": 60.67,
-			"y": 27.91
+			"y": 33.91
+		},
+		{
+			"uniqueKey": "Code../src/PositionElements.js/code",
+			"x": -46,
+			"y": -294
 		},
 		{
 			"uniqueKey": "File../src/Requirement.js",
@@ -68,19 +76,39 @@
 			"y": -261.91
 		},
 		{
+			"uniqueKey": "JSFunction../src/PositionElements.js/resetRepositionRequired",
+			"x": 74,
+			"y": -134
+		},
+		{
+			"uniqueKey": "JSFunction../src/PositionElements.js/repositionRequired",
+			"x": 394,
+			"y": -134
+		},
+		{
+			"uniqueKey": "JSFunction../src/PositionElements.js/removeRepositionRequired",
+			"x": 234,
+			"y": -134
+		},
+		{
+			"uniqueKey": "JSFunction../src/PositionElements.js/doRepositioningOfRequired",
+			"x": -270.75,
+			"y": -266.2
+		},
+		{
 			"uniqueKey": "JSFunction../src/PositionElements.js/addWithNeighbors",
-			"x": -426.49,
-			"y": 2.88
+			"x": -400,
+			"y": -53
 		},
 		{
 			"uniqueKey": "JSFunction../src/ContextMenu.js/handleContextMenu",
-			"x": -229.17,
-			"y": -150.5
+			"x": -126,
+			"y": -408
 		},
 		{
 			"uniqueKey": "JSFunction../src/ContextMenu.js/ContextMenuClicked",
-			"x": -395.13,
-			"y": -151.84
+			"x": -306,
+			"y": -408
 		},
 		{
 			"uniqueKey": "JSVariable../src/Requirement.js/SOMEXPL_5",
@@ -109,13 +137,13 @@
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/parentChildByParent",
-			"x": -223,
-			"y": 474
+			"x": -256,
+			"y": 421
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/parentChildByChild",
-			"x": -303,
-			"y": 374
+			"x": -234,
+			"y": 60
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/callByCaller",
@@ -161,6 +189,11 @@
 			"uniqueKey": "JSVariable../src/Diagrams.js/diagramInfos",
 			"x": -961,
 			"y": 9
+		},
+		{
+			"uniqueKey": "JSVariable../src/PositionElements.js/repositionRequireds",
+			"x": 74,
+			"y": -234
 		}
 	],
 	"comments": [
@@ -178,9 +211,21 @@
 		},
 		{
 			"uniqueKey": "JSFunction../src/PositionElements.js/addWithNeighbors",
-			"x": -381.49,
-			"y": -80.12,
+			"x": -360,
+			"y": -133,
 			"text": "Here it is decided where new elements are placed"
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/parentChildByChild",
+			"x": -184,
+			"y": 10,
+			"text": "Required to check whether a grouping is already displayed"
+		},
+		{
+			"uniqueKey": "JSVariable../src/PositionElements.js/repositionRequireds",
+			"x": 124,
+			"y": -284,
+			"text": "A list with all indexes where repositioning\nis still to be done"
 		}
 	],
 	"pinned": [
@@ -201,7 +246,15 @@
 		"JSFunction../src/Diagrams.js/setDiagramActive",
 		"JSFunction../src/Diagrams.js/ZoomToFit",
 		"JSFunction../src/Diagrams.js/ImportOldDiagram",
-		"JSVariable../src/Global.js/modelElementsByIndex"
+		"JSVariable../src/Global.js/modelElementsByIndex",
+		"JSVariable../src/Global.js/parentChildByChild",
+		"JSVariable../src/Global.js/parentChildByParent",
+		"JSVariable../src/PositionElements.js/repositionRequireds",
+		"JSFunction../src/PositionElements.js/resetRepositionRequired",
+		"JSFunction../src/PositionElements.js/removeRepositionRequired",
+		"JSFunction../src/PositionElements.js/repositionRequired",
+		"Code../src/PositionElements.js/code",
+		"JSFunction../src/PositionElements.js/doRepositioningOfRequired"
 	],
 	"suppressed": []
 }

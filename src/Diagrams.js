@@ -264,12 +264,12 @@ function toggleNameDisplay() {
 //   }
 // }
 
-async function ReadDisplayedDiagramStart(){
+async function ReadDisplayedDiagramStart() {
   if (typeof workDirectoryHandle === 'undefined') {
     window.alert("You have to specify a work directory first");
     return;
   }
-  
+
   readM2mRequested();
 }
 
@@ -345,6 +345,8 @@ async function ReadDisplayedDiagram(fileHandle) {
     };
   }
 
+  resetRepositionRequired();
+
   // --- Add elements with neighbor to this diagram
   for (const e of readGenerationInfo.addedWithNeighbors) {
     if (typeof modelElementsByUniqueKey[e] !== 'undefined') {
@@ -362,6 +364,8 @@ async function ReadDisplayedDiagram(fileHandle) {
       }
     }
   }
+
+  doRepositioningOfRequired();
 
   // --- Add comments to this diagram
   for (const e of readGenerationInfo.comments) {
@@ -533,6 +537,8 @@ async function ImportOldDiagram() {
   //doc.children[0].children
 
   let consoleWritten = false;
+  
+  resetRepositionRequired();
 
   for (var step = 1; step <= 2; step++) {
 
@@ -627,7 +633,7 @@ async function ImportOldDiagram() {
                       if (step == 1) {
                         // --- Add elements with neighbor to this diagram
                         if (n_add_explicitly) {
-                          addWithNeighbors(e2,true);
+                          addWithNeighbors(e2, true);
                         }
                       }
                       if (step == 2) {
@@ -671,7 +677,7 @@ async function ImportOldDiagram() {
                   if (step == 1) {
                     // --- Add elements with neighbor to this diagram
                     if (n_add_explicitly) {
-                      addWithNeighbors(e2,true);
+                      addWithNeighbors(e2, true);
                     }
                   }
                   if (step == 2) {
@@ -685,6 +691,7 @@ async function ImportOldDiagram() {
                       diagramms[diagramInfos.activeDiagram].complModelPosition[e2.index].x = parseFloat(n_x) * factorOldToNew;
                       diagramms[diagramInfos.activeDiagram].complModelPosition[e2.index].y = parseFloat(n_y) * factorOldToNew;
                       removeHighlightActive(e2.index);
+                      removeRepositionRequired(e2.index);
                       // Pin all elements directly after import
                       // This prevents that the Forced-direction accicentially spoils the layout
                       diagramms[diagramInfos.activeDiagram].pinned.push(e2.index);
@@ -743,6 +750,8 @@ async function ImportOldDiagram() {
       } // if (n.tagName == 'element') {
     }
   }
+
+  doRepositioningOfRequired();
 
   if (consoleWritten) {
     window.alert("Messages are written to the console, please check.");
