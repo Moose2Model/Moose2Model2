@@ -297,7 +297,7 @@ function ContextMenuClicked(e) {
   } else if (this.outerText == 'Make this diagram active') {
     setDiagramActive(diagramInfos.displayedDiagram);
   } else if (this.outerText == 'Add element with all neighbors' || this.outerText == 'Displayed <> Active: Add element with all neighbors') {
-    addWithNeighbors(gMCElementContextHandled);
+    addWithNeighbors(gMCElementContextHandled, true);
     activeDiagramChanged();
   } else if (this.outerText == 'Remove: Add element with all neighbors' || this.outerText == 'Displayed <> Active: Remove: Add element with all neighbors') {
     redoAddWithNeighbors(gMCElementContextHandled);

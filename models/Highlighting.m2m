@@ -1,0 +1,104 @@
+{
+	"newElementBox": {
+		"isInitial": false,
+		"newElBoxX": 460.349609375,
+		"newElBoxY": -94,
+		"newElBoxWidth": 400,
+		"newElBoxHeight": 628
+	},
+	"addedWithNeighbors": [
+		"JSFunction../src/Drawing.js/highlight",
+		"JSFunction../src/Drawing.js/highlightUsedBy",
+		"JSFunction../src/Drawing.js/highlightUsing",
+		"JSFunction../src/Drawing.js/RemoveAllHighlighting"
+	],
+	"positions": [
+		{
+			"uniqueKey": "File../src/ContextMenu.js",
+			"x": 115.8,
+			"y": 77.1
+		},
+		{
+			"uniqueKey": "File../src/Diagrams.js",
+			"x": -118.79,
+			"y": 348.14
+		},
+		{
+			"uniqueKey": "File../src/Drawing.js",
+			"x": -322.21,
+			"y": 341.33
+		},
+		{
+			"uniqueKey": "File../src/Global.js",
+			"x": 49.56,
+			"y": 337.06
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/highlightUsedBy",
+			"x": -120,
+			"y": 220
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/highlightUsing",
+			"x": -294,
+			"y": 217
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/highlight",
+			"x": -227,
+			"y": 212
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/RemoveAllHighlighting",
+			"x": -482,
+			"y": 271
+		},
+		{
+			"uniqueKey": "JSFunction../src/ContextMenu.js/ContextMenuClicked",
+			"x": -239,
+			"y": 23
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/callByCaller",
+			"x": -47,
+			"y": 410
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/callByCalled",
+			"x": 173,
+			"y": 410
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/accessByAccessor",
+			"x": 293,
+			"y": 410
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/accessByAccessed",
+			"x": 53,
+			"y": 410
+		},
+		{
+			"uniqueKey": "JSVariable../src/Diagrams.js/diagramms",
+			"x": -153,
+			"y": 423
+		},
+		{
+			"uniqueKey": "JSVariable../src/Diagrams.js/diagramInfos",
+			"x": -253,
+			"y": 423
+		}
+	],
+	"comments": [],
+	"pinned": [
+		"JSFunction../src/ContextMenu.js/ContextMenuClicked",
+		"JSVariable../src/Diagrams.js/diagramms",
+		"JSFunction../src/Drawing.js/highlight",
+		"JSFunction../src/Drawing.js/RemoveAllHighlighting",
+		"JSFunction../src/Drawing.js/highlightUsing",
+		"JSFunction../src/Drawing.js/highlightUsedBy",
+		"JSVariable../src/Global.js/callByCalled",
+		"JSVariable../src/Global.js/accessByAccessor"
+	],
+	"suppressed": []
+}

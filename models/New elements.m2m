@@ -1,0 +1,207 @@
+{
+	"newElementBox": {
+		"isInitial": false,
+		"newElBoxX": 425.6435513364456,
+		"newElBoxY": -574,
+		"newElBoxWidth": 400,
+		"newElBoxHeight": 1168
+	},
+	"addedWithNeighbors": [
+		"JSFunction../src/PositionElements.js/addWithNeighbors",
+		"JSFunction../src/Diagrams.js/ReadDisplayedDiagram",
+		"JSFunction../src/Diagrams.js/ImportOldDiagram"
+	],
+	"positions": [
+		{
+			"uniqueKey": "File../src/ContextMenu.js",
+			"x": 50.19,
+			"y": 21.86
+		},
+		{
+			"uniqueKey": "File../src/Diagrams.js",
+			"x": -1414.2,
+			"y": 68.29
+		},
+		{
+			"uniqueKey": "File../src/Global.js",
+			"x": -374.58,
+			"y": 318.93
+		},
+		{
+			"uniqueKey": "File../src/PositionElements.js",
+			"x": 60.67,
+			"y": 27.91
+		},
+		{
+			"uniqueKey": "File../src/Requirement.js",
+			"x": 379.51,
+			"y": -219.6
+		},
+		{
+			"uniqueKey": "JSFunction../src/Diagrams.js/newDiagram",
+			"x": -1121,
+			"y": -10
+		},
+		{
+			"uniqueKey": "JSFunction../src/Diagrams.js/switchDiagram",
+			"x": -1301,
+			"y": 70
+		},
+		{
+			"uniqueKey": "JSFunction../src/Diagrams.js/ZoomToFit",
+			"x": -992,
+			"y": 143
+		},
+		{
+			"uniqueKey": "JSFunction../src/Diagrams.js/setDiagramActive",
+			"x": -1227,
+			"y": 142
+		},
+		{
+			"uniqueKey": "JSFunction../src/Diagrams.js/ReadDisplayedDiagram",
+			"x": -1061,
+			"y": -290
+		},
+		{
+			"uniqueKey": "JSFunction../src/Diagrams.js/ImportOldDiagram",
+			"x": -1283.34,
+			"y": -261.91
+		},
+		{
+			"uniqueKey": "JSFunction../src/PositionElements.js/addWithNeighbors",
+			"x": -426.49,
+			"y": 2.88
+		},
+		{
+			"uniqueKey": "JSFunction../src/ContextMenu.js/handleContextMenu",
+			"x": -229.17,
+			"y": -150.5
+		},
+		{
+			"uniqueKey": "JSFunction../src/ContextMenu.js/ContextMenuClicked",
+			"x": -395.13,
+			"y": -151.84
+		},
+		{
+			"uniqueKey": "JSVariable../src/Requirement.js/SOMEXPL_5",
+			"x": -324.35,
+			"y": -468.67
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/fileHandle",
+			"x": 229,
+			"y": 352
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/workDirectoryHandle",
+			"x": 257,
+			"y": 394
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/modelElementsByUniqueKey",
+			"x": -94,
+			"y": 378
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/modelElementsByIndex",
+			"x": 287,
+			"y": 300.91
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/parentChildByParent",
+			"x": -223,
+			"y": 474
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/parentChildByChild",
+			"x": -303,
+			"y": 374
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/callByCaller",
+			"x": -483,
+			"y": 334
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/callByCalled",
+			"x": -383,
+			"y": 334
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/accessByAccessor",
+			"x": -423,
+			"y": 414
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/accessByAccessed",
+			"x": -263,
+			"y": 334
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/ctx",
+			"x": 82,
+			"y": 423
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/g_width",
+			"x": -50,
+			"y": 313
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/g_height",
+			"x": 142,
+			"y": 332
+		},
+		{
+			"uniqueKey": "JSVariable../src/Diagrams.js/diagramms",
+			"x": -1119,
+			"y": 89
+		},
+		{
+			"uniqueKey": "JSVariable../src/Diagrams.js/diagramInfos",
+			"x": -961,
+			"y": 9
+		}
+	],
+	"comments": [
+		{
+			"uniqueKey": "JSFunction../src/Diagrams.js/ReadDisplayedDiagram",
+			"x": -646,
+			"y": -78,
+			"text": "Calls also addWithNeighbors"
+		},
+		{
+			"uniqueKey": "JSFunction../src/Diagrams.js/ImportOldDiagram",
+			"x": -641.35,
+			"y": -30.21,
+			"text": "Calls also addWithNeighbors"
+		},
+		{
+			"uniqueKey": "JSFunction../src/PositionElements.js/addWithNeighbors",
+			"x": -381.49,
+			"y": -80.12,
+			"text": "Here it is decided where new elements are placed"
+		}
+	],
+	"pinned": [
+		"JSFunction../src/PositionElements.js/addWithNeighbors",
+		"JSVariable../src/Global.js/accessByAccessed",
+		"JSVariable../src/Global.js/callByCalled",
+		"JSFunction../src/ContextMenu.js/ContextMenuClicked",
+		"JSVariable../src/Diagrams.js/diagramms",
+		"JSFunction../src/Diagrams.js/ReadDisplayedDiagram",
+		"JSFunction../src/ContextMenu.js/handleContextMenu",
+		"JSVariable../src/Global.js/g_width",
+		"JSVariable../src/Global.js/g_height",
+		"JSVariable../src/Requirement.js/SOMEXPL_5",
+		"JSVariable../src/Global.js/modelElementsByUniqueKey",
+		"JSVariable../src/Global.js/ctx",
+		"JSVariable../src/Global.js/fileHandle",
+		"JSVariable../src/Diagrams.js/diagramInfos",
+		"JSFunction../src/Diagrams.js/setDiagramActive",
+		"JSFunction../src/Diagrams.js/ZoomToFit",
+		"JSFunction../src/Diagrams.js/ImportOldDiagram",
+		"JSVariable../src/Global.js/modelElementsByIndex"
+	],
+	"suppressed": []
+}

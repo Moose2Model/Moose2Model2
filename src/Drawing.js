@@ -163,6 +163,29 @@ function highlight(index) {
     }
 }
 
+function removeHighlight(index) {
+    const indexToRemove = diagramms[diagramInfos.displayedDiagram].highlighted.indexOf(index);
+    if (indexToRemove !== -1) {
+        // Remove the index from the array using splice
+        diagramms[diagramInfos.displayedDiagram].highlighted.splice(indexToRemove, 1);
+    }
+}
+
+function highlightActive(index) {
+    if (!diagramms[diagramInfos.activeDiagram].highlighted.includes(index)) {
+        diagramms[diagramInfos.activeDiagram].highlighted.push(index);
+    }
+}
+
+function removeHighlightActive(index) {
+
+    const indexToRemove = diagramms[diagramInfos.activeDiagram].highlighted.indexOf(index);
+    if (indexToRemove !== -1) {
+        // Remove the index from the array using splice
+        diagramms[diagramInfos.activeDiagram].highlighted.splice(indexToRemove, 1);
+    }
+}
+
 function RemoveAllHighlighting() {
     diagramms[diagramInfos.displayedDiagram].highlighted = [];
 }

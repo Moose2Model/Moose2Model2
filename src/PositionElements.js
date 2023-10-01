@@ -49,7 +49,7 @@ function redoAddWithNeighbors(element) {
     // How is this be done best?
     let where = diagramms[diagramInfos.activeDiagram].generationInfoInternal.addedWithNeighbors.indexOf(element.index);
     if (where != -1) {
-        diagramms[diagramInfos.activeDiagram].generationInfoInternal.addedWithNeighbors.splice(where,1)
+        diagramms[diagramInfos.activeDiagram].generationInfoInternal.addedWithNeighbors.splice(where, 1)
 
         // Remember positions
         let positions = diagramms[diagramInfos.activeDiagram].complModelPosition;
@@ -79,7 +79,7 @@ function redoAddWithNeighbors(element) {
     }
 }
 
-function addWithNeighbors(element) {
+function addWithNeighbors(element, highlight_new = false) {
 
     if (diagramms[diagramInfos.activeDiagram].generationInfoInternal.addedWithNeighbors.indexOf(element.index) == -1) {
         diagramms[diagramInfos.activeDiagram].generationInfoInternal.addedWithNeighbors.push(element.index);
@@ -103,6 +103,9 @@ function addWithNeighbors(element) {
         };
         if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[element['index']] === 'undefined') {
             diagramms[diagramInfos.activeDiagram].complModelPosition[element['index']] = position;
+            if (highlight_new) {
+                highlightActive(element['index']);
+            }
         }
     }
 
@@ -124,6 +127,9 @@ function addWithNeighbors(element) {
                 };
                 if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[el.child] === 'undefined') {
                     diagramms[diagramInfos.activeDiagram].complModelPosition[el.child] = position;
+                    if (highlight_new) {
+                        highlightActive(el.child);
+                    }
                     addNeighbors.push(el.child);
                 }
             }
@@ -162,6 +168,9 @@ function addWithNeighbors(element) {
                 };
                 if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[el.called] === 'undefined') {
                     diagramms[diagramInfos.activeDiagram].complModelPosition[el.called] = position;
+                    if (highlight_new) {
+                        highlightActive(el.called);
+                    }
                     addNeighbors.push(el.called);
                 }
             }
@@ -181,6 +190,9 @@ function addWithNeighbors(element) {
                 };
                 if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[el.caller] === 'undefined') {
                     diagramms[diagramInfos.activeDiagram].complModelPosition[el.caller] = position;
+                    if (highlight_new) {
+                        highlightActive(el.caller);
+                    }
                     addNeighbors.push(el.caller);
                 }
             }
@@ -200,6 +212,9 @@ function addWithNeighbors(element) {
                 };
                 if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[el.accessed] === 'undefined') {
                     diagramms[diagramInfos.activeDiagram].complModelPosition[el.accessed] = position;
+                    if (highlight_new) {
+                        highlightActive(el.accessed);
+                    }
                     addNeighbors.push(el.accessed);
                 }
             }
@@ -219,6 +234,9 @@ function addWithNeighbors(element) {
                 };
                 if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[el.accessor] === 'undefined') {
                     diagramms[diagramInfos.activeDiagram].complModelPosition[el.accessor] = position;
+                    if (highlight_new) {
+                        highlightActive(el.accessor)
+                    }
                     addNeighbors.push(el.accessor);
                 }
             }
@@ -242,6 +260,7 @@ function addWithNeighbors(element) {
                         };
                         if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[el.parent] === 'undefined') {
                             diagramms[diagramInfos.activeDiagram].complModelPosition[el.parent] = position;
+                            highlightActive(el.parent);
                         }
                     }
                 }

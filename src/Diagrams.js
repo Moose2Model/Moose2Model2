@@ -348,7 +348,7 @@ async function ReadDisplayedDiagram(fileHandle) {
   // --- Add elements with neighbor to this diagram
   for (const e of readGenerationInfo.addedWithNeighbors) {
     if (typeof modelElementsByUniqueKey[e] !== 'undefined') {
-      addWithNeighbors(modelElementsByUniqueKey[e]);
+      addWithNeighbors(modelElementsByUniqueKey[e], true);
     }
   }
   // --- Position elements on this diagram
@@ -358,6 +358,7 @@ async function ReadDisplayedDiagram(fileHandle) {
       if (typeof diagramms[diagramInfos.activeDiagram].complModelPosition[element.index] !== 'undefined') {
         diagramms[diagramInfos.activeDiagram].complModelPosition[element.index].x = e.x;
         diagramms[diagramInfos.activeDiagram].complModelPosition[element.index].y = e.y;
+        removeHighlightActive(element.index);
       }
     }
   }
@@ -626,7 +627,7 @@ async function ImportOldDiagram() {
                       if (step == 1) {
                         // --- Add elements with neighbor to this diagram
                         if (n_add_explicitly) {
-                          addWithNeighbors(e2);
+                          addWithNeighbors(e2,true);
                         }
                       }
                       if (step == 2) {
@@ -638,6 +639,7 @@ async function ImportOldDiagram() {
                           // --- Position elements on this diagram
                           diagramms[diagramInfos.activeDiagram].complModelPosition[e2.index].x = parseFloat(n_x) * factorOldToNew;
                           diagramms[diagramInfos.activeDiagram].complModelPosition[e2.index].y = parseFloat(n_y) * factorOldToNew;
+                          removeHighlightActive(e2.index);
 
                           // Pin all elements directly after import
                           // This prevents that the Forced-direction accicentially spoils the layout
@@ -669,7 +671,7 @@ async function ImportOldDiagram() {
                   if (step == 1) {
                     // --- Add elements with neighbor to this diagram
                     if (n_add_explicitly) {
-                      addWithNeighbors(e2);
+                      addWithNeighbors(e2,true);
                     }
                   }
                   if (step == 2) {
@@ -682,7 +684,7 @@ async function ImportOldDiagram() {
                       // --- Position elements on this diagram
                       diagramms[diagramInfos.activeDiagram].complModelPosition[e2.index].x = parseFloat(n_x) * factorOldToNew;
                       diagramms[diagramInfos.activeDiagram].complModelPosition[e2.index].y = parseFloat(n_y) * factorOldToNew;
-
+                      removeHighlightActive(e2.index);
                       // Pin all elements directly after import
                       // This prevents that the Forced-direction accicentially spoils the layout
                       diagramms[diagramInfos.activeDiagram].pinned.push(e2.index);
