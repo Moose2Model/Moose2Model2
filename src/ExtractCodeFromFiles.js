@@ -146,13 +146,20 @@ function javaScriptFindGlobal6(indexHTML, indexModel, codeParts) {
                   currentFunctionIndex = indexModel;
                   currentFunctionContainer.currentFunction = currentFunction;
                   currentFunctionContainer.currentFunctionIndex = currentFunctionIndex;
-                  functions[currentFunction] = {
-                    index: indexModel,
-                    container: codePart.container,
-                    line: line,
-                    used: []
-                  };
-                  indexModel += 1;
+                  if (!analyseUsage) {
+                    functions[currentFunction] = {
+                      index: indexModel,
+                      container: codePart.container,
+                      line: line,
+                      used: []
+                    };
+                    indexModel += 1;
+                  } else {
+                    // In the second part of the loop, the index of the function has to be read from the functions array
+                    // otherwise a wrong index will be used
+                    currentFunctionContainer.currentFunctionIndex = functions[currentFunction].index;
+                  }
+                  //}
                 }
               }
             } else if (/^[a-zA-Z_$]/.test(token)) { // check that token starts with a letter
@@ -206,9 +213,11 @@ function javaScriptFindGlobal6(indexHTML, indexModel, codeParts) {
                       used: []
                     };
                     if (!isExistingVariable) {
+                      //if (!analyseUsage) {
                       indexModel += 1;
                       variable.container = codePart.container;
                       variable.line = line;
+                      //}
                     }
                     if (isExistingVariable) {
                       if (analyseUsage) {
@@ -218,7 +227,9 @@ function javaScriptFindGlobal6(indexHTML, indexModel, codeParts) {
                     }
                     if ((!isExistingVariable && braketLevel == 0) || isExistingVariable) {
                       if (isExplictVariableDeclaration) {
+                        //if (!analyseUsage) {
                         variables[token] = variable;
+                        // }
                       }
                     }
                   }
@@ -1079,38 +1090,38 @@ function testFindGlobal6() {
   const variablesExp = {
     x: {
       index: 2, used: [
-        { currentFunction: 'foo', currentFunctionIndex: 12 },
+        { currentFunction: 'foo', currentFunctionIndex: 6 },
         { currentFunction: 'FirstCode', currentFunctionIndex: 100 },
         { currentFunction: 'SecondCode', currentFunctionIndex: 101 },
       ], container: 'First', line: 2
     },
     y: {
-      index: 3, used: [{ currentFunction: 'foo', currentFunctionIndex: 12 },
-      { currentFunction: 'foo2', currentFunctionIndex: 14 },
+      index: 3, used: [{ currentFunction: 'foo', currentFunctionIndex: 6 },
+      { currentFunction: 'foo2', currentFunctionIndex: 8 },
       { currentFunction: 'FirstCode', currentFunctionIndex: 100 }], container: 'First', line: 3
     },
     cl: {
       index: 4, used: [
-        { currentFunction: 'foo2', currentFunctionIndex: 14 },
+        { currentFunction: 'foo2', currentFunctionIndex: 8 },
         { currentFunction: 'FirstCode', currentFunctionIndex: 100 }], container: 'First', line: 4
     },
     z1: {
       index: 9, used: [
-        { currentFunction: 'foo', currentFunctionIndex: 12 },
+        { currentFunction: 'foo', currentFunctionIndex: 6 },
         { currentFunction: 'SecondCode', currentFunctionIndex: 101 }], container: 'Second', line: 2
     }
   };
   const functionsExp = {
     foo: {
-      index: 12, container: 'First', line: 9, used: [
-        { currentFunction: 'foo2', currentFunctionIndex: 14 },
+      index: 6, container: 'First', line: 9, used: [
+        { currentFunction: 'foo2', currentFunctionIndex: 8 },
         { currentFunction: 'FirstCode', currentFunctionIndex: 100 },
         { currentFunction: 'SecondCode', currentFunctionIndex: 101 }]
     },
-    foo2: { index: 14, container: 'First', line: 21, used: [] },
-    foo3: { index: 15, container: 'Second', line: 4, used: [] }
+    foo2: { index: 8, container: 'First', line: 21, used: [] },
+    foo3: { index: 10, container: 'Second', line: 4, used: [] }
   };
-  const indexExp = 16;
+  const indexExp = 13;
 
   console.log('VariablesExp:', variablesExp);
   console.log('FunctionsExp:', functionsExp);

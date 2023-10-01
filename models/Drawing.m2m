@@ -1,15 +1,16 @@
 {
 	"newElementBox": {
 		"isInitial": false,
-		"newElBoxX": 945.365234375,
+		"newElBoxX": 1085.3632760549729,
 		"newElBoxY": -934,
 		"newElBoxWidth": 400,
-		"newElBoxHeight": 1608
+		"newElBoxHeight": 1628
 	},
 	"addedWithNeighbors": [
 		"JSFunction../src/Drawing.js/draw",
 		"JSFunction../src/Drawing.js/drawAlways",
-		"JSFunction../src/Drawing.js/drawCompleteModel"
+		"JSFunction../src/Drawing.js/drawCompleteModel",
+		"JSFunction../src/Drawing.js/drawWhenForceDirectRequires"
 	],
 	"positions": [
 		{
@@ -24,8 +25,8 @@
 		},
 		{
 			"uniqueKey": "File../src/Diagrams.js",
-			"x": -865.09,
-			"y": 627.81
+			"x": -855.19,
+			"y": 641.95
 		},
 		{
 			"uniqueKey": "File../src/Drag.js",
@@ -36,6 +37,11 @@
 			"uniqueKey": "File../src/Drawing.js",
 			"x": -785.86,
 			"y": -59.24
+		},
+		{
+			"uniqueKey": "File../src/FileExtractorPreprocess.js",
+			"x": 273.85,
+			"y": -1184.34
 		},
 		{
 			"uniqueKey": "File../src/ForceDirecting.js",
@@ -78,9 +84,34 @@
 			"y": -1128.52
 		},
 		{
+			"uniqueKey": "JSFunction../src/FileExtractorPreprocess.js/SetExtractedFolder",
+			"x": 257.07,
+			"y": -492.47
+		},
+		{
+			"uniqueKey": "JSFunction../src/FileExtractorPreprocess.js/ExtractCodeFromFolder",
+			"x": 477.07,
+			"y": -512.47
+		},
+		{
 			"uniqueKey": "JSFunction../src/ForceDirecting.js/forceDirecting",
 			"x": -1083,
 			"y": 353
+		},
+		{
+			"uniqueKey": "JSFunction../src/Diagrams.js/ZoomToFit",
+			"x": -223.27,
+			"y": 470.3
+		},
+		{
+			"uniqueKey": "JSFunction../src/Diagrams.js/ReadDisplayedDiagram",
+			"x": -429.94,
+			"y": 461.01
+		},
+		{
+			"uniqueKey": "JSFunction../src/Diagrams.js/ImportOldDiagram",
+			"x": -705.08,
+			"y": 452.93
 		},
 		{
 			"uniqueKey": "JSFunction../src/ModelExplorer.js/drawModelExplorer",
@@ -94,58 +125,63 @@
 		},
 		{
 			"uniqueKey": "JSFunction../src/Drawing.js/supportRetina",
-			"x": -1338.79,
-			"y": -337.14
+			"x": -1340,
+			"y": -340
 		},
 		{
 			"uniqueKey": "JSFunction../src/Drawing.js/resetSnapToGrid",
-			"x": -1118.35,
-			"y": -341.03
+			"x": -1120,
+			"y": -340
 		},
 		{
 			"uniqueKey": "JSFunction../src/Drawing.js/snapToGrid",
-			"x": -1035,
-			"y": -342
+			"x": -1040,
+			"y": -340
 		},
 		{
 			"uniqueKey": "JSFunction../src/Drawing.js/cameraToCanvasX",
-			"x": -1215.65,
-			"y": -338.87
+			"x": -1220,
+			"y": -340
 		},
 		{
 			"uniqueKey": "JSFunction../src/Drawing.js/cameraToCanvasY",
-			"x": -1435.77,
-			"y": -344.6
+			"x": -1440,
+			"y": -340
 		},
 		{
 			"uniqueKey": "JSFunction../src/Drawing.js/cameraToCanvasScale",
-			"x": -620.3,
-			"y": -324.59
+			"x": -620,
+			"y": -320
 		},
 		{
 			"uniqueKey": "JSFunction../src/Drawing.js/cameraToPaneScale",
-			"x": -1311.98,
-			"y": -258.33
+			"x": -1320,
+			"y": -260
 		},
 		{
 			"uniqueKey": "JSFunction../src/Drawing.js/isInBox",
-			"x": -1289.06,
-			"y": -195.3
+			"x": -1280,
+			"y": -200
 		},
 		{
 			"uniqueKey": "JSFunction../src/Drawing.js/drawCompleteModel",
-			"x": -950,
-			"y": -426
+			"x": -940,
+			"y": -420
 		},
 		{
 			"uniqueKey": "JSFunction../src/Drawing.js/drawAlways",
-			"x": -1223.44,
-			"y": -624.71
+			"x": -1220,
+			"y": -620
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/drawWhenForceDirectRequires",
+			"x": -1228.77,
+			"y": -553.96
 		},
 		{
 			"uniqueKey": "JSFunction../src/Drawing.js/draw",
-			"x": -1090,
-			"y": -586
+			"x": -1080,
+			"y": -580
 		},
 		{
 			"uniqueKey": "JSFunction../src/ContextMenu.js/ContextMenuClicked",
@@ -274,138 +310,138 @@
 		},
 		{
 			"uniqueKey": "JSVariable../src/Diagrams.js/bulletPointDiagramType",
-			"x": -1237,
-			"y": 503
+			"x": -1230.1,
+			"y": 514.14
 		},
 		{
 			"uniqueKey": "JSVariable../src/Diagrams.js/circuitDiagramForSoftwareDiagramType",
-			"x": -1037,
-			"y": 503
+			"x": -1030.1,
+			"y": 514.14
 		},
 		{
 			"uniqueKey": "JSVariable../src/Diagrams.js/diagramms",
-			"x": -1217,
-			"y": 563
+			"x": -1210.1,
+			"y": 574.14
 		},
 		{
 			"uniqueKey": "JSVariable../src/Diagrams.js/diagramInfos",
-			"x": -937,
-			"y": 503
+			"x": -930.1,
+			"y": 514.14
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/drawingCount",
-			"x": -1075,
-			"y": -2
+			"x": -1080,
+			"y": 0
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/boundingRectCompleteMargin",
-			"x": -575,
-			"y": 58
+			"x": -580,
+			"y": 60
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/circuitDiagramColorGrouping",
-			"x": -1095,
-			"y": -262
+			"x": -1100,
+			"y": -260
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/circuitDiagramColorCode",
-			"x": -875,
-			"y": 78
+			"x": -880,
+			"y": 80
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/circuitDiagramColorHighlightedCode",
-			"x": -795,
-			"y": 18
+			"x": -800,
+			"y": 20
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/circuitDiagramColorData",
-			"x": -795,
-			"y": 58
+			"x": -800,
+			"y": 60
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/circuitDiagramColorHighlightedData",
-			"x": -575,
-			"y": 158
+			"x": -580,
+			"y": 160
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/circuitDiagramColorDataPersistent",
-			"x": -535,
-			"y": -202
+			"x": -540,
+			"y": -200
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/circuitDiagramColorHighlightedDataPersistent",
-			"x": -1055,
-			"y": -82
+			"x": -1060,
+			"y": -80
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/circuitDiagramColorCallLines",
-			"x": -795,
-			"y": -402
+			"x": -800,
+			"y": -400
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/circuitDiagramColorAccessesLines",
-			"x": -875,
-			"y": -382
+			"x": -880,
+			"y": -380
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/circuitDiagramColorCommentLines",
-			"x": -675,
-			"y": 158
+			"x": -680,
+			"y": 160
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/circuitDiagramCallWidth",
-			"x": -695,
-			"y": -382
+			"x": -700,
+			"y": -380
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/circuitDiagramAccessWidth",
-			"x": -775,
-			"y": -182
+			"x": -780,
+			"y": -180
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/circuitDiagramCommentWidth",
-			"x": -895,
-			"y": -102
+			"x": -900,
+			"y": -100
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/circuitDiagramMarkExplicitlyAdded",
-			"x": -975,
-			"y": -22
+			"x": -980,
+			"y": -20
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/arrowLength",
-			"x": -715,
-			"y": -102
+			"x": -720,
+			"y": -100
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/fontSizeGeneral",
-			"x": -975,
-			"y": 98
+			"x": -980,
+			"y": 100
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/groupSize",
-			"x": -875,
-			"y": -282
+			"x": -880,
+			"y": -280
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/codeSize",
-			"x": -1115,
-			"y": 118
+			"x": -1120,
+			"y": 120
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/dataSize",
-			"x": -795,
-			"y": -342
+			"x": -800,
+			"y": -340
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/generalFontSize",
-			"x": -955,
-			"y": -322
+			"x": -960,
+			"y": -320
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/commentBoxBorder",
-			"x": -1035,
-			"y": 178
+			"x": -1040,
+			"y": 180
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drag.js/startX",
@@ -421,9 +457,9 @@
 	"comments": [
 		{
 			"uniqueKey": "JSFunction../src/Drawing.js/drawAlways",
-			"x": -1501.66,
-			"y": -727.04,
-			"text": "Uses draw, but this is not found correctly."
+			"x": -1500,
+			"y": -720,
+			"text": ""
 		}
 	],
 	"pinned": [
@@ -449,7 +485,12 @@
 		"JSFunction../src/Drawing.js/supportRetina",
 		"JSFunction../src/Drawing.js/cameraToCanvasY",
 		"JSFunction../src/Drawing.js/cameraToPaneScale",
-		"JSFunction../src/Drawing.js/isInBox"
+		"JSFunction../src/Drawing.js/isInBox",
+		"JSFunction../src/Drawing.js/drawWhenForceDirectRequires",
+		"JSFunction../src/Diagrams.js/ReadDisplayedDiagram",
+		"JSFunction../src/Diagrams.js/ZoomToFit",
+		"JSFunction../src/Diagrams.js/ImportOldDiagram",
+		"JSFunction../src/FileExtractorPreprocess.js/ExtractCodeFromFolder"
 	],
 	"suppressed": []
 }

@@ -2,9 +2,9 @@
 	"newElementBox": {
 		"isInitial": false,
 		"newElBoxX": 425.6435513364456,
-		"newElBoxY": -574,
+		"newElBoxY": -632.4,
 		"newElBoxWidth": 400,
-		"newElBoxHeight": 1108
+		"newElBoxHeight": 1166.4
 	},
 	"addedWithNeighbors": [
 		"JSFunction../src/PositionElements.js/addWithNeighbors",
@@ -12,7 +12,8 @@
 		"JSFunction../src/Diagrams.js/ImportOldDiagram",
 		"JSVariable../src/PositionElements.js/repositionRequireds",
 		"JSFunction../src/PositionElements.js/removeRepositionRequired",
-		"JSFunction../src/PositionElements.js/resetRepositionRequired"
+		"JSFunction../src/PositionElements.js/resetRepositionRequired",
+		"JSFunction../src/PositionElements.js/repositionRequired"
 	],
 	"positions": [
 		{
@@ -22,8 +23,13 @@
 		},
 		{
 			"uniqueKey": "File../src/Diagrams.js",
-			"x": -1414.2,
-			"y": 68.29
+			"x": -1289.2,
+			"y": -39.71
+		},
+		{
+			"uniqueKey": "File../src/Drawing.js",
+			"x": -1034.28,
+			"y": -702.74
 		},
 		{
 			"uniqueKey": "File../src/Global.js",
@@ -47,33 +53,33 @@
 		},
 		{
 			"uniqueKey": "JSFunction../src/Diagrams.js/newDiagram",
-			"x": -1121,
-			"y": -10
+			"x": -998,
+			"y": -116
 		},
 		{
 			"uniqueKey": "JSFunction../src/Diagrams.js/switchDiagram",
-			"x": -1301,
-			"y": 70
+			"x": -1178,
+			"y": -36
 		},
 		{
 			"uniqueKey": "JSFunction../src/Diagrams.js/ZoomToFit",
-			"x": -992,
-			"y": 143
+			"x": -878,
+			"y": 24
 		},
 		{
 			"uniqueKey": "JSFunction../src/Diagrams.js/setDiagramActive",
-			"x": -1227,
-			"y": 142
+			"x": -1098,
+			"y": 24
 		},
 		{
 			"uniqueKey": "JSFunction../src/Diagrams.js/ReadDisplayedDiagram",
-			"x": -1061,
-			"y": -290
+			"x": -938,
+			"y": -396
 		},
 		{
 			"uniqueKey": "JSFunction../src/Diagrams.js/ImportOldDiagram",
-			"x": -1283.34,
-			"y": -261.91
+			"x": -1158,
+			"y": -376
 		},
 		{
 			"uniqueKey": "JSFunction../src/PositionElements.js/resetRepositionRequired",
@@ -96,14 +102,39 @@
 			"y": -266.2
 		},
 		{
+			"uniqueKey": "JSFunction../src/PositionElements.js/redoAddWithNeighbors",
+			"x": 98.52,
+			"y": -66.6
+		},
+		{
 			"uniqueKey": "JSFunction../src/PositionElements.js/addWithNeighbors",
-			"x": -400,
-			"y": -53
+			"x": -404,
+			"y": -47
+		},
+		{
+			"uniqueKey": "JSFunction../src/PositionElements.js/suppress",
+			"x": 3.64,
+			"y": -48.69
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/highlightActive",
+			"x": -705.7,
+			"y": 301.98
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/removeHighlightActive",
+			"x": -845.7,
+			"y": 301.98
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/drawCompleteModel",
+			"x": -985.7,
+			"y": 301.98
 		},
 		{
 			"uniqueKey": "JSFunction../src/ContextMenu.js/handleContextMenu",
-			"x": -126,
-			"y": -408
+			"x": -82,
+			"y": -432
 		},
 		{
 			"uniqueKey": "JSFunction../src/ContextMenu.js/ContextMenuClicked",
@@ -112,8 +143,8 @@
 		},
 		{
 			"uniqueKey": "JSVariable../src/Requirement.js/SOMEXPL_5",
-			"x": -324.35,
-			"y": -468.67
+			"x": -367.35,
+			"y": -505.67
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/fileHandle",
@@ -182,13 +213,13 @@
 		},
 		{
 			"uniqueKey": "JSVariable../src/Diagrams.js/diagramms",
-			"x": -1119,
-			"y": 89
+			"x": -998,
+			"y": -36
 		},
 		{
 			"uniqueKey": "JSVariable../src/Diagrams.js/diagramInfos",
-			"x": -961,
-			"y": 9
+			"x": -838,
+			"y": -116
 		},
 		{
 			"uniqueKey": "JSVariable../src/PositionElements.js/repositionRequireds",
@@ -199,20 +230,20 @@
 	"comments": [
 		{
 			"uniqueKey": "JSFunction../src/Diagrams.js/ReadDisplayedDiagram",
-			"x": -646,
-			"y": -78,
-			"text": "Calls also addWithNeighbors"
+			"x": -1058,
+			"y": -496,
+			"text": ""
 		},
 		{
 			"uniqueKey": "JSFunction../src/Diagrams.js/ImportOldDiagram",
-			"x": -641.35,
-			"y": -30.21,
-			"text": "Calls also addWithNeighbors"
+			"x": -1278,
+			"y": -516,
+			"text": ""
 		},
 		{
 			"uniqueKey": "JSFunction../src/PositionElements.js/addWithNeighbors",
-			"x": -360,
-			"y": -133,
+			"x": -364,
+			"y": -127,
 			"text": "Here it is decided where new elements are placed"
 		},
 		{
@@ -254,7 +285,11 @@
 		"JSFunction../src/PositionElements.js/removeRepositionRequired",
 		"JSFunction../src/PositionElements.js/repositionRequired",
 		"Code../src/PositionElements.js/code",
-		"JSFunction../src/PositionElements.js/doRepositioningOfRequired"
+		"JSFunction../src/PositionElements.js/doRepositioningOfRequired",
+		"JSFunction../src/Drawing.js/highlightActive",
+		"JSFunction../src/Drawing.js/removeHighlightActive",
+		"JSFunction../src/PositionElements.js/suppress",
+		"JSFunction../src/PositionElements.js/redoAddWithNeighbors"
 	],
 	"suppressed": []
 }
