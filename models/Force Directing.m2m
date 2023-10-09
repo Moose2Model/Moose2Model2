@@ -1,34 +1,40 @@
 {
 	"newElementBox": {
 		"isInitial": false,
-		"newElBoxX": 105.7021484375,
-		"newElBoxY": -394,
+		"newElBoxX": 105.70024998064173,
+		"newElBoxY": -614,
 		"newElBoxWidth": 400,
-		"newElBoxHeight": 588
+		"newElBoxHeight": 978
 	},
 	"addedWithNeighbors": [
-		"JSFunction../src/ForceDirecting.js/forceDirecting"
+		"JSFunction../src/ForceDirecting.js/forceDirecting",
+		"JSFunction../src/Drawing.js/draw"
 	],
 	"positions": [
 		{
 			"uniqueKey": "File../src/Diagrams.js",
-			"x": -213.29,
-			"y": -124.19
+			"x": -119.95,
+			"y": -62.67
 		},
 		{
 			"uniqueKey": "File../src/Drag.js",
-			"x": -145.23,
-			"y": -146.75
+			"x": 94.48,
+			"y": -349.69
 		},
 		{
 			"uniqueKey": "File../src/Drawing.js",
-			"x": 40.98,
-			"y": 78.95
+			"x": 6.33,
+			"y": -0.25
+		},
+		{
+			"uniqueKey": "File../src/FileExtractorPreprocess.js",
+			"x": -844.84,
+			"y": -142.78
 		},
 		{
 			"uniqueKey": "File../src/ForceDirecting.js",
-			"x": -678.66,
-			"y": -172.16
+			"x": -623.51,
+			"y": -16.6
 		},
 		{
 			"uniqueKey": "File../src/Global.js",
@@ -36,14 +42,84 @@
 			"y": -238.29
 		},
 		{
+			"uniqueKey": "File../src/HTMLLogic.js",
+			"x": -355.93,
+			"y": -91.87
+		},
+		{
+			"uniqueKey": "File../src/M2mExplorer.js",
+			"x": 240.98,
+			"y": 178.95
+		},
+		{
+			"uniqueKey": "File../src/ModelExplorer.js",
+			"x": 140.98,
+			"y": 178.95
+		},
+		{
+			"uniqueKey": "File../src/moose2model.html",
+			"x": 540.98,
+			"y": 178.95
+		},
+		{
+			"uniqueKey": "JSFunction../src/FileExtractorPreprocess.js/SetExtractedFolder",
+			"x": -745.82,
+			"y": -461.73
+		},
+		{
+			"uniqueKey": "JSFunction../src/FileExtractorPreprocess.js/ExtractCodeFromFolder",
+			"x": -885.82,
+			"y": -461.73
+		},
+		{
 			"uniqueKey": "JSFunction../src/ForceDirecting.js/forceDirecting",
-			"x": -595,
-			"y": -92
+			"x": -544.85,
+			"y": 55.56
+		},
+		{
+			"uniqueKey": "JSFunction../src/ModelExplorer.js/drawModelExplorer",
+			"x": -1007.39,
+			"y": 165.06
+		},
+		{
+			"uniqueKey": "JSFunction../src/M2mExplorer.js/drawM2mExplorer",
+			"x": -847.24,
+			"y": 177.67
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/supportRetina",
+			"x": -432.85,
+			"y": -267.38
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/drawCompleteModel",
+			"x": -294.66,
+			"y": -273.75
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/drawAlways",
+			"x": -384.17,
+			"y": -352.24
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/drawWhenForceDirectRequires",
+			"x": -254.47,
+			"y": -341.63
 		},
 		{
 			"uniqueKey": "JSFunction../src/Drawing.js/draw",
-			"x": -488.94,
-			"y": -287.63
+			"x": -532.85,
+			"y": -324.96
+		},
+		{
+			"uniqueKey": "JSFunction../src/HTMLLogic.js/LoadModel",
+			"x": -616.91,
+			"y": -490.82
+		},
+		{
+			"uniqueKey": "JSFunction../src/moose2model.html/LoadDemoModel",
+			"x": -271.95,
+			"y": -482.21
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/modelElementsByIndex",
@@ -66,52 +142,111 @@
 			"y": -160
 		},
 		{
+			"uniqueKey": "JSVariable../src/Global.js/ctx",
+			"x": -832,
+			"y": -60
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/requestAnimationFrame",
+			"x": -732,
+			"y": -60
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/showModelExplorer",
+			"x": -632,
+			"y": -60
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/showM2mExplorer",
+			"x": -532,
+			"y": -60
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/showExplorer",
+			"x": -432,
+			"y": -60
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/g_width",
+			"x": -332,
+			"y": -60
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/g_height",
+			"x": -232,
+			"y": -60
+		},
+		{
 			"uniqueKey": "JSVariable../src/ForceDirecting.js/scale",
-			"x": -672,
-			"y": 27
+			"x": -624.85,
+			"y": 175.56
 		},
 		{
 			"uniqueKey": "JSVariable../src/ForceDirecting.js/oversizeGroups",
-			"x": -755,
-			"y": 28
+			"x": -704.85,
+			"y": 175.56
 		},
 		{
 			"uniqueKey": "JSVariable../src/ForceDirecting.js/maxTimeForceDirectMs",
-			"x": -568,
-			"y": 20
+			"x": -504.85,
+			"y": 175.56
 		},
 		{
 			"uniqueKey": "JSVariable../src/Diagrams.js/circuitDiagramForSoftwareDiagramType",
-			"x": -304,
-			"y": 23
+			"x": -206.66,
+			"y": 81.52
 		},
 		{
 			"uniqueKey": "JSVariable../src/Diagrams.js/diagramms",
-			"x": -304,
-			"y": 83
+			"x": -206.66,
+			"y": 141.52
 		},
 		{
 			"uniqueKey": "JSVariable../src/Diagrams.js/diagramInfos",
-			"x": -304,
-			"y": -37
+			"x": -206.66,
+			"y": 21.52
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drag.js/isDragging",
-			"x": -171,
-			"y": -257
+			"x": 59.71,
+			"y": -462.94
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drag.js/backGroundDragged",
-			"x": -51,
-			"y": -257
+			"x": 179.71,
+			"y": -462.94
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drag.js/draggedElement",
-			"x": -311,
-			"y": -257
+			"x": -80.29,
+			"y": -462.94
+		},
+		{
+			"uniqueKey": "JSVariable../src/HTMLLogic.js/loadModelText",
+			"x": -467.11,
+			"y": -484.97
 		}
 	],
-	"comments": [],
+	"comments": [
+		{
+			"uniqueKey": "JSFunction../src/ModelExplorer.js/drawModelExplorer",
+			"x": -1002.64,
+			"y": 245.17,
+			"text": "Clears canvas at the start"
+		},
+		{
+			"uniqueKey": "JSFunction../src/M2mExplorer.js/drawM2mExplorer",
+			"x": -817.04,
+			"y": 269.8,
+			"text": "Clears canvas at the start"
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/drawCompleteModel",
+			"x": -106.78,
+			"y": -240.31,
+			"text": "Clears canvas at the start"
+		}
+	],
 	"pinned": [
 		"JSVariable../src/Diagrams.js/circuitDiagramForSoftwareDiagramType",
 		"JSVariable../src/Diagrams.js/diagramInfos",
@@ -123,7 +258,15 @@
 		"JSVariable../src/Global.js/callByCaller",
 		"JSVariable../src/Drag.js/draggedElement",
 		"JSVariable../src/Drag.js/isDragging",
-		"JSVariable../src/Drag.js/backGroundDragged"
+		"JSVariable../src/Drag.js/backGroundDragged",
+		"JSVariable../src/HTMLLogic.js/loadModelText",
+		"JSFunction../src/moose2model.html/LoadDemoModel",
+		"JSFunction../src/FileExtractorPreprocess.js/ExtractCodeFromFolder",
+		"JSFunction../src/ModelExplorer.js/drawModelExplorer",
+		"JSFunction../src/M2mExplorer.js/drawM2mExplorer",
+		"JSFunction../src/Drawing.js/drawAlways",
+		"JSFunction../src/Drawing.js/drawWhenForceDirectRequires",
+		"JSFunction../src/Drawing.js/drawCompleteModel"
 	],
 	"suppressed": []
 }

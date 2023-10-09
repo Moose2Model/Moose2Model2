@@ -1307,6 +1307,35 @@ function draw(always = true) {
     if (!showExplorer) {
 
         let redraw = true;
+
+        // Because the following is outcommented the flag redraw is always true.
+        // This is currently accepted.
+
+        // if (typeof diagramms[diagramInfos.displayedDiagram] !== 'undefined') {
+        //     if (diagramms[diagramInfos.displayedDiagram].forceFeedback) {
+        //         redraw = forceDirecting(width, height);
+        //         let loadModelText = document.getElementById("InfoID");
+        //         loadModelText.innerHTML = "Force-Directing is active";
+        //     } else {
+        //         let loadModelText = document.getElementById("InfoID");
+        //         loadModelText.innerHTML = "";
+        //     }
+        // }
+
+        if (redraw || always) {
+            drawCompleteModel(ctx, width, height);
+        }
+        if (typeof diagramms[diagramInfos.displayedDiagram] !== 'undefined') {
+            if (diagramms[diagramInfos.displayedDiagram].forceFeedback) {
+                requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
+            }
+        }
+
+        // #89 Do the time consuming force-directing after drawing the diagram
+        // This prevents that the screen becomes black most of the time when very many
+        // elements are drawn.
+        // It is not yet understood why this is the case.
+
         if (typeof diagramms[diagramInfos.displayedDiagram] !== 'undefined') {
             if (diagramms[diagramInfos.displayedDiagram].forceFeedback) {
                 redraw = forceDirecting(width, height);
@@ -1317,15 +1346,9 @@ function draw(always = true) {
                 loadModelText.innerHTML = "";
             }
         }
-        if (redraw || always) {
-            drawCompleteModel(ctx, width, height);
-        }
-        if (typeof diagramms[diagramInfos.displayedDiagram] !== 'undefined') {
-            if (diagramms[diagramInfos.displayedDiagram].forceFeedback) {
-                requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
-            }
-        }
+
     } else {
+
         if (showModelExplorer) {
             drawModelExplorer();
         } else if (showM2mExplorer) {
