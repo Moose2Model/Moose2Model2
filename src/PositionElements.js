@@ -35,6 +35,7 @@ function doRepositioningOfRequired() { // Reposition all elements which are requ
                                         pG.parent = pC.parent;
                                         pG.x = diagramms[diagramInfos.activeDiagram].complModelPosition[pP.child].x;
                                         pG.y = diagramms[diagramInfos.activeDiagram].complModelPosition[pP.child].y;
+                                        pG.countAdded = 1;
                                         parentGroups[pC.parent] = pG;
                                     }
                                     else {
@@ -63,8 +64,9 @@ function doRepositioningOfRequired() { // Reposition all elements which are requ
                 if (pC.isMain) {
                     if (typeof parentGroups[pC.parent] !== 'undefined') {
                         if (typeof parentGroups[pC.parent].x !== 'undefined') { // Reposition only if a parent group exists or has position
-                            diagramms[diagramInfos.activeDiagram].complModelPosition[index].x = parentGroups[pC.parent].x + 20;;
-                            diagramms[diagramInfos.activeDiagram].complModelPosition[index].y = parentGroups[pC.parent].y + 20;;
+                            diagramms[diagramInfos.activeDiagram].complModelPosition[index].x = parentGroups[pC.parent].x + 100 * parentGroups[pC.parent].countAdded;;
+                            diagramms[diagramInfos.activeDiagram].complModelPosition[index].y = parentGroups[pC.parent].y + 100;;
+                            parentGroups[pC.parent].countAdded += 1;
                         }
                     }
                 }
