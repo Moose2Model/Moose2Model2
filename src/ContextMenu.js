@@ -199,6 +199,8 @@ function handleContextMenu(e) {
         } else {
           m.push('Supress with all children');
         }
+        m.push('Pin All');
+        m.push('Unpin All');
       }
     }
     if (linkToEditorText != '') {
@@ -322,6 +324,11 @@ function ContextMenuClicked(e) {
     highlight(gMCElementContextHandled.index);
   } else if (this.outerText == 'Highlight using') {
     highlightUsing(gMCElementContextHandled.index);
+  } else if (this.outerText == 'Pin All') {
+    pinAllElementsOfGrouping(gMCElementContextHandled.index);
+  }
+  else if (this.outerText == 'Unpin All') {
+    unPinAllElementsOfGrouping(gMCElementContextHandled.index);
   }
   else {
     // Scan for a name of another diagram
@@ -335,6 +342,34 @@ function ContextMenuClicked(e) {
   }
 
 }
+
+function pinAllElementsOfGrouping(groupElementIndex) {
+  // This function should iterate through all children of 'groupElementIndex' 
+  // and add them to the array with pinned elements (if not already in there)
+
+  // Read array parentChildByParent to find all children of groupElementIndex and add them to pinned
+  if (parentChildByParent[groupElementIndex] != undefined) {
+    for (const c of parentChildByParent[groupElementIndex]) {
+      if (diagramms[diagramInfos.displayedDiagram].pinned.indexOf(c.child) == -1) {
+        diagramms[diagramInfos.displayedDiagram].pinned.push(c.child);
+      }
+    }
+  }
+}
+
+  function unPinAllElementsOfGrouping(groupElementIndex) {
+    // This function should iterate through all children of 'groupElement' 
+    // and remove them from the array with pinned elements (if in there)
+
+    // Read array parentChildByParent to find all children of groupElementIndex and remove them from pinned
+    if (parentChildByParent[groupElementIndex] != undefined) {
+      for (const c of parentChildByParent[groupElementIndex]) {
+        if (diagramms[diagramInfos.displayedDiagram].pinned.indexOf(c.child) != -1) {
+          diagramms[diagramInfos.displayedDiagram].pinned.splice(diagramms[diagramInfos.displayedDiagram].pinned.indexOf(c.child), 1);
+        }
+      }
+    }
+  }
 
 /**React on clicks in Menu */
 /* $('#contextMenu').on('click', 'li', function (e) {
