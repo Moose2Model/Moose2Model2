@@ -2,332 +2,46 @@
 	"newElementBox": {
 		"isInitial": false,
 		"newElBoxX": 717.0120504646759,
-		"newElBoxY": -334,
+		"newElBoxY": 86,
 		"newElBoxWidth": 400.0000000000002,
-		"newElBoxHeight": 1248
+		"newElBoxHeight": 428
 	},
 	"addedWithNeighbors": [
 		"JSFunction../src/Drawing.js/HighlightUnPinned",
 		"JSFunction../src/Drawing.js/PinAll",
 		"JSFunction../src/Drawing.js/UnPinAll",
-		"JSFunction../src/Drawing.js/UnPinHighlighted",
-		"JSVariable../src/Diagrams.js/diagramInfos"
+		"JSFunction../src/Drawing.js/UnPinHighlighted"
 	],
 	"positions": [
-		{
-			"uniqueKey": "File../src/Comment.js",
-			"x": 213.78,
-			"y": 437.06
-		},
-		{
-			"uniqueKey": "File../src/ContextMenu.js",
-			"x": 513.78,
-			"y": 437.06
-		},
 		{
 			"uniqueKey": "File../src/Diagrams.js",
 			"x": 658.76,
 			"y": -661.37
 		},
 		{
-			"uniqueKey": "Code../src/Diagrams.js/code",
-			"x": 613.77,
-			"y": -224.63
-		},
-		{
-			"uniqueKey": "File../src/Drag.js",
-			"x": 582.97,
-			"y": 624.95
-		},
-		{
 			"uniqueKey": "File../src/Drawing.js",
-			"x": -49.25,
-			"y": 2013.84
-		},
-		{
-			"uniqueKey": "File../src/ForceDirecting.js",
-			"x": 313.78,
-			"y": 437.06
-		},
-		{
-			"uniqueKey": "File../src/Global.js",
-			"x": 113.78,
-			"y": 437.06
-		},
-		{
-			"uniqueKey": "File../src/MouseWheel.js",
-			"x": 613.78,
-			"y": 437.06
-		},
-		{
-			"uniqueKey": "File../src/PositionElements.js",
-			"x": 413.78,
-			"y": 437.06
-		},
-		{
-			"uniqueKey": "JSFunction../src/Global.js/findNearestElement",
-			"x": -0.37,
-			"y": 118.91
-		},
-		{
-			"uniqueKey": "JSFunction../src/Comment.js/comment",
-			"x": 242.8,
-			"y": -81.05
-		},
-		{
-			"uniqueKey": "JSFunction../src/Comment.js/commentAdapted",
-			"x": 77.73,
-			"y": -80.94
-		},
-		{
-			"uniqueKey": "JSFunction../src/ForceDirecting.js/spring",
-			"x": 350.42,
-			"y": -81.34
-		},
-		{
-			"uniqueKey": "JSFunction../src/ForceDirecting.js/repulsion",
-			"x": 175.69,
-			"y": -95.96
-		},
-		{
-			"uniqueKey": "JSFunction../src/ForceDirecting.js/forceDirecting",
-			"x": 345.05,
-			"y": -0.18
-		},
-		{
-			"uniqueKey": "JSFunction../src/Diagrams.js/useStartDiagram",
-			"x": 533.77,
-			"y": -164.63
-		},
-		{
-			"uniqueKey": "JSFunction../src/Diagrams.js/switchDiagram",
-			"x": 773.77,
-			"y": -84.63
-		},
-		{
-			"uniqueKey": "JSFunction../src/Diagrams.js/activeDiagramChanged",
-			"x": 633.77,
-			"y": -124.63
-		},
-		{
-			"uniqueKey": "JSFunction../src/Diagrams.js/displayedDiagramChanged",
-			"x": 533.77,
-			"y": 35.37
-		},
-		{
-			"uniqueKey": "JSFunction../src/Diagrams.js/diagramIsSaved",
-			"x": 713.77,
-			"y": -204.63
-		},
-		{
-			"uniqueKey": "JSFunction../src/Diagrams.js/zoomDisplayedDiagram",
-			"x": 753.77,
-			"y": -4.63
-		},
-		{
-			"uniqueKey": "JSFunction../src/Diagrams.js/diagramFits",
-			"x": 753.77,
-			"y": 175.37
-		},
-		{
-			"uniqueKey": "JSFunction../src/Diagrams.js/ZoomToFit",
-			"x": 793.77,
-			"y": 75.37
-		},
-		{
-			"uniqueKey": "JSFunction../src/Diagrams.js/returnOtherDiagrams",
-			"x": 633.77,
-			"y": -24.63
-		},
-		{
-			"uniqueKey": "JSFunction../src/Diagrams.js/setDiagramActive",
-			"x": 813.77,
-			"y": -84.63
-		},
-		{
-			"uniqueKey": "JSFunction../src/Diagrams.js/toggleNameDisplay",
-			"x": 693.77,
-			"y": -124.63
-		},
-		{
-			"uniqueKey": "JSFunction../src/Diagrams.js/ReadDisplayedDiagram",
-			"x": 693.77,
-			"y": 135.37
-		},
-		{
-			"uniqueKey": "JSFunction../src/Diagrams.js/SaveDisplayedDiagram",
-			"x": 793.77,
-			"y": -164.63
-		},
-		{
-			"uniqueKey": "JSFunction../src/Diagrams.js/ImportOldDiagram",
-			"x": 753.77,
-			"y": 115.37
-		},
-		{
-			"uniqueKey": "JSFunction../src/PositionElements.js/doRepositioningOfRequired",
-			"x": 242.83,
-			"y": 62.7
-		},
-		{
-			"uniqueKey": "JSFunction../src/PositionElements.js/positionCircle",
-			"x": 175.98,
-			"y": -0.07
-		},
-		{
-			"uniqueKey": "JSFunction../src/PositionElements.js/redoAddWithNeighbors",
-			"x": 80.28,
-			"y": 220.95
-		},
-		{
-			"uniqueKey": "JSFunction../src/PositionElements.js/addWithNeighbors",
-			"x": 292.23,
-			"y": 81.12
-		},
-		{
-			"uniqueKey": "JSFunction../src/PositionElements.js/suppressChildren",
-			"x": 133.92,
-			"y": 0.46
-		},
-		{
-			"uniqueKey": "JSFunction../src/PositionElements.js/suppress",
-			"x": 315.07,
-			"y": 204.25
-		},
-		{
-			"uniqueKey": "JSFunction../src/PositionElements.js/redoSuppress",
-			"x": 63.18,
-			"y": 0.21
-		},
-		{
-			"uniqueKey": "JSFunction../src/Drawing.js/cameraToCanvasX",
-			"x": 424.54,
-			"y": 585.09
-		},
-		{
-			"uniqueKey": "JSFunction../src/Drawing.js/cameraToPaneX",
-			"x": 324.54,
-			"y": 685.09
-		},
-		{
-			"uniqueKey": "JSFunction../src/Drawing.js/cameraToCanvasY",
-			"x": 544.54,
-			"y": 605.09
-		},
-		{
-			"uniqueKey": "JSFunction../src/Drawing.js/cameraToPaneY",
-			"x": 364.54,
-			"y": 765.09
-		},
-		{
-			"uniqueKey": "JSFunction../src/Drawing.js/cameraToCanvasScale",
-			"x": 564.54,
-			"y": 745.09
-		},
-		{
-			"uniqueKey": "JSFunction../src/Drawing.js/cameraToPaneScale",
-			"x": 284.54,
-			"y": 765.09
-		},
-		{
-			"uniqueKey": "JSFunction../src/Drawing.js/highlight",
-			"x": 404.54,
-			"y": 665.09
-		},
-		{
-			"uniqueKey": "JSFunction../src/Drawing.js/removeHighlight",
-			"x": 644.54,
-			"y": 785.09
-		},
-		{
-			"uniqueKey": "JSFunction../src/Drawing.js/highlightActive",
-			"x": 484.54,
-			"y": 685.09
-		},
-		{
-			"uniqueKey": "JSFunction../src/Drawing.js/removeHighlightActive",
-			"x": 724.54,
-			"y": 585.09
-		},
-		{
-			"uniqueKey": "JSFunction../src/Drawing.js/RemoveAllHighlighting",
-			"x": 704.54,
-			"y": 705.09
+			"x": 12.59,
+			"y": 1762.92
 		},
 		{
 			"uniqueKey": "JSFunction../src/Drawing.js/PinAll",
-			"x": 444.54,
-			"y": 765.09
+			"x": 450.63,
+			"y": 337.28
 		},
 		{
 			"uniqueKey": "JSFunction../src/Drawing.js/UnPinAll",
-			"x": 484.54,
-			"y": 805.09
+			"x": 537.32,
+			"y": 404.09
 		},
 		{
 			"uniqueKey": "JSFunction../src/Drawing.js/UnPinHighlighted",
-			"x": 544.54,
-			"y": 805.09
+			"x": 646.32,
+			"y": 403.8
 		},
 		{
 			"uniqueKey": "JSFunction../src/Drawing.js/HighlightUnPinned",
-			"x": 624.54,
-			"y": 705.09
-		},
-		{
-			"uniqueKey": "JSFunction../src/Drawing.js/drawCompleteModel",
-			"x": 464.54,
-			"y": 605.09
-		},
-		{
-			"uniqueKey": "JSFunction../src/Drawing.js/draw",
-			"x": 584.54,
-			"y": 645.09
-		},
-		{
-			"uniqueKey": "JSFunction../src/ContextMenu.js/handleContextMenu",
-			"x": 161.88,
-			"y": 242.72
-		},
-		{
-			"uniqueKey": "JSFunction../src/ContextMenu.js/ContextMenuClicked",
-			"x": 241.78,
-			"y": 134.31
-		},
-		{
-			"uniqueKey": "JSFunction../src/ContextMenu.js/pinAllElementsOfGrouping",
-			"x": -0.32,
-			"y": 29.99
-		},
-		{
-			"uniqueKey": "JSFunction../src/ContextMenu.js/unPinAllElementsOfGrouping",
-			"x": 81.06,
-			"y": 81.05
-		},
-		{
-			"uniqueKey": "JSFunction../src/MouseWheel.js/zoom",
-			"x": 486.19,
-			"y": 405.11
-		},
-		{
-			"uniqueKey": "JSFunction../src/Drag.js/handleDragMouseDown",
-			"x": 29.19,
-			"y": 347.89
-		},
-		{
-			"uniqueKey": "JSFunction../src/Drag.js/handleDragMouseMove",
-			"x": -19.89,
-			"y": 415.14
-		},
-		{
-			"uniqueKey": "JSFunction../src/Drag.js/handleDragMouseUp",
-			"x": -152.97,
-			"y": 440.43
-		},
-		{
-			"uniqueKey": "JSFunction../src/Drag.js/handleDragMouseOut",
-			"x": -126.81,
-			"y": 357.73
+			"x": 729.5,
+			"y": 330.31
 		},
 		{
 			"uniqueKey": "JSVariable../src/Diagrams.js/diagramms",
@@ -373,24 +87,8 @@
 		"JSFunction../src/ContextMenu.js/unPinAllElementsOfGrouping",
 		"JSFunction../src/MouseWheel.js/zoom",
 		"JSFunction../src/Drag.js/handleDragMouseDown",
-		"JSFunction../src/Drawing.js/cameraToCanvasX",
-		"JSFunction../src/Drawing.js/cameraToPaneX",
-		"JSFunction../src/Drawing.js/cameraToCanvasY",
-		"JSFunction../src/Drawing.js/cameraToPaneY",
-		"JSFunction../src/Drawing.js/cameraToCanvasScale",
-		"JSFunction../src/Drawing.js/cameraToPaneScale",
-		"JSFunction../src/Drawing.js/highlight",
-		"JSFunction../src/Drawing.js/removeHighlight",
-		"JSFunction../src/Drawing.js/highlightActive",
-		"JSFunction../src/Drawing.js/removeHighlightActive",
-		"JSFunction../src/Drawing.js/RemoveAllHighlighting",
-		"JSFunction../src/Drawing.js/PinAll",
-		"JSFunction../src/Drawing.js/UnPinAll",
-		"JSFunction../src/Drawing.js/UnPinHighlighted",
-		"JSFunction../src/Drawing.js/HighlightUnPinned",
-		"JSFunction../src/Drawing.js/drawCompleteModel",
-		"JSFunction../src/Drawing.js/draw",
-		"JSVariable../src/Diagrams.js/diagramInfos"
+		"JSVariable../src/Diagrams.js/diagramInfos",
+		"JSVariable../src/Diagrams.js/diagramms"
 	],
 	"suppressed": []
 }

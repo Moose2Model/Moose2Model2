@@ -25,6 +25,11 @@ let circuitDiagramColorCallLines = '#97979780'; // 50% transparent
 let circuitDiagramColorAccessesLines = '#3131fd80'; // 50% transparent
 let circuitDiagramColorCommentLines = '#fdab3180';
 
+// make white
+let circuitDiagramColorAddedCode = '#ffffff';
+let circuitDiagramColorAddedDataPersistent = '#ffffff';
+let circuitDiagramColorAddedData = '#ffffff';
+
 let circuitDiagramCallWidth = 2;
 let circuitDiagramAccessWidth = 2;
 let circuitDiagramCommentWidth = 2;
@@ -191,13 +196,13 @@ function RemoveAllHighlighting() {
 }
 
 function PinAll() {     // Pin all elements 
-    for (const cmp of diagramms[diagramInfos.displayedDiagram].complModelPosition) {    
+    for (const cmp of diagramms[diagramInfos.displayedDiagram].complModelPosition) {
         if (typeof cmp !== 'undefined') {
             if (cmp.visible) {
-                    // add cmp.index to diagramms[diagramInfos.displayedDiagram].pinned
-                    if (!diagramms[diagramInfos.displayedDiagram].pinned.includes(cmp.index)) {
-                        diagramms[diagramInfos.displayedDiagram].pinned.push(cmp.index);
-                    }
+                // add cmp.index to diagramms[diagramInfos.displayedDiagram].pinned
+                if (!diagramms[diagramInfos.displayedDiagram].pinned.includes(cmp.index)) {
+                    diagramms[diagramInfos.displayedDiagram].pinned.push(cmp.index);
+                }
             }
         }
     }
@@ -243,9 +248,9 @@ function HighlightUnPinned() {     // Highlight all unpinned elements
     }
 }
 
-    
-        
-        
+
+
+
 
 
 
@@ -309,6 +314,10 @@ function drawCompleteModel(ctx, width, height) {
         circuitDiagramColorAccessesLines = '#3131fd80'; // 50% transparent
         circuitDiagramColorCommentLines = '#fdab3180';
 
+        circuitDiagramColorAddedCode = '#ffffff';
+        circuitDiagramColorAddedDataPersistent = '#ffffff';
+        circuitDiagramColorAddedData = '#ffffff';
+
     } else {
         // White Theme
         fontColor = "black";
@@ -324,6 +333,10 @@ function drawCompleteModel(ctx, width, height) {
         circuitDiagramColorCallLines = '#97979780'; // 50% transparent
         circuitDiagramColorAccessesLines = '#3131fd80'; // 50% transparent
         circuitDiagramColorCommentLines = '#fdab3180';
+
+        circuitDiagramColorAddedCode = '#000000';
+        circuitDiagramColorAddedDataPersistent = '#000000';
+        circuitDiagramColorAddedData = '#000000';
 
     }
 
@@ -653,7 +666,11 @@ function drawCompleteModel(ctx, width, height) {
 
                                 if (circuitDiagramMarkExplicitlyAdded) {
                                     if (diagramms[diagramInfos.displayedDiagram].generationInfoInternal.addedWithNeighbors.includes(mEBI.index)) {
-                                        ctx.strokeStyle = circuitDiagramColorHighlightedCode;
+                                        if (diagramms[diagramInfos.displayedDiagram].highlighted.includes(mEBI.index)) {
+                                            ctx.strokeStyle = circuitDiagramColorAddedCode; // Make whither, so that is is also visible when highlighted
+                                        } else {
+                                            ctx.strokeStyle = circuitDiagramColorHighlightedCode;
+                                        }
                                         SizeOnPane = codeSize * scale;
                                         size = cameraToCanvasScale(SizeOnPane);
                                         ctx.beginPath();
@@ -695,9 +712,17 @@ function drawCompleteModel(ctx, width, height) {
                                     if (diagramms[diagramInfos.displayedDiagram].generationInfoInternal.addedWithNeighbors.includes(mEBI.index)) {
 
                                         if (mEBI.technicalType == 'DBTable') {
-                                            ctx.strokeStyle = circuitDiagramColorHighlightedDataPersistent;
+                                            if (diagramms[diagramInfos.displayedDiagram].highlighted.includes(mEBI.index)) {
+                                                ctx.strokeStyle = circuitDiagramColorAddedDataPersistent;
+                                            } else {
+                                                ctx.strokeStyle = circuitDiagramColorHighlightedDataPersistent;
+                                            }
                                         } else {
-                                            ctx.strokeStyle = circuitDiagramColorHighlightedData;
+                                            if (diagramms[diagramInfos.displayedDiagram].highlighted.includes(mEBI.index)) {
+                                                ctx.strokeStyle = circuitDiagramColorAddedData;
+                                            } else {
+                                                ctx.strokeStyle = circuitDiagramColorHighlightedData;
+                                            }
                                         }
                                         SizeOnPane = dataSize * scale;
                                         size = cameraToCanvasScale(SizeOnPane);
