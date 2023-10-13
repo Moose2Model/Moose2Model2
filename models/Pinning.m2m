@@ -1,0 +1,67 @@
+{
+	"newElementBox": {
+		"isInitial": false,
+		"newElBoxX": 499.66821999574563,
+		"newElBoxY": 86,
+		"newElBoxWidth": 400,
+		"newElBoxHeight": 428
+	},
+	"addedWithNeighbors": [
+		"JSFunction../src/Drawing.js/HighlightUnPinned",
+		"JSFunction../src/Drawing.js/PinAll",
+		"JSFunction../src/Drawing.js/UnPinAll",
+		"JSFunction../src/Drawing.js/UnPinHighlighted"
+	],
+	"positions": [
+		{
+			"uniqueKey": "File../src/Diagrams.js",
+			"x": 11.01,
+			"y": 101.44
+		},
+		{
+			"uniqueKey": "File../src/Drawing.js",
+			"x": 13.78,
+			"y": 337.06
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/PinAll",
+			"x": 43.03,
+			"y": 408.9
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/UnPinAll",
+			"x": 120.6,
+			"y": 396.98
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/UnPinHighlighted",
+			"x": 226.26,
+			"y": 391.72
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/HighlightUnPinned",
+			"x": 348.3,
+			"y": 395.98
+		},
+		{
+			"uniqueKey": "JSVariable../src/Diagrams.js/diagramms",
+			"x": 137.17,
+			"y": 197.78
+		},
+		{
+			"uniqueKey": "JSVariable../src/Diagrams.js/diagramInfos",
+			"x": 257.17,
+			"y": 197.78
+		}
+	],
+	"comments": [],
+	"pinned": [
+		"JSFunction../src/Drawing.js/PinAll",
+		"JSFunction../src/Drawing.js/HighlightUnPinned",
+		"JSFunction../src/Drawing.js/UnPinAll",
+		"JSFunction../src/Drawing.js/UnPinHighlighted",
+		"JSVariable../src/Diagrams.js/diagramms",
+		"JSVariable../src/Diagrams.js/diagramInfos"
+	],
+	"suppressed": []
+}

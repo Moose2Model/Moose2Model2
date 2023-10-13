@@ -416,6 +416,10 @@
                 <input id="SwitchThemeButton" value="Switch between dark and white theme">
                 <input id="ZoomToFItButton" value="Zoom to fit on screen">
                 <input id="RemoveAllHighlightingButton" value="Remove all highlighting">
+                <input id="PinAllButton" value="Pin all">
+                <input id="UnPinAllButton" value="Remove all pinning">
+                <input id="UnPinHighlightedButton" value="Unpin highlighted">
+                <input id="HighlightUnPinnedButton" value="Highlight unpinned">
             </div>
         </div>
         <div class="dropdownHelpMenu">
@@ -537,6 +541,18 @@
 
         const RemoveAllHighlightingButton = document.getElementById('RemoveAllHighlightingButton');
         RemoveAllHighlightingButton.addEventListener('click', RemoveAllHighlighting);
+
+        const PinAllButton = document.getElementById('PinAllButton');
+        PinAllButton.addEventListener('click', PinAll);
+
+        const UnPinAllButton = document.getElementById('UnPinAllButton');
+        UnPinAllButton.addEventListener('click', UnPinAll);
+
+        const UnPinHighlightedButton = document.getElementById('UnPinHighlightedButton');
+        UnPinHighlightedButton.addEventListener('click', UnPinHighlighted);
+
+        const HighlightUnPinnedButton = document.getElementById('HighlightUnPinnedButton');
+        HighlightUnPinnedButton.addEventListener('click', HighlightUnPinned);
 
 
 

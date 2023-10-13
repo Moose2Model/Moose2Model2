@@ -190,6 +190,65 @@ function RemoveAllHighlighting() {
     diagramms[diagramInfos.displayedDiagram].highlighted = [];
 }
 
+function PinAll() {     // Pin all elements 
+    for (const cmp of diagramms[diagramInfos.displayedDiagram].complModelPosition) {    
+        if (typeof cmp !== 'undefined') {
+            if (cmp.visible) {
+                    // add cmp.index to diagramms[diagramInfos.displayedDiagram].pinned
+                    if (!diagramms[diagramInfos.displayedDiagram].pinned.includes(cmp.index)) {
+                        diagramms[diagramInfos.displayedDiagram].pinned.push(cmp.index);
+                    }
+            }
+        }
+    }
+}
+
+function UnPinAll() {     // Unpin all elements 
+    diagramms[diagramInfos.displayedDiagram].pinned = [];
+}
+
+function UnPinHighlighted() {     // Unpin all highlighted elements
+    for (const cmp of diagramms[diagramInfos.displayedDiagram].complModelPosition) {
+
+        if (typeof cmp !== 'undefined') {
+            if (cmp.visible) {
+
+                if (diagramms[diagramInfos.displayedDiagram].highlighted.includes(cmp.index)) {
+                    // remove cmp.index from diagramms[diagramInfos.displayedDiagram].pinned
+                    const indexToRemove = diagramms[diagramInfos.displayedDiagram].pinned.indexOf(cmp.index);
+                    if (indexToRemove !== -1) {
+                        // Remove the index from the array using splice
+                        diagramms[diagramInfos.displayedDiagram].pinned.splice(indexToRemove, 1);
+                    }
+                }
+            }
+        }
+    }
+}
+
+function HighlightUnPinned() {     // Highlight all unpinned elements
+    for (const cmp of diagramms[diagramInfos.displayedDiagram].complModelPosition) {
+
+        if (typeof cmp !== 'undefined') {
+            if (cmp.visible) {
+
+                if (!diagramms[diagramInfos.displayedDiagram].pinned.includes(cmp.index)) {
+                    // add cmp.index to diagramms[diagramInfos.displayedDiagram].highlighted
+                    if (!diagramms[diagramInfos.displayedDiagram].highlighted.includes(cmp.index)) {
+                        diagramms[diagramInfos.displayedDiagram].highlighted.push(cmp.index);
+                    }
+                }
+            }
+        }
+    }
+}
+
+    
+        
+        
+
+
+
 function isInBox(x, y, bX1, bX2, bY1, bY2, marginX, marginY) {
     // normalize box
     let nbX1, nbX2, nbY1, nbY2;
