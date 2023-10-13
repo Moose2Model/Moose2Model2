@@ -8,7 +8,9 @@
 	},
 	"addedWithNeighbors": [
 		"JSFunction../src/ForceDirecting.js/forceDirecting",
-		"JSFunction../src/Drawing.js/draw"
+		"JSFunction../src/Drawing.js/draw",
+		"JSFunction../src/ForceDirecting.js/spring",
+		"JSFunction../src/ForceDirecting.js/repulsion"
 	],
 	"positions": [
 		{
@@ -70,6 +72,16 @@
 			"uniqueKey": "JSFunction../src/FileExtractorPreprocess.js/ExtractCodeFromFolder",
 			"x": -885.82,
 			"y": -461.73
+		},
+		{
+			"uniqueKey": "JSFunction../src/ForceDirecting.js/spring",
+			"x": -598.26,
+			"y": 239.52
+		},
+		{
+			"uniqueKey": "JSFunction../src/ForceDirecting.js/repulsion",
+			"x": -511.04,
+			"y": 241.08
 		},
 		{
 			"uniqueKey": "JSFunction../src/ForceDirecting.js/forceDirecting",
@@ -266,7 +278,9 @@
 		"JSFunction../src/M2mExplorer.js/drawM2mExplorer",
 		"JSFunction../src/Drawing.js/drawAlways",
 		"JSFunction../src/Drawing.js/drawWhenForceDirectRequires",
-		"JSFunction../src/Drawing.js/drawCompleteModel"
+		"JSFunction../src/Drawing.js/drawCompleteModel",
+		"JSFunction../src/ForceDirecting.js/spring",
+		"JSFunction../src/ForceDirecting.js/repulsion"
 	],
 	"suppressed": []
 }

@@ -20,12 +20,47 @@ const initialForceDirectingState = {
 // /** Remember the index when the loop for repulsion was left to improve performance */
 // let previousRepulsionIndex = -1;
 
-const maxTimeForceDirectMs = 200;
+const maxTimeForceDirectMs = 2000;
 
 // let complModelPositionNew = [];
 // let complModelPositionNew2 = [];
 
+function spring(x1, y1, x2, y2) {
+    let vect = {
+        x: (x2 - x1) / scale,
+        y: (y2 - y1) / scale
+    };
+    let dist = Math.sqrt(vect.x * vect.x + vect.y * vect.y);
+    let force = {
+        // x: vect.x * (dist - avgLen),
+        x: scale * vect.x * (dist - diagramms[diagramInfos.displayedDiagram].forceDirectingState.springLength / scale),
+        // y: vect.y * (dist - avgLen)
+        y: scale * vect.y * (dist - diagramms[diagramInfos.displayedDiagram].forceDirectingState.springLength / scale)
+    };
+    return force;
+};
 
+function repulsion(x1, y1, x2, y2) {
+    let vect = {
+        x: (x2 - x1) / scale,
+        y: (y2 - y1) / scale
+    };
+    let dist = Math.sqrt(vect.x * vect.x + vect.y * vect.y);
+    let fact = 1;
+    if (dist > diagramms[diagramInfos.displayedDiagram].forceDirectingState.maxRepulsionLength) {
+        fact = 0;
+    } else if (dist < 0.1 * scale) {
+        fact = 100;
+    } else { fact = 1 / (dist * dist) };
+    // fact = -fact * 2000;
+    // fact = -fact * 20000;
+    fact = -fact * 40000; // 08.01.2022 Increase factor by two because duplicate calculation of repulsion was removed in line 215
+    let force = {
+        x: scale * vect.x * fact,
+        y: scale * vect.y * fact
+    };
+    return force;
+};
 
 function forceDirecting(width, height) {
 
@@ -90,42 +125,42 @@ function forceDirecting(width, height) {
 
 
 
-    function spring(x1, y1, x2, y2) {
-        let vect = {
-            x: (x2 - x1) / scale,
-            y: (y2 - y1) / scale
-        };
-        let dist = Math.sqrt(vect.x * vect.x + vect.y * vect.y);
-        let force = {
-            // x: vect.x * (dist - avgLen),
-            x: scale * vect.x * (dist - diagramms[diagramInfos.displayedDiagram].forceDirectingState.springLength / scale),
-            // y: vect.y * (dist - avgLen)
-            y: scale * vect.y * (dist - diagramms[diagramInfos.displayedDiagram].forceDirectingState.springLength / scale)
-        };
-        return force;
-    };
+    // function spring(x1, y1, x2, y2) {
+    //     let vect = {
+    //         x: (x2 - x1) / scale,
+    //         y: (y2 - y1) / scale
+    //     };
+    //     let dist = Math.sqrt(vect.x * vect.x + vect.y * vect.y);
+    //     let force = {
+    //         // x: vect.x * (dist - avgLen),
+    //         x: scale * vect.x * (dist - diagramms[diagramInfos.displayedDiagram].forceDirectingState.springLength / scale),
+    //         // y: vect.y * (dist - avgLen)
+    //         y: scale * vect.y * (dist - diagramms[diagramInfos.displayedDiagram].forceDirectingState.springLength / scale)
+    //     };
+    //     return force;
+    // };
 
-    function repulsion(x1, y1, x2, y2) {
-        let vect = {
-            x: (x2 - x1) / scale,
-            y: (y2 - y1) / scale
-        };
-        let dist = Math.sqrt(vect.x * vect.x + vect.y * vect.y);
-        let fact = 1;
-        if (dist > diagramms[diagramInfos.displayedDiagram].forceDirectingState.maxRepulsionLength) {
-            fact = 0;
-        } else if (dist < 0.1 * scale) {
-            fact = 100;
-        } else { fact = 1 / (dist * dist) };
-        // fact = -fact * 2000;
-        // fact = -fact * 20000;
-        fact = -fact * 40000; // 08.01.2022 Increase factor by two because duplicate calculation of repulsion was removed in line 215
-        let force = {
-            x: scale * vect.x * fact,
-            y: scale * vect.y * fact
-        };
-        return force;
-    };
+    // function repulsion(x1, y1, x2, y2) {
+    //     let vect = {
+    //         x: (x2 - x1) / scale,
+    //         y: (y2 - y1) / scale
+    //     };
+    //     let dist = Math.sqrt(vect.x * vect.x + vect.y * vect.y);
+    //     let fact = 1;
+    //     if (dist > diagramms[diagramInfos.displayedDiagram].forceDirectingState.maxRepulsionLength) {
+    //         fact = 0;
+    //     } else if (dist < 0.1 * scale) {
+    //         fact = 100;
+    //     } else { fact = 1 / (dist * dist) };
+    //     // fact = -fact * 2000;
+    //     // fact = -fact * 20000;
+    //     fact = -fact * 40000; // 08.01.2022 Increase factor by two because duplicate calculation of repulsion was removed in line 215
+    //     let force = {
+    //         x: scale * vect.x * fact,
+    //         y: scale * vect.y * fact
+    //     };
+    //     return force;
+    // };
 
     let startTime = Date.now();
 
