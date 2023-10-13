@@ -29,12 +29,19 @@ function findM2mListEntry(x, y) {
   let foundElement;
   found.inComment = false;
   for (const e of listPositionToEntries2) {
-      if (y >= e.yMin && y < e.yMax) {
-          foundElement = e.element;
-      }
+    if (y >= e.yMin && y < e.yMax) {
+      foundElement = e.element;
+    }
   }
   found.element = foundElement;
   return found;
+}
+
+function calculateAgeInDays(lastModifiedTime) {
+  const currentTime = new Date().getTime();
+  const timeDiff = currentTime - lastModifiedTime;
+  const ageInDays = Math.round(timeDiff / (1000 * 60 * 60 * 24));
+  return ageInDays;
 }
 
 async function drawM2mExplorer() {
@@ -89,6 +96,15 @@ async function drawM2mExplorer() {
   yPosElements += lineDifference;
   // Add empty line between explanation and files
   yPosElements += lineDifference;
+  const text = `Days`;
+  const textWidth = ctx.measureText(text).width;
+  const colDatePosEnd = 50;
+  const colNameStart = 70;
+  ctx.fillText('Days', xPosElements + colDatePosEnd - textWidth, yPosElements);
+  ctx.fillText('Diagram', xPosElements + colNameStart, yPosElements);
+  yPosElements += lineDifference;
+  // Add empty line between explanation and files
+  yPosElements += lineDifference;
 
   let linesForElements = Math.floor((g_height - yPosElements) / (lineDifference));
   linesForElements -= 1;
@@ -104,9 +120,14 @@ async function drawM2mExplorer() {
   listPositionToEntries2 = [];
 
   for (let i = 0; i <= linesForElements; i++) {
-    let lineDisplay = startM2mExplorerLine  + i;
+    let lineDisplay = startM2mExplorerLine + i;
     if (typeof m2mFilesInFolder[lineDisplay] !== 'undefined') {
-      ctx.fillText(m2mFilesInFolder[lineDisplay].name, xPosElements, yPosElements);
+      ctx.fillText(m2mFilesInFolder[lineDisplay].name, xPosElements + colNameStart, yPosElements);
+      let ageInDays = calculateAgeInDays(m2mFilesInFolder[lineDisplay].file.lastModified);
+      // Write rightbound
+      const text = `${ageInDays}`;
+      const textWidth = ctx.measureText(text).width;
+      ctx.fillText(ageInDays, xPosElements + colDatePosEnd - textWidth, yPosElements);
     }
 
     let listPositionToEntry = {}
