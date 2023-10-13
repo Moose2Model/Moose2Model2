@@ -228,7 +228,7 @@ function handleContextMenu(e) {
       if (diagramms[diagramInfos.displayedDiagram].type != circuitDiagramForSoftwareType) {
         m.push('Toggle display of names');
       }
-      m.push('Start Force-directed graph', 'Stop Force-directed graph');
+      m.push('Start Force-directed graph', 'Stop Force-directed graph', 'Force-Direct for 0.5s');
 
       let otherArrays = returnOtherDiagrams();
       for (const oA of otherArrays) {
@@ -288,6 +288,17 @@ function ContextMenuClicked(e) {
       diagramms[diagramInfos.displayedDiagram].forceFeedback = false;
       window.cancelAnimationFrame(requestAnimationFrame);
     }
+    // Start and Stop Force-directed graph after 0.5 seconds
+  } else if (this.outerText == 'Force-Direct for 0.5s') {
+    diagramms[diagramInfos.displayedDiagram].forceFeedback = true;
+    requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
+    displayedDiagramChanged();
+
+    setTimeout(() => {
+      diagramms[diagramInfos.displayedDiagram].forceFeedback = false;
+      window.cancelAnimationFrame(requestAnimationFrame);
+    }, 500);  // Stop after 500 milliseconds (0.5 seconds)
+
   } else if (this.outerText == 'Jump to code') {
     window.location.href = gMC_url;
     // requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
@@ -357,19 +368,19 @@ function pinAllElementsOfGrouping(groupElementIndex) {
   }
 }
 
-  function unPinAllElementsOfGrouping(groupElementIndex) {
-    // This function should iterate through all children of 'groupElement' 
-    // and remove them from the array with pinned elements (if in there)
+function unPinAllElementsOfGrouping(groupElementIndex) {
+  // This function should iterate through all children of 'groupElement' 
+  // and remove them from the array with pinned elements (if in there)
 
-    // Read array parentChildByParent to find all children of groupElementIndex and remove them from pinned
-    if (parentChildByParent[groupElementIndex] != undefined) {
-      for (const c of parentChildByParent[groupElementIndex]) {
-        if (diagramms[diagramInfos.displayedDiagram].pinned.indexOf(c.child) != -1) {
-          diagramms[diagramInfos.displayedDiagram].pinned.splice(diagramms[diagramInfos.displayedDiagram].pinned.indexOf(c.child), 1);
-        }
+  // Read array parentChildByParent to find all children of groupElementIndex and remove them from pinned
+  if (parentChildByParent[groupElementIndex] != undefined) {
+    for (const c of parentChildByParent[groupElementIndex]) {
+      if (diagramms[diagramInfos.displayedDiagram].pinned.indexOf(c.child) != -1) {
+        diagramms[diagramInfos.displayedDiagram].pinned.splice(diagramms[diagramInfos.displayedDiagram].pinned.indexOf(c.child), 1);
       }
     }
   }
+}
 
 /**React on clicks in Menu */
 /* $('#contextMenu').on('click', 'li', function (e) {
