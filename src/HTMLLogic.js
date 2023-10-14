@@ -113,7 +113,14 @@ async function SetWorkFolder() {
 
         if (workDirectoryHandle) {
             let mseFileHandle = await getMostRecentMseFile(workDirectoryHandle);
+
             if (mseFileHandle) {
+
+                // Inform user that a SOMIX file will be loaded
+                ctx.font = '15px sans-serif';
+                ctx.fillStyle = fontColor
+                ctx.fillText('SOMIX model is found and will be loaded : ' + mseFileHandle.name, 10, 50);
+
                 LoadModel(mseFileHandle);
             }
         }

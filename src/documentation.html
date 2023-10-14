@@ -92,8 +92,11 @@
 
             <h3>Use a SOMIX model</h3>
             When you have a SOMIX model (You will need to use SAP2Moose for now):
-            <li>Choose File -> Load Model and load a SOMIX model</li>
             <li>Choose File -> Open Work Folder (Generation informations for files will be stored in this folder)</li>
+            <li>When this folder has a subfolder SOMIX the application will load the most recent .mse file in this folder automatically. 
+                In that case the next step is not required.</li>            
+            <li>Choose File -> Load Model and load a SOMIX model</li>
+
             <li>Choose File -> New Diagram and enter a name for the new diagram.</li>
             <li>Make a right click into the pane and choose the name of your diagram. This will change the view and
                 display:
@@ -131,6 +134,10 @@
                         <li>Search elements in the model. The search is case insensitive.</li>
                         <li>Switch between dark and white theme</li>
                         <li>Remove all hightlighting of the displayed elements</li>
+                        <li>Pin all elements</li>
+                        <li>Remove all pinning</li>
+                        <li>Unpin all Highlighted elements</li>
+                        <li>Highlight all not pinned elements</li>
                     </ul>
                 </li>
                 <li>Context click on elements:
@@ -147,6 +154,11 @@
                         <li>Highlight elements or the using or used elements</li>
                     </ul>
                 </li>
+                <li>Context click on a grouping - It is also possible to:</li>
+                <ul>
+                    <li>Pin all elements of this grouping</li>
+                    <li>Unpin all elements of this grouping</li>
+                </ul>
                 <li>Context click on pane:
                     <ul>
                         <li>(Only in the diagram with all model elements: Toogle the display of element names)</li>
