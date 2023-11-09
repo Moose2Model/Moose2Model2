@@ -106,15 +106,7 @@ async function getFileLastModifiedDate(fileHandle) {
     return file.lastModified;
 }
 
-// Funktion, um das Array in CSV umzuwandeln und in die Datei zu schreiben
-async function saveArrayToCSV(array, directoryHandle, fileName) {
-    const fileHandle = await directoryHandle.getFileHandle(fileName, { create: true });
-    const writable = await fileHandle.createWritable();
-    const csvData = array.map(item => Object.values(item).join(',')).join('\n');
-    await writable.write(csvData);
-    await writable.close();
-    console.log('Array wurde in CSV-Datei gespeichert:', fileName);
-}
+
 
 async function SetWorkFolder() {
     'use strict';
@@ -131,17 +123,9 @@ async function SetWorkFolder() {
                 ctx.fillStyle = fontColor
                 ctx.fillText('SOMIX model is found and will be loaded : ' + mseFileHandle.name, 10, 50);
 
-                LoadModel(mseFileHandle);
+                await LoadModel(mseFileHandle);
 
-                // Ihre interne Liste (Array)
-                const data = [
-                    { Name: 'John', Alter: 30 },
-                    { Name: 'Jane', Alter: 25 },
-                    { Name: 'Bob', Alter: 35 }
-                ];
-
-                // Aufrufen der Funktion, um das Array in die CSV-Datei zu schreiben
-                saveArrayToCSV(data, workDirectoryHandle, 'Usage.txt'); "Use extension .txt to force Excel to use the text import wizard always"
+                await ExportModelInformation();
 
             }
         }
@@ -151,4 +135,48 @@ async function SetWorkFolder() {
         return;
     }
 }
+
+// Function to convert the array to CSV format and write it to the file
+async function saveArrayToCSV(array, directoryHandle, fileName) {
+    const fileHandle = await directoryHandle.getFileHandle(fileName, { create: true });
+    const writable = await fileHandle.createWritable();
+    const csvData = array.map(row => row.join(',')).join('\n');
+    await writable.write(csvData);
+    await writable.close();
+    console.log('Array wurde in CSV-Datei gespeichert:', fileName);
+  }
+
+  // Function to count the matches
+function countCalls(index) {
+
+    const matchingEntries = callByCalled[index];
+    return matchingEntries ? matchingEntries.length : 0;
+  }
+  function countAccesses(index) {
+
+      const matchingEntries = accessByAccessed[index];
+      return matchingEntries ? matchingEntries.length : 0;
+    }
+  
+  function ExportModelInformation() {
+   // CSV headers
+    const headers = ['Index', 'Technical Type', 'Unique Name', 'Name', 'Number of calls'];
+  
+    const extractedData = modelElementsByIndex
+    .map(item => [
+      item.index,
+      item.technicalType,
+      item.uniqueName,
+      item.name,
+      countCalls(item.index) + countAccesses(item.index)
+
+    ])
+    .slice(1); // Skip the first entry because it is never filled in these tables
+  
+    // Merging the headers and extracted data
+    const tableData = [headers, ...extractedData];
+  
+     // Calling the function to write the array to the CSV file
+    saveArrayToCSV(tableData, workDirectoryHandle, 'Usage.txt');
+  }
 
