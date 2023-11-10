@@ -253,7 +253,8 @@
             display: none;
             position: absolute;
             background-color: #f9f9f9;
-            min-width: 160px;
+            /*Width, specify both for .HelpMenu-content and HelpMenu-content input*/
+            min-width: 241px;
             box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
             z-index: 1;
         }
@@ -317,6 +318,8 @@
             border: none;
             outline: none;
             padding: 10px 10px;
+            /*Width, specify both for .HelpMenu and HelpMenu input*/
+            min-width: 241px;
             text-decoration: none;
             /* Required so that elements are placed below each other */
             display: block;
@@ -424,11 +427,16 @@
             background-color: var(--menuItemHighBGColor);
         }
 
-        #LoadButton,
+        /* Adapt also in Colors.js the change of colors*/
+        #FolderCodeToSOMIXButton,
         #OpenWorkFolderButton,
-        #ImportOldDiagramButton {
+        #ImportOldDiagramButton,
+        #ExploreModelButton,
+        #ToGithubButton,
+        #ZoomToFItButton,
+        #RemoveAllHighlightingButton {
             /* Separators in Menu */
-            border-bottom: 1px solid #cccccc;
+            border-bottom: 3px solid #cccccc;
         }
 
         #CreateNewDiagramButton,
@@ -473,9 +481,10 @@
             <button class="modelMenuButton" onclick="ToggleModelMenu()">Model
             </button>
             <div class="ModelMenu-content" id="ModelMenuID">
+                <input id="LoadButton" value="Load SOMIX model from mse file (from SAP)">
                 <input id="FolderToSOMIXButton" value="Extract File System to SOMIX model (w/o .git)">
                 <input id="FolderCodeToSOMIXButton" value="Extract Code from File System to SOMIX model (w/o .git)">
-                <input id="LoadButton" value="Load SOMIX model from mse file">
+                <input id="ExploreModelButton" value="Explore model (Add elements to diagrams)">
                 <input id="ExportModelInformationButton" value="Export model information">
             </div>
         </div>
@@ -483,8 +492,6 @@
             <button class="diagramMenuButton" onclick="ToggleDiagramMenu()">Diagram
             </button>
             <div class="DiagramMenu-content" id="DiagramMenuID">
-                <input id="ExploreModelButton" value="Explore model">
-                <input id="SwitchThemeButton" value="Switch between dark and white theme">
                 <input id="ZoomToFItButton" value="Zoom to fit on screen">
                 <input id="RemoveAllHighlightingButton" value="Remove all highlighting">
                 <input id="PinAllButton" value="Pin all">
@@ -501,6 +508,7 @@
                 <input id="LoadDemoModel" value="Load demo data">
                 <input id="ToNewsGroup" value="News Group SOMIX Suite">
                 <input id="ToGithubButton" value="Github repository">
+                <input id="SwitchThemeButton" value="Switch between dark and white theme">
             </div>
         </div>
     </div>

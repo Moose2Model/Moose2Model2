@@ -39,13 +39,15 @@
             <li>Make sure you have a folder which contains html files together with JavaScript code. You may for
                 instance use git to replicate the source code of this application to a local folder.</li>
             <li>Open this application in a browser</li>
-            <li>Choose in the menu File -> Extract Code from File System to SOMIX model (w/o .git). Choose the main
+            <li>Choose in the menu Model -> Extract Code from File System to SOMIX model (w/o .git). Choose the main
                 folder of the application. All extracted components will be displayed in a circle.</li>
-            <li>Choose in the menu FIle -> Open Work Folder. Specify a folder where the generation information for all
+            <li>Choose in the menu File -> Open Work Folder. Specify a folder where the generation information for all
                 diagrams shall be stored. In case you analyze this application choose the folder models.</li>
-            <li>In case you use this application. Choose in the menu File -> Read Diagram. You will see a list of existing diagrams.</li>
-            <li>In case there are no diagram informations yet. Choose in the menu File -> New Diagram. Enter a name for the diagram. 
-                Choose Diagram -> Explore model to choose components to be displayed.</li>
+            <li>In case you use this application. Choose in the menu File -> Read Diagram. You will see a list of
+                existing diagrams.</li>
+            <li>In case there are no diagram informations yet. Choose in the menu File -> New Diagram. Enter a name for
+                the diagram.
+                Choose Model -> Explore model ()Add elements to diagrams) to choose components to be displayed.</li>
             <h3>Demo</h3>
             It is possible to display and use demo data.
             Follow
@@ -59,7 +61,7 @@
             <li>Do a right mouse click into the pane and choose Demo Diagram</li>
             <li>Play around with left and right clicks of the mouse on elements, into boxes and onto the pane. Use also
                 the scrool wheel of the mouse.</li>
-            You may also choose Diagram -> Explore Model. Use this steps:
+            You may also choose Model -> Explore Model (Add elements to diagrams). Use this steps:
             <li>Open the application in a Browser</li>
             <li>Choose in the menu Help -> Load demo data</li>
             <li>Enter for instance ^Z.*LOG in the input field. This filters for all elements which start with Z and have
@@ -75,7 +77,7 @@
 
             <h3>Generate a SOMIX model from files in a local folder</h3>
             It is possible to analyze folders in the local file system:
-            <li>Extract a model where files are date and folders are groupings. Choose File -> Extract File System to
+            <li>Extract a model where files are date and folders are groupings. Choose Model -> Extract File System to
                 SOMIX
                 model (w/o .git). A pop up opens where you specify a local folder on
                 your computer.
@@ -93,8 +95,9 @@
             <h3>Use a SOMIX model</h3>
             When you have a SOMIX model (You will need to use SAP2Moose for now):
             <li>Choose File -> Open Work Folder (Generation informations for files will be stored in this folder)</li>
-            <li>When this folder has a subfolder SOMIX the application will load the most recent .mse file in this folder automatically. 
-                In that case the next step is not required.</li>            
+            <li>When this folder has a subfolder SOMIX the application will load the most recent .mse file in this
+                folder automatically.
+                In that case the next step is not required.</li>
             <li>Choose File -> Load Model and load a SOMIX model</li>
 
             <li>Choose File -> New Diagram and enter a name for the new diagram.</li>
@@ -119,17 +122,21 @@
             </li>
 
             <h3>Export Model Information</h3>
-            <p>This new feature allows you to export a comprehensive list of all model elements, along with the count of calls and accesses to each element. This can be particularly useful for analyzing the usage and interactions of elements within your model.</p>
+            <p>This new feature allows you to export a comprehensive list of all model elements, along with the count of
+                calls and accesses to each element. This can be particularly useful for analyzing the usage and
+                interactions of elements within your model.</p>
             <ol>
                 <li>Ensure that you have loaded a SOMIX model into the application.</li>
                 <li>Select the 'Model' menu.</li>
-                <li>Click on 'Export model information'. This will prompt you to choose a location to save the CSV file.</li>
-                <li>The exported file will include details such as the index, technical type, unique name, main group, name, and the number of calls and accesses for each model element.</li>
+                <li>Click on 'Export model information'. This will prompt you to choose a location to save the CSV file.
+                </li>
+                <li>The exported file will include details such as the index, technical type, unique name, main group,
+                    name, and the number of calls and accesses for each model element.</li>
                 <li>Make sure you have specified a work directory where the export file will be stored.</li>
             </ol>
 
-            <h2>Implemented Features</h2>
-            <h3>General features</h3>
+            <h2> Features</h2>
+            <h3>General</h3>
             <ul>
                 <li>Load a SOMIX model</li>
                 <li>Read a folder and create a SOMIX model of the contained folders and files.</li>
@@ -138,10 +145,18 @@
                 <li>Scrolling by dragging the pane(with "right" mouseclick")</li>
                 <li>Dragging elements (with "left" mouseclick)</li>
                 <li>Zooming with the wheel of the mouse</li>
+                <li>Menu Model</li>
+                <ul>
+                    <li>Extract a SOMIX model from a folder in the local file system</li>
+                    <li>Extract Code from File System to SOMIX model (w/o .git). Content in .git folders is ignored.
+                    </li>
+                    <li>Load a SOMIX model</li>
+                    <li>Explore model (Add elements to diagrams)</li>
+                    <li>Export model information</li>
+                </ul>
                 <li>Menu Diagram
                     <ul>
                         <li>Search elements in the model. The search is case insensitive.</li>
-                        <li>Switch between dark and white theme</li>
                         <li>Remove all hightlighting of the displayed elements</li>
                         <li>Pin all elements</li>
                         <li>Remove all pinning</li>
@@ -149,6 +164,10 @@
                         <li>Highlight all not pinned elements</li>
                     </ul>
                 </li>
+                <li>Menu Help
+                    <ul>
+                        <li>Switch between dark and white theme</li>
+                    </ul>
                 <li>Context click on elements:
                     <ul>
                         <li>Add an element with all neighbors to the active diagram</li>
@@ -157,8 +176,11 @@
                         <li>Enter or edit a comment for an element</li>
                         <li>Supress an element with all children</li>
                         <li>Redo supressing an element with all children</li>
-                        <li>Jump to code with when a link is contained in the model (For SAP: adt links have to be activated for
-                            Eclipse. For JavaScript: This works currently only when the tool is called from file and not from the Web. The jump may go to the correct line or higher. This is due to a not exact implementation of the logic to determine the line number.)</li>
+                        <li>Jump to code with when a link is contained in the model (For SAP: adt links have to be
+                            activated for
+                            Eclipse. For JavaScript: This works currently only when the tool is called from file and
+                            not from the Web. The jump may go to the correct line or higher. This is due to a not
+                            exact implementation of the logic to determine the line number.)</li>
                         <li>Remove pinning of recently dragged elements</li>
                         <li>Highlight elements or the using or used elements</li>
                     </ul>
@@ -184,11 +206,13 @@
                         <li>Save the generation information for the displayed diagram. It be stored in a file with
                             extension
                             .m2m and similar name.</li>
-                        <li>Read the generation information from an .m2m file. You should have all required model data
+                        <li>Read the generation information from an .m2m file. You should have all required model
+                            data
                             loaded
                             before. A diagram with identical name is created.</li>
                         <li>Import xml files from the old Smalltalk version of Moose2Model.</li>
-                        <li>Please note that no warning is yet raised when information is lost due to wrong handling.
+                        <li>Please note that no warning is yet raised when information is lost due to wrong
+                            handling.
                         </li>
                     </ul>
                 </li>
@@ -215,8 +239,6 @@
                 <li>Groupings are indicated by a dashed box and include all elements contained in them</li>
                 <li>Elements can be commented</li>
             </ul>
-            <h2>Planned Features</h2>
-            <p>Most current features of Moose2Model as are available currently in Smalltalk. And some more.</p>
         </div>
     </div>
 </body>

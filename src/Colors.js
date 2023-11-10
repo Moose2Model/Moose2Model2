@@ -153,13 +153,25 @@ function changeColors() {
 
     // Change color of separators for menus
 
-    element = document.getElementById('LoadButton');
+    element = document.getElementById('FolderCodeToSOMIXButton');
     element.style.borderColor = menuSeparatorColor;
 
     element = document.getElementById('OpenWorkFolderButton');
     element.style.borderColor = menuSeparatorColor;
 
     element = document.getElementById('ImportOldDiagramButton');
+    element.style.borderColor = menuSeparatorColor;
+
+    element = document.getElementById('ExploreModelButton');
+    element.style.borderColor = menuSeparatorColor;
+
+    element = document.getElementById('ToGithubButton');
+    element.style.borderColor = menuSeparatorColor;
+
+    element = document.getElementById('ZoomToFItButton');
+    element.style.borderColor = menuSeparatorColor;
+
+    element = document.getElementById('RemoveAllHighlightingButton');
     element.style.borderColor = menuSeparatorColor;
 
     // Change color for input of data
