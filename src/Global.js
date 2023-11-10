@@ -39,7 +39,7 @@ let modelElementsByIndex = [];
         };
  */
 let parentChildByParent = [];
-/** Contains an array where childs are placed at their index and an object is contained with this structure:
+/** Contains an array where childs are placed at their index and an array is contained with objects with this structure:
  *         const parentChild = {
             parent: parent,
             child: child,

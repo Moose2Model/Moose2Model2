@@ -186,6 +186,32 @@ function countAccesses(index) {
     return matchingEntries ? matchingEntries.length : 0;
 }
 
+// Function to find the main group name for a given element index
+// function findMainGroupName(index) {
+//     const parentChild = parentChildByChild[index];
+//     if (parentChild && parentChild.isMain) {
+//         const mainParentIndex = parentChild.parent;
+//         const mainParentElement = modelElementsByIndex[mainParentIndex];
+//         return mainParentElement ? mainParentElement.name : 'No Main Group';
+//     }
+//     return 'No Main Group';
+// }
+
+// Function to find the main group name for a given element index
+function findMainGroupName(index) {
+    const parentChildRelations = parentChildByChild[index];
+    if (parentChildRelations && parentChildRelations.length > 0) {
+        // Find the 'main' parent relationship
+        const mainRelation = parentChildRelations.find(rel => rel.isMain);
+        if (mainRelation) {
+            const mainParentIndex = mainRelation.parent;
+            const mainParentElement = modelElementsByIndex[mainParentIndex];
+            return mainParentElement ? mainParentElement.name : 'No Main Group';
+        }
+    }
+    return 'No Main Group';
+}
+
 function ExportModelInformation() {
 
     // Check if the directory handle is provided
@@ -201,18 +227,32 @@ function ExportModelInformation() {
     }
 
     // CSV headers
-    const headers = ['Index', 'Technical Type', 'Unique Name', 'Name', 'Number of calls'];
+    const headers = ['Index', 'Technical Type', 'Unique Name', 'Main Group', 'Name', 'Number of calls'];
+
+    // CSV headers
+    // const headers = ['Index', 'Technical Type', 'Unique Name', 'Name', 'Number of calls'];
 
     const extractedData = modelElementsByIndex
         .map(item => [
             item.index,
             item.technicalType,
             item.uniqueName,
+            findMainGroupName(item.index), // Add main group name
             item.name,
             countCalls(item.index) + countAccesses(item.index)
-
         ])
-        .slice(1); // Skip the first entry because it is never filled in these tables
+        .slice(1); // Skip the first entry
+
+    // const extractedData = modelElementsByIndex
+    //     .map(item => [
+    //         item.index,
+    //         item.technicalType,
+    //         item.uniqueName,
+    //         item.name,
+    //         countCalls(item.index) + countAccesses(item.index)
+
+    //     ])
+    //     .slice(1); // Skip the first entry because it is never filled in these tables
 
     // Merging the headers and extracted data
     const tableData = [headers, ...extractedData];
