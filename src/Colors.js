@@ -92,6 +92,23 @@ function changeColors() {
         //cols[i].style.color = fontColor;
     }
 
+    cols = document.getElementsByClassName('modelMenuButton');
+    for (let i = 0; i < cols.length; i++) {
+        //cols[i].style.backgroundColor = borderBackground;
+        cols[i].style.setProperty("--menuBGColor", borderBackground);
+        cols[i].style.setProperty("--menuHighBGColor", highlightedBorderBackground);
+        cols[i].style.color = fontColor;
+    }
+
+    cols = document.getElementsByClassName('ModelMenu-content');
+    for (let i = 0; i < cols.length; i++) {
+        //cols[i].style.backgroundColor = borderBackground;
+        cols[i].style.setProperty("--menuItemBGColor", menuBGColor);
+        cols[i].style.setProperty("--menuItemHighBGColor", menuHighlightedBGColor);
+        cols[i].style.setProperty("--fontColor", fontColor);
+        //cols[i].style.color = fontColor;
+    }
+
     cols = document.getElementsByClassName('DiagramMenu-content');
     for (let i = 0; i < cols.length; i++) {
         //cols[i].style.backgroundColor = borderBackground;
@@ -134,7 +151,7 @@ function changeColors() {
     element = document.getElementById('pane');
     element.style.backgroundColor = backGroundCanvas;
 
-    // Chane color or separators for menus
+    // Change color of separators for menus
 
     element = document.getElementById('LoadButton');
     element.style.borderColor = menuSeparatorColor;

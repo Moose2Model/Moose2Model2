@@ -5,7 +5,31 @@ let workDirectoryHandle;
 
 // This are all global variables which contain informations on a loaded model
 // They should be enhanced when more than a single mse model is loaded
+/** Contains an object where for each UniqueKey an object is contained with this structure
+ *         const index = indexByMSEIndex[idVal];
+        const element = {
+            element: elementName,
+            index: index,
+            name: nameVal,
+            technicalType: technicalTypeVal,
+            uniqueName: uniqueNameVal,
+            linkToEditor: linkToEditorVal,
+        };
+        modelElementsByUniqueKey[uniqueKey(technicalTypeVal, uniqueNameVal)] = element;
+ */
 let modelElementsByUniqueKey = {};
+/** Contains an object where for each UniqueKey an object is contained with this structure
+ *         const index = indexByMSEIndex[idVal];
+        const element = {
+            element: elementName,
+            index: index,
+            name: nameVal,
+            technicalType: technicalTypeVal,
+            uniqueName: uniqueNameVal,
+            linkToEditor: linkToEditorVal,
+        };
+        modelElementsByIndex[index] = element;
+ */
 let modelElementsByIndex = [];
 /** Contains an array where parents are placed at their index and an object is contained with this structure:
  *         const parentChild = {

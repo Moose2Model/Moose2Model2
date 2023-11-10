@@ -108,6 +108,11 @@
             overflow: hidden;
         }
 
+        .dropdownModelMenu {
+            float: left;
+            overflow: hidden;
+        }
+
         .dropdownDiagramMenu {
             float: left;
             overflow: hidden;
@@ -131,6 +136,22 @@
             padding-top: 5px;
 
             /* background-color: inherit;*/
+            font-family: inherit;
+        }
+
+        .dropdownModelMenu .modelMenuButton,
+        button {
+            cursor: pointer;
+            font-size: 16px;
+            border: none;
+            outline: none;
+            color: rgb(0, 0, 0);
+            padding-bottom: 0px;
+            padding-left: 0px;
+            padding-right: 20px;
+            padding-top: 5px;
+
+            /* background-color: inherit; */
             font-family: inherit;
         }
 
@@ -174,6 +195,13 @@
         }
 
         .navbar button:hover,
+        .dropdownModelMenu:hover .modelMenuButton,
+        .modelMenuButton:focus {
+            background-color: var(--menuHighBGColor);
+            /* background-color: rgb(223, 223, 223); */
+        }
+
+        .navbar button:hover,
         .dropdownDiagramMenu:hover .diagramMenuButton,
         .diagramMenuButton:focus {
             background-color: var(--menuHighBGColor);
@@ -196,6 +224,16 @@
             background-color: red;
             /*background-color: var(--menuItemBGColor); /* #f9f9f9; */
             /*Width, specify both for .FileMenu-content and FileMenu-content input*/
+            min-width: 340px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .ModelMenu-content {
+            display: none;
+            position: absolute;
+            background-color: #5b2d2d;
+            /*Width, specify both for .ModelMenu-content and ModelMenu-content input*/
             min-width: 340px;
             box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
             z-index: 1;
@@ -230,6 +268,23 @@
             padding: 10px 10px;
             min-width: 340px;
             /*Width, specify both for .FileMenu-content and FileMenu-content input*/
+            text-decoration: none;
+            /* Required so that elements are placed below each other */
+            display: block;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .ModelMenu-content input,
+        a input {
+            float: none;
+            background-color: var(--menuItemBGColor);
+            color: var(--fontColor);
+            border: none;
+            outline: none;
+            padding: 10px 10px;
+            /*Width, specify both for .ModelMenu-content and ModelMenu-content input*/
+            min-width: 340px;
             text-decoration: none;
             /* Required so that elements are placed below each other */
             display: block;
@@ -273,6 +328,12 @@
         a:hover {
             background-color: var(--menuItemHighBGColor);
             /* #ddd;*/
+        }
+
+        .ModelMenu-content input:hover,
+        a:hover {
+            background-color: var(--menuItemHighBGColor);
+            /* #ddd; */
         }
 
         .DiagramMenu-content input:hover,
@@ -399,13 +460,23 @@
             </button>
             <div class="FileMenu-content" id="FileMenuID">
                 <input id="OpenWorkFolderButton" value="Open Work Folder">
-                <input id="FolderToSOMIXButton" value="Extract File System to SOMIX model (w/o .git)">
+                <!-- <input id="FolderToSOMIXButton" value="Extract File System to SOMIX model (w/o .git)">
                 <input id="FolderCodeToSOMIXButton" value="Extract Code from File System to SOMIX model (w/o .git)">
-                <input id="LoadButton" value="Load SOMIX model from mse file">
+                <input id="LoadButton" value="Load SOMIX model from mse file"> -->
                 <input id="ImportOldDiagramButton" value="Import old Diagram (XML)">
                 <input id="NewDiagramButton" value="New Diagram">
                 <input id="ReadDiagramButton" value="Read Diagram">
                 <input id="SaveDiagramButton" value="Save Displayed Diagram">
+            </div>
+        </div>
+        <div class="dropdownModelMenu">
+            <button class="modelMenuButton" onclick="ToggleModelMenu()">Model
+            </button>
+            <div class="ModelMenu-content" id="ModelMenuID">
+                <input id="FolderToSOMIXButton" value="Extract File System to SOMIX model (w/o .git)">
+                <input id="FolderCodeToSOMIXButton" value="Extract Code from File System to SOMIX model (w/o .git)">
+                <input id="LoadButton" value="Load SOMIX model from mse file">
+                <input id="ExportModelInformationButton" value="Export model information">
             </div>
         </div>
         <div class="dropdownDiagramMenu">
@@ -528,6 +599,9 @@
 
         const SaveDiagramButton = document.getElementById('SaveDiagramButton');
         SaveDiagramButton.addEventListener('click', SaveDisplayedDiagram);
+
+        const ExportModelInformationButton = document.getElementById('ExportModelInformationButton');
+        ExportModelInformationButton.addEventListener('click', ExportModelInformation);
 
         //
         const ExploreModelButton = document.getElementById('ExploreModelButton');
@@ -723,6 +797,9 @@
         function ToggleFileMenu() {
             document.getElementById("FileMenuID").classList.toggle("show");
         }
+        function ToggleModelMenu() {
+            document.getElementById("ModelMenuID").classList.toggle("show");
+        }
         function ToggleDiagramMenu() {
             document.getElementById("DiagramMenuID").classList.toggle("show");
         }
@@ -735,6 +812,12 @@
 
             if (!e.target.matches('.fileMenuButton')) {
                 var MenuID = document.getElementById("FileMenuID");
+                if (MenuID.classList.contains('show')) {
+                    MenuID.classList.remove('show');
+                }
+            }
+            if (!e.target.matches('.modelMenuButton')) {
+                var MenuID = document.getElementById("ModelMenuID");
                 if (MenuID.classList.contains('show')) {
                     MenuID.classList.remove('show');
                 }

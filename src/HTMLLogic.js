@@ -125,7 +125,7 @@ async function SetWorkFolder() {
 
                 await LoadModel(mseFileHandle);
 
-                await ExportModelInformation();
+                // await ExportModelInformation();
 
             }
         }
@@ -136,47 +136,88 @@ async function SetWorkFolder() {
     }
 }
 
-// Function to convert the array to CSV format and write it to the file
-async function saveArrayToCSV(array, directoryHandle, fileName) {
-    const fileHandle = await directoryHandle.getFileHandle(fileName, { create: true });
-    const writable = await fileHandle.createWritable();
-    const csvData = array.map(row => row.join(',')).join('\n');
-    await writable.write(csvData);
-    await writable.close();
-    console.log('Array wurde in CSV-Datei gespeichert:', fileName);
-  }
+// Function to ensure the 'model_information' directory exists
+async function ensureDirectoryExists(directoryHandle) {
+    try {
+        return await directoryHandle.getDirectoryHandle('model_information', { create: true });
+    } catch (error) {
+        console.error('Error accessing the directory:', error);
+        throw error;
+    }
+}
 
-  // Function to count the matches
+// Function to convert the array to CSV format and write it to the file in the specified subdirectory
+async function saveArrayToCSV(array, directoryHandle, fileName) {
+    try {
+        const modelInfoDirHandle = await ensureDirectoryExists(directoryHandle);
+
+        const fileHandle = await modelInfoDirHandle.getFileHandle(fileName, { create: true });
+        const writable = await fileHandle.createWritable();
+
+        const csvData = array.reduce((acc, row, index) => {
+            if (!Array.isArray(row) || row.some(cell => cell === undefined)) {
+                console.log(`Skipping row at index ${index} due to it being undefined or improperly formatted.`);
+                return acc; // Continue with the accumulated data, skipping this row
+            }
+            const quotedRow = row.map(cell => `"${cell}"`).join(',');
+            return acc + quotedRow + '\r\n'; // Use \r\n for line breaks
+        }, '').trim();
+        
+
+         await writable.write(csvData);
+        await writable.close();
+
+        // Display a popup message about the file location
+        alert(`Model information has been saved in the CSV file: ${fileName}\nThe file is located in the "model_information" subfolder of the selected work directory.`);
+    } catch (error) {
+        console.error('Error writing to the file:', error);
+    }
+}
+
+// Function to count the matches
 function countCalls(index) {
 
     const matchingEntries = callByCalled[index];
     return matchingEntries ? matchingEntries.length : 0;
-  }
-  function countAccesses(index) {
+}
+function countAccesses(index) {
 
-      const matchingEntries = accessByAccessed[index];
-      return matchingEntries ? matchingEntries.length : 0;
+    const matchingEntries = accessByAccessed[index];
+    return matchingEntries ? matchingEntries.length : 0;
+}
+
+function ExportModelInformation() {
+
+    // Check if the directory handle is provided
+    if (!workDirectoryHandle) {
+        alert('Please specify a work directory first.');
+        return; // Exit the function if no directory handle is provided
     }
-  
-  function ExportModelInformation() {
-   // CSV headers
-    const headers = ['Index', 'Technical Type', 'Unique Name', 'Name', 'Number of calls'];
-  
-    const extractedData = modelElementsByIndex
-    .map(item => [
-      item.index,
-      item.technicalType,
-      item.uniqueName,
-      item.name,
-      countCalls(item.index) + countAccesses(item.index)
 
-    ])
-    .slice(1); // Skip the first entry because it is never filled in these tables
-  
+    // Check if modelElementsByIndex is empty
+    if (modelElementsByIndex.length === 0) {
+        alert('No model data loaded. Please load a model first.');
+        return; // Exit the function if no model data is loaded
+    }
+
+    // CSV headers
+    const headers = ['Index', 'Technical Type', 'Unique Name', 'Name', 'Number of calls'];
+
+    const extractedData = modelElementsByIndex
+        .map(item => [
+            item.index,
+            item.technicalType,
+            item.uniqueName,
+            item.name,
+            countCalls(item.index) + countAccesses(item.index)
+
+        ])
+        .slice(1); // Skip the first entry because it is never filled in these tables
+
     // Merging the headers and extracted data
     const tableData = [headers, ...extractedData];
-  
-     // Calling the function to write the array to the CSV file
+
+    // Calling the function to write the array to the CSV file
     saveArrayToCSV(tableData, workDirectoryHandle, 'Usage.txt');
-  }
+}
 
