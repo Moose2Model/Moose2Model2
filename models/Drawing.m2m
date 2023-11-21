@@ -1,10 +1,10 @@
 {
 	"newElementBox": {
 		"isInitial": false,
-		"newElBoxX": 1085.3632760549729,
-		"newElBoxY": -934,
+		"newElBoxX": 653.8824141129905,
+		"newElBoxY": -1214,
 		"newElBoxWidth": 400,
-		"newElBoxHeight": 1628
+		"newElBoxHeight": 1908
 	},
 	"addedWithNeighbors": [
 		"JSFunction../src/Drawing.js/draw",
@@ -35,8 +35,8 @@
 		},
 		{
 			"uniqueKey": "File../src/Drawing.js",
-			"x": -785.86,
-			"y": -59.24
+			"x": -865.86,
+			"y": -17.24
 		},
 		{
 			"uniqueKey": "File../src/FileExtractorPreprocess.js",
@@ -50,8 +50,8 @@
 		},
 		{
 			"uniqueKey": "File../src/Global.js",
-			"x": 605.64,
-			"y": -139.83
+			"x": 884.82,
+			"y": -980.73
 		},
 		{
 			"uniqueKey": "File../src/HTMLLogic.js",
@@ -125,63 +125,63 @@
 		},
 		{
 			"uniqueKey": "JSFunction../src/Drawing.js/supportRetina",
-			"x": -1340,
-			"y": -340
+			"x": -637.81,
+			"y": -510.62
 		},
 		{
 			"uniqueKey": "JSFunction../src/Drawing.js/resetSnapToGrid",
-			"x": -1120,
-			"y": -340
+			"x": -1200,
+			"y": -298
 		},
 		{
 			"uniqueKey": "JSFunction../src/Drawing.js/snapToGrid",
-			"x": -1040,
-			"y": -340
+			"x": -1120,
+			"y": -298
 		},
 		{
 			"uniqueKey": "JSFunction../src/Drawing.js/cameraToCanvasX",
-			"x": -1220,
-			"y": -340
+			"x": -1300,
+			"y": -298
 		},
 		{
 			"uniqueKey": "JSFunction../src/Drawing.js/cameraToCanvasY",
-			"x": -1440,
-			"y": -340
+			"x": -794.88,
+			"y": -124.24
 		},
 		{
 			"uniqueKey": "JSFunction../src/Drawing.js/cameraToCanvasScale",
-			"x": -620,
-			"y": -320
+			"x": -700,
+			"y": -278
 		},
 		{
 			"uniqueKey": "JSFunction../src/Drawing.js/cameraToPaneScale",
-			"x": -1320,
-			"y": -260
+			"x": -801.49,
+			"y": 16.38
 		},
 		{
 			"uniqueKey": "JSFunction../src/Drawing.js/isInBox",
-			"x": -1280,
-			"y": -200
+			"x": -1249.8,
+			"y": -185.63
 		},
 		{
 			"uniqueKey": "JSFunction../src/Drawing.js/drawCompleteModel",
-			"x": -940,
-			"y": -420
+			"x": -1041.02,
+			"y": -441.91
 		},
 		{
 			"uniqueKey": "JSFunction../src/Drawing.js/drawAlways",
-			"x": -1220,
-			"y": -620
+			"x": -1300,
+			"y": -578
 		},
 		{
 			"uniqueKey": "JSFunction../src/Drawing.js/drawWhenForceDirectRequires",
-			"x": -1228.77,
-			"y": -553.96
+			"x": -1300,
+			"y": -518
 		},
 		{
 			"uniqueKey": "JSFunction../src/Drawing.js/draw",
-			"x": -1080,
-			"y": -580
+			"x": -1160,
+			"y": -538
 		},
 		{
 			"uniqueKey": "JSFunction../src/ContextMenu.js/ContextMenuClicked",
@@ -245,63 +245,63 @@
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/modelElementsByIndex",
-			"x": 655,
-			"y": -156
+			"x": -221.25,
+			"y": -929.65
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/parentChildByParent",
-			"x": 915,
-			"y": 4
+			"x": -440.82,
+			"y": -1000.9
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/callByCaller",
-			"x": 855,
-			"y": -316
+			"x": -607.74,
+			"y": -927.49
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/accessByAccessor",
-			"x": 735,
-			"y": -336
+			"x": -720.82,
+			"y": -920.9
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/canvas",
-			"x": 735,
-			"y": 184
+			"x": -630.98,
+			"y": -1013.11
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/ctx",
-			"x": 595,
-			"y": -236
+			"x": -381.04,
+			"y": -924.79
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/requestAnimationFrame",
-			"x": 615,
-			"y": 244
+			"x": -526.48,
+			"y": -1041.69
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/showModelExplorer",
-			"x": 655,
-			"y": 64
+			"x": -737.39,
+			"y": -1033.39
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/showM2mExplorer",
-			"x": 815,
-			"y": -76
+			"x": -336.77,
+			"y": -1064.11
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/showExplorer",
-			"x": 595,
-			"y": 144
+			"x": -625.27,
+			"y": -1096.42
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/g_width",
-			"x": 735,
-			"y": -136
+			"x": -230.12,
+			"y": -986.73
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/g_height",
-			"x": 755,
-			"y": -216
+			"x": -333.15,
+			"y": -988.14
 		},
 		{
 			"uniqueKey": "JSVariable../src/ForceDirecting.js/scale",
@@ -330,118 +330,133 @@
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/drawingCount",
-			"x": -1080,
-			"y": 0
+			"x": -1160,
+			"y": 42
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/boundingRectCompleteMargin",
-			"x": -580,
-			"y": 60
+			"x": -660,
+			"y": 102
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/circuitDiagramColorGrouping",
-			"x": -1100,
-			"y": -260
+			"x": -1180,
+			"y": -218
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/circuitDiagramColorCode",
-			"x": -880,
-			"y": 80
+			"x": -960,
+			"y": 122
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/circuitDiagramColorHighlightedCode",
-			"x": -800,
-			"y": 20
+			"x": -880,
+			"y": 62
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/circuitDiagramColorData",
-			"x": -800,
-			"y": 60
+			"x": -880,
+			"y": 102
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/circuitDiagramColorHighlightedData",
-			"x": -580,
-			"y": 160
+			"x": -660,
+			"y": 202
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/circuitDiagramColorDataPersistent",
-			"x": -540,
-			"y": -200
+			"x": -620,
+			"y": -158
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/circuitDiagramColorHighlightedDataPersistent",
-			"x": -1060,
-			"y": -80
+			"x": -1140,
+			"y": -38
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/circuitDiagramColorCallLines",
-			"x": -800,
-			"y": -400
+			"x": -821.14,
+			"y": -410.98
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/circuitDiagramColorAccessesLines",
-			"x": -880,
-			"y": -380
+			"x": -960,
+			"y": -338
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/circuitDiagramColorCommentLines",
-			"x": -680,
-			"y": 160
+			"x": -760,
+			"y": 202
+		},
+		{
+			"uniqueKey": "JSVariable../src/Drawing.js/circuitDiagramColorAddedCode",
+			"x": -840,
+			"y": -518
+		},
+		{
+			"uniqueKey": "JSVariable../src/Drawing.js/circuitDiagramColorAddedDataPersistent",
+			"x": -720,
+			"y": -458
+		},
+		{
+			"uniqueKey": "JSVariable../src/Drawing.js/circuitDiagramColorAddedData",
+			"x": -780,
+			"y": -198
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/circuitDiagramCallWidth",
-			"x": -700,
-			"y": -380
+			"x": -780,
+			"y": -338
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/circuitDiagramAccessWidth",
-			"x": -780,
-			"y": -180
+			"x": -860,
+			"y": -138
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/circuitDiagramCommentWidth",
-			"x": -900,
-			"y": -100
+			"x": -980,
+			"y": -58
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/circuitDiagramMarkExplicitlyAdded",
-			"x": -980,
-			"y": -20
+			"x": -1060,
+			"y": 22
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/arrowLength",
-			"x": -720,
-			"y": -100
+			"x": -800,
+			"y": -58
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/fontSizeGeneral",
-			"x": -980,
-			"y": 100
+			"x": -1060,
+			"y": 142
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/groupSize",
-			"x": -880,
-			"y": -280
+			"x": -960,
+			"y": -238
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/codeSize",
-			"x": -1120,
-			"y": 120
+			"x": -1200,
+			"y": 162
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/dataSize",
-			"x": -800,
-			"y": -340
+			"x": -880,
+			"y": -298
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/generalFontSize",
-			"x": -960,
-			"y": -320
+			"x": -1040,
+			"y": -278
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drawing.js/commentBoxBorder",
-			"x": -1040,
-			"y": 180
+			"x": -1120,
+			"y": 222
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drag.js/startX",
@@ -482,15 +497,75 @@
 		"JSFunction../src/Drawing.js/cameraToCanvasX",
 		"JSFunction../src/Drawing.js/resetSnapToGrid",
 		"JSFunction../src/Drawing.js/cameraToCanvasScale",
-		"JSFunction../src/Drawing.js/supportRetina",
-		"JSFunction../src/Drawing.js/cameraToCanvasY",
-		"JSFunction../src/Drawing.js/cameraToPaneScale",
-		"JSFunction../src/Drawing.js/isInBox",
 		"JSFunction../src/Drawing.js/drawWhenForceDirectRequires",
 		"JSFunction../src/Diagrams.js/ReadDisplayedDiagram",
 		"JSFunction../src/Diagrams.js/ZoomToFit",
 		"JSFunction../src/Diagrams.js/ImportOldDiagram",
-		"JSFunction../src/FileExtractorPreprocess.js/ExtractCodeFromFolder"
+		"JSFunction../src/FileExtractorPreprocess.js/ExtractCodeFromFolder",
+		"File../src/Colors.js",
+		"File../src/ContextMenu.js",
+		"File../src/Diagrams.js",
+		"File../src/Drag.js",
+		"File../src/Drawing.js",
+		"File../src/FileExtractorPreprocess.js",
+		"File../src/ForceDirecting.js",
+		"File../src/Global.js",
+		"File../src/HTMLLogic.js",
+		"File../src/M2mExplorer.js",
+		"File../src/ModelExplorer.js",
+		"File../src/moose2model.html",
+		"File../src/MouseWheel.js",
+		"File../src/Requirement.js",
+		"JSFunction../src/FileExtractorPreprocess.js/SetExtractedFolder",
+		"JSFunction../src/ForceDirecting.js/forceDirecting",
+		"JSFunction../src/Drawing.js/snapToGrid",
+		"JSFunction../src/HTMLLogic.js/LoadModel",
+		"JSFunction../src/moose2model.html/ExploreModelRequested",
+		"JSVariable../src/Requirement.js/SOMEXPL_2",
+		"JSVariable../src/Colors.js/colorTheme",
+		"JSVariable../src/Colors.js/fontColor",
+		"JSVariable../src/Diagrams.js/circuitDiagramForSoftwareDiagramType",
+		"JSVariable../src/Diagrams.js/diagramInfos",
+		"JSVariable../src/Drawing.js/drawingCount",
+		"JSVariable../src/Drawing.js/boundingRectCompleteMargin",
+		"JSVariable../src/Drawing.js/circuitDiagramColorGrouping",
+		"JSVariable../src/Drawing.js/circuitDiagramColorCode",
+		"JSVariable../src/Drawing.js/circuitDiagramColorHighlightedCode",
+		"JSVariable../src/Drawing.js/circuitDiagramColorData",
+		"JSVariable../src/Drawing.js/circuitDiagramColorHighlightedData",
+		"JSVariable../src/Drawing.js/circuitDiagramColorDataPersistent",
+		"JSVariable../src/Drawing.js/circuitDiagramColorHighlightedDataPersistent",
+		"JSVariable../src/Drawing.js/circuitDiagramColorCallLines",
+		"JSVariable../src/Drawing.js/circuitDiagramColorAccessesLines",
+		"JSVariable../src/Drawing.js/circuitDiagramColorCommentLines",
+		"JSVariable../src/Drawing.js/circuitDiagramCallWidth",
+		"JSVariable../src/Drawing.js/circuitDiagramAccessWidth",
+		"JSVariable../src/Drawing.js/circuitDiagramCommentWidth",
+		"JSVariable../src/Drawing.js/circuitDiagramMarkExplicitlyAdded",
+		"JSVariable../src/Drawing.js/arrowLength",
+		"JSVariable../src/Drawing.js/fontSizeGeneral",
+		"JSVariable../src/Drawing.js/groupSize",
+		"JSVariable../src/Drawing.js/codeSize",
+		"JSVariable../src/Drawing.js/dataSize",
+		"JSVariable../src/Drawing.js/generalFontSize",
+		"JSVariable../src/Drawing.js/commentBoxBorder",
+		"JSVariable../src/Drag.js/startX",
+		"JSVariable../src/Global.js/callByCaller",
+		"JSVariable../src/Global.js/modelElementsByIndex",
+		"JSVariable../src/Global.js/ctx",
+		"JSVariable../src/Global.js/g_width",
+		"JSVariable../src/Global.js/g_height",
+		"JSVariable../src/Global.js/canvas",
+		"JSVariable../src/Global.js/showModelExplorer",
+		"JSVariable../src/Global.js/requestAnimationFrame",
+		"JSVariable../src/Global.js/showM2mExplorer",
+		"JSVariable../src/Global.js/showExplorer",
+		"JSVariable../src/Global.js/parentChildByParent",
+		"JSVariable../src/Global.js/accessByAccessor",
+		"JSVariable../src/Drawing.js/circuitDiagramColorAddedCode",
+		"JSVariable../src/Drawing.js/circuitDiagramColorAddedDataPersistent",
+		"JSVariable../src/Drawing.js/circuitDiagramColorAddedData",
+		"JSFunction../src/Drawing.js/supportRetina"
 	],
 	"suppressed": []
 }

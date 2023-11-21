@@ -22,6 +22,11 @@ function filterModel() {
             unFilteredModel[i] = {};
             unFilteredModel[i].index = mEBI.index;
             unFilteredModel[i].name = mEBI.name;
+            if (diagramInfos.activeDiagram && diagramms[diagramInfos.activeDiagram].generationInfoInternal.addedWithNeighbors.includes(mEBI.index)) {
+                unFilteredModel[i].info = 'Added with neighbors';
+            } else if (diagramInfos.activeDiagram && diagramms[diagramInfos.activeDiagram].generationInfoInternal.suppressed.includes(mEBI.index)) {
+                unFilteredModel[i].info = 'suppressed';
+            } else { unFilteredModel[i].info = ''; }
             i += 1;
         }
     }
@@ -98,7 +103,8 @@ function drawModelExplorer() {
     ctx.clearRect(0, 0, g_width, g_height);
 
     let yPosElements = 50;
-    let xPosElements = 10;
+    let xPosElementsInfo = 10;
+    let xPosElements = 200;
     let fontSize = 15;
     let lineDifference = fontSize;
 
@@ -127,6 +133,7 @@ function drawModelExplorer() {
     for (let i = 0; i <= linesForElements; i++) {
         let lineDisplay = startExplorerLine + i;
         if (typeof filteredModel[lineDisplay] !== 'undefined') {
+            ctx.fillText(filteredModel[lineDisplay].info, xPosElementsInfo, yPosElements);
             ctx.fillText(filteredModel[lineDisplay].completeName, xPosElements, yPosElements);
         }
 

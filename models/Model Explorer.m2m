@@ -1,0 +1,111 @@
+{
+	"newElementBox": {
+		"isInitial": false,
+		"newElBoxX": 241.6884765625,
+		"newElBoxY": -274,
+		"newElBoxWidth": 400,
+		"newElBoxHeight": 628
+	},
+	"addedWithNeighbors": [
+		"JSFunction../src/ModelExplorer.js/drawModelExplorer"
+	],
+	"positions": [
+		{
+			"uniqueKey": "File../src/Colors.js",
+			"x": 33.59,
+			"y": 60.48
+		},
+		{
+			"uniqueKey": "File../src/Drawing.js",
+			"x": 47.92,
+			"y": 48.68
+		},
+		{
+			"uniqueKey": "File../src/Global.js",
+			"x": -125.27,
+			"y": 92.91
+		},
+		{
+			"uniqueKey": "File../src/ModelExplorer.js",
+			"x": -326.75,
+			"y": 35.67
+		},
+		{
+			"uniqueKey": "File../src/MouseWheel.js",
+			"x": 30.58,
+			"y": 79.81
+		},
+		{
+			"uniqueKey": "JSFunction../src/ModelExplorer.js/filterModel",
+			"x": -402,
+			"y": 112
+		},
+		{
+			"uniqueKey": "JSFunction../src/ModelExplorer.js/drawModelExplorer",
+			"x": -357,
+			"y": -39
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/draw",
+			"x": -92.67,
+			"y": -156.61
+		},
+		{
+			"uniqueKey": "JSFunction../src/MouseWheel.js/zoom",
+			"x": 7.46,
+			"y": 2.62
+		},
+		{
+			"uniqueKey": "JSVariable../src/Colors.js/fontColor",
+			"x": 213.1,
+			"y": -60.08
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/ctx",
+			"x": -133,
+			"y": 167
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/g_width",
+			"x": 27,
+			"y": 187
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/g_height",
+			"x": -153,
+			"y": 247
+		},
+		{
+			"uniqueKey": "JSVariable../src/ModelExplorer.js/filteredModel",
+			"x": -522,
+			"y": -8
+		},
+		{
+			"uniqueKey": "JSVariable../src/ModelExplorer.js/startExplorerLine",
+			"x": -522,
+			"y": 92
+		},
+		{
+			"uniqueKey": "JSVariable../src/ModelExplorer.js/scrollExplorerLine",
+			"x": -362,
+			"y": -128
+		},
+		{
+			"uniqueKey": "JSVariable../src/ModelExplorer.js/endExplorerLine",
+			"x": -482,
+			"y": 192
+		},
+		{
+			"uniqueKey": "JSVariable../src/ModelExplorer.js/listPositionToEntries",
+			"x": -322,
+			"y": 172
+		}
+	],
+	"comments": [],
+	"pinned": [
+		"JSFunction../src/ModelExplorer.js/filterModel",
+		"JSFunction../src/ModelExplorer.js/drawModelExplorer",
+		"JSFunction../src/Drawing.js/draw"
+	],
+	"suppressed": []
+}

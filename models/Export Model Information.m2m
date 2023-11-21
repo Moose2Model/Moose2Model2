@@ -1,0 +1,111 @@
+{
+	"newElementBox": {
+		"isInitial": false,
+		"newElBoxX": -304.3173828125,
+		"newElBoxY": -332.4,
+		"newElBoxWidth": 400,
+		"newElBoxHeight": 626.4
+	},
+	"addedWithNeighbors": [
+		"JSFunction../src/HTMLLogic.js/ExportModelInformation",
+		"JSFunction../src/HTMLLogic.js/countCalls",
+		"JSFunction../src/HTMLLogic.js/countAccesses",
+		"JSFunction../src/HTMLLogic.js/saveArrayToCSV",
+		"JSFunction../src/HTMLLogic.js/ensureDirectoryExists",
+		"JSFunction../src/HTMLLogic.js/findMainGroupName"
+	],
+	"positions": [
+		{
+			"uniqueKey": "File../src/Global.js",
+			"x": -833.43,
+			"y": 28.46
+		},
+		{
+			"uniqueKey": "File../src/HTMLLogic.js",
+			"x": -524.66,
+			"y": 46.57
+		},
+		{
+			"uniqueKey": "JSFunction../src/HTMLLogic.js/ensureDirectoryExists",
+			"x": -370.32,
+			"y": 66.22
+		},
+		{
+			"uniqueKey": "JSFunction../src/HTMLLogic.js/saveArrayToCSV",
+			"x": -385,
+			"y": -22
+		},
+		{
+			"uniqueKey": "JSFunction../src/HTMLLogic.js/countCalls",
+			"x": -525,
+			"y": -21
+		},
+		{
+			"uniqueKey": "JSFunction../src/HTMLLogic.js/countAccesses",
+			"x": -632,
+			"y": -15
+		},
+		{
+			"uniqueKey": "JSFunction../src/HTMLLogic.js/findMainGroupName",
+			"x": -455.27,
+			"y": 114.4
+		},
+		{
+			"uniqueKey": "JSFunction../src/HTMLLogic.js/ExportModelInformation",
+			"x": -494,
+			"y": -112
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/fileHandle",
+			"x": -860,
+			"y": 121
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/workDirectoryHandle",
+			"x": -860,
+			"y": -119
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/modelElementsByIndex",
+			"x": -860,
+			"y": -59
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/parentChildByChild",
+			"x": -858,
+			"y": 184
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/callByCalled",
+			"x": -860,
+			"y": 1
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/accessByAccessed",
+			"x": -860,
+			"y": 61
+		}
+	],
+	"comments": [
+		{
+			"uniqueKey": "JSFunction../src/HTMLLogic.js/ExportModelInformation",
+			"x": -549,
+			"y": -217,
+			"text": "Is called from menu"
+		}
+	],
+	"pinned": [
+		"JSFunction../src/HTMLLogic.js/ExportModelInformation",
+		"JSVariable../src/Global.js/workDirectoryHandle",
+		"JSVariable../src/Global.js/callByCalled",
+		"JSVariable../src/Global.js/accessByAccessed",
+		"JSVariable../src/Global.js/fileHandle",
+		"JSFunction../src/HTMLLogic.js/SetWorkFolder",
+		"JSFunction../src/HTMLLogic.js/countCalls",
+		"JSFunction../src/HTMLLogic.js/saveArrayToCSV",
+		"JSFunction../src/HTMLLogic.js/ensureDirectoryExists",
+		"JSFunction../src/HTMLLogic.js/findMainGroupName",
+		"JSVariable../src/Global.js/parentChildByChild"
+	],
+	"suppressed": []
+}
