@@ -111,7 +111,7 @@ function drawModelExplorer() {
     yPosElements += lineDifference;
     ctx.fillText('Use the mouse wheel to scroll', xPosElements, yPosElements);
     yPosElements += lineDifference;
-    ctx.fillText('Left click to add or remove an element to active diagram. Context click for further topics.', xPosElements, yPosElements);
+    ctx.fillText('Left click and press A or R to Add or Remove an element to active diagram. Context click for further topics.', xPosElements, yPosElements);
     yPosElements += lineDifference;
     // Add empty line between explanation and model elements
     yPosElements += lineDifference;
