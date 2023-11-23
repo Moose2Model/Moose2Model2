@@ -52,9 +52,6 @@ function filterModel() {
 
     filteredModel = unFilteredModel.filter(filterModelText);
 
-    // exploreModelFilter.value contains the filter string
-
-
 }
 
 function compareModel(a, b) {
@@ -113,6 +110,8 @@ function drawModelExplorer() {
     ctx.fillText('Use regular expressions to filter in the list', xPosElements, yPosElements);
     yPosElements += lineDifference;
     ctx.fillText('Use the mouse wheel to scroll', xPosElements, yPosElements);
+    yPosElements += lineDifference;
+    ctx.fillText('Left click to add or remove an element to active diagram. Context click for further topics.', xPosElements, yPosElements);
     yPosElements += lineDifference;
     // Add empty line between explanation and model elements
     yPosElements += lineDifference;

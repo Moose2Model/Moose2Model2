@@ -311,11 +311,13 @@ function ContextMenuClicked(e) {
   } else if (this.outerText == 'Make this diagram active') {
     setDiagramActive(diagramInfos.displayedDiagram);
   } else if (this.outerText == 'Add element with all neighbors' || this.outerText == 'Displayed <> Active: Add element with all neighbors') {
+    // Duplicate Coding in ContextMenu.js and Click.js
     resetRepositionRequired();
     addWithNeighbors(gMCElementContextHandled, true);
     doRepositioningOfRequired();
     activeDiagramChanged();
   } else if (this.outerText == 'Remove: Add element with all neighbors' || this.outerText == 'Displayed <> Active: Remove: Add element with all neighbors') {
+    // Duplicate Coding in ContextMenu.js and Click.js
     redoAddWithNeighbors(gMCElementContextHandled);
     activeDiagramChanged();
   } else if (this.outerText == 'Comment' || this.outerText == 'Displayed <> Active: Comment') {
