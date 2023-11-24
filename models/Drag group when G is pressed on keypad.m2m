@@ -1,0 +1,108 @@
+{
+	"newElementBox": {
+		"isInitial": false,
+		"newElBoxX": 214.37109375,
+		"newElBoxY": -214,
+		"newElBoxWidth": 400,
+		"newElBoxHeight": 708
+	},
+	"addedWithNeighbors": [
+		"JSVariable../src/Global.js/isGKeyPressed",
+		"JSFunction../src/Global.js/findNearestElement"
+	],
+	"positions": [
+		{
+			"uniqueKey": "File../src/ContextMenu.js",
+			"x": 209.31,
+			"y": 114.91
+		},
+		{
+			"uniqueKey": "File../src/Diagrams.js",
+			"x": -615.69,
+			"y": 482.91
+		},
+		{
+			"uniqueKey": "File../src/Drag.js",
+			"x": 309.31,
+			"y": 114.91
+		},
+		{
+			"uniqueKey": "File../src/Drawing.js",
+			"x": -467.69,
+			"y": 422.91
+		},
+		{
+			"uniqueKey": "File../src/Global.js",
+			"x": -290.69,
+			"y": 80.91
+		},
+		{
+			"uniqueKey": "Code../src/Global.js/code",
+			"x": -320,
+			"y": 46
+		},
+		{
+			"uniqueKey": "JSFunction../src/Global.js/findNearestElement",
+			"x": -187,
+			"y": 184
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/snapToGrid",
+			"x": -252.32,
+			"y": 383
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drawing.js/isInBox",
+			"x": -181.96,
+			"y": 383
+		},
+		{
+			"uniqueKey": "JSFunction../src/ContextMenu.js/handleContextMenu",
+			"x": -169.48,
+			"y": -93.12
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drag.js/handleDragMouseDown",
+			"x": 40.29,
+			"y": -98.78
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/modelElementsByIndex",
+			"x": -220,
+			"y": 306
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/isGKeyPressed",
+			"x": -320,
+			"y": 126
+		},
+		{
+			"uniqueKey": "JSVariable../src/Diagrams.js/bulletPointDiagramType",
+			"x": -565,
+			"y": 313
+		},
+		{
+			"uniqueKey": "JSVariable../src/Diagrams.js/circuitDiagramForSoftwareDiagramType",
+			"x": -745,
+			"y": 313
+		},
+		{
+			"uniqueKey": "JSVariable../src/Diagrams.js/diagramms",
+			"x": -825,
+			"y": 373
+		},
+		{
+			"uniqueKey": "JSVariable../src/Diagrams.js/diagramInfos",
+			"x": -745,
+			"y": 373
+		}
+	],
+	"comments": [],
+	"pinned": [
+		"Code../src/Global.js/code",
+		"JSFunction../src/Global.js/findNearestElement",
+		"JSFunction../src/ContextMenu.js/handleContextMenu",
+		"JSFunction../src/Drag.js/handleDragMouseDown"
+	],
+	"suppressed": []
+}

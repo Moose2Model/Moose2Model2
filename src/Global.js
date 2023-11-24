@@ -137,6 +137,22 @@ function resizeCanvas() {
     canvas.height = g_height;
 }
 
+// Globale Variable, um den Zustand der Taste "G" zu speichern
+let isGKeyPressed = false;
+
+// Event-Listener, um den Zustand der Taste "G" zu aktualisieren
+document.addEventListener("keydown", function (event) {
+    if (event.key === "g" || event.key === "G") {
+        isGKeyPressed = true;
+    }
+});
+
+document.addEventListener("keyup", function (event) {
+    if (event.key === "g" || event.key === "G") {
+        isGKeyPressed = false;
+    }
+});
+
 function findNearestElement(x, y, maxDistance) {
     let minDistanceSquared = -1;
     let minIndex = 0;
@@ -210,6 +226,11 @@ function findNearestElement(x, y, maxDistance) {
                 }
             }
         }
+    }
+
+    if (isGKeyPressed && foundGroup != 0) {
+        found.element = modelElementsByIndex[foundGroup];
+        return found;
     }
 
     if (foundComment != 0) {
