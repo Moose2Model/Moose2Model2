@@ -201,6 +201,7 @@ function handleContextMenu(e) {
         }
         m.push('Pin All');
         m.push('Unpin All');
+        m.push('Compact Layout');
       }
     }
     if (linkToEditorText != '') {
@@ -343,6 +344,9 @@ function ContextMenuClicked(e) {
   else if (this.outerText == 'Unpin All') {
     unPinAllElementsOfGrouping(gMCElementContextHandled.index);
   }
+  else if (this.outerText == 'Compact Layout') {
+    orderAllElementsOfGrouping(gMCElementContextHandled.index);
+  }
   else {
     // Scan for a name of another diagram
     for (const c of returnOtherDiagrams()) {
@@ -383,6 +387,62 @@ function unPinAllElementsOfGrouping(groupElementIndex) {
     }
   }
 }
+
+function orderAllElementsOfGrouping(groupElementIndex) {
+  const elementsToOrder = parentChildByParent[groupElementIndex];
+
+  if (!elementsToOrder) return;
+
+  // Filter und sortieren Sie die sichtbaren Elemente
+  const visibleElements = elementsToOrder
+    .filter((c) => {
+      const element = diagramms[diagramInfos.displayedDiagram].complModelPosition[c.child];
+      return element && (element.visible === true || element.visible === undefined);
+    })
+    .sort((a, b) => {
+      const ax = diagramms[diagramInfos.displayedDiagram].complModelPosition[a.child].x;
+      const ay = diagramms[diagramInfos.displayedDiagram].complModelPosition[a.child].y;
+      const bx = diagramms[diagramInfos.displayedDiagram].complModelPosition[b.child].x;
+      const by = diagramms[diagramInfos.displayedDiagram].complModelPosition[b.child].y;
+
+      if (ay === by) {
+        return ax - bx;
+      }
+
+      return ay - by;
+    });
+
+  // Berechnen Sie die maximale Anzahl von Elementen in einer Zeile
+  const maxElementsPerRow = Math.ceil(Math.sqrt(visibleElements.length));
+
+  // Set initial positions
+  let currentX = diagramms[diagramInfos.displayedDiagram].complModelPosition[visibleElements[0].child].x;
+  let currentXStart = currentX;
+  let currentY = diagramms[diagramInfos.displayedDiagram].complModelPosition[visibleElements[0].child].y;
+
+  for (let i = 0; i < visibleElements.length; i++) {
+    const childIndex = visibleElements[i].child;
+    const element = diagramms[diagramInfos.displayedDiagram].complModelPosition[childIndex];
+    const { boxX1, boxX2, boxY1, boxY2 } = element;
+
+    // Check if the current row exceeds the maximum elements per row
+    if (i > 0 && i % maxElementsPerRow === 0) {
+      // Start a new row
+      currentX = currentXStart;
+      currentY += 2* (boxY2 - boxY1) + 10;
+    }
+
+    // Place the element
+    element.x = currentX + ((boxX2 - boxX1) / 2) + 30;
+    element.y = currentY;
+
+    // Update the current X position
+    currentX += boxX2 - boxX1 + 20;
+  }
+}
+
+
+
 
 /**React on clicks in Menu */
 /* $('#contextMenu').on('click', 'li', function (e) {
