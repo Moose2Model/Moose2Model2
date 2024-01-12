@@ -40,8 +40,8 @@
 		},
 		{
 			"uniqueKey": "File../src/Global.js",
-			"x": -1117.86,
-			"y": -238.29
+			"x": -1222.97,
+			"y": -233.24
 		},
 		{
 			"uniqueKey": "File../src/HTMLLogic.js",
@@ -135,58 +135,58 @@
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/modelElementsByIndex",
-			"x": -935,
-			"y": -168
+			"x": -819.89,
+			"y": -224.02
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/parentChildByParent",
-			"x": -932,
-			"y": -213
+			"x": -959.89,
+			"y": -224.02
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/callByCaller",
-			"x": -1073,
-			"y": -222
+			"x": -1059.89,
+			"y": -224.02
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/accessByAccessor",
-			"x": -1081,
-			"y": -160
+			"x": -679.89,
+			"y": -224.02
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/ctx",
-			"x": -832,
-			"y": -60
+			"x": -959.89,
+			"y": -144.02
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/requestAnimationFrame",
-			"x": -732,
-			"y": -60
+			"x": -859.89,
+			"y": -144.02
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/showModelExplorer",
-			"x": -632,
-			"y": -60
+			"x": -1039.89,
+			"y": -144.02
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/showM2mExplorer",
-			"x": -532,
-			"y": -60
+			"x": -719.89,
+			"y": -144.02
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/showExplorer",
-			"x": -432,
-			"y": -60
+			"x": -1059.89,
+			"y": -84.02
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/g_width",
-			"x": -332,
-			"y": -60
+			"x": -979.89,
+			"y": -84.02
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/g_height",
-			"x": -232,
-			"y": -60
+			"x": -919.89,
+			"y": -84.02
 		},
 		{
 			"uniqueKey": "JSVariable../src/ForceDirecting.js/scale",
@@ -280,7 +280,9 @@
 		"JSFunction../src/Drawing.js/drawWhenForceDirectRequires",
 		"JSFunction../src/Drawing.js/drawCompleteModel",
 		"JSFunction../src/ForceDirecting.js/spring",
-		"JSFunction../src/ForceDirecting.js/repulsion"
+		"JSFunction../src/ForceDirecting.js/repulsion",
+		"JSVariable../src/Global.js/showModelExplorer",
+		"JSVariable../src/Global.js/g_height"
 	],
 	"suppressed": []
 }
