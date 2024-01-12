@@ -1,0 +1,61 @@
+{
+	"newElementBox": {
+		"isInitial": false,
+		"newElBoxX": 245.365234375,
+		"newElBoxY": -174,
+		"newElBoxWidth": 400,
+		"newElBoxHeight": 428
+	},
+	"addedWithNeighbors": [
+		"JSFunction../src/ContextMenu.js/orderAllElementsOfGrouping"
+	],
+	"positions": [
+		{
+			"uniqueKey": "File../src/ContextMenu.js",
+			"x": 0.36,
+			"y": 81.53
+		},
+		{
+			"uniqueKey": "File../src/Diagrams.js",
+			"x": 99.49,
+			"y": 57.6
+		},
+		{
+			"uniqueKey": "File../src/Global.js",
+			"x": 3.13,
+			"y": 70.53
+		},
+		{
+			"uniqueKey": "JSFunction../src/ContextMenu.js/ContextMenuClicked",
+			"x": -67.77,
+			"y": 67.07
+		},
+		{
+			"uniqueKey": "JSFunction../src/ContextMenu.js/orderAllElementsOfGrouping",
+			"x": 27.94,
+			"y": 137.71
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/parentChildByParent",
+			"x": 166.92,
+			"y": 15.72
+		},
+		{
+			"uniqueKey": "JSVariable../src/Diagrams.js/diagramms",
+			"x": -38.83,
+			"y": -54.76
+		},
+		{
+			"uniqueKey": "JSVariable../src/Diagrams.js/diagramInfos",
+			"x": 62.58,
+			"y": -50.8
+		}
+	],
+	"comments": [],
+	"pinned": [
+		"JSVariable../src/Diagrams.js/diagramms",
+		"JSFunction../src/ContextMenu.js/ContextMenuClicked",
+		"JSFunction../src/ContextMenu.js/orderAllElementsOfGrouping"
+	],
+	"suppressed": []
+}

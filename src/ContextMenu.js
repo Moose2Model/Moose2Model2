@@ -346,6 +346,7 @@ function ContextMenuClicked(e) {
   }
   else if (this.outerText == 'Compact Layout') {
     orderAllElementsOfGrouping(gMCElementContextHandled.index);
+    displayedDiagramChanged();
   }
   else {
     // Scan for a name of another diagram

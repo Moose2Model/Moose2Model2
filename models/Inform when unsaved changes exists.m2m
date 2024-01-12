@@ -1,0 +1,99 @@
+{
+	"newElementBox": {
+		"isInitial": false,
+		"newElBoxX": 342.3779296875,
+		"newElBoxY": -414,
+		"newElBoxWidth": 400,
+		"newElBoxHeight": 548
+	},
+	"addedWithNeighbors": [
+		"JSFunction../src/Diagrams.js/activeDiagramChanged",
+		"JSFunction../src/Diagrams.js/displayedDiagramChanged"
+	],
+	"positions": [
+		{
+			"uniqueKey": "File../src/Click.js",
+			"x": 39.66,
+			"y": 87.35
+		},
+		{
+			"uniqueKey": "File../src/ContextMenu.js",
+			"x": 29.9,
+			"y": 19.34
+		},
+		{
+			"uniqueKey": "File../src/Diagrams.js",
+			"x": -355.82,
+			"y": -121.75
+		},
+		{
+			"uniqueKey": "File../src/Drag.js",
+			"x": 176.6,
+			"y": 187.35
+		},
+		{
+			"uniqueKey": "File../src/HTMLLogic.js",
+			"x": -10.4,
+			"y": -88.05
+		},
+		{
+			"uniqueKey": "JSFunction../src/Diagrams.js/activeDiagramChanged",
+			"x": -296,
+			"y": -71
+		},
+		{
+			"uniqueKey": "JSFunction../src/Diagrams.js/displayedDiagramChanged",
+			"x": -135,
+			"y": -78
+		},
+		{
+			"uniqueKey": "JSFunction../src/Diagrams.js/diagramNameWithChangeMark",
+			"x": -242,
+			"y": 26
+		},
+		{
+			"uniqueKey": "JSFunction../src/ContextMenu.js/ContextMenuClicked",
+			"x": -144.63,
+			"y": -292.42
+		},
+		{
+			"uniqueKey": "JSFunction../src/Drag.js/handleDragMouseMove",
+			"x": -462.77,
+			"y": -285.65
+		},
+		{
+			"uniqueKey": "JSFunction../src/Click.js/handleMouseClick",
+			"x": -307.02,
+			"y": -277.35
+		},
+		{
+			"uniqueKey": "JSVariable../src/Diagrams.js/diagramms",
+			"x": -456,
+			"y": -71
+		},
+		{
+			"uniqueKey": "JSVariable../src/Diagrams.js/diagramInfos",
+			"x": -416,
+			"y": -131
+		},
+		{
+			"uniqueKey": "JSVariable../src/HTMLLogic.js/displayedDiagramText",
+			"x": 73,
+			"y": -256
+		},
+		{
+			"uniqueKey": "JSVariable../src/HTMLLogic.js/activeDiagramText",
+			"x": 193,
+			"y": -256
+		}
+	],
+	"comments": [],
+	"pinned": [
+		"JSFunction../src/Drag.js/handleDragMouseMove",
+		"JSFunction../src/Click.js/handleMouseClick",
+		"JSFunction../src/ContextMenu.js/ContextMenuClicked",
+		"JSFunction../src/Diagrams.js/displayedDiagramChanged",
+		"JSFunction../src/Diagrams.js/diagramNameWithChangeMark"
+	],
+	"suppressed": []
+}
