@@ -1,7 +1,4 @@
 'use strict';
-/**
- * Analyzes the code in files.
- */
 
 const nameOfFileLogic = 'code';
 
@@ -47,17 +44,6 @@ function javaScriptFindGlobal6(indexHTML, indexModel, codeParts) {
 
 
         // Begin test line number determination
-
-        /*          // Create a second regular expression to extract tokens without multiline comments but keep newline characters
-                 let noMultilineCommentsPattern = /\/\*[\s\S]*?\*\/|\/\/.*?(\r?\n|$)/gm;
-                 let cleanedCode = codePart.code.replace(noMultilineCommentsPattern, match => {
-                   return match.includes('\n') ? match : '\n'; // Replace multiline comments with newline characters
-                 });
-                 
-                 // Tokenize the cleaned code
-                 let cleanedTokens = cleanedCode.match(/\S+/g);
-        
-                 let line = 1; */
 
         let line = 1;
 
@@ -346,6 +332,19 @@ function parseHTML(html) {
   return doc;
 }
 
+function getFilePath() {
+  // Check if the user has already been prompted
+  if (!isFilePathSet) {
+      // Prompt the user to enter the path
+      userFilePath = prompt("Please enter the path to your JavaScript source code folder:", "");
+
+      // Set the flag to true indicating the user has been prompted
+      isFilePathSet = true;
+  }
+
+  // Return the file path
+  return userFilePath;
+}  
 
 function convertToVscodeLink(input) {
   // Split the input string by '?' to separate the path and query parameters
@@ -358,6 +357,18 @@ function convertToVscodeLink(input) {
   const vscodeLink = `vscode://file/${filePath}`;
 
   return vscodeLink;
+}
+
+function formatPathForVSCodeURL(path) {
+  // Replace backslashes with forward slashes
+  let formattedPath = path.replace(/\\/g, '/');
+
+  // Ensure there's a trailing slash
+  if (!formattedPath.endsWith('/')) {
+      formattedPath += '/';
+  }
+
+  return formattedPath;
 }
 
 async function AnalyzeFileAndFolder() {
@@ -654,12 +665,17 @@ async function AnalyzeFileAndFolder() {
           if (Array.isArray(scriptElementIs)) {
             await Promise.all(scriptElementIs.map(async (scriptElementI) => {
 
-              const filePath = scriptElementI.scriptElement.src;
+              // Get the name of the script file, there may be still artefacts from the browser in the name
+              const sriptName = scriptElementI.scriptElement.src;
 
-              const urlToVSCode = convertToVscodeLink(filePath);
+              let sourceCodeFolderPath = getFilePath(); // Get the file path from the user to the source code folder
+
+              sourceCodeFolderPath = formatPathForVSCodeURL(sourceCodeFolderPath);
+
+              const urlToVSCode = convertToVscodeLink(sourceCodeFolderPath+sriptName);
 
               // Remove the 'file://' protocol from the filePath
-              const pathWithoutProtocol = filePath.replace(/^file:\/\//, '');
+              const pathWithoutProtocol = sriptName.replace(/^file:\/\//, '');
 
               // Remove the query parameter from the path
               const pathWithoutQuery = pathWithoutProtocol.split('?')[0];

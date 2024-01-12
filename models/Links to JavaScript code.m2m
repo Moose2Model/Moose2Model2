@@ -1,0 +1,72 @@
+{
+	"newElementBox": {
+		"isInitial": false,
+		"newElBoxX": 140.3504890971346,
+		"newElBoxY": -432.4,
+		"newElBoxWidth": 400,
+		"newElBoxHeight": 586.4
+	},
+	"addedWithNeighbors": [
+		"JSFunction../src/ExtractCodeFromFiles.js/convertToVscodeLink",
+		"JSFunction../src/ExtractCodeFromFiles.js/getFilePath",
+		"JSFunction../src/ExtractCodeFromFiles.js/formatPathForVSCodeURL"
+	],
+	"positions": [
+		{
+			"uniqueKey": "File../src/ExtractCodeFromFiles.js",
+			"x": -93.74,
+			"y": -0.47
+		},
+		{
+			"uniqueKey": "File../src/Global.js",
+			"x": 158.28,
+			"y": 62.14
+		},
+		{
+			"uniqueKey": "JSFunction../src/ExtractCodeFromFiles.js/getFilePath",
+			"x": 1.43,
+			"y": -99
+		},
+		{
+			"uniqueKey": "JSFunction../src/ExtractCodeFromFiles.js/convertToVscodeLink",
+			"x": -170.88,
+			"y": 43.18
+		},
+		{
+			"uniqueKey": "JSFunction../src/ExtractCodeFromFiles.js/formatPathForVSCodeURL",
+			"x": 3.89,
+			"y": -10.77
+		},
+		{
+			"uniqueKey": "JSFunction../src/ExtractCodeFromFiles.js/AnalyzeFileAndFolder",
+			"x": -167.52,
+			"y": -164.27
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/userFilePath",
+			"x": 238.5,
+			"y": -190
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/isFilePathSet",
+			"x": 232.25,
+			"y": -143.41
+		}
+	],
+	"comments": [
+		{
+			"uniqueKey": "JSFunction../src/ExtractCodeFromFiles.js/getFilePath",
+			"x": -71.34,
+			"y": -328.95,
+			"text": "The user has to enter a file path to the\nsource folder of the JavaScript files\nbecause the File System AP nor the\nbrowser provider absolute paths."
+		}
+	],
+	"pinned": [
+		"JSFunction../src/ExtractCodeFromFiles.js/AnalyzeFileAndFolder",
+		"JSFunction../src/ExtractCodeFromFiles.js/convertToVscodeLink",
+		"JSFunction../src/ExtractCodeFromFiles.js/getFilePath",
+		"JSFunction../src/ExtractCodeFromFiles.js/formatPathForVSCodeURL",
+		"JSVariable../src/Global.js/isFilePathSet"
+	],
+	"suppressed": []
+}

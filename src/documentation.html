@@ -78,16 +78,14 @@
             <h3>Generate a SOMIX model from files in a local folder</h3>
             It is possible to analyze folders in the local file system:
             <li>Extract a model where files are date and folders are groupings. Choose Model -> Extract File System to
-                SOMIX
-                model (w/o .git). A pop up opens where you specify a local folder on
-                your computer.
-                Content in .git folders is ignored. This is in most cases helfull when git is used. Git stores many
-                files which
-                are normally not of interest.</li>
+                SOMIX model (w/o .git). A pop up opens where you specify a local folder on
+                your computer. Therafter it is prompted to specify a folder to the source of the JavaScript code. This is required because it is not 
+                possible to determine the source folder from within a browser.
+                Content in .git folders is ignored. This is in most cases helpfull when git is used. Git stores many
+                files which are normally not of interest.</li>
             <li>Extract a model of the code in files. This is currently in development. Extract Code from File System to
-                SOMIX
-                model (w/o .git). A pop up opens where you specify a local folder on
-                your computer.
+                SOMIX model (w/o .git). A pop up opens where you specify a local folder on your computer.
+
                 Content in .git folders is ignored. This is in most cases helfull when git is used. Git stores many
                 files which
                 are normally not of interest.</li>
@@ -181,14 +179,14 @@
                         <li>Redo supressing an element with all children</li>
                         <li>Jump to code with when a link is contained in the model (For SAP: adt links have to be
                             activated for
-                            Eclipse. For JavaScript: This works currently only when the tool is called from file and
-                            not from the Web. The jump may go to the correct line or higher. This is due to a not
+                            Eclipse. For JavaScript: This works currently only when the user adds the paths to the source folder when prompted. 
+                            The jump may go to the correct line or higher. This is due to a not
                             exact implementation of the logic to determine the line number.)</li>
                         <li>Remove pinning of recently dragged elements</li>
                         <li>Highlight elements or the using or used elements</li>
                     </ul>
                 </li>
-                <li>Context click on a grouping - It is also possible to:</li>
+                <li>Context click on a grouping - It is also possible to:</li>?v=67C:\DataEigen\Moose2Model2\src
                 <ul>
                     <li>Press G to force that the grouping is selected</li>
                     <li>Pin all elements of this grouping</li>

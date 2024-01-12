@@ -100,6 +100,10 @@ let showModelExplorer = false;
 let showM2mExplorer = false;
 let showExplorer = false;
 
+// For VS Code links
+var userFilePath = null; // To store the file path
+var isFilePathSet = false; // Flag to check if the user has already been prompted
+
 
 
 // To support mouse event handling
