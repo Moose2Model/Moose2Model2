@@ -1422,9 +1422,17 @@ function draw(always = true) {
 
         if (typeof diagramms[diagramInfos.displayedDiagram] !== 'undefined') {
             if (diagramms[diagramInfos.displayedDiagram].forceFeedback) {
-                redraw = forceDirecting(width, height);
-                let loadModelText = document.getElementById("InfoID");
-                loadModelText.innerHTML = "Force-Directing is active";
+                if (diagramms[diagramInfos.displayedDiagram].diagramType != circuitDiagramForSoftwareDiagramType) {
+                    redraw = forceDirecting(width, height);
+                    // Inform user
+                    let loadModelText = document.getElementById("InfoID");
+                    loadModelText.innerHTML = "Force-Directing is active";
+                } else {
+                    redraw = autoLayout(width, height);
+                    // Inform user
+                    let loadModelText = document.getElementById("InfoID");
+                    loadModelText.innerHTML = "Auto-Layout is active";
+                }
             } else {
                 let loadModelText = document.getElementById("InfoID");
                 loadModelText.innerHTML = "";

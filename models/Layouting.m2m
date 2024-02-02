@@ -10,13 +10,19 @@
 		"JSFunction../src/ForceDirecting.js/forceDirecting",
 		"JSFunction../src/Drawing.js/draw",
 		"JSFunction../src/ForceDirecting.js/spring",
-		"JSFunction../src/ForceDirecting.js/repulsion"
+		"JSFunction../src/ForceDirecting.js/repulsion",
+		"JSFunction../src/AutoLayout.js/autoLayout"
 	],
 	"positions": [
 		{
+			"uniqueKey": "File../src/AutoLayout.js",
+			"x": 310.39,
+			"y": -407.28
+		},
+		{
 			"uniqueKey": "File../src/Diagrams.js",
-			"x": -119.95,
-			"y": -62.67
+			"x": 504.84,
+			"y": -123.21
 		},
 		{
 			"uniqueKey": "File../src/Drag.js",
@@ -87,6 +93,11 @@
 			"uniqueKey": "JSFunction../src/ForceDirecting.js/forceDirecting",
 			"x": -544.85,
 			"y": 55.56
+		},
+		{
+			"uniqueKey": "JSFunction../src/AutoLayout.js/autoLayout",
+			"x": -117.76,
+			"y": 58.48
 		},
 		{
 			"uniqueKey": "JSFunction../src/ModelExplorer.js/drawModelExplorer",
@@ -199,24 +210,29 @@
 			"y": 175.56
 		},
 		{
+			"uniqueKey": "JSVariable../src/ForceDirecting.js/maxForceIndex",
+			"x": -312.86,
+			"y": 243.3
+		},
+		{
 			"uniqueKey": "JSVariable../src/ForceDirecting.js/maxTimeForceDirectMs",
 			"x": -504.85,
 			"y": 175.56
 		},
 		{
 			"uniqueKey": "JSVariable../src/Diagrams.js/circuitDiagramForSoftwareDiagramType",
-			"x": -206.66,
-			"y": 81.52
+			"x": 424.79,
+			"y": 19.46
 		},
 		{
 			"uniqueKey": "JSVariable../src/Diagrams.js/diagramms",
-			"x": -206.66,
-			"y": 141.52
+			"x": 424.79,
+			"y": 79.46
 		},
 		{
 			"uniqueKey": "JSVariable../src/Diagrams.js/diagramInfos",
-			"x": -206.66,
-			"y": 21.52
+			"x": 424.79,
+			"y": -40.54
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drag.js/isDragging",
@@ -240,6 +256,12 @@
 		}
 	],
 	"comments": [
+		{
+			"uniqueKey": "JSFunction../src/AutoLayout.js/autoLayout",
+			"x": -67.76,
+			"y": 8.48,
+			"text": "Is used for diagrams instead of Force-Directing"
+		},
 		{
 			"uniqueKey": "JSFunction../src/ModelExplorer.js/drawModelExplorer",
 			"x": -1002.64,
@@ -282,7 +304,9 @@
 		"JSFunction../src/ForceDirecting.js/spring",
 		"JSFunction../src/ForceDirecting.js/repulsion",
 		"JSVariable../src/Global.js/showModelExplorer",
-		"JSVariable../src/Global.js/g_height"
+		"JSVariable../src/Global.js/g_height",
+		"JSVariable../src/ForceDirecting.js/maxForceIndex",
+		"JSFunction../src/AutoLayout.js/autoLayout"
 	],
 	"suppressed": []
 }

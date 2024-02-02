@@ -229,8 +229,11 @@ function handleContextMenu(e) {
       if (diagramms[diagramInfos.displayedDiagram].type != circuitDiagramForSoftwareType) {
         m.push('Toggle display of names');
       }
-      m.push('Start Force-directed graph', 'Stop Force-directed graph', 'Force-Direct for 0.5s');
-
+      if (diagramms[diagramInfos.displayedDiagram].diagramType != circuitDiagramForSoftwareDiagramType) {
+        m.push('Start Force-directed graph', 'Stop Force-directed graph', 'Force-Direct for 0.5s');
+      } else {
+        m.push('Start Auto-Layout', 'Stop Auto-Layout', 'Auto-Layout for 0.5s');
+      }
       let otherArrays = returnOtherDiagrams();
       for (const oA of otherArrays) {
         m.push(oA);
@@ -278,19 +281,19 @@ function handleContextMenu(e) {
 function ContextMenuClicked(e) {
 
   NewMenu.hidden = true;
-  if (this.outerText == 'Start Force-directed graph') {
+  if (this.outerText == 'Start Force-directed graph' || this.outerText == 'Start Auto-Layout') {
     if (typeof diagramms[diagramInfos.displayedDiagram] !== 'undefined') {
       diagramms[diagramInfos.displayedDiagram].forceFeedback = true;
       requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
       displayedDiagramChanged();
     }
-  } else if (this.outerText == 'Stop Force-directed graph') {
+  } else if (this.outerText == 'Stop Force-directed graph' || this.outerText == 'Stop Auto-Layout') {
     if (typeof diagramms[diagramInfos.displayedDiagram] !== 'undefined') {
       diagramms[diagramInfos.displayedDiagram].forceFeedback = false;
       window.cancelAnimationFrame(requestAnimationFrame);
     }
     // Start and Stop Force-directed graph after 0.5 seconds
-  } else if (this.outerText == 'Force-Direct for 0.5s') {
+  } else if (this.outerText == 'Force-Direct for 0.5s' || this.outerText == 'Auto-Layout for 0.5s') {
     diagramms[diagramInfos.displayedDiagram].forceFeedback = true;
     requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
     displayedDiagramChanged();
@@ -430,7 +433,7 @@ function orderAllElementsOfGrouping(groupElementIndex) {
     if (i > 0 && i % maxElementsPerRow === 0) {
       // Start a new row
       currentX = currentXStart;
-      currentY += 2* (boxY2 - boxY1) + 10;
+      currentY += 2 * (boxY2 - boxY1) + 10;
     }
 
     // Place the element

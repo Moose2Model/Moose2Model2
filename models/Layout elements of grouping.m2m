@@ -12,8 +12,8 @@
 	"positions": [
 		{
 			"uniqueKey": "File../src/ContextMenu.js",
-			"x": 0.36,
-			"y": 81.53
+			"x": -96.76,
+			"y": 105.92
 		},
 		{
 			"uniqueKey": "File../src/Diagrams.js",
@@ -27,13 +27,13 @@
 		},
 		{
 			"uniqueKey": "JSFunction../src/ContextMenu.js/ContextMenuClicked",
-			"x": -67.77,
-			"y": 67.07
+			"x": -77.12,
+			"y": 84.39
 		},
 		{
 			"uniqueKey": "JSFunction../src/ContextMenu.js/orderAllElementsOfGrouping",
-			"x": 27.94,
-			"y": 137.71
+			"x": 42.88,
+			"y": 144.39
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/parentChildByParent",
