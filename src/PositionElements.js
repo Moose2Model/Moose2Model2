@@ -79,14 +79,24 @@ function doRepositioningOfRequired() { // Reposition all elements which are requ
 
 
 function positionCircle(width, height) {
+
+    // Position all elements in a circle
+    // Is only called for all model elements after a 
+    // new SOMIX model has been loaded
+
     const offset = 20;
     // const w2 = Math.min(width, height);
     let nElements = 1;
     for (const mEBI of modelElementsByIndex) {
         nElements += 1;
     }
-
-    const w2 = 5 * diagramms[diagramInfos.displayedDiagram].forceDirectingState.springLength * Math.sqrt(nElements);
+    let w2 = 0;
+    if (diagramms[diagramInfos.displayedDiagram].diagramType != circuitDiagramForSoftwareDiagramType) {
+        w2 = 5 * diagramms[diagramInfos.displayedDiagram].layoutingState.springLength * Math.sqrt(nElements);
+    } else { // Stop processing and show an error message 
+        alert("The diagram type 'Circuit Diagram' is not supported for the positioning method 'Position in Circle'");
+        return;
+    }
     const w4 = w2 / 2 - offset;
 
     const dAngle = 2 * Math.PI / nElements;
@@ -163,7 +173,7 @@ function addWithNeighbors(element, highlight_new = false) {
     }
 
     // Switch Force-Directing off, so that new elements remain in the box where they have been placed
-    diagramms[diagramInfos.activeDiagram].forceFeedback = false;
+    diagramms[diagramInfos.activeDiagram].layoutingActive = false;
 
     let newElBoxX = diagramms[diagramInfos.activeDiagram].diagramSettings.newElementBox.newElBoxX;
     let newElBoxY = diagramms[diagramInfos.activeDiagram].diagramSettings.newElementBox.newElBoxY;

@@ -1,10 +1,10 @@
 {
 	"newElementBox": {
 		"isInitial": false,
-		"newElBoxX": 105.70024998064173,
+		"newElBoxX": 418.68478125201,
 		"newElBoxY": -614,
 		"newElBoxWidth": 400,
-		"newElBoxHeight": 978
+		"newElBoxHeight": 1188
 	},
 	"addedWithNeighbors": [
 		"JSFunction../src/ForceDirecting.js/forceDirecting",
@@ -16,13 +16,13 @@
 	"positions": [
 		{
 			"uniqueKey": "File../src/AutoLayout.js",
-			"x": 310.39,
-			"y": -407.28
+			"x": 296.12,
+			"y": -408.47
 		},
 		{
 			"uniqueKey": "File../src/Diagrams.js",
-			"x": 504.84,
-			"y": -123.21
+			"x": -175.61,
+			"y": 264.12
 		},
 		{
 			"uniqueKey": "File../src/Drag.js",
@@ -95,9 +95,19 @@
 			"y": 55.56
 		},
 		{
+			"uniqueKey": "JSFunction../src/AutoLayout.js/ALspring",
+			"x": -114.27,
+			"y": 238.81
+		},
+		{
+			"uniqueKey": "JSFunction../src/AutoLayout.js/ALrepulsion",
+			"x": -14.27,
+			"y": 238.81
+		},
+		{
 			"uniqueKey": "JSFunction../src/AutoLayout.js/autoLayout",
-			"x": -117.76,
-			"y": 58.48
+			"x": -134.27,
+			"y": 58.81
 		},
 		{
 			"uniqueKey": "JSFunction../src/ModelExplorer.js/drawModelExplorer",
@@ -125,9 +135,9 @@
 			"y": -352.24
 		},
 		{
-			"uniqueKey": "JSFunction../src/Drawing.js/drawWhenForceDirectRequires",
-			"x": -254.47,
-			"y": -341.63
+			"uniqueKey": "JSFunction../src/Drawing.js/drawWhenLayoutingRequires",
+			"x": 211.97,
+			"y": -301.32
 		},
 		{
 			"uniqueKey": "JSFunction../src/Drawing.js/draw",
@@ -211,8 +221,8 @@
 		},
 		{
 			"uniqueKey": "JSVariable../src/ForceDirecting.js/maxForceIndex",
-			"x": -312.86,
-			"y": 243.3
+			"x": -346.86,
+			"y": 186.3
 		},
 		{
 			"uniqueKey": "JSVariable../src/ForceDirecting.js/maxTimeForceDirectMs",
@@ -220,19 +230,39 @@
 			"y": 175.56
 		},
 		{
+			"uniqueKey": "JSVariable../src/AutoLayout.js/ALscale",
+			"x": -74.27,
+			"y": 158.81
+		},
+		{
+			"uniqueKey": "JSVariable../src/AutoLayout.js/ALoversizeGroups",
+			"x": 25.73,
+			"y": 178.81
+		},
+		{
+			"uniqueKey": "JSVariable../src/AutoLayout.js/ALmaxForceIndex",
+			"x": 254.59,
+			"y": 220.54
+		},
+		{
+			"uniqueKey": "JSVariable../src/AutoLayout.js/ALmaxTimeForceDirectMs",
+			"x": 185.73,
+			"y": 178.81
+		},
+		{
 			"uniqueKey": "JSVariable../src/Diagrams.js/circuitDiagramForSoftwareDiagramType",
-			"x": 424.79,
-			"y": 19.46
+			"x": -257.52,
+			"y": 400
 		},
 		{
 			"uniqueKey": "JSVariable../src/Diagrams.js/diagramms",
-			"x": 424.79,
-			"y": 79.46
+			"x": -257.52,
+			"y": 460
 		},
 		{
 			"uniqueKey": "JSVariable../src/Diagrams.js/diagramInfos",
-			"x": 424.79,
-			"y": -40.54
+			"x": -257.52,
+			"y": 340
 		},
 		{
 			"uniqueKey": "JSVariable../src/Drag.js/isDragging",
@@ -258,8 +288,8 @@
 	"comments": [
 		{
 			"uniqueKey": "JSFunction../src/AutoLayout.js/autoLayout",
-			"x": -67.76,
-			"y": 8.48,
+			"x": -74.27,
+			"y": -1.19,
 			"text": "Is used for diagrams instead of Force-Directing"
 		},
 		{
@@ -299,14 +329,20 @@
 		"JSFunction../src/ModelExplorer.js/drawModelExplorer",
 		"JSFunction../src/M2mExplorer.js/drawM2mExplorer",
 		"JSFunction../src/Drawing.js/drawAlways",
-		"JSFunction../src/Drawing.js/drawWhenForceDirectRequires",
 		"JSFunction../src/Drawing.js/drawCompleteModel",
 		"JSFunction../src/ForceDirecting.js/spring",
 		"JSFunction../src/ForceDirecting.js/repulsion",
 		"JSVariable../src/Global.js/showModelExplorer",
 		"JSVariable../src/Global.js/g_height",
 		"JSVariable../src/ForceDirecting.js/maxForceIndex",
-		"JSFunction../src/AutoLayout.js/autoLayout"
+		"JSFunction../src/AutoLayout.js/autoLayout",
+		"JSFunction../src/AutoLayout.js/ALspring",
+		"JSVariable../src/AutoLayout.js/ALscale",
+		"JSVariable../src/AutoLayout.js/ALoversizeGroups",
+		"JSVariable../src/AutoLayout.js/ALmaxTimeForceDirectMs",
+		"JSFunction../src/Drawing.js/drawWhenLayoutingRequires",
+		"JSFunction../src/AutoLayout.js/ALrepulsion",
+		"JSVariable../src/AutoLayout.js/ALmaxForceIndex"
 	],
 	"suppressed": []
 }

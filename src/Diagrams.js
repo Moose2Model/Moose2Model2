@@ -29,7 +29,7 @@ const circuitDiagramForSoftwareDiagramType = 'C';
 diagramms[diagramInfos.displayedDiagram].cameraSettings.move.x
 diagramms[diagramInfos.displayedDiagram].cameraSettings.move.y
 diagramms[diagramInfos.displayedDiagram].cameraSettings.zoomfactor
-* @member forceDirectingState see ForceDirection.js for content
+* @member layoutingState see ForceDirection.js and AutoLayout.js for content
 * @member generationInfoInternal An object with all information how a diagram is to be generated. This is the internal representation. It is not defined for the start diagram.
 diagramms[diagramInfos.displayedDiagram].generationInfoInternal.addedWithNeighbors - A list with all indizees of elements that are added with neighbors. Do not add indizees twice, check whether they exist before adding.
 diagramms[diagramInfos.displayedDiagram].generationInfoInternal.suppressed - A list with all elements that are suppressed with all children
@@ -58,10 +58,10 @@ function useStartDiagram() {
   diagramms[name].diagramSettings.displayNewElementBox = false;
   diagramms[name].diagramSettings.displayElementNames = false;
   diagramms[name].diagramSettings.displayArrows = false;
-  diagramms[name].forceFeedback = false;
+  diagramms[name].layoutingActive = false;
   diagramms[name].complModelPosition = [];
   diagramms[name].pinned = [];
-  diagramms[name].forceDirectingState = initialForceDirectingState;
+  diagramms[name].layoutingState = initialForceDirectingState;
 
   diagramms[diagramInfos.displayedDiagram].cameraSettings = {
     move: move,
@@ -91,10 +91,10 @@ function newDiagram(name) {
   };
   diagramms[name].diagramSettings.displayElementNames = true;
   diagramms[name].diagramSettings.displayArrows = true;
-  diagramms[name].forceFeedback = false;
+  diagramms[name].layoutingActive = false;
   diagramms[name].complModelPosition = [];
   diagramms[name].pinned = [];
-  diagramms[name].forceDirectingState = initialForceDirectingState;
+  diagramms[name].layoutingState = initialAutolayoutState;
 
   diagramms[name].cameraSettings = {
     move: move,

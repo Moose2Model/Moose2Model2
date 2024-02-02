@@ -25,9 +25,9 @@ function spring(x1, y1, x2, y2) {
     let dist = Math.sqrt(vect.x * vect.x + vect.y * vect.y);
     let force = {
         // x: vect.x * (dist - avgLen),
-        x: scale * vect.x * (dist - diagramms[diagramInfos.displayedDiagram].forceDirectingState.springLength / scale),
+        x: scale * vect.x * (dist - diagramms[diagramInfos.displayedDiagram].layoutingState.springLength / scale),
         // y: vect.y * (dist - avgLen)
-        y: scale * vect.y * (dist - diagramms[diagramInfos.displayedDiagram].forceDirectingState.springLength / scale)
+        y: scale * vect.y * (dist - diagramms[diagramInfos.displayedDiagram].layoutingState.springLength / scale)
     };
     return force;
 };
@@ -39,7 +39,7 @@ function repulsion(x1, y1, x2, y2) {
     };
     let dist = Math.sqrt(vect.x * vect.x + vect.y * vect.y);
     let fact = 1;
-    if (dist > diagramms[diagramInfos.displayedDiagram].forceDirectingState.maxRepulsionLength) {
+    if (dist > diagramms[diagramInfos.displayedDiagram].layoutingState.maxRepulsionLength) {
         fact = 0;
     } else if (dist < 0.1 * scale) {
         fact = 100;
@@ -73,11 +73,11 @@ function forceDirecting(width, height) {
         redraw = true;
         return redraw;
     }
-    if (diagramms[diagramInfos.displayedDiagram].forceDirectingState.previousLoop == -1 &&
-        diagramms[diagramInfos.displayedDiagram].forceDirectingState.previousLoopIndex == -1) {
-        diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew = [];
-        diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew2 = [];
-        diagramms[diagramInfos.displayedDiagram].forceDirectingState.elementsGrouped = [];
+    if (diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoop == -1 &&
+        diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoopIndex == -1) {
+        diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew = [];
+        diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew2 = [];
+        diagramms[diagramInfos.displayedDiagram].layoutingState.elementsGrouped = [];
 
         // for (const mEBI of modelElementsByIndex) {
         for (const mEBI of diagramms[diagramInfos.displayedDiagram].complModelPosition) {
@@ -91,21 +91,21 @@ function forceDirecting(width, height) {
                     x: 0,
                     y: 0,
                 };
-                diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[mEBI['index']] = position;
-                diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew2[mEBI['index']] = position;
+                diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew[mEBI['index']] = position;
+                diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew2[mEBI['index']] = position;
 
                 // The following is required to optimize the calculation of repulsions. Adjacent elements are grouped together
                 // The following appears to be the best way to implement the DIV operation in Javascript
                 // (https://stackoverflow.com/questions/4228356/how-to-perform-an-integer-division-and-separately-get-the-remainder-in-javascr)
-                let groupX = Math.floor(mEBI.x / (diagramms[diagramInfos.displayedDiagram].forceDirectingState.maxRepulsionLength + oversizeGroups));
-                let groupY = Math.floor(mEBI.y / (diagramms[diagramInfos.displayedDiagram].forceDirectingState.maxRepulsionLength + oversizeGroups));
-                if (typeof diagramms[diagramInfos.displayedDiagram].forceDirectingState.elementsGrouped[groupX] === 'undefined') {
-                    diagramms[diagramInfos.displayedDiagram].forceDirectingState.elementsGrouped[groupX] = [];
+                let groupX = Math.floor(mEBI.x / (diagramms[diagramInfos.displayedDiagram].layoutingState.maxRepulsionLength + oversizeGroups));
+                let groupY = Math.floor(mEBI.y / (diagramms[diagramInfos.displayedDiagram].layoutingState.maxRepulsionLength + oversizeGroups));
+                if (typeof diagramms[diagramInfos.displayedDiagram].layoutingState.elementsGrouped[groupX] === 'undefined') {
+                    diagramms[diagramInfos.displayedDiagram].layoutingState.elementsGrouped[groupX] = [];
                 }
-                if (typeof diagramms[diagramInfos.displayedDiagram].forceDirectingState.elementsGrouped[groupX][groupY] === 'undefined') {
-                    diagramms[diagramInfos.displayedDiagram].forceDirectingState.elementsGrouped[groupX][groupY] = [];
+                if (typeof diagramms[diagramInfos.displayedDiagram].layoutingState.elementsGrouped[groupX][groupY] === 'undefined') {
+                    diagramms[diagramInfos.displayedDiagram].layoutingState.elementsGrouped[groupX][groupY] = [];
                 }
-                diagramms[diagramInfos.displayedDiagram].forceDirectingState.elementsGrouped[groupX][groupY].push(mEBI);
+                diagramms[diagramInfos.displayedDiagram].layoutingState.elementsGrouped[groupX][groupY].push(mEBI);
             }
         }
     }
@@ -117,22 +117,22 @@ function forceDirecting(width, height) {
 
     let startTime = Date.now();
 
-    if (diagramms[diagramInfos.displayedDiagram].forceDirectingState.previousLoop == -1) {
-        diagramms[diagramInfos.displayedDiagram].forceDirectingState.previousLoop = 1;
-        diagramms[diagramInfos.displayedDiagram].forceDirectingState.previousLoopIndex = 1;
-    } else if (diagramms[diagramInfos.displayedDiagram].forceDirectingState.previousLoop > maxForceIndex) {
-        diagramms[diagramInfos.displayedDiagram].forceDirectingState.previousLoop = 1;
-        diagramms[diagramInfos.displayedDiagram].forceDirectingState.previousLoopIndex = 1;
+    if (diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoop == -1) {
+        diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoop = 1;
+        diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoopIndex = 1;
+    } else if (diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoop > maxForceIndex) {
+        diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoop = 1;
+        diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoopIndex = 1;
     }
     /** @deprecated */
     let loopCount = 0;
 
-    for (let i = diagramms[diagramInfos.displayedDiagram].forceDirectingState.previousLoop; i <= maxForceIndex; i++) {
+    for (let i = diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoop; i <= maxForceIndex; i++) {
         // i = 1: Forces due to spring foreces between parent and child elements
         if (diagramms[diagramInfos.displayedDiagram].diagramType != circuitDiagramForSoftwareDiagramType) {
             // Forces for parent child relations are not effective for Circuit diagrams
             if (i == 1) {
-                for (let j = diagramms[diagramInfos.displayedDiagram].forceDirectingState.previousLoopIndex; j < parentChildByParent.length; j++) {
+                for (let j = diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoopIndex; j < parentChildByParent.length; j++) {
                     let pCBP = parentChildByParent[j];
                     if (typeof pCBP !== 'undefined') {
                         for (const pC of pCBP) {
@@ -147,30 +147,30 @@ function forceDirecting(width, height) {
                                         diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['parent']].y,
                                         diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['child']].x,
                                         diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['child']].y);
-                                    diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[pC['parent']].x += step * pCForce.x;
-                                    diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[pC['parent']].y += step * pCForce.y;
-                                    diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[pC['child']].x -= step * pCForce.x;
-                                    diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[pC['child']].y -= step * pCForce.y;
+                                    diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew[pC['parent']].x += step * pCForce.x;
+                                    diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew[pC['parent']].y += step * pCForce.y;
+                                    diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew[pC['child']].x -= step * pCForce.x;
+                                    diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew[pC['child']].y -= step * pCForce.y;
 
                                 }
                             }
                         }
                     }
                     if ((Date.now() - startTime) > maxTimeForceDirectMs) {
-                        diagramms[diagramInfos.displayedDiagram].forceDirectingState.previousLoopIndex = j + 1;
-                        diagramms[diagramInfos.displayedDiagram].forceDirectingState.previousLoop = 1;
+                        diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoopIndex = j + 1;
+                        diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoop = 1;
                         redraw = false;
                         return redraw;
                     }
                 }
-                diagramms[diagramInfos.displayedDiagram].forceDirectingState.previousLoop = 2;
-                diagramms[diagramInfos.displayedDiagram].forceDirectingState.previousLoopIndex = 1;
+                diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoop = 2;
+                diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoopIndex = 1;
             }
         }
 
         if (i == 2) {
             // i=2: Forces due to spring forces between caller and called elements
-            for (let j = diagramms[diagramInfos.displayedDiagram].forceDirectingState.previousLoopIndex; j < callByCaller.length; j++) {
+            for (let j = diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoopIndex; j < callByCaller.length; j++) {
                 let cBC = callByCaller[j];
                 if (typeof cBC !== 'undefined') {
                     for (const cC of cBC) {
@@ -185,10 +185,10 @@ function forceDirecting(width, height) {
                                     diagramms[diagramInfos.displayedDiagram].complModelPosition[cC['caller']].y,
                                     diagramms[diagramInfos.displayedDiagram].complModelPosition[cC['called']].x,
                                     diagramms[diagramInfos.displayedDiagram].complModelPosition[cC['called']].y);
-                                diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[cC['caller']].x += step * cCForce.x;
-                                diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[cC['caller']].y += step * cCForce.y;
-                                diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[cC['called']].x -= step * cCForce.x;
-                                diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[cC['called']].y -= step * cCForce.y;
+                                diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew[cC['caller']].x += step * cCForce.x;
+                                diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew[cC['caller']].y += step * cCForce.y;
+                                diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew[cC['called']].x -= step * cCForce.x;
+                                diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew[cC['called']].y -= step * cCForce.y;
                             }
 
 
@@ -197,19 +197,19 @@ function forceDirecting(width, height) {
                     }
                 }
                 if ((Date.now() - startTime) > maxTimeForceDirectMs) {
-                    diagramms[diagramInfos.displayedDiagram].forceDirectingState.previousLoopIndex = j + 1;
-                    diagramms[diagramInfos.displayedDiagram].forceDirectingState.previousLoop = 2;
+                    diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoopIndex = j + 1;
+                    diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoop = 2;
                     redraw = false;
                     return redraw;
                 }
             }
-            diagramms[diagramInfos.displayedDiagram].forceDirectingState.previousLoop = 3;
-            diagramms[diagramInfos.displayedDiagram].forceDirectingState.previousLoopIndex = 1;
+            diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoop = 3;
+            diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoopIndex = 1;
         }
 
         if (i == 3) {
             // i=3: Forces due to spring forces between accessors and accessed elements
-            for (let j = diagramms[diagramInfos.displayedDiagram].forceDirectingState.previousLoopIndex; j < accessByAccessor.length; j++) {
+            for (let j = diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoopIndex; j < accessByAccessor.length; j++) {
                 let aBA = accessByAccessor[j];
                 if (typeof aBA !== 'undefined') {
                     for (const aA of aBA) {
@@ -223,10 +223,10 @@ function forceDirecting(width, height) {
                                     diagramms[diagramInfos.displayedDiagram].complModelPosition[aA['accessor']].y,
                                     diagramms[diagramInfos.displayedDiagram].complModelPosition[aA['accessed']].x,
                                     diagramms[diagramInfos.displayedDiagram].complModelPosition[aA['accessed']].y);
-                                diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[aA['accessor']].x += step * aAForce.x;
-                                diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[aA['accessor']].y += step * aAForce.y;
-                                diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[aA['accessed']].x -= step * aAForce.x;
-                                diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[aA['accessed']].y -= step * aAForce.y;
+                                diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew[aA['accessor']].x += step * aAForce.x;
+                                diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew[aA['accessor']].y += step * aAForce.y;
+                                diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew[aA['accessed']].x -= step * aAForce.x;
+                                diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew[aA['accessed']].y -= step * aAForce.y;
                             }
 
 
@@ -235,36 +235,36 @@ function forceDirecting(width, height) {
                     }
                 }
                 if ((Date.now() - startTime) > maxTimeForceDirectMs) {
-                    diagramms[diagramInfos.displayedDiagram].forceDirectingState.previousLoopIndex = j + 1;
-                    diagramms[diagramInfos.displayedDiagram].forceDirectingState.previousLoop = 3;
+                    diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoopIndex = j + 1;
+                    diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoop = 3;
                     redraw = false;
                     return redraw;
                 }
             }
-            diagramms[diagramInfos.displayedDiagram].forceDirectingState.previousLoop = 4;
-            diagramms[diagramInfos.displayedDiagram].forceDirectingState.previousLoopIndex = 1;
+            diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoop = 4;
+            diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoopIndex = 1;
         }
 
         if (i == 4) {
             // i=4: Forces due to repulsion between elements
 
-            // for (let j = diagramms[diagramInfos.displayedDiagram].forceDirectingState.previousLoopIndex; j < modelElementsByIndex.length; j++) {
+            // for (let j = diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoopIndex; j < modelElementsByIndex.length; j++) {
             //     let mEBI = modelElementsByIndex[j];
-            for (let j = diagramms[diagramInfos.displayedDiagram].forceDirectingState.previousLoopIndex; j < diagramms[diagramInfos.displayedDiagram].complModelPosition.length; j++) {
+            for (let j = diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoopIndex; j < diagramms[diagramInfos.displayedDiagram].complModelPosition.length; j++) {
                 let mEBI = diagramms[diagramInfos.displayedDiagram].complModelPosition[j];
                 if (typeof mEBI !== 'undefined') {
                     if (mEBI.visible) {
 
                         if (typeof diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']] !== 'undefined') {
 
-                            let groupX = Math.floor(mEBI.x / (diagramms[diagramInfos.displayedDiagram].forceDirectingState.maxRepulsionLength + oversizeGroups));
-                            let groupY = Math.floor(mEBI.y / (diagramms[diagramInfos.displayedDiagram].forceDirectingState.maxRepulsionLength + oversizeGroups));
+                            let groupX = Math.floor(mEBI.x / (diagramms[diagramInfos.displayedDiagram].layoutingState.maxRepulsionLength + oversizeGroups));
+                            let groupY = Math.floor(mEBI.y / (diagramms[diagramInfos.displayedDiagram].layoutingState.maxRepulsionLength + oversizeGroups));
 
                             for (let ix = groupX - 2; ix <= groupX + 2; ix++) {
                                 for (let iy = groupY - 2; iy <= groupY + 2; iy++) {
-                                    if (typeof diagramms[diagramInfos.displayedDiagram].forceDirectingState.elementsGrouped[ix] !== 'undefined') {
-                                        if (typeof diagramms[diagramInfos.displayedDiagram].forceDirectingState.elementsGrouped[ix][iy] !== 'undefined') {
-                                            for (const mEBI2 of diagramms[diagramInfos.displayedDiagram].forceDirectingState.elementsGrouped[ix][iy]) {
+                                    if (typeof diagramms[diagramInfos.displayedDiagram].layoutingState.elementsGrouped[ix] !== 'undefined') {
+                                        if (typeof diagramms[diagramInfos.displayedDiagram].layoutingState.elementsGrouped[ix][iy] !== 'undefined') {
+                                            for (const mEBI2 of diagramms[diagramInfos.displayedDiagram].layoutingState.elementsGrouped[ix][iy]) {
                                                 if (mEBI.index < mEBI2.index) {
                                                     let doIt = false;
                                                     if (diagramms[diagramInfos.displayedDiagram].diagramType == circuitDiagramForSoftwareDiagramType) {
@@ -283,10 +283,10 @@ function forceDirecting(width, height) {
                                                             diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI['index']].y,
                                                             diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI2['index']].x,
                                                             diagramms[diagramInfos.displayedDiagram].complModelPosition[mEBI2['index']].y);
-                                                        diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew2[mEBI['index']].x += step * eForce.x;
-                                                        diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew2[mEBI['index']].y += step * eForce.y;
-                                                        diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew2[mEBI2['index']].x -= step * eForce.x;
-                                                        diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew2[mEBI2['index']].y -= step * eForce.y;
+                                                        diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew2[mEBI['index']].x += step * eForce.x;
+                                                        diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew2[mEBI['index']].y += step * eForce.y;
+                                                        diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew2[mEBI2['index']].x -= step * eForce.x;
+                                                        diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew2[mEBI2['index']].y -= step * eForce.y;
                                                     }
                                                 }
                                             }
@@ -301,21 +301,21 @@ function forceDirecting(width, height) {
                 if ((Date.now() - startTime) > maxTimeForceDirectMs) {
                     // if (j + 1 < modelElementsByIndex.length) {
                     if (j + 1 < diagramms[diagramInfos.displayedDiagram].complModelPosition.length) {
-                        diagramms[diagramInfos.displayedDiagram].forceDirectingState.previousLoopIndex = j + 1;
-                        diagramms[diagramInfos.displayedDiagram].forceDirectingState.previousLoop = 4;
+                        diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoopIndex = j + 1;
+                        diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoop = 4;
                         redraw = false;
                         return redraw;
                     }
                     else {
                         // In rare cases the time limit was approached when the last loop pass occured
-                        diagramms[diagramInfos.displayedDiagram].forceDirectingState.previousLoop = -1;
-                        diagramms[diagramInfos.displayedDiagram].forceDirectingState.previousLoopIndex = -1;
+                        diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoop = -1;
+                        diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoopIndex = -1;
                     }
                 }
             }
         };
-        diagramms[diagramInfos.displayedDiagram].forceDirectingState.previousLoop = -1;
-        diagramms[diagramInfos.displayedDiagram].forceDirectingState.previousLoopIndex = -1;
+        diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoop = -1;
+        diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoopIndex = -1;
     }
 
     // Determine correction factor
@@ -332,28 +332,28 @@ function forceDirecting(width, height) {
                 if (isDragging && !backGroundDragged) {
                     if (draggedIndex == handledIndex) {
                         // Do not alter the position of currently dragged elements
-                        diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[mEBI['index']].x = 0;
-                        diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew2[mEBI['index']].x = 0;
-                        diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[mEBI['index']].y = 0;
-                        diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew2[mEBI['index']].y = 0;
+                        diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew[mEBI['index']].x = 0;
+                        diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew2[mEBI['index']].x = 0;
+                        diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew[mEBI['index']].y = 0;
+                        diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew2[mEBI['index']].y = 0;
                         continue;
                     }
                 }
 
                 if (diagramms[diagramInfos.displayedDiagram].pinned.indexOf(handledIndex) > -1) {
                     // Do not alter position of pinned elements
-                    diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[mEBI['index']].x = 0;
-                    diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew2[mEBI['index']].x = 0;
-                    diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[mEBI['index']].y = 0;
-                    diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew2[mEBI['index']].y = 0;
+                    diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew[mEBI['index']].x = 0;
+                    diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew2[mEBI['index']].x = 0;
+                    diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew[mEBI['index']].y = 0;
+                    diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew2[mEBI['index']].y = 0;
                     continue;
                 }
 
-                if (Math.abs(diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[mEBI['index']].x + diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew2[mEBI['index']].x) > maxDiff) {
-                    maxDiff = Math.abs(diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[mEBI['index']].x + diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew2[mEBI['index']].x);
+                if (Math.abs(diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew[mEBI['index']].x + diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew2[mEBI['index']].x) > maxDiff) {
+                    maxDiff = Math.abs(diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew[mEBI['index']].x + diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew2[mEBI['index']].x);
                 };
-                if (Math.abs(diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[mEBI['index']].y + diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew2[mEBI['index']].y) > maxDiff) {
-                    maxDiff = Math.abs(diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[mEBI['index']].y + diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew2[mEBI['index']].y);
+                if (Math.abs(diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew[mEBI['index']].y + diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew2[mEBI['index']].y) > maxDiff) {
+                    maxDiff = Math.abs(diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew[mEBI['index']].y + diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew2[mEBI['index']].y);
                 };
             }
         }
@@ -387,8 +387,8 @@ function forceDirecting(width, height) {
                 if (typeof diagramms[diagramInfos.displayedDiagram].complModelPosition[handledIndex] !== 'undefined') {
                     let position = {
                         index: handledIndex,
-                        x: corrFact * diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[handledIndex].x + corrFact * diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew2[handledIndex].x + diagramms[diagramInfos.displayedDiagram].complModelPosition[handledIndex].x,
-                        y: corrFact * diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew[handledIndex].y + corrFact * diagramms[diagramInfos.displayedDiagram].forceDirectingState.complModelPositionNew2[handledIndex].y + diagramms[diagramInfos.displayedDiagram].complModelPosition[handledIndex].y,
+                        x: corrFact * diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew[handledIndex].x + corrFact * diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew2[handledIndex].x + diagramms[diagramInfos.displayedDiagram].complModelPosition[handledIndex].x,
+                        y: corrFact * diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew[handledIndex].y + corrFact * diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew2[handledIndex].y + diagramms[diagramInfos.displayedDiagram].complModelPosition[handledIndex].y,
                     };
                     // Do not overwrite other fields of complModelPosition
                     diagramms[diagramInfos.displayedDiagram].complModelPosition[handledIndex].x = position.x;

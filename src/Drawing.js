@@ -1375,7 +1375,7 @@ function drawAlways() {
     draw(true)
 }
 
-function drawWhenForceDirectRequires() {
+function drawWhenLayoutingRequires() {
     draw(false)
 }
 
@@ -1396,7 +1396,7 @@ function draw(always = true) {
         // This is currently accepted.
 
         // if (typeof diagramms[diagramInfos.displayedDiagram] !== 'undefined') {
-        //     if (diagramms[diagramInfos.displayedDiagram].forceFeedback) {
+        //     if (diagramms[diagramInfos.displayedDiagram].layoutingActive) {
         //         redraw = forceDirecting(width, height);
         //         let loadModelText = document.getElementById("InfoID");
         //         loadModelText.innerHTML = "Force-Directing is active";
@@ -1410,8 +1410,8 @@ function draw(always = true) {
             drawCompleteModel(ctx, width, height);
         }
         if (typeof diagramms[diagramInfos.displayedDiagram] !== 'undefined') {
-            if (diagramms[diagramInfos.displayedDiagram].forceFeedback) {
-                requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
+            if (diagramms[diagramInfos.displayedDiagram].layoutingActive) {
+                requestAnimationFrame = window.requestAnimationFrame(drawWhenLayoutingRequires);
             }
         }
 
@@ -1421,7 +1421,7 @@ function draw(always = true) {
         // It is not yet understood why this is the case.
 
         if (typeof diagramms[diagramInfos.displayedDiagram] !== 'undefined') {
-            if (diagramms[diagramInfos.displayedDiagram].forceFeedback) {
+            if (diagramms[diagramInfos.displayedDiagram].layoutingActive) {
                 if (diagramms[diagramInfos.displayedDiagram].diagramType != circuitDiagramForSoftwareDiagramType) {
                     redraw = forceDirecting(width, height);
                     // Inform user
@@ -1451,7 +1451,7 @@ function draw(always = true) {
 }
 canvas.addEventListener('mouseover', function (e) {
     // if (!showModelExplorer) {
-    requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
+    requestAnimationFrame = window.requestAnimationFrame(drawWhenLayoutingRequires);
     // }
 });
 

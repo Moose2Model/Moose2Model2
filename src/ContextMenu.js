@@ -283,35 +283,35 @@ function ContextMenuClicked(e) {
   NewMenu.hidden = true;
   if (this.outerText == 'Start Force-directed graph' || this.outerText == 'Start Auto-Layout') {
     if (typeof diagramms[diagramInfos.displayedDiagram] !== 'undefined') {
-      diagramms[diagramInfos.displayedDiagram].forceFeedback = true;
-      requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
+      diagramms[diagramInfos.displayedDiagram].layoutingActive = true;
+      requestAnimationFrame = window.requestAnimationFrame(drawWhenLayoutingRequires);
       displayedDiagramChanged();
     }
   } else if (this.outerText == 'Stop Force-directed graph' || this.outerText == 'Stop Auto-Layout') {
     if (typeof diagramms[diagramInfos.displayedDiagram] !== 'undefined') {
-      diagramms[diagramInfos.displayedDiagram].forceFeedback = false;
+      diagramms[diagramInfos.displayedDiagram].layoutingActive = false;
       window.cancelAnimationFrame(requestAnimationFrame);
     }
     // Start and Stop Force-directed graph after 0.5 seconds
   } else if (this.outerText == 'Force-Direct for 0.5s' || this.outerText == 'Auto-Layout for 0.5s') {
-    diagramms[diagramInfos.displayedDiagram].forceFeedback = true;
-    requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
+    diagramms[diagramInfos.displayedDiagram].layoutingActive = true;
+    requestAnimationFrame = window.requestAnimationFrame(drawWhenLayoutingRequires);
     displayedDiagramChanged();
 
     setTimeout(() => {
-      diagramms[diagramInfos.displayedDiagram].forceFeedback = false;
+      diagramms[diagramInfos.displayedDiagram].layoutingActive = false;
       window.cancelAnimationFrame(requestAnimationFrame);
     }, 500);  // Stop after 500 milliseconds (0.5 seconds)
 
   } else if (this.outerText == 'Jump to code') {
     window.location.href = gMC_url;
-    // requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
+    // requestAnimationFrame = window.requestAnimationFrame(drawWhenLayoutingRequires);
   } else if (this.outerText == 'Remove pinning') {
     const idx = diagramms[diagramInfos.displayedDiagram].pinned.indexOf(gMCElementContextHandled.index);
     if (idx !== -1) {
       diagramms[diagramInfos.displayedDiagram].pinned.splice(idx, 1); // delete this element from list
     }
-    // requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
+    // requestAnimationFrame = window.requestAnimationFrame(drawWhenLayoutingRequires);
   } else if (this.outerText == 'Make this diagram active') {
     setDiagramActive(diagramInfos.displayedDiagram);
   } else if (this.outerText == 'Add element with all neighbors' || this.outerText == 'Displayed <> Active: Add element with all neighbors') {
@@ -456,23 +456,23 @@ function orderAllElementsOfGrouping(groupElementIndex) {
   NewMenu.hidden = true;
   if ($(this).text() == 'Start Force-directed graph') {
     if (typeof diagramms[diagramInfos.displayedDiagram] !== 'undefined') {
-      diagramms[diagramInfos.displayedDiagram].forceFeedback = true;
-      requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
+      diagramms[diagramInfos.displayedDiagram].layoutingActive = true;
+      requestAnimationFrame = window.requestAnimationFrame(drawWhenLayoutingRequires);
     }
   } else if ($(this).text() == 'Stop Force-directed graph') {
     if (typeof diagramms[diagramInfos.displayedDiagram] !== 'undefined') {
-      diagramms[diagramInfos.displayedDiagram].forceFeedback = false;
+      diagramms[diagramInfos.displayedDiagram].layoutingActive = false;
       window.cancelAnimationFrame(requestAnimationFrame);
     }
   } else if ($(this).text() == 'Jump to code') {
     window.location.href = gMC_url;
-    // requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
+    // requestAnimationFrame = window.requestAnimationFrame(drawWhenLayoutingRequires);
   } else if ($(this).text() == 'Remove pinning') {
     const idx = diagramms[diagramInfos.displayedDiagram].pinned.indexOf(gMCElementContextHandled.index);
     if (idx !== -1) {
       diagramms[diagramInfos.displayedDiagram].pinned.splice(idx, 1); // delete this element from list
     }
-    // requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
+    // requestAnimationFrame = window.requestAnimationFrame(drawWhenLayoutingRequires);
   } else if ($(this).text() == 'Make this diagram active') {
     setDiagramActive(diagramInfos.displayedDiagram);
   } else if ($(this).text() == 'Add element with all neighbors' || $(this).text() == 'Displayed <> Active: Add element with all neighbors') {

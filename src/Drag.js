@@ -211,8 +211,8 @@ function handleDragMouseUp(e) {
     isDragging = false;
     isDraggingJustStarted = false;
     isCommentDragging = false;
-    if (diagramms[diagramInfos.displayedDiagram].forceFeedback) {
-        requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
+    if (diagramms[diagramInfos.displayedDiagram].layoutingActive) {
+        requestAnimationFrame = window.requestAnimationFrame(drawWhenLayoutingRequires);
     }
 
 };
@@ -226,8 +226,8 @@ function handleDragMouseOut(e) {
     isDragging = false;
     isDraggingJustStarted = false;
     isCommentDragging = false;
-    if (diagramms[diagramInfos.displayedDiagram].forceFeedback) {
-        requestAnimationFrame = window.requestAnimationFrame(drawWhenForceDirectRequires);
+    if (diagramms[diagramInfos.displayedDiagram].layoutingActive) {
+        requestAnimationFrame = window.requestAnimationFrame(drawWhenLayoutingRequires);
     }
 
 };
