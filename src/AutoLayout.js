@@ -4,7 +4,6 @@ const ALscale = 4;
 const ALoversizeGroups = 1;
 const ALmaxForceIndex = 4;
 const ALmaxTimeForceDirectMs = 2000;
-
 const initialAutolayoutState = {
     springLength: 28 * scale, // 10, Make spring length identical to the previous standard length
     maxRepulsionLength: 20 * scale, // the maximal length where a repulsion between elements is not zero
@@ -68,6 +67,7 @@ function autoLayout(width, height) {
     }
 
     if (nElements == 1) {
+        // No layouting required for one element
         redraw = true;
         return redraw;
     }
@@ -154,12 +154,6 @@ function autoLayout(width, height) {
                             }
                         }
                     }
-                    if ((Date.now() - startTime) > ALmaxTimeForceDirectMs) {
-                        diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoopIndex = j + 1;
-                        diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoop = 1;
-                        redraw = false;
-                        return redraw;
-                    }
                 }
                 diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoop = 2;
                 diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoopIndex = 1;
@@ -194,12 +188,6 @@ function autoLayout(width, height) {
                         }
                     }
                 }
-                if ((Date.now() - startTime) > ALmaxTimeForceDirectMs) {
-                    diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoopIndex = j + 1;
-                    diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoop = 2;
-                    redraw = false;
-                    return redraw;
-                }
             }
             diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoop = 3;
             diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoopIndex = 1;
@@ -231,12 +219,6 @@ function autoLayout(width, height) {
 
                         }
                     }
-                }
-                if ((Date.now() - startTime) > ALmaxTimeForceDirectMs) {
-                    diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoopIndex = j + 1;
-                    diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoop = 3;
-                    redraw = false;
-                    return redraw;
                 }
             }
             diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoop = 4;
@@ -294,20 +276,6 @@ function autoLayout(width, height) {
 
                             }
                         }
-                    }
-                }
-                if ((Date.now() - startTime) > ALmaxTimeForceDirectMs) {
-                    // if (j + 1 < modelElementsByIndex.length) {
-                    if (j + 1 < diagramms[diagramInfos.displayedDiagram].complModelPosition.length) {
-                        diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoopIndex = j + 1;
-                        diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoop = 4;
-                        redraw = false;
-                        return redraw;
-                    }
-                    else {
-                        // In rare cases the time limit was approached when the last loop pass occured
-                        diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoop = -1;
-                        diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoopIndex = -1;
                     }
                 }
             }
