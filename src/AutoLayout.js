@@ -73,6 +73,7 @@ function autoLayout(width, height) {
     }
     if (diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoop == -1 &&
         diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoopIndex == -1) {
+
         diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew = [];
         diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew2 = [];
         diagramms[diagramInfos.displayedDiagram].layoutingState.elementsGrouped = [];
@@ -106,6 +107,7 @@ function autoLayout(width, height) {
                 diagramms[diagramInfos.displayedDiagram].layoutingState.elementsGrouped[groupX][groupY].push(mEBI);
             }
         }
+
     }
 
     const oldSpringLength = w2 / Math.sqrt(nElements);
@@ -126,39 +128,6 @@ function autoLayout(width, height) {
     let loopCount = 0;
 
     for (let i = diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoop; i <= ALmaxForceIndex; i++) {
-        // i = 1: Forces due to ALspring foreces between parent and child elements
-        if (diagramms[diagramInfos.displayedDiagram].diagramType != circuitDiagramForSoftwareDiagramType) {
-            // Forces for parent child relations are not effective for Circuit diagrams
-            if (i == 1) {
-                for (let j = diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoopIndex; j < parentChildByParent.length; j++) {
-                    let pCBP = parentChildByParent[j];
-                    if (typeof pCBP !== 'undefined') {
-                        for (const pC of pCBP) {
-                            if (typeof diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['parent']] !== 'undefined' &&
-                                typeof diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['child']] !== 'undefined') {
-
-                                if (diagramms[diagramInfos.displayedDiagram].complModelPosition[pC.parent].visible &&
-                                    diagramms[diagramInfos.displayedDiagram].complModelPosition[pC.child].visible) {
-
-                                    let pCForce = ALspring(
-                                        diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['parent']].x,
-                                        diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['parent']].y,
-                                        diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['child']].x,
-                                        diagramms[diagramInfos.displayedDiagram].complModelPosition[pC['child']].y);
-                                    diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew[pC['parent']].x += step * pCForce.x;
-                                    diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew[pC['parent']].y += step * pCForce.y;
-                                    diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew[pC['child']].x -= step * pCForce.x;
-                                    diagramms[diagramInfos.displayedDiagram].layoutingState.complModelPositionNew[pC['child']].y -= step * pCForce.y;
-
-                                }
-                            }
-                        }
-                    }
-                }
-                diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoop = 2;
-                diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoopIndex = 1;
-            }
-        }
 
         if (i == 2) {
             // i=2: Forces due to ALspring forces between caller and called elements
@@ -247,14 +216,11 @@ function autoLayout(width, height) {
                                             for (const mEBI2 of diagramms[diagramInfos.displayedDiagram].layoutingState.elementsGrouped[ix][iy]) {
                                                 if (mEBI.index < mEBI2.index) {
                                                     let doIt = false;
-                                                    if (diagramms[diagramInfos.displayedDiagram].diagramType == circuitDiagramForSoftwareDiagramType) {
-                                                        // No Forces due to groupings which are not displayed in the Circuit Diagram
-                                                        let mEBI_1 = modelElementsByIndex[mEBI.index];
-                                                        let mEBI_2 = modelElementsByIndex[mEBI2.index];
-                                                        if (mEBI_1.element != 'SOMIX.Grouping' && mEBI_2.element != 'SOMIX.Grouping') {
-                                                            doIt = true;
-                                                        }
-                                                    } else {
+
+                                                    // No Forces due to groupings which are not displayed in the Circuit Diagram
+                                                    let mEBI_1 = modelElementsByIndex[mEBI.index];
+                                                    let mEBI_2 = modelElementsByIndex[mEBI2.index];
+                                                    if (mEBI_1.element != 'SOMIX.Grouping' && mEBI_2.element != 'SOMIX.Grouping') {
                                                         doIt = true;
                                                     }
                                                     if (doIt == true) {
@@ -280,6 +246,8 @@ function autoLayout(width, height) {
                 }
             }
         };
+
+
         diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoop = -1;
         diagramms[diagramInfos.displayedDiagram].layoutingState.previousLoopIndex = -1;
     }
