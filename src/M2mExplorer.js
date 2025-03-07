@@ -44,7 +44,19 @@ function calculateAgeInDays(lastModifiedTime) {
   return ageInDays;
 }
 
+let isM2mExplorerDrawing = false;
+let lastExecutionTimeM2mExplorer = Date.now();
+
 async function drawM2mExplorer() {
+
+  const now = Date.now();
+
+  // Allow execution if the last execution started more than 1000ms ago, even if isDrawing is still true
+  if (isM2mExplorerDrawing && now - lastExecutionTimeM2mExplorer < 1000) return;
+
+  isM2mExplorerDrawing = true;
+  lastExecutionTimeM2mExplorer = now;
+
 
   ctx.clearRect(0, 0, g_width, g_height);
 
@@ -66,7 +78,10 @@ async function drawM2mExplorer() {
     }
   }
 
-
+  // Sort m2mFilesInFolder by name
+  m2mFilesInFolder.sort((a, b) => {
+    return a.name.localeCompare(b.name);
+  });
 
   endM2mExplorerLine = m2mFilesInFolder.length;
   if (endM2mExplorerLine == 0) {
@@ -119,7 +134,7 @@ async function drawM2mExplorer() {
 
   listPositionToEntries2 = [];
 
-  for (let i = 0; i <= linesForElements; i++) {
+  for (let i = 0; i < linesForElements; i++) {
     let lineDisplay = startM2mExplorerLine + i;
     if (typeof m2mFilesInFolder[lineDisplay] !== 'undefined') {
       ctx.fillText(m2mFilesInFolder[lineDisplay].name, xPosElements + colNameStart, yPosElements);
@@ -139,5 +154,8 @@ async function drawM2mExplorer() {
     yPosElements += lineDifference;
 
   }
+
+
+  isM2mExplorerDrawing = false;
 
 }
