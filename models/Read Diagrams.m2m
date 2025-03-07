@@ -2,9 +2,9 @@
 	"newElementBox": {
 		"isInitial": false,
 		"newElBoxX": 579.359375,
-		"newElBoxY": -672.4,
+		"newElBoxY": -892.4,
 		"newElBoxWidth": 400,
-		"newElBoxHeight": 866.4
+		"newElBoxHeight": 1086.4
 	},
 	"addedWithNeighbors": [
 		"JSFunction../src/Diagrams.js/ReadDisplayedDiagram",
@@ -26,9 +26,24 @@
 			"y": 52.67
 		},
 		{
+			"uniqueKey": "File../src/Diagrams.js",
+			"x": 189.56,
+			"y": -332.93
+		},
+		{
+			"uniqueKey": "File../src/Drawing.js",
+			"x": -277.99,
+			"y": -523.61
+		},
+		{
 			"uniqueKey": "File../src/M2mExplorer.js",
 			"x": -1430.44,
 			"y": 823.24
+		},
+		{
+			"uniqueKey": "File../src/MouseWheel.js",
+			"x": 389.56,
+			"y": 178.24
 		},
 		{
 			"uniqueKey": "File../src/moose2model.html",
@@ -41,9 +56,9 @@
 			"y": -463
 		},
 		{
-			"uniqueKey": "File../src/MouseWheel.js",
-			"x": 389.56,
-			"y": 178.24
+			"uniqueKey": "File../src/Requirement.js",
+			"x": 16.8,
+			"y": 78.24
 		},
 		{
 			"uniqueKey": "File../src/PositionElements.js",
@@ -51,29 +66,14 @@
 			"y": 21.26
 		},
 		{
-			"uniqueKey": "File../src/Drawing.js",
-			"x": -203.07,
-			"y": 54.34
-		},
-		{
-			"uniqueKey": "File../src/Requirement.js",
-			"x": 16.8,
-			"y": 78.24
-		},
-		{
-			"uniqueKey": "File../src/Global.js",
-			"x": -834.09,
-			"y": 19.18
-		},
-		{
-			"uniqueKey": "File../src/Diagrams.js",
-			"x": 189.56,
-			"y": -332.93
-		},
-		{
 			"uniqueKey": "File../src/ModelExplorer.js",
 			"x": -1950.44,
 			"y": 441.24
+		},
+		{
+			"uniqueKey": "File../src/Global.js",
+			"x": -788.9,
+			"y": -232.93
 		},
 		{
 			"uniqueKey": "JSFunction../src/Diagrams.js/newDiagram",
@@ -142,23 +142,23 @@
 		},
 		{
 			"uniqueKey": "JSFunction../src/Drawing.js/removeHighlightActive",
-			"x": -19,
-			"y": -145
+			"x": -94.92,
+			"y": -717.95
 		},
 		{
 			"uniqueKey": "JSFunction../src/Drawing.js/drawCompleteModel",
-			"x": -139,
-			"y": -145
+			"x": -214.92,
+			"y": -737.95
 		},
 		{
 			"uniqueKey": "JSFunction../src/Drawing.js/drawAlways",
-			"x": -179,
-			"y": -85
+			"x": -254.92,
+			"y": -657.95
 		},
 		{
 			"uniqueKey": "JSFunction../src/Drawing.js/draw",
-			"x": 81,
-			"y": 15
+			"x": -374.92,
+			"y": -757.95
 		},
 		{
 			"uniqueKey": "JSFunction../src/ContextMenu.js/handleContextMenu",
@@ -167,8 +167,8 @@
 		},
 		{
 			"uniqueKey": "JSFunction../src/MouseWheel.js/zoom",
-			"x": 706.48,
-			"y": -643.75
+			"x": -737.22,
+			"y": -692.51
 		},
 		{
 			"uniqueKey": "JSFunction../src/moose2model.html/readM2mRequested",
@@ -192,43 +192,43 @@
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/fileHandle",
-			"x": -753.32,
-			"y": -150
+			"x": -714.81,
+			"y": -392.11
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/workDirectoryHandle",
-			"x": -584.91,
-			"y": -150
+			"x": -534.81,
+			"y": -392.11
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/modelElementsByUniqueKey",
-			"x": -582.93,
-			"y": -18
+			"x": -534.81,
+			"y": -272.11
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/ctx",
-			"x": -766,
-			"y": -84
+			"x": -714.81,
+			"y": -332.11
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/showM2mExplorer",
-			"x": -730.32,
-			"y": -18
+			"x": -574.81,
+			"y": -532.11
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/showExplorer",
-			"x": -634.29,
-			"y": -84
+			"x": -594.81,
+			"y": -332.11
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/g_width",
-			"x": -711.32,
-			"y": -84
+			"x": -674.81,
+			"y": -332.11
 		},
 		{
 			"uniqueKey": "JSVariable../src/Global.js/g_height",
-			"x": -683.61,
-			"y": -150
+			"x": -634.81,
+			"y": -392.11
 		},
 		{
 			"uniqueKey": "JSVariable../src/Diagrams.js/diagramms",
@@ -266,6 +266,16 @@
 			"y": -245
 		},
 		{
+			"uniqueKey": "JSVariable../src/M2mExplorer.js/isM2mExplorerDrawing",
+			"x": -1189.93,
+			"y": -543.22
+		},
+		{
+			"uniqueKey": "JSVariable../src/M2mExplorer.js/lastExecutionTimeM2mExplorer",
+			"x": -1316.72,
+			"y": -508.32
+		},
+		{
 			"uniqueKey": "JSVariable../src/moose2model.html/readM2m",
 			"x": -194,
 			"y": -403
@@ -279,9 +289,27 @@
 	"comments": [
 		{
 			"uniqueKey": "JSFunction../src/M2mExplorer.js/drawM2mExplorer",
-			"x": -1069,
-			"y": -565,
+			"x": -1101.11,
+			"y": -644.68,
 			"text": "Here is the list with Diagrams which can be \nread built and drawn to the screen"
+		},
+		{
+			"uniqueKey": "JSVariable../src/Global.js/showM2mExplorer",
+			"x": -603.3,
+			"y": -785.47,
+			"text": "Flag that the list with files is shown\nIs called M2mExplorer"
+		},
+		{
+			"uniqueKey": "JSVariable../src/M2mExplorer.js/isM2mExplorerDrawing",
+			"x": -1293.34,
+			"y": -757.33,
+			"text": "Use to prevent that drawing is done too\noften when the triggering event is called\nin short succession"
+		},
+		{
+			"uniqueKey": "JSVariable../src/M2mExplorer.js/lastExecutionTimeM2mExplorer",
+			"x": -1569.97,
+			"y": -654.64,
+			"text": "Used as safety belt, when the last drawing\nis some time (1000ms) in the past, a \ndrawing is always done."
 		}
 	],
 	"pinned": [
@@ -293,7 +321,13 @@
 		"JSVariable../src/ModelExplorer.js/scrollExplorerLine",
 		"JSFunction../src/M2mExplorer.js/drawM2mExplorer",
 		"JSFunction../src/M2mExplorer.js/getM2mFilesRecursively",
-		"JSFunction../src/M2mExplorer.js/calculateAgeInDays"
+		"JSFunction../src/M2mExplorer.js/calculateAgeInDays",
+		"JSVariable../src/M2mExplorer.js/lastExecutionTimeM2mExplorer",
+		"JSVariable../src/M2mExplorer.js/isM2mExplorerDrawing",
+		"JSFunction../src/MouseWheel.js/zoom",
+		"JSFunction../src/Drawing.js/drawCompleteModel",
+		"JSFunction../src/Drawing.js/draw",
+		"JSVariable../src/Global.js/showM2mExplorer"
 	],
 	"suppressed": []
 }
