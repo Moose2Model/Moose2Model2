@@ -1455,3 +1455,234 @@ canvas.addEventListener('mouseover', function (e) {
     // }
 });
 
+
+
+/**
+ * Create a KI-friendly JSON snapshot for circuit diagrams using stable IDs.
+ * Node ID format: "somix:<type>:<uniqueName>" (lowercase).
+ * Falls uniqueName fehlt, fallback auf name bzw. index.
+ *
+ * @param {number|string} [diagramTitle=diagramInfos.displayedDiagram]
+ * @param {Object} [options]
+ * @param {boolean} [options.includePositions=false]
+ * @returns {Object|null}
+ */
+function buildCircuitDiagramJSON(diagramTitle = diagramInfos.displayedDiagram, options = {}) {
+  const { includePositions = false } = options;
+  const d = diagramms[diagramTitle];
+  if (!d || d.diagramType !== circuitDiagramForSoftwareDiagramType) return null;
+
+  // --- helpers ---------------------------------------------------------------
+  const somixType = (el) => {
+    // 'SOMIX.Code'|'SOMIX.Data'|'SOMIX.Grouping' -> 'code'|'data'|'grouping'
+    if (!el || typeof el !== 'string') return 'unknown';
+    const part = el.split('.').pop() || el;
+    return String(part).toLowerCase();
+  };
+
+  const makeStableIdBase = (me) => {
+    // prefer uniqueName, then name, then index
+    const base = (me.uniqueName && String(me.uniqueName).trim())
+      || (me.name && String(me.name).trim())
+      || `idx${me.index}`;
+    return base;
+  };
+
+  const makeStableId = (me) => {
+    const typeKey = somixType(me.element);
+    const base = makeStableIdBase(me);
+    // Lowercase for stability; keep original names as metadata
+    return `somix:${typeKey}:${String(base).toLowerCase()}`;
+  };
+
+  // --- first pass: visible nodes & ID mapping --------------------------------
+  const visible = new Set();
+  const idByIndex = new Map();
+  const seenIds = new Set();
+
+  for (const cmp of d.complModelPosition) {
+    if (!cmp || !cmp.visible) continue;
+    const me = modelElementsByIndex[cmp.index];
+    if (!me) continue;
+
+    visible.add(me.index);
+
+    let id = makeStableId(me);
+    // ensure uniqueness even if uniqueName collides across elements
+    if (seenIds.has(id)) {
+      id = `${id}#${me.index}`; // deterministic disambiguation
+    }
+    seenIds.add(id);
+    idByIndex.set(me.index, id);
+  }
+
+  // --- nodes -----------------------------------------------------------------
+  const nodes = [];
+  const comments = [];
+  const addedWithNeighborsIdx =
+    Array.isArray(d.generationInfoInternal?.addedWithNeighbors)
+      ? d.generationInfoInternal.addedWithNeighbors
+      : [];
+
+  for (const cmp of d.complModelPosition) {
+    if (!cmp || !cmp.visible) continue;
+    const me = modelElementsByIndex[cmp.index];
+    if (!me) continue;
+
+    const nodeId = idByIndex.get(me.index);
+    if (!nodeId) continue;
+
+    const node = {
+      id: nodeId,
+      SOMIXelement: me.element ?? "",
+      technicalType: me.technicalType ?? null,
+      isAddedWithNeighbors: addedWithNeighborsIdx.includes(me.index),
+
+      // metadata for traceability (do not use as primary ID in KI):
+      // index: me.index,
+      // uniqueName: me.uniqueName ?? null,
+      name: me.name ?? null
+    };
+
+    if (includePositions) {
+      const snapped = snapToGrid(cmp.x ?? 0, cmp.y ?? 0, me.index);
+      node.layout = { x: snapped.x, y: snapped.y };
+    }
+
+    // comments: content only
+    const c = d.generationInfoInternal?.commentsByID?.[me.index];
+    if (c && typeof c.text === 'string' && c.text.trim() !== "") {
+      comments.push({ elementId: nodeId, text: c.text });
+    }
+
+    nodes.push(node);
+  }
+
+  // neighborsCompleteFor mapped to stableIds (only for nodes present)
+  const neighborsCompleteFor = addedWithNeighborsIdx
+    .filter(idx => visible.has(idx) && idByIndex.has(idx))
+    .map(idx => idByIndex.get(idx));
+
+  // --- edges -----------------------------------------------------------------
+  const edges = [];
+  const endpointVisible = (idx) => visible.has(idx) && idByIndex.has(idx);
+
+  // Calls: caller -> called
+  if (typeof callByCaller !== 'undefined') {
+    for (const cmp of d.complModelPosition) {
+      if (!cmp || !cmp.visible) continue;
+      const list = callByCaller[cmp.index];
+      if (!Array.isArray(list)) continue;
+      for (const e of list) {
+        const fromIdx = e?.caller;
+        const toIdx   = e?.called;
+        if (endpointVisible(fromIdx) && endpointVisible(toIdx)) {
+          edges.push({
+            kind: "call",
+            from: idByIndex.get(fromIdx),
+            to:   idByIndex.get(toIdx),
+            // directed: true
+          });
+        }
+      }
+    }
+  }
+
+  // Accesses: accessor -> accessed
+  if (typeof accessByAccessor !== 'undefined') {
+    for (const cmp of d.complModelPosition) {
+      if (!cmp || !cmp.visible) continue;
+      const list = accessByAccessor[cmp.index];
+      if (!Array.isArray(list)) continue;
+      for (const e of list) {
+        const fromIdx = e?.accessor;
+        const toIdx   = e?.accessed;
+        if (endpointVisible(fromIdx) && endpointVisible(toIdx)) {
+          edges.push({
+            kind: "access",
+            from: idByIndex.get(fromIdx),
+            to:   idByIndex.get(toIdx),
+            // directed: true
+          });
+        }
+      }
+    }
+  }
+
+  return {
+    // Explain what this file is for
+    FileContent: 'This file contains a circuit diagram exported from Moose2Model2 to be used in AI. ' + 
+                 'It uses stable IDs based on the SOMIX model element unique names.',
+    m2m_export: "somix-circuit-diagram",
+    version: 2, // bumped because ID scheme changed
+    modelName: modelName || null,
+    diagramTitle,
+    timestamp: new Date().toISOString(),
+    neighborsCompleteFor,
+    nodes,
+    edges,
+    comments
+  };
+}
+
+
+/**
+ * Save the currently displayed circuit diagram as KI-friendly JSON
+ * into "<diagramName>.json" next to the generation infos.
+ * Requires: workDirectoryHandle, buildCircuitDiagramJSON(...)
+ *
+ * @param {Object} [options] - e.g., { includePositions: true }
+ * @returns {Promise<{ fileHandle: FileSystemFileHandle, fileName: string }|null>}
+ */
+async function downloadCircuitDiagramJSON(options = {}) {
+  const dKey = diagramInfos.displayedDiagram;
+  const d = diagramms[dKey];
+  if (!d || d.diagramType !== circuitDiagramForSoftwareDiagramType) {
+    window.alert("No circuit diagram to export (or wrong diagram type).");
+    return null;
+  }
+
+  if (!workDirectoryHandle || typeof workDirectoryHandle.getFileHandle !== "function") {
+    window.alert("workDirectoryHandle is not available. Cannot write file.");
+    return null;
+  }
+
+  try {
+    // Ensure permission (FS Access API)
+    if (typeof workDirectoryHandle.requestPermission === "function") {
+      const perm = await workDirectoryHandle.requestPermission({ mode: "readwrite" });
+      if (perm !== "granted") {
+        window.alert("Write permission denied for work directory.");
+        return null;
+      }
+    }
+
+    // Build JSON payload (stable IDs based on uniqueName)
+    const payload = buildCircuitDiagramJSON(dKey, options);
+    if (!payload) {
+      window.alert("Nothing to export.");
+      return null;
+    }
+
+    // Pretty JSON + trailing newline
+    const jsonExport = JSON.stringify(payload, null, 2) + "\n";
+
+    // File name derived from the displayed diagram name, with .json extension
+    const diagramContentFilename = `${String(dKey)}.json`;
+
+    const fileHandle = await workDirectoryHandle.getFileHandle(diagramContentFilename, { create: true });
+    const writable = await fileHandle.createWritable(); // truncates by default
+    await writable.write(jsonExport);
+    await writable.close();
+
+    // Display a popup message about the file location
+        alert(`The content of the displayed diagram is stored to file: \n${diagramContentFilename}\nThe file is located in the selected work directory.`);
+
+    return { fileHandle, fileName: diagramContentFilename };
+  } catch (err) {
+    console.error("downloadCircuitDiagramJSON failed:", err);
+    window.alert(`Export failed: ${err?.message || err}`);
+    return null;
+  }
+}
+

@@ -1,6 +1,10 @@
 'use strict';
 // store a reference to the loaded metamodel, has to be adapted when more than a single model can be loaded
 let fileHandle;
+
+// The name of the loaded SOMIX model
+let modelName = '';
+
 let workDirectoryHandle;
 
 // This are all global variables which contain informations on a loaded model

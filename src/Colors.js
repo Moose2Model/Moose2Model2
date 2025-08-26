@@ -159,6 +159,9 @@ function changeColors() {
     element = document.getElementById('OpenWorkFolderButton');
     element.style.borderColor = menuSeparatorColor;
 
+    element = document.getElementById('SaveDiagramButton');
+    element.style.borderColor = menuSeparatorColor;
+
     element = document.getElementById('ImportOldDiagramButton');
     element.style.borderColor = menuSeparatorColor;
 

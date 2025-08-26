@@ -9,21 +9,18 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 
     <style>
-        /* html {
-        font-family: sans-serif;
-      }
-
-      body {
-        width: 50%;
-        max-width: 800px;
-        min-width: 480px;
-        margin: 0 auto;
-      }
-
-      .lastResult {
-        color: white;
-        padding: 3px;
-      } */
+        /* Local styles for callouts / small fixes */
+        .notice-new {
+            background: #fff3cd;            /* light amber */
+            border-left: 4px solid #ff9800; /* accent bar */
+            padding: 12px 16px;
+            margin: 16px 0 24px 0;
+            font-weight: 600;
+        }
+        .notice-new code { font-weight: 600; }
+        .muted { color: #666; }
+        code { background: #f6f8fa; padding: 0 4px; border-radius: 3px; }
+        pre { background: #f6f8fa; padding: 12px; border-radius: 6px; overflow: auto; }
     </style>
 </head>
 
@@ -34,9 +31,19 @@
         </div>
         <div class="text-content">
             <h1>Documentation</h1>
+
+            <!-- New feature announcement -->
+            <div class="notice-new">
+                <strong>New:</strong> Export circuit diagrams as <em>AI-readable JSON</em> (.json<).
+                Open a circuit diagram and choose in the menu File -> Export Displayed Diagram, to write
+                &lt;diagramName&gt;.json into your work folder (same place as the diagram’s generation infos).
+                The export includes visible nodes, directed call/access edges, comments, and the set of elements with complete neighbors.
+                Positions are omitted by default. Requires a Chromium-based browser (File System Access API).
+            </div>
+
             <h2>First Steps</h2>
             <h3>Analyze JavaScript coding</h3>
-            <li>Make sure you have a folder which contains html files together with JavaScript code. You may for
+            <li>Make sure you have a folder which contains HTML files together with JavaScript code. You may for
                 instance use git to replicate the source code of this application to a local folder.</li>
             <li>Open this application in a browser</li>
             <li>Choose in the menu Model -> Extract Code from File System to SOMIX model (w/o .git). Choose the main
@@ -47,12 +54,12 @@
                 existing diagrams.</li>
             <li>In case there are no diagram informations yet. Choose in the menu File -> New Diagram. Enter a name for
                 the diagram.
-                Choose Model -> Explore model ()Add elements to diagrams) to choose components to be displayed.</li>
+                Choose Model -> Explore model (Add elements to diagrams) to choose components to be displayed.</li>
+
             <h3>Demo</h3>
             It is possible to display and use demo data.
-            Follow
-            these steps:
-            <li>Open the application in a Browser</li>
+            Follow these steps:
+            <li>Open the application in a browser</li>
             <li>Choose in the menu Help -> Load demo data</li>
             <li>Do a right mouse click into the pane and choose "Start Force-directed graph". Wait some time and choose
                 then "Stop Force-directed graph".</li>
@@ -60,35 +67,32 @@
                 neighbors"</li>
             <li>Do a right mouse click into the pane and choose Demo Diagram</li>
             <li>Play around with left and right clicks of the mouse on elements, into boxes and onto the pane. Use also
-                the scrool wheel of the mouse.</li>
-            You may also choose Model -> Explore Model (Add elements to diagrams). Use this steps:
-            <li>Open the application in a Browser</li>
+                the scroll wheel of the mouse.</li>
+            You may also choose Model -> Explore Model (Add elements to diagrams). Use these steps:
+            <li>Open the application in a browser</li>
             <li>Choose in the menu Help -> Load demo data</li>
-            <li>Enter for instance ^Z.*LOG in the input field. This filters for all elements which start with Z and have
-                a LOG
-                somewhre in the name. You can use any Regex expression. The search is case insensitive.</li>
-            <li>The Button Apply Filter may not yet work, instead move the mouse down.</li>
+            <li>Enter for instance <code>^Z.*LOG</code> in the input field. This filters for all elements which start with Z and have
+                a LOG somewhere in the name. You can use any Regex expression. The search is case insensitive.</li>
+            <li>The button "Apply Filter" may not yet work, instead move the mouse down.</li>
             <li>You can scroll with the mouse wheel in the result list.</li>
             <li>Make a right click on an element and choose "Add element with all neighbors"</li>
             <li>Choose cancel</li>
             <li>Make a right click in the pane and choose Demo Diagram.</li>
             <li>Play around with left and right clicks of the mouse on elements, into boxes and onto the pane. Use also
-                the scrool wheel of the mouse.</li>
+                the scroll wheel of the mouse.</li>
 
             <h3>Generate a SOMIX model from files in a local folder</h3>
             It is possible to analyze folders in the local file system:
-            <li>Extract a model where files are date and folders are groupings. Choose Model -> Extract File System to
+            <li>Extract a model where files are data and folders are groupings. Choose Model -> Extract File System to
                 SOMIX model (w/o .git). A pop up opens where you specify a local folder on
-                your computer. Therafter it is prompted to specify a folder to the source of the JavaScript code. This is required because it is not 
+                your computer. Thereafter you are prompted to specify a folder to the source of the JavaScript code. This is required because it is not 
                 possible to determine the source folder from within a browser.
-                Content in .git folders is ignored. This is in most cases helpfull when git is used. Git stores many
+                Content in .git folders is ignored. This is in most cases helpful when git is used. Git stores many
                 files which are normally not of interest.</li>
             <li>Extract a model of the code in files. This is currently in development. Extract Code from File System to
                 SOMIX model (w/o .git). A pop up opens where you specify a local folder on your computer.
-
-                Content in .git folders is ignored. This is in most cases helfull when git is used. Git stores many
-                files which
-                are normally not of interest.</li>
+                Content in .git folders is ignored. This is in most cases helpful when git is used. Git stores many
+                files which are normally not of interest.</li>
 
             <h3>Use a SOMIX model</h3>
             When you have a SOMIX model (You will need to use SAP2Moose for now):
@@ -101,7 +105,7 @@
             <li>Choose File -> New Diagram and enter a name for the new diagram.</li>
             <li>Make a right click into the pane and choose the name of your diagram. This will change the view and
                 display:
-                "This diagram is currentl empty: ..."</li>
+                "This diagram is currently empty: ..."</li>
             <li>Make a right mouse click into the pane and choose "Make this diagram active". When you later add
                 elements to a
                 diagram, these elements will be added to the active diagram.</li>
@@ -109,29 +113,63 @@
                 Steps" ->
                 "Demo".</li>
             <li>To save the displayed diagram choose File -> Save Displayed Diagram.</li>
-            <li>When you repeat your work do <ul>
+            <li>When you repeat your work do 
+                <ul>
                     <li>Load a new SOMIX model. This will normally not be the model you used before. The diagram will be
                         automatically adapted to the new software version.</li>
                     <li>Choose File -> Open Work Folder</li>
                     <li>Choose File -> Read Diagram (You will need "Import old Diagram (XML) only when you worked with
-                        the
-                        Smalltalk version of Moose2Model).</li>
+                        the Smalltalk version of Moose2Model).</li>
                 </ul>
             </li>
 
-            <h3>Export Model Information</h3>
-            <p>This new feature allows you to export a comprehensive list of all model elements, along with the count of
-                calls and accesses to each element. This can be particularly useful for analyzing the usage and
-                interactions of elements within your model.</p>
+            <!-- New section: AI-readable JSON export -->
+            <h2>AI-readable JSON Export (New)</h2>
+            <p>
+                You can export the <em>currently displayed circuit diagram</em> as a JSON file (Choose in the menu File -> Export Displayed Diagram,) that is easy for AI tools to consume.
+                The export contains:
+            </p>
+            <ul>
+                <li><strong>nodes</strong> (visible elements) with: id (stable, based on uniqueName), element, technicalType, 
+                    uniqueName, name, index, and isAddedWithNeighbors.</li>
+                <li><strong>edges</strong> (directed): kind (call or access), from, to, directed.</li>
+                <li><strong>neighborsCompleteFor</strong>: the set of elements for which all neighbors are guaranteed to be present in the diagram.</li>
+                <li><strong>comments</strong>: text notes attached to elements (content only).</li>
+                
+            </ul>
+
+            <h3>How to export</h3>
             <ol>
-                <li>Ensure that you have loaded a SOMIX model into the application.</li>
-                <li>Select the 'Model' menu.</li>
-                <li>Click on 'Export model information'. This will prompt you to choose a location to save the CSV file.
-                </li>
-                <li>The exported file will include details such as the index, technical type, unique name, main group,
-                    name, and the number of calls and accesses for each model element.</li>
-                <li>Make sure you have specified a work directory where the export file will be stored.</li>
+                <li>Open (or activate) a <em>circuit diagram</em> you want to export.</li>
+                <li>Choose in the menu File -> Export Displayed Diagram.</li>
+                <li>The file &lt;diagramName&gt;.json is written into your work folder (same place as the diagram’s generation infos).</li>
             </ol>
+
+            <h3>Minimal example</h3>
+            <pre><code>{
+  FileContent": "This file contains a circuit diagram exported from Moose2Model2 to be used in AI. It uses stable IDs based on the SOMIX model element unique names.",              
+  "m2m_export": "somix-circuit-diagram",
+  "version": 2,
+  "modelName": "Your SOMIX model",
+  "diagramTitle": "MyDiagram",
+  "timestamp": "2025-08-26T11:43:33.596Z",
+  "neighborsCompleteFor": ["somix:code:sap.y<0>bw_xf"],
+  "nodes": [
+    {
+      "id": "somix:code:sap.y0bw_xf",
+      "SOMIXelement": "SOMIX.Code",
+      "technicalType": null,
+      "isAddedWithNeighbors": true
+      "name": "Y0BW_XF"
+    }
+  ],
+  "edges": [
+    { "kind": "access", "from": "somix:code:sap.y0bw_xf", "to": "somix:data:sflight", "directed": true }
+  ],
+  "comments": [
+    { "elementId": "somix:code:sap.y0bw_xf", "text": "Hot path" }
+  ]
+}</code></pre>
 
             <h2> Features</h2>
             <h3>General</h3>
@@ -140,99 +178,95 @@
                 <li>Read a folder and create a SOMIX model of the contained folders and files.</li>
                 <li>Create a new diagram</li>
                 <li>Force-dragged positioning. Start and stop with a context click in background of pane</li>
-                <li>Scrolling by dragging the pane(with "right" mouseclick")</li>
-                <li>Dragging elements (with "left" mouseclick)</li>
-                <ul>
-                    <li>Press G to drag always the group an element is in</li>
-                </ul>
+                <li>Scrolling by dragging the pane (with right mouse click)</li>
+                <li>Dragging elements (with left mouse click)
+                    <ul>
+                        <li>Press G to drag always the group an element is in</li>
+                    </ul>
+                </li>
                 <li>Zooming with the wheel of the mouse</li>
-                <li>Menu Model</li>
-                <ul>
-                    <li>Extract a SOMIX model from a folder in the local file system</li>
-                    <li>Extract Code from File System to SOMIX model (w/o .git). Content in .git folders is ignored.
-                    </li>
-                    <li>Load a SOMIX model</li>
-                    <li>Explore model (Add elements to diagrams)</li>
-                    <li>Export model information</li>
-                </ul>
+                <li>Menu Model
+                    <ul>
+                        <li>Extract a SOMIX model from a folder in the local file system</li>
+                        <li>Extract Code from File System to SOMIX model (w/o .git). Content in .git folders is ignored.</li>
+                        <li>Load a SOMIX model</li>
+                        <li>Explore model (Add elements to diagrams)</li>
+                        <li>Export model information</li>
+                    </ul>
+                </li>
                 <li>Menu Diagram
                     <ul>
                         <li>Search elements in the model. The search is case insensitive.</li>
-                        <li>Remove all hightlighting of the displayed elements</li>
+                        <li>Remove all highlighting of the displayed elements</li>
                         <li>Pin all elements</li>
                         <li>Remove all pinning</li>
-                        <li>Unpin all Highlighted elements</li>
+                        <li>Unpin all highlighted elements</li>
                         <li>Highlight all not pinned elements</li>
+                        <li><strong>Export AI-readable JSON of the displayed circuit diagram</strong> (<code>.json</code>)</li>
                     </ul>
                 </li>
                 <li>Menu Help
                     <ul>
                         <li>Switch between dark and white theme</li>
                     </ul>
+                </li>
                 <li>Context click on elements:
                     <ul>
                         <li>Add an element with all neighbors to the active diagram</li>
                         <li>Redo adding an element with all neighbors to the active diagram</li>
-                        <li>Get informations on the element</li>
+                        <li>Get information on the element</li>
                         <li>Enter or edit a comment for an element</li>
-                        <li>Supress an element with all children</li>
-                        <li>Redo supressing an element with all children</li>
-                        <li>Jump to code with when a link is contained in the model (For SAP: adt links have to be
-                            activated for
-                            Eclipse. For JavaScript: This works currently only when the user adds the paths to the source folder when prompted. 
-                            The jump may go to the correct line or higher. This is due to a not
-                            exact implementation of the logic to determine the line number.)</li>
+                        <li>Suppress an element with all children</li>
+                        <li>Redo suppressing an element with all children</li>
+                        <li>Jump to code when a link is contained in the model (For SAP: ADT links have to be
+                            activated for Eclipse. For JavaScript: This works currently only when the user adds the
+                            paths to the source folder when prompted. The jump may go to the correct line or higher due to
+                            limitations in line number detection.)</li>
                         <li>Remove pinning of recently dragged elements</li>
                         <li>Highlight elements or the using or used elements</li>
                     </ul>
                 </li>
-                <li>Context click on a grouping - It is also possible to:</li>?v=67C:\DataEigen\Moose2Model2\src
-                <ul>
-                    <li>Press G to force that the grouping is selected</li>
-                    <li>Pin all elements of this grouping</li>
-                    <li>Unpin all elements of this grouping</li>
-                </ul>
+                <li>Context click on a grouping – it is also possible to:
+                    <ul>
+                        <li>Press G to force that the grouping is selected</li>
+                        <li>Pin all elements of this grouping</li>
+                        <li>Unpin all elements of this grouping</li>
+                    </ul>
+                </li>
                 <li>Context click on pane:
                     <ul>
-                        <li>(Only in the diagram with all model elements: Toogle the display of element names)</li>
-                        <li>Set a diagram active (But not the diagram with all elements)</li>
+                        <li>(Only in the diagram with all model elements: Toggle the display of element names)</li>
+                        <li>Set a diagram active (but not the diagram with all elements)</li>
                         <li>Start and Stop Force-directed graph</li>
                         <li>Jump to other diagram</li>
                     </ul>
                 </li>
                 <li>Save information to generate a diagram to file
                     <ul>
-                        <li>Specify a workfolder first. These folder contains all diagrams which belong to the same
-                            model
-                        </li>
-                        <li>Save the generation information for the displayed diagram. It be stored in a file with
-                            extension
-                            .m2m and similar name.</li>
-                        <li>Read the generation information from an .m2m file. You should have all required model
-                            data
-                            loaded
-                            before. A diagram with identical name is created.</li>
-                        <li>Import xml files from the old Smalltalk version of Moose2Model.</li>
-                        <li>Please note that no warning is yet raised when information is lost due to wrong
-                            handling.
-                        </li>
+                        <li>Specify a work folder first. This folder contains all diagrams which belong to the same model.</li>
+                        <li>Save the generation information for the displayed diagram. It is stored in a file with
+                            extension <code>.m2m</code> and similar name.</li>
+                        <li>Read the generation information from an <code>.m2m</code> file. You should have all required model
+                            data loaded before. A diagram with identical name is created.</li>
+                        <li>Import XML files from the old Smalltalk version of Moose2Model.</li>
+                        <li><strong>Export AI-readable diagram JSON</strong> — write <code>&lt;diagramName&gt;.json</code> (circuit diagrams) to the work folder.</li>
+                        <li>Please note that no warning is yet raised when information is lost due to wrong handling.</li>
                     </ul>
                 </li>
             </ul>
-            </ul>
 
             <h3>Header</h3>
-
             <ul>
                 <li>Display the diagram which is displayed and which is active.</li>
                 <li>Unsaved changes are marked with a bullet point behind the name of a diagram.</li>
             </ul>
 
             <h3>Diagram with all elements</h3>
-            A diagram with all elments is always displayed.
+            A diagram with all elements is always displayed.
             It can be animated as a force-directed graph. This works well for small models.
-            The main intention of this application is not to make force-directed graph, so other tools might work better
+            The main intention of this application is not to make force-directed graphs, so other tools might work better
             here.
+
             <h3>Circuit Diagram for Software</h3>
             <ul>
                 <li>Code is displayed as orange box</li>
@@ -240,7 +274,7 @@
                 <li>Persistent data is displayed as green circle</li>
                 <li>Groupings are indicated by a dashed box and include all elements contained in them</li>
                 <li>Elements can be commented</li>
-                <li>A brighter frame indicates that the element is explictly added to the diagram</li>
+                <li>A brighter frame indicates that the element is explicitly added to the diagram</li>
             </ul>
         </div>
     </div>

@@ -399,6 +399,20 @@ async function ReadDisplayedDiagram(fileHandle) {
   ZoomToFit();
 }
 
+async function ExportDisplayedDiagram() {
+  if (diagramInfos.displayedDiagram == startDiagram) {
+    window.alert("The diagram with all model elements cannot be exported");
+    return;
+  }
+
+  if (typeof workDirectoryHandle === 'undefined') {
+    window.alert("You have to specify a work directory first");
+    return;
+  }
+
+  downloadCircuitDiagramJSON( );
+}
+
 async function SaveDisplayedDiagram() {
   if (diagramInfos.displayedDiagram == startDiagram) {
     window.alert("The diagram with all model elements cannot be saved");
