@@ -1580,7 +1580,7 @@ function buildCircuitDiagramJSON(diagramTitle = diagramInfos.displayedDiagram, o
   }
 
   return {
-    FileContent: 'This file contains a circuit diagram of software in a condensed SOMIX format, exported from Moose2Model2 (www.moose2model.org) for AI analysis. See legend for format.',
+    FileContent: 'This file contains a focused circuit diagram of software in a condensed SOMIX format, exported from Moose2Model2 (www.moose2model.org) for AI analysis. It does not represent the complete model — only the part relevant to a specific aspect. Elements with the AwN flag have ALL their calls and accesses visible in the diagram. Elements without AwN appear as context only — they may have additional relationships in the code that are not shown here. See legend for format.',
     m2m_export: "somix-circuit-diagram",
     version: 3,
     modelName: modelName || null,
