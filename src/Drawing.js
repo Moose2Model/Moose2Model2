@@ -1473,13 +1473,6 @@ function buildCircuitDiagramJSON(diagramTitle = diagramInfos.displayedDiagram, o
   if (!d || d.diagramType !== circuitDiagramForSoftwareDiagramType) return null;
 
   // --- helpers ---------------------------------------------------------------
-  const somixType = (el) => {
-    // 'SOMIX.Code'|'SOMIX.Data'|'SOMIX.Grouping' -> 'code'|'data'|'grouping'
-    if (!el || typeof el !== 'string') return 'unknown';
-    const part = el.split('.').pop() || el;
-    return String(part).toLowerCase();
-  };
-
   const makeStableIdBase = (me) => {
     // prefer uniqueName, then name, then index
     const base = (me.uniqueName && String(me.uniqueName).trim())
@@ -1489,10 +1482,9 @@ function buildCircuitDiagramJSON(diagramTitle = diagramInfos.displayedDiagram, o
   };
 
   const makeStableId = (me) => {
-    const typeKey = somixType(me.element);
     const base = makeStableIdBase(me);
     // Lowercase for stability; keep original names as metadata
-    return `somix:${typeKey}:${String(base).toLowerCase()}`;
+    return String(base).toLowerCase();
   };
 
   // --- first pass: visible nodes & ID mapping --------------------------------
@@ -1532,21 +1524,13 @@ function buildCircuitDiagramJSON(diagramTitle = diagramInfos.displayedDiagram, o
     const nodeId = idByIndex.get(me.index);
     if (!nodeId) continue;
 
-    const node = {
-      id: nodeId,
-      SOMIXelement: me.element ?? "",
-      technicalType: me.technicalType ?? null,
-      isAddedWithNeighbors: addedWithNeighborsIdx.includes(me.index),
+    // Strip "SOMIX." prefix from element type
+    const elementShort = (me.element ?? "").replace("SOMIX.", "");
 
-      // metadata for traceability (do not use as primary ID in KI):
-      // index: me.index,
-      // uniqueName: me.uniqueName ?? null,
-      name: me.name ?? null
-    };
-
-    if (includePositions) {
-      const snapped = snapToGrid(cmp.x ?? 0, cmp.y ?? 0, me.index);
-      node.layout = { x: snapped.x, y: snapped.y };
+    // node array: [id, SOMIXelement, technicalType, name] or [id, SOMIXelement, technicalType, name, "AwN"]
+    const node = [nodeId, elementShort, me.technicalType ?? null, me.name ?? null];
+    if (addedWithNeighborsIdx.includes(me.index)) {
+      node.push("AwN");
     }
 
     // comments: content only
@@ -1558,13 +1542,9 @@ function buildCircuitDiagramJSON(diagramTitle = diagramInfos.displayedDiagram, o
     nodes.push(node);
   }
 
-  // neighborsCompleteFor mapped to stableIds (only for nodes present)
-  const neighborsCompleteFor = addedWithNeighborsIdx
-    .filter(idx => visible.has(idx) && idByIndex.has(idx))
-    .map(idx => idByIndex.get(idx));
-
   // --- edges -----------------------------------------------------------------
-  const edges = [];
+  const calls = [];
+  const accesses = [];
   const endpointVisible = (idx) => visible.has(idx) && idByIndex.has(idx);
 
   // Calls: caller -> called
@@ -1577,12 +1557,7 @@ function buildCircuitDiagramJSON(diagramTitle = diagramInfos.displayedDiagram, o
         const fromIdx = e?.caller;
         const toIdx   = e?.called;
         if (endpointVisible(fromIdx) && endpointVisible(toIdx)) {
-          edges.push({
-            kind: "call",
-            from: idByIndex.get(fromIdx),
-            to:   idByIndex.get(toIdx),
-            // directed: true
-          });
+          calls.push([idByIndex.get(fromIdx), idByIndex.get(toIdx)]);
         }
       }
     }
@@ -1598,29 +1573,28 @@ function buildCircuitDiagramJSON(diagramTitle = diagramInfos.displayedDiagram, o
         const fromIdx = e?.accessor;
         const toIdx   = e?.accessed;
         if (endpointVisible(fromIdx) && endpointVisible(toIdx)) {
-          edges.push({
-            kind: "access",
-            from: idByIndex.get(fromIdx),
-            to:   idByIndex.get(toIdx),
-            // directed: true
-          });
+          accesses.push([idByIndex.get(fromIdx), idByIndex.get(toIdx)]);
         }
       }
     }
   }
 
   return {
-    // Explain what this file is for
-    FileContent: 'This file contains a circuit diagram exported from Moose2Model2 to be used in AI. ' + 
-                 'It uses stable IDs based on the SOMIX model element unique names.',
+    FileContent: 'This file contains a circuit diagram of software in a condensed SOMIX format, exported from Moose2Model2 (www.moose2model.org) for AI analysis. See legend for format.',
     m2m_export: "somix-circuit-diagram",
-    version: 2, // bumped because ID scheme changed
+    version: 3,
     modelName: modelName || null,
     diagramTitle,
     timestamp: new Date().toISOString(),
-    neighborsCompleteFor,
+    legend: {
+      nodes: "[id, SOMIXelement, technicalType, name, flags?]",
+      flags: { AwN: "Added with Neighbors - all calls and accesses of this element are visible in the diagram" },
+      calls: "[from, to]",
+      accesses: "[from, to]"
+    },
     nodes,
-    edges,
+    calls,
+    accesses,
     comments
   };
 }
