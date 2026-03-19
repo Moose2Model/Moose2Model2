@@ -49,7 +49,8 @@ async function LoadModel(fileHandle) {
         contents = await fileData.text();
         document.title = fileData.name;
         loadModelText.innerHTML = 'Loaded SOMIX model: ' + fileData.name;
-        modelName = fileData.name.replace('.mse', '');
+        modelName = fileData.name;
+        //modelName = fileData.name.replace('.mse', '');
         useStartDiagram();
         analyzeMseFile(contents);
         positionCircle(g_width, g_height);
