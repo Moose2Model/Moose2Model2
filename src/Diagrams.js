@@ -413,6 +413,89 @@ async function ExportDisplayedDiagram() {
   downloadCircuitDiagramJSON( );
 }
 
+async function ExportAllDiagrams() {
+  if (typeof workDirectoryHandle === 'undefined') {
+    window.alert("You have to specify a work directory first");
+    return;
+  }
+
+  const changedNames = [];
+  for (const name of Object.keys(diagramms)) {
+    if (name === startDiagram) continue;
+    if (diagramms[name].changed === true) changedNames.push(name);
+  }
+  if (changedNames.length > 0) {
+    const proceed = window.confirm(
+      `Unsaved changes detected in ${changedNames.length} diagram(s):\n` +
+      changedNames.join('\n') +
+      `\n\nExporting all diagrams will reload every .m2m file from disk and discard these unsaved changes. Continue?`
+    );
+    if (!proceed) return;
+  }
+
+  if (typeof workDirectoryHandle.requestPermission === "function") {
+    const perm = await workDirectoryHandle.requestPermission({ mode: "readwrite" });
+    if (perm !== "granted") {
+      window.alert("Write permission denied for work directory.");
+      return;
+    }
+  }
+
+  const m2mFiles = [];
+  for await (const fileInfo of getM2mFilesRecursively(workDirectoryHandle, 0)) {
+    const ext = fileInfo.file.name.split('.').pop().toLowerCase();
+    if (ext === 'm2m') m2mFiles.push(fileInfo);
+  }
+
+  const exported = [];
+  const failed = [];
+  const suppressedAlerts = [];
+
+  const originalAlert = window.alert;
+  window.alert = (msg) => suppressedAlerts.push({ source: null, msg: String(msg) });
+
+  try {
+    for (const fileInfo of m2mFiles) {
+      const sourceName = fileInfo.file.name;
+      const alertCountBefore = suppressedAlerts.length;
+      try {
+        await ReadDisplayedDiagram(fileInfo.fileHandle);
+        const diagramKey = diagramInfos.displayedDiagram;
+        if (diagramms[diagramKey].diagramType !== circuitDiagramForSoftwareDiagramType) continue;
+
+        const payload = buildCircuitDiagramJSON(diagramKey);
+        if (!payload) continue;
+
+        const jsonExport = JSON.stringify(payload, null, 2) + "\n";
+        const jsonName = `${String(diagramKey)}.json`;
+        const fileHandle = await workDirectoryHandle.getFileHandle(jsonName, { create: true });
+        const writable = await fileHandle.createWritable();
+        await writable.write(jsonExport);
+        await writable.close();
+        exported.push(jsonName);
+      } catch (err) {
+        console.error(`Export failed for ${sourceName}:`, err);
+        failed.push(`${sourceName}: ${err?.message || err}`);
+      }
+      for (let i = alertCountBefore; i < suppressedAlerts.length; i++) {
+        suppressedAlerts[i].source = sourceName;
+      }
+    }
+  } finally {
+    window.alert = originalAlert;
+  }
+
+  let msg = `Exported ${exported.length} diagram(s) to JSON in the selected work directory.`;
+  if (failed.length > 0) {
+    msg += `\n\nFailed (${failed.length}):\n${failed.join('\n')}`;
+  }
+  if (suppressedAlerts.length > 0) {
+    msg += `\n\nNotices during run (${suppressedAlerts.length}):\n` +
+      suppressedAlerts.map(a => `${a.source || '?'}: ${a.msg}`).join('\n');
+  }
+  window.alert(msg);
+}
+
 async function SaveDisplayedDiagram() {
   if (diagramInfos.displayedDiagram == startDiagram) {
     window.alert("The diagram with all model elements cannot be saved");

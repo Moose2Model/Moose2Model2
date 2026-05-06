@@ -145,6 +145,20 @@
                 <li>The file &lt;diagramName&gt;.json is written into your work folder (same place as the diagram’s generation infos).</li>
             </ol>
 
+            <h3>How to export all diagrams at once</h3>
+            <p>
+                If you want a JSON file for every diagram in your work folder, choose in the menu
+                File -> Export All Diagrams. The application iterates over all <code>.m2m</code> files in the work folder
+                (and one level of sub-folders, e.g. <code>SOMIX/</code>), loads each diagram, and writes
+                &lt;diagramName&gt;.json next to it. Existing JSON files are overwritten.
+            </p>
+            <ul>
+                <li>The diagrams briefly flash on the canvas while they are loaded — that is the progress indication.</li>
+                <li>The last loaded diagram remains displayed when the run finishes.</li>
+                <li>If any diagram has unsaved changes, you are asked for confirmation first, because the bulk export reloads every <code>.m2m</code> from disk and would discard those changes.</li>
+                <li>At the end, a single message reports how many JSON files were written and lists any failures or notices that occurred during the run.</li>
+            </ul>
+
             <h3>Minimal example</h3>
             <pre><code>{
   FileContent": "This file contains a circuit diagram exported from Moose2Model2 to be used in AI. It uses stable IDs based on the SOMIX model element unique names.",              

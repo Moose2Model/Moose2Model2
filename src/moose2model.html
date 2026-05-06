@@ -481,6 +481,7 @@
                 <input id="ReadDiagramButton" value="Read Diagram">
                 <input id="SaveDiagramButton" value="Save Displayed Diagram">
                 <input id="ExportDiagramButton" value="Export Displayed Diagram">
+                <input id="ExportAllDiagramsButton" value="Export All Diagrams">
             </div>
         </div>
         <div class="dropdownModelMenu">
@@ -563,7 +564,7 @@
     <script src="Comment.js?v=75"></script>
     <script src="ForceDirecting.js?v=75"></script>
     <script src="AutoLayout.js?v=75"></script>
-    <script src="Diagrams.js?v=75"></script>
+    <script src="Diagrams.js?v=77"></script>
     <script src="AnalyzeMseFile.js?v=75"></script>
     <script src="PositionElements.js?v=75"></script>
     <script src="ModelExplorer.js?v=75"></script>
@@ -618,6 +619,9 @@
 
         const ExportDiagramButton = document.getElementById('ExportDiagramButton');
         ExportDiagramButton.addEventListener('click', ExportDisplayedDiagram);
+
+        const ExportAllDiagramsButton = document.getElementById('ExportAllDiagramsButton');
+        ExportAllDiagramsButton.addEventListener('click', ExportAllDiagrams);
 
         const ExportModelInformationButton = document.getElementById('ExportModelInformationButton');
         ExportModelInformationButton.addEventListener('click', ExportModelInformation);
