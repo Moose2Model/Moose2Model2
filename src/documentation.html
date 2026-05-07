@@ -157,6 +157,12 @@
                 <li>The last loaded diagram remains displayed when the run finishes.</li>
                 <li>If any diagram has unsaved changes, you are asked for confirmation first, because the bulk export reloads every <code>.m2m</code> from disk and would discard those changes.</li>
                 <li>At the end, a single message reports how many JSON files were written and lists any failures or notices that occurred during the run.</li>
+                <li>A <code>README.md</code> is written into the work folder. It explains the SOMIX model, the file types
+                    (<code>.m2m</code>, <code>.json</code>, optional <code>.md</code> per diagram), and lists all exported diagrams.
+                    The file is intended for AI tools that consume the folder. It is regenerated on every run, so do not edit it
+                    manually — keep your own notes in a separate <code>README2.md</code> instead.</li>
+                <li>The optional <code>&lt;diagramName&gt;.md</code> next to a diagram may be human-written or AI-written;
+                    if present, it is referenced in the generated <code>README.md</code> and never overwritten by the tool.</li>
             </ul>
 
             <h3>Minimal example</h3>
