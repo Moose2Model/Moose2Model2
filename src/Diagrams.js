@@ -133,6 +133,14 @@ function displayedDiagramChanged() {
   activeDiagramText.innerHTML = 'Active diagram: ' + diagramNameWithChangeMark(diagramInfos.activeDiagram);
 }
 
+function hasUnsavedDiagramChanges() {
+  for (const name of Object.keys(diagramms)) {
+    if (name === startDiagram) continue;
+    if (diagramms[name].changed === true) return true;
+  }
+  return false;
+}
+
 function diagramIsSaved(diagramName) {
   diagramms[diagramName].changed = false;
   // Redraw the texts in the header.
