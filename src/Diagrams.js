@@ -599,7 +599,11 @@ function buildReadmeMarkdown(entries) {
   lines.push('');
   lines.push('- `positions` — sets the x/y of an already-shown element; does not add it.');
   lines.push('- `pinned` — pins an already-shown element; does not add it.');
-  lines.push('- `comments` — attaches a comment to an already-shown element; does not add it.');
+  lines.push('- `comments` — attaches a comment to an already-shown element; does not add it. Comment');
+  lines.push('  text is drawn verbatim, one line per `\\n`; there is no automatic word wrap. Insert `\\n`');
+  lines.push('  yourself to break long text into short lines, otherwise it renders as a single overflowing');
+  lines.push('  line. The box auto-sizes to the longest line, so there is no hard limit, but roughly 40–50');
+  lines.push('  characters per line reads well.');
   lines.push('- `suppressed` — hides an already-shown element together with all of its children; it never');
   lines.push('  adds anything.');
   lines.push('');
